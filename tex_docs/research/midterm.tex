@@ -1,0 +1,167 @@
+\documentclass[a4paper, 10pt, titlepage]{article}
+%\acmVolume{V}
+%\acmNumber{N}
+%\acmArticle{A}
+%\acmYear{YYYY}
+%\acmMonth{0}
+
+\usepackage{xcolor}
+\usepackage{alltt}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{ulem}
+\usepackage{setspace}
+\usetikzlibrary{trees}
+
+\newcommand
+{\image}[2]{\vspace{10 mm} \includegraphics[width=\textwidth]{#1}
+\begin{center} \caption{#2} \end{center}
+\vspace{10 mm}
+}
+
+\definecolor{light-gray}{gray}{0.95}
+% Compensate for fbox sep:
+\newcommand\Hi[2][light-gray]{%
+  \hspace*{-\fboxsep}%
+  \colorbox{#1}{#2}%
+  \hspace*{-\fboxsep}%
+}
+
+% Command for inserting a todo item
+%http://midtiby.blogspot.ie/2007/09/todo-notes-in-latex.html
+\newcommand{\todo}[1]{%
+% Add to todo list
+\addcontentsline{tdo}{todo}{\protect{#1}}%
+%
+\begin{tikzpicture}[remember picture, baseline=-0.75ex]%
+\node [coordinate] (inText) {};
+\end{tikzpicture}%
+%
+% Make the margin par
+\marginpar{%
+\begin{tikzpicture}[remember picture]%
+\definecolor{orange}{rgb}{1,0.5,0}
+\draw node[draw=black, fill=orange, text width = 3cm] (inNote)
+{#1};%
+\end{tikzpicture}%
+}%
+%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[draw = orange, thick]
+([yshift=-0.2cm] inText)
+-| ([xshift=-0.2cm] inNote.west)
+-| (inNote.west);
+\end{tikzpicture}%
+%
+}%
+
+
+
+
+\title{Implementing a Horizontal Size of KDGEs Information Classification and Visualization System}
+\author{Steven Diviney}
+%\begin{abstract}
+%Should probably put something here
+%\end{abstract}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+ 
+\section{Introduction}
+Visualization has come to have a wide range of uses. It is defined as an activity in which human beings are engaged as an internal construction in the mind. It is a cognitive activity facilitated by external visual representations from which people build an internal mental representation \cite{spence2001information}. In this article the term visualization will refer to the creation of a pictorial representation of some data unless explicitly stated as the cognitive process of understanding an image. 
+
+For our purposes we will define three subfields of visualization. Data visualization, information visualization and scientific visualization. There are many other types but these three are of particular interest as their primary concern is the visualization of large volumes of data almost always with the aid of a computer.
+\subsection{Information Visualization}
+Information visualization is perhaps the broadest and can be thought to encompass all of the fields of visualization. After all, almost anything if sufficiently organized, is information of a sort \cite{friendly2001milestones}. Friendly notes that tables, graphs, maps and even text, whether static or dynamic, provide some means to see what lies within, determine the answer to a question, find relations, and perhaps apprehend things which could not be seen so readily in other forms. However, the term today is generally applied to the visual representation of large-scale collections of non-numerical information, such as text in a book or files on a hard-disk.
+\sybsection{Data Visualization}
+Data Visualization is the science of visual representation of “data”, defined as information which has been abstracted in some schematic form, including attributes or variables for the units of information \cite{friendly2001milestones}. The distinction between data and information visualization is not very distinct. In researching for this paper I have come across several examples of one labeled as the other. Here we will simply define data visualization as the visual representation of numerical data and information visualization as the representation of non-numerical data. The former should conjure images of scatter-plots and bar-charts while the latter generally results in somewhat more elaborate visuals, such as time-lines or treemaps.
+\subsection{Scientific Visualization}
+Lastly there is scientific visualization. It is concerned primarily with the visualization of objects in three dimensional space with an emphasis on realistic rendering. This emphasis on realism is primarily what distinguishes it from other forms of visualization. This is not to say that the other forms may distort the data, rather that abstract data does not necessarily have a spatial dimension. How would one realistically visualize the lines of a book? Novel ways must be invented to accomplish this.
+\subsection{Visualization Synthesis}
+In general the creation of a visual art follows three successive stages\cite{mazza2009introduction}.
+\begin{itemize}
+\item Preprocessing and data transformations.
+\item Visual mapping.
+\item View creation.
+\end{itemize}
+\subsubsection{Preprocessing and data transformations}
+The initial phase is concerned with taking raw data, that is data supplied by the world, or datasets, and organizing them them into a logical structure suitable for machine processing. Additional information can be added in this preliminary step. Filtering operations can be used to eliminate unnecessary data and calculations can be used to obtain new data, i.e. the summation of particular record instances.
+\subsubsection{Visual mapping}
+This stage determines the form of the data. Again, abstract data does not always have a location in physical space associated with it so a visual mapping is needed. The spatial substrate defines the dimensions in physical space where this visual representation is created \cite{mazza2009introduction}. It is defined in terms of axis. The nature of the data determines the mapping. Quantitative, ordinal and nominal data are all reported in different ways along an axis. The graphical elements used to display the data and their properties are also defined at this stage.
+\subsubsection{View creation}
+The view renders the visual representation on the display of the computer. The main issue here arises when the quantity of data is too great too large for the display. There is a large body of research surrounding this problem as it is very common.
+
+\subsection{KDEGs Information Classification and Visualization System}
+KDEG, the Knowledge and Data Engineering Group in Trinity College Dublin, are developing a system to automate this process. Up until now the development of a visualization has been a somewhat manual process. There are an abundance of tools that, given a dataset, produce one or several types of visual representation. In the vast majority of cases these tools expect data in a specific format. Additionally, there a large number of tools to assist with the preprocessing and transformation of data. Both of these tools, particularly the latter, rely on the user to contribute some knowledge about the nature of the data. KDEG are attempting to build a system that will take a data-source, or multiple sources \todo{Set or source?}, classify it, determine the form of the data and associate it with an appropriate visualization. This visualization is then rendered to produce the result.
+
+My task has been initially defined as implementing a horizontal slice of this system. I will take a number of distinct data-sets that share similar properties and attempt to visualize them by building a restricted version of the system above. Parts of the system have already been implemented by KDEG and the will be used. The point of developing such as system is to automate the manual transition between steps. As such a key consideration of my project is to develop a system appropriate to the nature of the data, not to any one data-set. The classification and visualization of data are two very distinct task, which we will get too, and I suspect one will receive more treatment than the other.
+
+\section{A Brief History of Information Visualization}
+Information visualization has very deep roots. The earliest examples arise in geometric diagrams and maps to aid in navigation. The earliest know map has several claimants but is generally regarded to be map of "Konya", a town in modern-day Turkey. It is thought to date back to 6200 BC \cite{bagrow2009history}. There are many more examples in the subsequent centuries, largely that of maps but also of diagrams used to illustrate concepts, although these appear much later.
+
+It was not until the 16th century that techniques and instruments for precise observation and measurement of physical quantities were well developed. These inventions were born in the fields of astronomy, surveying and cartography. It was also during this time a great new growth occurred in theory and practice. The birth of probability theory, the rise of analytic geometry and theories of estimation and measurement to name a few. This is when humanity began to amass data, along with theories to make sense of it and visual representations.
+
+It was not until the 19th century that modern data graphics began to emerge. The steady fertilization provided by the previous centuries resulted in an explosion of statistical graphics \cite{friendly2001milestones}. Bar charts, histograms, line-graphs and many others were invented.  By the middle of the century many states had established statistical offices in recognition of the importance of numerical information in social planning, commerce, transportation and other areas. This is when statistics began to gain wide-spread social significance and visualization was used to make sense of large bodies of data. 
+
+Perhaps the most famous example of this is the dot map used to illustrate the source of a cholera epidemic in London. John Snow, an English physician that cholera was spreading through the cities water supply, not the air as was the dominant theory. Snow's chemical examination of the water from the Broad Street pump were not sufficient to prove it as the source. Rather his studies of the pattern of the disease were what convinced the local authorities. He plotted each case of cholera on a map. The map clearly shows the water pump at the center of the outbreak \cite{frerichs2007ghost}.
+
+It might be said that this is when data visualization underwent its first revolution. Up until now the bulk of activity outside of cartography had been rather ad-hoc. The latter half of the 19th century saw the emergence of standard models that could be used to display different types of data. This was coupled with the acknowledgment of statistics as having real social value and a need to make sense of the increasing amount of data being gathered. The agreement on first principles and the influence of social circumstance are two of the most influential factors that lead to the adoption of a paradigm \cite{kuhn1996structure}.
+
+I am however somewhat reluctant to award information visualization the status of paradigm thus far. From my analysis there does not appear to be much competing schools of thought, nor any debate on the correct way to create a visualization. Rather individuals, or small groups of individuals, have invented novel ways of displaying information at various points in history, usually when the need arises. This reached more of a tipping point rather than a crisis point as the need for standard techniques became apparent. Whether this disqualifies a field from being considered a science is a matter for another essay. For the moment I will continue to apply the model of paradigm as it will continue to fit rather well. Later I hope to show that modern field of information visualization is indeed a science. 
+
+Progress in the field slowed dramatically around the turn of the 20th century. Statistics had become more precise and many statisticians regarded pictures incapable of stating fact, at least with no where near the of precision as their new statistical models \cite{friendly2000discussion}. Another way to look at this period is one of normal science. Graphical methods began to enter textbooks, saw use in government, education, commerce and science \cite{haskell1919make} \cite{ayres1919war} \cite{gantt1919organization}. Visualization increasingly became used to help analyze data rather than just represent it, something we will visit later. \todo{VISIT}
+
+From the 1950 to 1970 information visualization underwent a seismic shift, spurred by three developments \cite{friendly2001milestones};
+\begin{itemize}
+\item "The Future of Data Analysis" issued a call for the recognition of data analysis as a legitimate branch of statistics \cite{tukey1962future}
+\item "Semiologie Graphique" \cite{bertin1973semiologie} organized visual and perceptual components of graphics according to their features and relations between data. It is widely regarded as the periodic table information visualization.
+\item Computer processing of data had begun. It offered the opportunity to create new graphical forms and processes quantities of data that had before been unpractical.
+\end{itemize}
+
+
+From the mid seventies until the present day the field has developed at an accelerated pace. Better computers have resulted in a largery variety of highly interactive visualizations. New methods have been developed for visualizing higher dimensional data, e.g. scatter-plots, parallel coordinates. These developments have largely depended in advances in theory and tools.
+
+The second half of the twentieth century is where, I think, we begin to see the inclusion of psychology in the field. "Semiologie Graphique" categorized various graphical properties and later studies classified them in terms of our ability to process them \cite{cleveland1984graphical}.
+
+Today information visualization is closely intertwined with Human Computer Interaction. It can be thought of as discipline with two distinct parts. The first is how to process the data, what structures can be used to represent it while preserving important aspects. The second is concerned with how effectively we interpret these visualizations, how well they help us create our own internal visualizations. The former has already accumulated a good deal of normal scientific literature while publications surrounding the latter represent that of pre-paradigmatic psychology as we know it today: hypothesis derived from empirical studies of human behavior.
+
+
+\section{Information Synthesis}
+If the aim of information visualization is the creation of visual artifacts to amplify human cognition it would seem useful to investigate human cognition, or more specifically the process of understanding data. The process has been defined as a "continuum of understanding" \cite{jacobson1999information}. It consists of four stages;
+\begin{itemize}
+\item Data: entities that lack any meaning on their own. The are the bricks from which we build information.
+\item Information: the transformation of data into information is accomplished by "organizing it into a meaningful form, presenting it in meaningful ways and communicating context around it" \cite{jacobson1999information}.
+\item Knowledge: information is integrated with experience.
+\item Wisdom: a person has acquired levels of knowledge to such a level such that they are able to express qualified judgment on data.
+\end{itemize}
+
+The last point is up for debate. Information visualization lies somewhere between the first two so we need not concern ourselves with it. Information visualization is concerned with providing the tools to organize and represent data to produce information
+
+data to information to knowledge to wisdom etc Cite the guy mazza did
+All of these areas share the common goal of creating visual artifacts aimed at amplifying human cognition.
+
+
+\section{Brief History of Data Visualization}
+
+\section{}
+
+\section{Data Visualization}
+
+\newpage
+
+\bibliographystyle{apacite}
+\bibliography{bibliography} 
+
+
+ 
+
+\end{document} 
+
+
+
+
+\end{document}

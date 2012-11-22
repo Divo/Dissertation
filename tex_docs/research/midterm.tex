@@ -1,61 +1,8 @@
 \documentclass[a4paper, 10pt, titlepage]{article}
-%\acmVolume{V}
-%\acmNumber{N}
-%\acmArticle{A}
-%\acmYear{YYYY}
-%\acmMonth{0}
-
-\usepackage{xcolor}
-\usepackage{alltt}
-\usepackage{url}
-\usepackage{tikz}
-\usepackage{ulem}
-\usepackage{setspace}
-\usetikzlibrary{trees}
-
-\newcommand
-{\image}[2]{\vspace{10 mm} \includegraphics[width=\textwidth]{#1}
-\begin{center} \caption{#2} \end{center}
-\vspace{10 mm}
-}
-
-\definecolor{light-gray}{gray}{0.95}
-% Compensate for fbox sep:
-\newcommand\Hi[2][light-gray]{%
-  \hspace*{-\fboxsep}%
-  \colorbox{#1}{#2}%
-  \hspace*{-\fboxsep}%
-}
-
-% Command for inserting a todo item
-%http://midtiby.blogspot.ie/2007/09/todo-notes-in-latex.html
-\newcommand{\todo}[1]{%
-% Add to todo list
-\addcontentsline{tdo}{todo}{\protect{#1}}%
-%
-\begin{tikzpicture}[remember picture, baseline=-0.75ex]%
-\node [coordinate] (inText) {};
-\end{tikzpicture}%
-%
-% Make the margin par
-\marginpar{%
-\begin{tikzpicture}[remember picture]%
-\definecolor{orange}{rgb}{1,0.5,0}
-\draw node[draw=black, fill=orange, text width = 3cm] (inNote)
-{#1};%
-\end{tikzpicture}%
-}%
-%
-\begin{tikzpicture}[remember picture, overlay]%
-\draw[draw = orange, thick]
-([yshift=-0.2cm] inText)
--| ([xshift=-0.2cm] inNote.west)
--| (inNote.west);
-\end{tikzpicture}%
-%
-}%
 
 
+
+\usepackage{apacite}
 
 
 \title{Implementing a Horizontal Size of KDGEs Information Classification and Visualization System}
@@ -146,10 +93,10 @@ How does a visual representation help us to understand data? Spence \cite{spence
 Visual representations can boost cognitive processes because they allow some inferences to be done very easily \cite{card1999readings}. They make use of our visual perceptive abilities we have gained through our evolution.
 
 \subsection{Perception}
-If a visualization aims to enhance cognition the attributes of the data under consideration should be mapped to graphical elements in a certain way. Patterns in the data must be easily perceivable. The "trick" to this is to make certain visual forms stand out. Our knowledge of human memory is what helps us to do this. Cognitive psychology identifies several types of memory. We will consider three based on the duration of their retention. A useful analogy is that of a CPU cache.
+If a visualization aims to enhance cognition the attributes of the data under consideration should be mapped to graphical elements in a certain way. Patterns in the data must be easily perceivable. The "trick" to this is to make certain visual forms stand out. Our knowledge of human memory is what helps us to do this. Cognitive psychology identifies several types of memory. We will consider three based on the duration of their retention.
 \begin{itemize}
 \item Sensory or preattentive memory. This memory has very short retention, only a few hundred milliseconds. It stores the visual information from the eyes and is independent of conscious control. During preattentive processing a limited set of visual attributes are detected. These include colour, size, orientation etc. We have evolved this preattentive processing to help prioritize the massive amount of data coming from our vision system. We exploit the characteristics of this memory to make certain elements stand-out from others.
-\item Short term memory. This is where we begin an attentive process of perception. It can store about 7 items. An example of its usage for out purposes would be remembering the labeling of a certain visual elements while observing its distribution on screen.
+\item Short term memory. This is where we begin an attentive process of perception. It can store about 7 items. An example of its usage for outr purposes would be remembering the labeling of a certain visual element while observing its distribution on screen.
 \item Long term. This is less of a concern as the way to "store" something in long term memory is periodic rehearsal or meaningful association.
 \end{itemize}
  A number of preattentive properties have been identified \cite{treisman1985preattentive}. They can roughly be categorized as colour, form, movement and position. Each of these categories have certain attributes onto which we can map attributes of data. The effectiveness of each mapping is somewhat understood but there exist no explicit rules, only various sets of guidelines \cite{few2004show} 

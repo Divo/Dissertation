@@ -1,0 +1,164 @@
+\documentclass{article}
+
+
+\usepackage{xcolor}
+\usepackage{alltt}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{ulem}
+\usepackage{setspace}
+\usetikzlibrary{trees}
+
+\newcommand
+{\image}[2]{\vspace{10 mm} \includegraphics[width=\textwidth]{#1}
+\begin{center} \caption{#2} \end{center}
+\vspace{10 mm}
+}
+
+\definecolor{light-gray}{gray}{0.95}
+% Compensate for fbox sep:
+\newcommand\Hi[2][light-gray]{%
+  \hspace*{-\fboxsep}%
+  \colorbox{#1}{#2}%
+  \hspace*{-\fboxsep}%
+}
+
+% Command for inserting a todo item
+%http://midtiby.blogspot.ie/2007/09/todo-notes-in-latex.html
+\newcommand{\todo}[1]{%
+% Add to todo list
+\addcontentsline{tdo}{todo}{\protect{#1}}%
+%
+\begin{tikzpicture}[remember picture, baseline=-0.75ex]%
+\node [coordinate] (inText) {};
+\end{tikzpicture}%
+%
+% Make the margin par
+\marginpar{%
+\begin{tikzpicture}[remember picture]%
+\definecolor{orange}{rgb}{1,0.5,0}
+\draw node[draw=black, fill=orange, text width = 3cm] (inNote)
+{#1};%
+\end{tikzpicture}%
+}%
+%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[draw = orange, thick]
+([yshift=-0.2cm] inText)
+-| ([xshift=-0.2cm] inNote.west)
+-| (inNote.west);
+\end{tikzpicture}%
+%
+}%
+
+
+
+
+\title{Access Control System}
+\author{Steven Diviney 08462267}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+ 
+
+\section{Introduction}
+This project consists of three main parts. The LCD screen, the I2C buttons and the controlling logic. These three components are separated conceptually and in the projects physical structure. The LCD screen is controlled in almost exactly the same fashion as the previous assignment. Four buttons are used to simulate the doors and communication is done with I2C. The controlling logic is implemented as a state machine. 
+
+FreeROTS is used to coordinate communication between the three components. Each of the three components executes as a separate FreeROTS task.
+
+The console is used extensively to display output detailing the state of the system. The LEDs are on when doors are locked. The code for the LCD display is 0001.
+
+\section{State Machine}
+The state machine resembles a state table with action methods. It contains a number of states, events and actions. The states and events are used to index a two-dimensional array of function pointers. These functions transition the state and perform any additional processing needed to transition, i.e. Turning LEDs on or off. 
+
+The LCD and button components have a reference to a FreeROTS queue managed by the state machine. When the correct password is entered using the LCD or a button is pushed an event is placed on the queue. The state machine then resumes execution and processes the event.
+
+
+This approach produced relatively clean and easy to understand code. This was partially due to the small number of states and events, although more states would also be manageable. The state machine logic is kept to a minimum and follows intuitively from a state table drawn up during design. Debugging is also greatly simplified. Each state and transition is checked to validate the logic of the application. Any remaining issues are with the hardware.
+
+\subsection{States}
+The states and events are encoded as enumerated integers. There are 5 states;
+\begin{itemize}
+\item s1: The start state in which all the doors are locked.
+\item s2: Outer door closed.
+\item s3: Outer door open.
+\item s4: Inner door open.
+\item s5: Inner door closed.
+\end{itemize}
+\subsection{Events}
+The seven possible events are also encoded as enumerated integers;
+\begin{itemize}
+\item AB: 	Valid code entered or button B pressed.
+\item C:	Button C pressed.
+\item D1O:	Outer door opened.
+\item D1C:	Outer door closed.
+\item D2O:	Inner door opened.
+\item D2C:	Inner door closed.
+\item T:	Timer expired.
+\end{itemize}
+
+\subsection{Implementation}
+The state machine code resembles the table below. The table is encoded as an array. The current state of the machine is used to index the column while the event being processed is used to index the row. Each entry in the table is a function pointer. The function performs the necessary processing and advances the state. The action methods are very simple. Apart from advancing the state they toggle the LEDs and start the 5 second timer when needed. 
+
+The table below has scope for reduction. This was not done because of time constraints, and resulted in many of the action methods being essentially redundant. However, methods for each transition could be useful for debugging. 
+
+The invalid and don't care states must also be implemented as functions, otherwise the machine would try and execute NULL entires. The invalid and don't care action methods simply return.
+
+The bulk of the implementation time was spent on implementing message passing using FreeROTS queues. The logic of the application was relatively easy to encode.
+\begin{center}
+    \begin{tabular}{|l|l|l|l|l|l|l|l|}
+    \hline
+      & AB & C  & D1O & D1C & D2O & D2C & T  \\ \hline
+    s1          & s2 & s4 & -   & -   & -   & -   & -  \\ \hline
+   	s2          & -  & -  & s3  & -   & -   & -   & s1 \\ \hline
+    s3          & -  & -  & -   & s1  & -   & -   & x  \\ \hline
+    s4          & -  & -  & -   & -   & s5  & -   & s1 \\ \hline
+    s5          & -  & -  & -   & -   & -   & s1  & x  \\
+    \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Timer}
+The timer was implemented in software using FreeROTS. After 5 seconds a callback function is executed. This callback explicitly advances the state (theres no reason for this other than I ran out of time to test the callback function placing an event on the queue. The code is there however and should work.) As can be seen from the table the timer is ignored if a door is open as there is no point locking the door if it is open. 
+
+
+
+\section{I/O}
+The I/O contains 3 parts. The LCD screen and the buttons on the development boards are used as input. The LEDs above the buttons are used as output. The console is also used to display any changes in the inputs or outputs.
+
+\subsection{LCD}
+The LCD module is almost identical to the work submitted for assignment 2. The only additions are the inclusion of a password hard-coded in the file as a string. When the user presses "OK" their input is checked against this string. If the two match an event is placed on the queue and processed by the state machine. 
+
+The user input is rendered on the screen after each key-press. This may not be a great idea from a security standpoint but makes testing the system much easier. When the input is cleared the top portion of the screen is drawn over. This saves having to redraw the entire screen.
+
+
+\subsection{Buttons}
+The button layout is as follows;
+\begin{itemize}
+\item Button 1 is used to simulate "B" being pressed. Falling edge
+\item Button 2 is used to simulate the sensor on the outer door. Falling edge is door open, rising edge is door closed.
+\item Button 3 is used to simulate "C" being pressed. Falling edge.
+\item Button 4 is used to simulate the sensor on the inner door. Falling edge is door open, rising edge is door closed.
+\end{itemize}
+
+The buttons are read over I2C. A pole is done every 20ms. If the state of the buttons changes from the last poll the event is determined and sent to the state machine.
+
+\subsection{LEDs}
+The LEDs over buttons 1 and 3 are used to display system output. LED1 is lit if the outer door is locked and LED3 is lit if the inner door is locked. The LED code is relatively simple. It consists of one function within the button module. The process is very similar to determining the button values only values are written out instead of being read.
+
+The sensor class originally made the LED states mirror the button states. This has been removed.
+
+\section{Testing}
+The nature of the implementation made debugging relatively easy. Using the state table each input event was tested against each state. There were no defects found. State tables are generally very clearly defined. There are no edge cases or real possibilities for interference. As such a series of formal tests, as used in the last assignment, were not needed. 
+
+The LCD had been tested during the last assignment so it was assumed (relatively) bug free.
+
+The buttons were verified simply by pressing and releasing them.
+
+Any possible race conditions are guarded against in two ways. Each event is placed on a queue which guarantees events are processed in the order they occur. A door being locked, open and closed are considered separate events. A door must be closed before it can be locked. This is encoded in the state table.  
+
+\end{document}

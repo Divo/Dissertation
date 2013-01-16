@@ -1,0 +1,55 @@
+<html>
+
+
+<head>
+
+<script src="http://d3js.org/d3.v2.js"></script>
+</head>
+
+
+<body>
+
+<div id="viz"></div>
+<script type="text/javascript" id="day-length-js">
+d3.text("edu.csv", function(datasetText){
+
+var parsedCSV = d3.csv.parseRows(datasetText);
+
+console.log(parsedCSV);
+
+
+var maxR = 100;
+var max = function(datum) { return d3.max(parsedCSV, function(datum) { return datum[2]; }) };
+var rCalc = d3.scale.linear().domain([0, max(parsedCSV)]).range([0, maxR]);
+//var width = function(datum, index) { d3.sum( datum.slice(0, index), function(datum) { return datum[2]; })};
+var width = function(datum, index) { return d3.sum (datum.slice(0, index), function(d) { return rCalc(d[2]);} ); };
+
+console.log((width(parsedCSV, 5)));
+console.log((width(parsedCSV, 0)));
+
+
+var simpleSVG = d3.select("#viz")
+	.append("svg")
+	.attr("width", 1400)
+	.attr("height", 300);
+	
+simpleSVG.selectAll("circle")
+	.data(parsedCSV)
+	.enter().append("circle")
+	.style("stroke", "gray")
+	.style("fill", "white")
+	.attr("cx", function(datum, index) { return width(parsedCSV, index) + rCalc(datum[2]); })
+	.attr("cy", 100)
+	.attr("r", function(datum) { return rCalc(datum[2]); })
+	.on("mouseout", function(){d3.select(this).style("fill", "white");})
+	.on("mouseover", function(datum){d3.select(this).style("fill", "aliceblue");})
+	.append("svg:title")
+	.text(function(datum) { return datum[1] });
+	
+
+
+});
+</script>
+</body>
+
+</html>

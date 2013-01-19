@@ -16,6 +16,10 @@ text {
 	fill: #333;
 }	
 
+.exit {
+	fill: brown;
+}
+
 </style>
 
 <script src="http://d3js.org/d3.v2.js"></script>
@@ -38,27 +42,44 @@ var svg = d3.select("body").append("svg")
 	.attr("transform", "translate(32," + (height / 2) + ")"); //Simply move text to middle fo canvas
 
 function update(data) {
-	
+
+	//http://bl.ocks.org/3808221 Bit hazy on this
 	//Join new data with old elements if any
 	var text = svg.selectAll("text") //Empty, d3 declarative magic
-		.data(data);
+		.data(data, function(d) { return d ;});
 
 	//Update old elements as needed
-	text.attr("class", "update");
+	text.attr("class", "update")
+		.transition()
+		.duration(750)
+		.attr("x", function(d, i) { return i * 32; });
 
 	//Create new elements
 	text.enter().append("text")
 		.attr("class", "enter")
+		.attr("dy", ".35em")
+		.attr("y", -60)
 		.attr("x", function(d, i) { return i * 32; })
-		.attr("dy", ".35em");
+		.style("fill-opacity", 1e-6)
+		.text(function(d) { return d; })
+	  .transition()
+		.duration(750)
+		.attr("y", 0)
+		.style("fill-opacity", 1);
 
 	//Enter and Update
    // Appending to the enter selection expands the update selection to include
    // entering elements; so, operations on the update selection after appending to
    // the enter selection will apply to both entering and updating nodes.
-	text.text(function(d) { return d; });
+	//text.attr("x", function(d, i) { return i * 32; });
 
-	text.exit().remove();
+	text.exit()
+		.attr("class", "exit")
+	  .transition()
+		.duration(750)
+		.attr("y", 60)
+		.style("fill-opacity", 1e-6)
+		.remove();
 
 }
 

@@ -52,7 +52,7 @@ function update(data) {
 	text.attr("class", "update")
 		.transition()
 		.duration(750)
-		.attr("x", function(d, i) { return i * 32; });
+		.attr("x", function(d, i) { return i * 32; });  //Recalcuate the x position of old elements
 
 	//Create new elements
 	text.enter().append("text")

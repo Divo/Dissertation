@@ -1,0 +1,76 @@
+<html>
+
+
+<head>
+
+<script src="http://d3js.org/d3.v2.js"></script>
+<style>
+
+
+</style>
+</head>
+
+
+<body>
+<a href="https://github.com/mbostock/bost.ocks.org/blob/gh-pages/mike/constancy/index.html">Source</a>
+
+<div id="chart"></div>
+
+<p id="menu"><select></select>
+<script type="text/javascript" id="rect-demo-js">
+var margin = {top: 20, right: 40, bottom: 10, left: 40},
+	width = 960,
+	height = 250 - margin.top - margin.bottom;
+
+var format = d3.format(".1%"), //Display 2 digits followed by %
+	states,
+	age;
+
+var x = d3.scale.linear()
+	.range([0, width]);
+
+var y = d3.scale.ordinal()
+	.rangeRoundBands([0, height], .1); //Draw lines on X axis
+
+var xAxis = d3.svg.axis()
+	.scale(x)
+	.orient("top")
+	.tickSize(-height - margin.bottom)
+	.tickFormat(format);
+
+var svg = d3.select("#chart").append("svg")
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
+	.style("margin-left", - margin.left + "px")
+  .append(g)
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")"); //Not sure
+/*
+
+svg.append("g")
+	.attr("class", "x axis");
+
+svg.append("g")
+	.attr("class", "y axis")
+  .append("line")
+	.attr("class", "domain")
+	.attr("y2", height);
+
+var menu = d3.select.("#menu select")
+	.on("change", change); //Add change event listener
+
+d3.csv("state-age.csv", function(data) {
+	states = data;
+	console.log(states);
+
+	var ages = d3.keys(states[0]).filter(function(key) {
+		return key != "State" && key != "Total";	
+	});
+
+
+}
+*/
+ 
+</script>
+</body>
+
+</html>

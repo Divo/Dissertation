@@ -44,7 +44,6 @@ var svg = d3.select("#chart").append("svg")
 	.style("margin-left", - margin.left + "px")
   .append(g)
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")"); //Not sure
-/*
 
 svg.append("g")
 	.attr("class", "x axis");
@@ -55,7 +54,7 @@ svg.append("g")
 	.attr("class", "domain")
 	.attr("y2", height);
 
-var menu = d3.select.("#menu select")
+var menu = d3.select("#menu select")
 	.on("change", change); //Add change event listener
 
 d3.csv("state-age.csv", function(data) {
@@ -63,12 +62,51 @@ d3.csv("state-age.csv", function(data) {
 	console.log(states);
 
 	var ages = d3.keys(states[0]).filter(function(key) {
-		return key != "State" && key != "Total";	
+		return key != "State" && key != "Total"; //Grab the headings from first line of data set	
+	});
+	
+	state.forEach(function(state) {
+		ages.forEach(function(age) {
+			state[age] = state[age] / Total;
+		});
 	});
 
+	memu.selectAll("option")
+		.data(ages)
+	  .enter().append("option")
+		.text(function(d) { return d; });
+
+	menu.property("value", "18 to 24 years");
+
+	redraw();
+
+});
+
+var altKey;
+
+d3.select(window)
+	.on("keydown", function() { altKey = d3.event.altKey; })
+	.on("keyup", function() { altKey = false; }):
+
+
+function change() {
+	clearTimeout(timeout);
+
+	d3.transition()
+		.duration(altKey ? 7500 : 750)
+		.each(redraw);
 
 }
-*/
+
+
+
+
+
+
+
+
+
+
  
 </script>
 </body>

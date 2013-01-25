@@ -1,0 +1,69 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Barnes, Shechtman, Finkelstein, and
+  Goldman}{Barnes et~al\mbox{.}}{2009}]{Barnes}
+{\sc Barnes, C.}, {\sc Shechtman, E.}, {\sc Finkelstein, A.}, {\sc and} {\sc
+  Goldman, D.~B.} 2009.
+\newblock {PatchMatch}: A randomized correspondence algorithm for structural
+  image editing.
+\newblock {\em ACM Transactions on Graphics (Proc. SIGGRAPH)\/}~{\em 28}.
+
+\bibitem[\protect\citeauthoryear{Boykov, Veksler, and Zabih}{Boykov
+  et~al\mbox{.}}{2001}]{boykov2001fast}
+{\sc Boykov, Y.}, {\sc Veksler, O.}, {\sc and} {\sc Zabih, R.} 2001.
+\newblock Fast approximate energy minimization via graph cuts.
+\newblock {\em Pattern Analysis and Machine Intelligence, IEEE Transactions
+  on\/}~{\em 23,\/}~11, 1222--1239.
+
+\bibitem[\protect\citeauthoryear{Efros and Freeman}{Efros and
+  Freeman}{2001}]{efros2001image}
+{\sc Efros, A.} {\sc and} {\sc Freeman, W.} 2001.
+\newblock Image quilting for texture synthesis and transfer.
+\newblock In {\em Proceedings of the 28th annual conference on Computer
+  graphics and interactive techniques}. ACM, 341--346.
+
+\bibitem[\protect\citeauthoryear{Guo, Shum, and Xu}{Guo
+  et~al\mbox{.}}{2000}]{guo2000chaos}
+{\sc Guo, B.}, {\sc Shum, H.}, {\sc and} {\sc Xu, Y.} 2000.
+\newblock Chaos mosaic: Fast and memory efficient texture synthesis.
+\newblock {\em Microsoft research paper MSR-TR-2000-32\/}.
+
+\bibitem[\protect\citeauthoryear{Kwatra, Sch{\"o}dl, Essa, Turk, and
+  Bobick}{Kwatra et~al\mbox{.}}{2003}]{kwatra2003graphcut}
+{\sc Kwatra, V.}, {\sc Sch{\"o}dl, A.}, {\sc Essa, I.}, {\sc Turk, G.}, {\sc
+  and} {\sc Bobick, A.} 2003.
+\newblock Graphcut textures: image and video synthesis using graph cuts.
+\newblock In {\em ACM Transactions on Graphics (TOG)}. Vol.~22. ACM, 277--286.
+
+\bibitem[\protect\citeauthoryear{Lefebvre and Hoppe}{Lefebvre and
+  Hoppe}{2006}]{lefebvre2006appearance}
+{\sc Lefebvre, S.} {\sc and} {\sc Hoppe, H.} 2006.
+\newblock Appearance-space texture synthesis.
+\newblock In {\em ACM Transactions on Graphics (TOG)}. Vol.~25. ACM, 541--548.
+
+\bibitem[\protect\citeauthoryear{Paget and Longstaff}{Paget and
+  Longstaff}{1998}]{paget1998texture}
+{\sc Paget, R.} {\sc and} {\sc Longstaff, I.} 1998.
+\newblock Texture synthesis via a noncausal nonparametric multiscale markov
+  random field.
+\newblock {\em Image Processing, IEEE Transactions on\/}~{\em 7,\/}~6,
+  925--931.
+
+\bibitem[\protect\citeauthoryear{Saisan, Doretto, Wu, and Soatto}{Saisan
+  et~al\mbox{.}}{2001}]{saisan2001dynamic}
+{\sc Saisan, P.}, {\sc Doretto, G.}, {\sc Wu, Y.}, {\sc and} {\sc Soatto, S.}
+  2001.
+\newblock Dynamic texture recognition.
+\newblock In {\em Computer Vision and Pattern Recognition, 2001. CVPR 2001.
+  Proceedings of the 2001 IEEE Computer Society Conference on}. Vol.~2. IEEE,
+  II--58.
+
+\bibitem[\protect\citeauthoryear{Wei, Lefebvre, Kwatra, Turk,
+  et~al\mbox{.}}{Wei et~al\mbox{.}}{2009}]{wei2009state}
+{\sc Wei, L.}, {\sc Lefebvre, S.}, {\sc Kwatra, V.}, {\sc Turk, G.}, {\sc
+  et~al\mbox{.}} 2009.
+\newblock State of the art in example-based texture synthesis.
+\newblock In {\em Eurographics 2009, State of the Art Report, EG-STAR}.
+  93--117.
+
+\end{thebibliography}

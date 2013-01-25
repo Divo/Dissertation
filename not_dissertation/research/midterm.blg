@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: midterm.aux
+The style file: apacite.bst
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Database file #1: bibliography.bib
+apacite.bst [2009/03/01 v4.05 APA bibliography style]
+Warning--No address in ayres1919war
+Warning--No address in bagrow2009history
+Warning--No address in bertin1973semiologie
+Warning--No address in card1999readings
+Warning--No address in dix2004human
+Warning--No journal in few2004show
+Warning--No address in haskell1919make
+Warning--No address in jacobson1999information
+Warning--No address in kuhn1996structure
+Warning--No address in mazza2009introduction
+Warning--No address in spence2001information
+You've used 18 entries,
+            6361 wiz_defined-function locations,
+            1279 strings with 11780 characters,
+and the built_in function-call counts, 26408 in all, are:
+= -- 3209
+> -- 214
+< -- 1121
++ -- 1036
+- -- 36
+* -- 1608
+:= -- 4749
+add.period$ -- 73
+call.type$ -- 18
+change.case$ -- 90
+chr.to.int$ -- 0
+cite$ -- 47
+duplicate$ -- 674
+empty$ -- 1279
+format.name$ -- 330
+if$ -- 5248
+int.to.chr$ -- 0
+int.to.str$ -- 36
+missing$ -- 0
+newline$ -- 405
+num.names$ -- 144
+pop$ -- 688
+preamble$ -- 1
+purify$ -- 72
+quote$ -- 0
+skip$ -- 1712
+stack$ -- 0
+substring$ -- 1157
+swap$ -- 390
+text.length$ -- 38
+text.prefix$ -- 0
+top$ -- 1
+type$ -- 1440
+warning$ -- 11
+while$ -- 110
+width$ -- 0
+write$ -- 471
+(There were 11 warnings)

@@ -1,0 +1,426 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{%
+Ayres%
+}{%
+Ayres%
+}{%
+{\protect\APACyear{1919}}%
+}]{%
+ayres1919war}%
+\APACinsertmetastar{%
+ayres1919war}%
+Ayres, L.%
+%
+\unskip\
+\newblock
+\APACrefYear{1919}.
+\newblock
+\APACrefbtitle{The war with Germany: a statistical summary}{The war with
+  germany: a statistical summary}.
+\newblock
+\APACaddressPublisher{}{Govt. print. off.}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Bagrow%
+\ \BBA{} Skelton%
+}{%
+Bagrow%
+\ \BBA{} Skelton%
+}{%
+{\protect\APACyear{2009}}%
+}]{%
+bagrow2009history}%
+\APACinsertmetastar{%
+bagrow2009history}%
+Bagrow, L.%
+\BCBT{}\ \BBA{} Skelton, R.%
+%
+\unskip\
+\newblock
+\APACrefYear{2009}.
+\newblock
+\APACrefbtitle{History of cartography}{History of cartography}.
+\newblock
+\APACaddressPublisher{}{Transaction Pub}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Bertin%
+\ \BBA{} Barbut%
+}{%
+Bertin%
+\ \BBA{} Barbut%
+}{%
+{\protect\APACyear{1973}}%
+}]{%
+bertin1973semiologie}%
+\APACinsertmetastar{%
+bertin1973semiologie}%
+Bertin, J.%
+\BCBT{}\ \BBA{} Barbut, M.%
+%
+\unskip\
+\newblock
+\APACrefYear{1973}.
+\newblock
+\APACrefbtitle{S{\'e}miologie graphique}{S{\'e}miologie graphique}.
+\newblock
+\APACaddressPublisher{}{Mouton; Paris: Gauthier-Villars}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Card%
+, Mackinlay%
+\BCBL{}\ \BBA{} Shneiderman%
+}{%
+Card%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{1999}}%
+}]{%
+card1999readings}%
+\APACinsertmetastar{%
+card1999readings}%
+Card, S.%
+, Mackinlay, J.%
+\BCBL{}\ \BBA{} Shneiderman, B.%
+%
+\unskip\
+\newblock
+\APACrefYear{1999}.
+\newblock
+\APACrefbtitle{Readings in information visualization: using vision to
+  think}{Readings in information visualization: using vision to think}.
+\newblock
+\APACaddressPublisher{}{Morgan Kaufmann}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Cleveland%
+\ \BBA{} McGill%
+}{%
+Cleveland%
+\ \BBA{} McGill%
+}{%
+{\protect\APACyear{1984}}%
+}]{%
+cleveland1984graphical}%
+\APACinsertmetastar{%
+cleveland1984graphical}%
+Cleveland, W.%
+\BCBT{}\ \BBA{} McGill, R.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1984}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Graphical perception: Theory, experimentation, and
+  application to the development of graphical methods}{Graphical perception:
+  Theory, experimentation, and application to the development of graphical
+  methods}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Journal of the American Statistical
+  Association}{79}{387}{531--554}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Dix%
+}{%
+Dix%
+}{%
+{\protect\APACyear{2004}}%
+}]{%
+dix2004human}%
+\APACinsertmetastar{%
+dix2004human}%
+Dix, A.%
+%
+\unskip\
+\newblock
+\APACrefYear{2004}.
+\newblock
+\APACrefbtitle{Human-computer interaction}{Human-computer interaction}.
+\newblock
+\APACaddressPublisher{}{Prentice hall}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Few%
+}{%
+Few%
+}{%
+{\protect\APACyear{2004}}%
+}]{%
+few2004show}%
+\APACinsertmetastar{%
+few2004show}%
+Few, S.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2004}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Show me the numbers: Designing Tables and Graphs to
+  Enlighten}{Show me the numbers: Designing tables and graphs to
+  enlighten}.\BBCQ{}
+\newblock
+
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Frerichs%
+}{%
+Frerichs%
+}{%
+{\protect\APACyear{2007}}%
+}]{%
+frerichs2007ghost}%
+\APACinsertmetastar{%
+frerichs2007ghost}%
+Frerichs, R.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2007}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{The Ghost Map}{The ghost map}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Emerging Infectious Diseases}{}{}{1134}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Friendly%
+\ \BBA{} Denis%
+}{%
+Friendly%
+\ \BBA{} Denis%
+}{%
+{\protect\APACyear{2000}}%
+}]{%
+friendly2000discussion}%
+\APACinsertmetastar{%
+friendly2000discussion}%
+Friendly, M.%
+\BCBT{}\ \BBA{} Denis, D.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2000}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Discussion and comments. Approche graphique en analyse
+  des donn{\'e}es. The roots and branches of modern statistical
+  graphics.}{Discussion and comments. approche graphique en analyse des
+  donn{\'e}es. the roots and branches of modern statistical graphics.}\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Journal de la soci{\'e}t{\'e} fran{\c{c}}aise de
+  statistique}{141}{4}{51--60}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Friendly%
+\ \BBA{} Denis%
+}{%
+Friendly%
+\ \BBA{} Denis%
+}{%
+{\protect\APACyear{2001}}%
+}]{%
+friendly2001milestones}%
+\APACinsertmetastar{%
+friendly2001milestones}%
+Friendly, M.%
+\BCBT{}\ \BBA{} Denis, D.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2001}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Milestones in the history of thematic cartography,
+  statistical graphics, and data visualization}{Milestones in the history of
+  thematic cartography, statistical graphics, and data visualization}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Accessed: March}{18}{}{2010}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Gantt%
+}{%
+Gantt%
+}{%
+{\protect\APACyear{1919}}%
+}]{%
+gantt1919organization}%
+\APACinsertmetastar{%
+gantt1919organization}%
+Gantt, H.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1919}{}{}.
+\newblock
+\APACrefbtitle{Organization for Work.}{Organization for work.}
+\newblock
+\APACaddressPublisher{}{London: Allen and Unwin}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Haskell%
+}{%
+Haskell%
+}{%
+{\protect\APACyear{1919}}%
+}]{%
+haskell1919make}%
+\APACinsertmetastar{%
+haskell1919make}%
+Haskell, A.%
+%
+\unskip\
+\newblock
+\APACrefYear{1919}.
+\newblock
+\APACrefbtitle{How to make and use graphic charts}{How to make and use graphic
+  charts}.
+\newblock
+\APACaddressPublisher{}{Codex book company inc.}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Jacobson%
+\ \BBA{} Wurman%
+}{%
+Jacobson%
+\ \BBA{} Wurman%
+}{%
+{\protect\APACyear{1999}}%
+}]{%
+jacobson1999information}%
+\APACinsertmetastar{%
+jacobson1999information}%
+Jacobson, R.%
+\BCBT{}\ \BBA{} Wurman, R.%
+%
+\unskip\
+\newblock
+\APACrefYear{1999}.
+\newblock
+\APACrefbtitle{Information design}{Information design}.
+\newblock
+\APACaddressPublisher{}{Mit Press London}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Kuhn%
+}{%
+Kuhn%
+}{%
+{\protect\APACyear{1996}}%
+}]{%
+kuhn1996structure}%
+\APACinsertmetastar{%
+kuhn1996structure}%
+Kuhn, T.%
+%
+\unskip\
+\newblock
+\APACrefYear{1996}.
+\newblock
+\APACrefbtitle{The structure of scientific revolutions}{The structure of
+  scientific revolutions}\ (\BVOL~2).
+\newblock
+\APACaddressPublisher{}{University of Chicago press}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Mazza%
+}{%
+Mazza%
+}{%
+{\protect\APACyear{2009}}%
+}]{%
+mazza2009introduction}%
+\APACinsertmetastar{%
+mazza2009introduction}%
+Mazza, R.%
+%
+\unskip\
+\newblock
+\APACrefYear{2009}.
+\newblock
+\APACrefbtitle{Introduction to information visualization}{Introduction to
+  information visualization}.
+\newblock
+\APACaddressPublisher{}{Springer}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Spence%
+}{%
+Spence%
+}{%
+{\protect\APACyear{2001}}%
+}]{%
+spence2001information}%
+\APACinsertmetastar{%
+spence2001information}%
+Spence, R.%
+%
+\unskip\
+\newblock
+\APACrefYear{2001}.
+\newblock
+\APACrefbtitle{Information visualization}{Information visualization}.
+\newblock
+\APACaddressPublisher{}{Addison-Wesley}.
+\newblock
+ \begin{APACrefURL} \url{http://books.google.ie/books?id=gYQoAQAAMAAJ}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Treisman%
+}{%
+Treisman%
+}{%
+{\protect\APACyear{1985}}%
+}]{%
+treisman1985preattentive}%
+\APACinsertmetastar{%
+treisman1985preattentive}%
+Treisman, A.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1985}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Preattentive processing in vision}{Preattentive
+  processing in vision}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Computer vision, graphics, and image
+  processing}{31}{2}{156--177}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Tukey%
+}{%
+Tukey%
+}{%
+{\protect\APACyear{1962}}%
+}]{%
+tukey1962future}%
+\APACinsertmetastar{%
+tukey1962future}%
+Tukey, J.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1962}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{The future of data analysis}{The future of data
+  analysis}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{The Annals of Mathematical Statistics}{33}{1}{1--67}.
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

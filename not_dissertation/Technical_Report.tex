@@ -1,0 +1,93 @@
+\documentclass[a4paper, 11pt, titlepage]{article}
+%\usepackage{color}
+%\definecolor{light-gray}{gray}{0.95}
+
+\usepackage{xcolor}
+\usepackage{alltt}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{ulem}
+\usepackage{setspace}
+\usetikzlibrary{trees}
+
+\newcommand
+{\image}[2]{\vspace{10 mm} \includegraphics[width=\textwidth]{#1}
+\begin{center} \caption{#2} \end{center}
+\vspace{10 mm}
+}
+
+
+\definecolor{light-gray}{gray}{0.95}
+% Compensate for fbox sep:
+\newcommand\Hi[2][light-gray]{%
+  \hspace*{-\fboxsep}%
+  \colorbox{#1}{#2}%
+  \hspace*{-\fboxsep}%
+}
+
+% Command for inserting a todo item
+%http://midtiby.blogspot.ie/2007/09/todo-notes-in-latex.html
+\newcommand{\todo}[1]{%
+% Add to todo list
+\addcontentsline{tdo}{todo}{\protect{#1}}%
+%
+\begin{tikzpicture}[remember picture, baseline=-0.75ex]%
+\node [coordinate] (inText) {};
+\end{tikzpicture}%
+%
+% Make the margin par
+\marginpar{%
+\begin{tikzpicture}[remember picture]%
+\definecolor{orange}{rgb}{1,0.5,0}
+\draw node[draw=black, fill=orange, text width = 3cm] (inNote)
+{#1};%
+\end{tikzpicture}%
+}%
+%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[draw = orange, thick]
+([yshift=-0.2cm] inText)
+-| ([xshift=-0.2cm] inNote.west)
+-| (inNote.west);
+\end{tikzpicture}%
+%
+}%
+
+\definecolor{light-gray}{gray}{0.95}
+% Compensate for fbox sep:
+\newcommand\Hi[2][light-gray]{%
+  \hspace*{-\fboxsep}%
+  \colorbox{#1}{#2}%
+  \hspace*{-\fboxsep}%
+}
+
+\title{Technical Report}
+
+\begin{document}
+\onehalfspacing
+\maketitle
+
+\tableofcontents
+
+\newpage
+ 
+\section{Introduction} 
+
+\section{Related Work}
+
+\section{Parallel Patch Based Synthesizer}
+
+\section{Fast Approximate Cycle Cuts}
+
+\section{Feature Alignment}
+
+\section{Patch Rejection}
+
+\section{Implementation Details}
+
+\section{Results}
+
+
+ 
+
+\end{document} 

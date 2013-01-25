@@ -1,0 +1,63 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: ./PPBTS.aux
+The style file: acmsmall.bst
+Database file #1: bibliography.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--page numbers missing in Barnes
+Warning--empty publisher in efros2001image
+Warning--empty address in efros2001image
+Warning--no number and no volume in guo2000chaos
+Warning--page numbers missing in guo2000chaos
+Warning--can't use both volume and number fields in jia2006drag
+Warning--empty publisher in jia2006drag
+Warning--empty address in jia2006drag
+Warning--empty publisher in kwatra2003graphcut
+Warning--empty address in kwatra2003graphcut
+Warning--empty publisher in lefebvre2006appearance
+Warning--empty address in lefebvre2006appearance
+Warning--empty publisher in saisan2001dynamic
+Warning--empty address in saisan2001dynamic
+Warning--empty publisher in wei2009state
+Warning--empty address in wei2009state
+You've used 11 entries,
+            3177 wiz_defined-function locations,
+            790 strings with 7397 characters,
+and the built_in function-call counts, 8317 in all, are:
+= -- 800
+> -- 437
+< -- 4
++ -- 126
+- -- 154
+* -- 791
+:= -- 1298
+add.period$ -- 54
+call.type$ -- 11
+change.case$ -- 90
+chr.to.int$ -- 11
+cite$ -- 27
+duplicate$ -- 280
+empty$ -- 576
+format.name$ -- 224
+if$ -- 1692
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 16
+newline$ -- 58
+num.names$ -- 110
+pop$ -- 90
+preamble$ -- 1
+purify$ -- 155
+quote$ -- 0
+skip$ -- 267
+stack$ -- 0
+substring$ -- 455
+swap$ -- 105
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 220
+warning$ -- 16
+while$ -- 83
+width$ -- 0
+write$ -- 161
+(There were 16 warnings)

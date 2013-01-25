@@ -1,0 +1,154 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.7.25)  12 NOV 2012 13:57
+entering extended mode
+ %&-line parsing enabled.
+**./acm_test.tex
+(./acm_test.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(./acmsmall.cls
+Document Class: acmsmall 2010/07/15, fonts included on 28 June 2010
+(/usr/share/texmf-texlive/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
+\Gread@gobject=\count79
+))
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+)
+\Gin@req@height=\dimen102
+\Gin@req@width=\dimen103
+)
+Document Class `acmsmall' Electronic Submissions v1.4 <July 9, 2012> (ACM).
+\@firstpg=\count80
+\@lastpg=\count81
+\trimheight=\dimen104
+\trimwidth=\dimen105
+\normaltextheight=\dimen106
+\tempdimen=\dimen107
+\tempbox=\box26
+\tbbox=\box27
+\tabledim=\dimen108
+\symnewlargesymbols=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \bigsqcup on input line 1978.
+\normalparindent=\dimen109
+\footheight=\skip41
+\@maxsep=\skip42
+\@dblmaxsep=\skip43
+\@totalpg=\count82
+\@abstract=\box28
+\@permissionbox=\box29
+\c@part=\count83
+\c@section=\count84
+\c@subsection=\count85
+\c@subsubsection=\count86
+\c@paragraph=\count87
+\enumdim=\dimen110
+\c@theorem=\count88
+\belowcaptionskip=\skip44
+\abovecaptionskip=\skip45
+\c@figure=\count89
+\c@table=\count90
+\@narrowfig=\dimen111
+\@nfigbox=\box30
+\@nfcapbox=\box31
+\@nfigbox=\box32
+\@nfcapbox=\box33
+\bibindent=\dimen112
+LaTeX Font Info:    Overwriting math alphabet `\mathbb' in version `normal'
+(Font)                  OT1/ams/bx/n --> OT1/ams/bx/n on input line 3560.
+LaTeX Font Info:    Overwriting math alphabet `\mathbb' in version `bold'
+(Font)                  OT1/ams/bx/n --> OT1/ams/bx/n on input line 3561.
+) (./acm_test.aux)
+\openout1 = `acm_test.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+ (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count91
+\scratchdimen=\dimen113
+\scratchbox=\box34
+\nofMPsegments=\count92
+\nofMParguments=\count93
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count94
+\MPscratchDim=\dimen114
+\MPnumerator=\count95
+\everyMPtoPDFconversion=\toks16
+)
+Overfull \vbox (72.27pt too high) has occurred while \output is active []
+
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+Non-PDF special ignored!
+
+]
+Underfull \vbox (badness 1622) has occurred while \output is active []
+
+ [2]
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <9> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 61.
+
+[3] (./acm_test.bbl) [4] (./acm_test.aux) ) 
+Here is how much of TeX's memory you used:
+ 1382 strings out of 495061
+ 16210 string characters out of 1182621
+ 74725 words of memory out of 3000000
+ 4603 multiletter control sequences out of 15000+50000
+ 6944 words of font info for 25 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 32i,8n,22p,799b,169s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type
+1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
+mr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texm
+f-texlive/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texmf-texlive/fo
+nts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1
+/public/amsfonts/cm/cmssi9.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
+fonts/cm/cmti8.pfb>
+Output written on acm_test.pdf (4 pages, 139231 bytes).
+PDF statistics:
+ 51 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

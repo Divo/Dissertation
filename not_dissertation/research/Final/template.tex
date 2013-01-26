@@ -1,0 +1,68 @@
+\documentclass[10pt,twocolumn]{article} 
+
+\usepackage{simpleConference}
+\usepackage{times}
+\usepackage{apacite}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{url}
+
+\begin{document}
+
+\title{A Sample Two-Column Paper Format}
+
+\author{Carl Vogel \\
+Computational Linguistics Group  \\
+Trinity College Dublin \\
+{\tt vogel@tcd.ie}}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+   This is a simple sample.
+\end{abstract}
+
+\section{Introduction}
+
+This is the shell of a two-column paper.
+
+
+
+\begin{figure}[hbt]
+  \begin{center}
+    \includegraphics[width=3.5in]{figure.eps}
+  \end{center}
+  \caption{\small TCD Logo.}
+  \label{f:s}
+\end{figure}
+
+
+\begin{figure*}[hbt]
+  \begin{center}
+    \includegraphics[width=3.5in]{figure.eps}
+  \end{center}
+  \caption{\small This is a two column version of the TCD logo.}
+  \label{f:t}
+\end{figure*}
+
+\section{Readings}
+
+We read a work of \citeA{Kuh70}, and also of
+\citeauthor{Quine2d53}.  Some texts were foundational and formal
+\cite{Gar79}.  Some texts were foundational and philosophical
+\cite{Descartes1637}.  We considered \citeA{Morton76} as a marvel of
+conciseness.\footnote{Notice how the sentences in this section
+are grammatical:  some include the author's name as a word in the
+sentence and some make the textual citation wholly parenthetical.}
+
+\section{Conclusion}
+
+This is more terse than a proper paper would be.\footnote{Note that
+three bibliographic files require naming: a bibliography, a bibligraphy
+style, and a bibliographic package (apacite appears in two of those; 
+the author defines the third).}
+
+\bibliographystyle{apacite}
+\bibliography{bibliography}
+\end{document}

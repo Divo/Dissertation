@@ -1,0 +1,34 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\BCAY{Friendly \BBA{} Denis}{Friendly \BBA{}
+  Denis}{2001}]{friendly2001milestones}
+Friendly, M.\BCBT{} \BBA{} Denis, D.
+\newblock{}\BBOP{}2001\BBCP{}.
+\newblock{}\BBOQ{}Milestones in the history of thematic cartography,
+  statistical graphics, and data visualization.\BBCQ{}
+\newblock{}\Bem{Accessed: March}, \Bem{18}, 2010.
+
+\bibitem[\protect\BCAY{Hampson}{Hampson}{2011}]{champ}
+Hampson, C.
+\newblock{}\BBOP{}2011\BBCP{}.
+\newblock{}\Bem{An expert supported approach to data exploration.}
+\newblock{}\BUPhD, Trinity College Dublin.
+
+\bibitem[\protect\BCAY{Mazza}{Mazza}{2009}]{mazza2009introduction}
+Mazza, R.
+\newblock{}\BBOP{}2009\BBCP{}.
+\newblock{}\Bem{Introduction to information visualization.}
+\newblock{}Springer.
+
+\bibitem[\protect\BCAY{oed31}{oed31}{2013}]{oed31}
+\Bem{{Oxford English Dictionary Online, 2nd edition}.}
+\newblock{}\BBOP{}2013, July\BBCP{}.
+\newblock{}\url{http://www.oed.com/}.
+
+\bibitem[\protect\BCAY{Spence}{Spence}{2001}]{spence2001information}
+Spence, R.
+\newblock{}\BBOP{}2001\BBCP{}.
+\newblock{}\Bem{Information visualization.}
+\newblock{}Addison-Wesley.
+
+\end{thebibliography}

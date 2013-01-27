@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.23)  27 JAN 2013 20:34
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.23)  27 JAN 2013 20:54
 entering extended mode
  %&-line parsing enabled.
 **./final.tex
@@ -386,23 +386,19 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 77.
-
-Overfull \hbox (88.4242pt too wide) in paragraph at lines 92--92
-[][] 
- []
-
-[1
+ [1
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 113.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 112.
 
- (/usr/share/texmf-texlive/tex/latex/psnfss/omsptm.fd
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 113.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 112.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 118.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 117.
  [2]
 <snow.jpg, id=18, 3056.41875pt x 2850.65pt>
 File: snow.jpg Graphic file (type jpg)
@@ -411,9 +407,13 @@ File: snow.jpg Graphic file (type jpg)
 File: Minard.png Graphic file (type png)
  <use Minard.png>
 
-LaTeX Warning: Reference `fig::march' on page 3 undefined on input line 155.
+LaTeX Warning: Reference `fig::march' on page 3 undefined on input line 154.
 
-[3] [4 <./snow.jpg> <./Minard.png (PNG copy)>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3]
+[4 <./snow.jpg> <./Minard.png (PNG copy)>]
 <Mackinlay_PerceptualTask.jpg, id=27, 548.0475pt x 288.3272pt>
 File: Mackinlay_PerceptualTask.jpg Graphic file (type jpg)
 
@@ -421,19 +421,19 @@ File: Mackinlay_PerceptualTask.jpg Graphic file (type jpg)
 ! Illegal parameter number in definition of \reserved@a.
 <to be read again> 
                    3
-l.205 ... of data \cite{mackinlay1986automating}.}
+l.204 ... of data \cite{mackinlay1986automating}.}
                                                   
 ? 
 ! Illegal parameter number in definition of \reserved@a.
 <to be read again> 
                    2
-l.205 ... of data \cite{mackinlay1986automating}.}
+l.204 ... of data \cite{mackinlay1986automating}.}
                                                   
 ? 
 ! Argument of \@caption has an extra }.
 <inserted text> 
                 \par 
-l.205 ... of data \cite{mackinlay1986automating}.}
+l.204 ... of data \cite{mackinlay1986automating}.}
                                                   
 ? 
 Runaway argument?
@@ -441,13 +441,13 @@ Runaway argument?
 ! Paragraph ended before \@caption was complete.
 <to be read again> 
                    \par 
-l.205 ... of data \cite{mackinlay1986automating}.}
+l.204 ... of data \cite{mackinlay1986automating}.}
                                                   
 ? 
 <treemap.png, id=28, 627.34375pt x 453.695pt>
 File: treemap.png Graphic file (type png)
  <use treemap.png>
-Underfull \hbox (badness 1946) in paragraph at lines 225--226
+Underfull \hbox (badness 1946) in paragraph at lines 224--225
 []\OT1/ptm/m/n/10 Multivariate Anal-y-sis deals with data with var-i-ous
  []
 
@@ -487,22 +487,25 @@ Underfull \hbox (badness 1675) in paragraph at lines 157--163
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 10046 strings out of 495061
- 187043 string characters out of 1182620
- 227145 words of memory out of 3000000
- 12998 multiletter control sequences out of 15000+50000
+ 9995 strings out of 495061
+ 185912 string characters out of 1182620
+ 227064 words of memory out of 3000000
+ 12947 multiletter control sequences out of 15000+50000
  25283 words of font info for 61 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 56i,9n,55p,1255b,558s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,6n,55p,1255b,277s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
 ve/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/ty
 pe1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/u
 hvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on final.pdf (8 pages, 2221769 bytes).
+Output written on final.pdf (8 pages, 2221677 bytes).
 PDF statistics:
  63 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

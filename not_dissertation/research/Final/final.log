@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.23)  27 JAN 2013 20:29
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.23)  27 JAN 2013 20:34
 entering extended mode
  %&-line parsing enabled.
 **./final.tex
@@ -334,7 +334,12 @@ Package: `setspace' 6.7 <2000/12/01>
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytrees
 .code.tex
 File: tikzlibrarytrees.code.tex 2008/02/24 v2.10 (rcs-revision 1.2)
-) (./final.aux)
+)
+
+LaTeX Warning: Unused global option(s):
+    [onehalfspace].
+
+(./final.aux)
 \openout1 = `final.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
@@ -439,10 +444,6 @@ Runaway argument?
 l.205 ... of data \cite{mackinlay1986automating}.}
                                                   
 ? 
-
-LaTeX Warning: Citation `shneiderman2001ordered' on page 5 undefined on input l
-ine 213.
-
 <treemap.png, id=28, 627.34375pt x 453.695pt>
 File: treemap.png Graphic file (type png)
  <use treemap.png>
@@ -486,15 +487,12 @@ Underfull \hbox (badness 1675) in paragraph at lines 157--163
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 10044 strings out of 495061
- 187001 string characters out of 1182620
- 226976 words of memory out of 3000000
- 12996 multiletter control sequences out of 15000+50000
+ 10046 strings out of 495061
+ 187043 string characters out of 1182620
+ 227145 words of memory out of 3000000
+ 12998 multiletter control sequences out of 15000+50000
  25283 words of font info for 61 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  56i,9n,55p,1255b,558s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -504,7 +502,7 @@ pe1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/u
 hvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on final.pdf (8 pages, 2221629 bytes).
+Output written on final.pdf (8 pages, 2221769 bytes).
 PDF statistics:
  63 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

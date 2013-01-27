@@ -4,45 +4,45 @@ The style file: apacite.bst
 Database file #1: bibliography.bib
 `address' is a missing field, not a string, for entry shneiderman2001ordered
 while executing---line 3135 of file apacite.bst
-You've used 26 entries,
+You've used 27 entries,
             2540 wiz_defined-function locations,
-            781 strings with 8330 characters,
-and the built_in function-call counts, 11395 in all, are:
-= -- 888
-> -- 316
-< -- 88
-+ -- 197
-- -- 138
-* -- 556
-:= -- 2311
-add.period$ -- 117
-call.type$ -- 26
-change.case$ -- 80
+            785 strings with 8388 characters,
+and the built_in function-call counts, 11783 in all, are:
+= -- 919
+> -- 324
+< -- 92
++ -- 203
+- -- 142
+* -- 568
+:= -- 2396
+add.period$ -- 122
+call.type$ -- 27
+change.case$ -- 83
 chr.to.int$ -- 0
-cite$ -- 27
-duplicate$ -- 649
-empty$ -- 800
-format.name$ -- 138
-if$ -- 1990
+cite$ -- 28
+duplicate$ -- 672
+empty$ -- 828
+format.name$ -- 142
+if$ -- 2058
 int.to.chr$ -- 0
-int.to.str$ -- 52
+int.to.str$ -- 54
 missing$ -- 0
-newline$ -- 160
-num.names$ -- 100
-pop$ -- 487
+newline$ -- 166
+num.names$ -- 104
+pop$ -- 506
 preamble$ -- 1
-purify$ -- 52
+purify$ -- 54
 quote$ -- 0
-skip$ -- 492
+skip$ -- 508
 stack$ -- 0
-substring$ -- 154
-swap$ -- 499
+substring$ -- 159
+swap$ -- 510
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 548
+type$ -- 568
 warning$ -- 0
-while$ -- 101
+while$ -- 105
 width$ -- 0
-write$ -- 420
+write$ -- 436
 (There was 1 error message)

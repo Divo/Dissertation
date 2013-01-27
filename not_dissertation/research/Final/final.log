@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.23)  27 JAN 2013 21:54
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.23)  27 JAN 2013 22:23
 entering extended mode
  %&-line parsing enabled.
 **./final.tex
@@ -409,7 +409,7 @@ File: Minard.png Graphic file (type png)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
-Underfull \vbox (badness 5231) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4 <./snow.jpg>] <Mackinlay_PerceptualTask.jpg, id=27, 548.0475pt x 288.3272pt
 >
@@ -418,19 +418,13 @@ File: Mackinlay_PerceptualTask.jpg Graphic file (type jpg)
 <use Mackinlay_PerceptualTask.jpg>
 ! Illegal parameter number in definition of \reserved@a.
 <to be read again> 
-                   2
-l.194 ... of data \cite{mackinlay1986automating}.}
-                                                  
-? 
-! Illegal parameter number in definition of \reserved@a.
-<to be read again> 
                    3
 l.194 ... of data \cite{mackinlay1986automating}.}
                                                   
 ? 
 ! Illegal parameter number in definition of \reserved@a.
 <to be read again> 
-                   1
+                   2
 l.194 ... of data \cite{mackinlay1986automating}.}
                                                   
 ? 
@@ -448,60 +442,66 @@ Runaway argument?
 l.194 ... of data \cite{mackinlay1986automating}.}
                                                   
 ? 
-<treemap.png, id=28, 627.34375pt x 453.695pt>
+[5 <./Minard.png (PNG copy)>] <treemap.png, id=31, 627.34375pt x 453.695pt>
 File: treemap.png Graphic file (type png)
- <use treemap.png> [5 <./Minard.png (PNG copy)>]
 
-LaTeX Warning: Citation `dix2004human' on page 6 undefined on input line 215.
+<use treemap.png>
+Underfull \hbox (badness 1946) in paragraph at lines 210--211
+[]\OT1/ptm/m/n/10 Multivariate Anal-y-sis deals with data with var-i-ous
+ []
 
 [6 <./Mackinlay_PerceptualTask.jpg>] (./final.bbl
-Overfull \hbox (95.90117pt too wide) in paragraph at lines 96--103
+Overfull \hbox (95.90117pt too wide) in paragraph at lines 102--109
 \OT1/ptm/m/n/10 (http://www.telegraph.co.uk/news/worldnews/europe/spain/5978900
 /Worlds-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--103
+Underfull \hbox (badness 10000) in paragraph at lines 102--109
 \OT1/ptm/m/n/10 oldest-map-Spanish-cave-has-landscape-from-
  []
 
 [7 <./treemap.png>]
-Underfull \hbox (badness 4242) in paragraph at lines 137--141
+Underfull \hbox (badness 4242) in paragraph at lines 143--147
 []\OT1/ptm/m/n/10 Mazza, R.  (2009).  |   []   |   []   |   []
  []
 
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 159.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 165.
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 5260) in paragraph at lines 157--160
+Underfull \hbox (badness 5260) in paragraph at lines 163--166
 []|   []  \OT1/ptm/m/n/10 (2013,
  []
 
 
-Underfull \hbox (badness 1675) in paragraph at lines 163--169
+Underfull \hbox (badness 1675) in paragraph at lines 169--175
 []\OT1/ptm/m/n/10 Shneiderman, B., & Wat-ten-berg, M.  (2001).  Or-
  []
 
 ) [8
 
-] (./final.aux) ) 
+] (./final.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 9999 strings out of 495061
- 185987 string characters out of 1182620
- 228107 words of memory out of 3000000
- 12951 multiletter control sequences out of 15000+50000
+ 10000 strings out of 495061
+ 186004 string characters out of 1182620
+ 228146 words of memory out of 3000000
+ 12952 multiletter control sequences out of 15000+50000
  25283 words of font info for 61 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  56i,7n,55p,1255b,277s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-t
-exlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1
-/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a
-.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/tex
-mf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on final.pdf (9 pages, 2223968 bytes).
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/u
+hvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/shar
+e/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/font
+s/type1/urw/times/utmri8a.pfb>
+Output written on final.pdf (9 pages, 2224478 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -1,5 +1,83 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\BCAY{Ayres}{Ayres}{1919}]{ayres1919war}
+Ayres, L.
+\newblock{}\BBOP{}1919\BBCP{}.
+\newblock{}\Bem{The war with germany: a statistical summary.}
+\newblock{}Govt. print. off.
+
+\bibitem[\protect\BCAY{Bagrow \BBA{} Skelton}{Bagrow \BBA{}
+  Skelton}{2009}]{bagrow2009history}
+Bagrow, L.\BCBT{} \BBA{} Skelton, R.
+\newblock{}\BBOP{}2009\BBCP{}.
+\newblock{}\Bem{History of cartography.}
+\newblock{}Transaction Pub.
+
+\bibitem[\protect\BCAY{Bertin \BBA{} Barbut}{Bertin \BBA{}
+  Barbut}{1973}]{bertin1973semiologie}
+Bertin, J.\BCBT{} \BBA{} Barbut, M.
+\newblock{}\BBOP{}1973\BBCP{}.
+\newblock{}\Bem{S{\'e}miologie graphique.}
+\newblock{}Mouton; Paris: Gauthier-Villars.
+
+\bibitem[\protect\BCAY{Card, Mackinlay\BCBL{} \BBA{} Shneiderman}{Card
+  \BOthers{}}{1999}]{card1999readings}
+Card, S., Mackinlay, J.\BCBL{} \BBA{} Shneiderman, B.
+\newblock{}\BBOP{}1999\BBCP{}.
+\newblock{}\Bem{Readings in information visualization: using vision to think.}
+\newblock{}Morgan Kaufmann.
+
+\bibitem[\protect\BCAY{Cleveland \BBA{} McGill}{Cleveland \BBA{}
+  McGill}{1984}]{cleveland1984graphical}
+Cleveland, W.\BCBT{} \BBA{} McGill, R.
+\newblock{}\BBOP{}1984\BBCP{}.
+\newblock{}\BBOQ{}Graphical perception: Theory, experimentation, and
+  application to the development of graphical methods.\BBCQ{}
+\newblock{}\Bem{Journal of the American Statistical Association},
+  \Bem{79}(387), 531--554.
+
+\bibitem[\protect\BCAY{Eriksen \BBA{} Hake}{Eriksen \BBA{}
+  Hake}{1955}]{eriksen1955absolute}
+Eriksen, C.\BCBT{} \BBA{} Hake, H.
+\newblock{}\BBOP{}1955\BBCP{}.
+\newblock{}\BBOQ{}Absolute judgments as a function of stimulus range and number
+  of stimulus and response categories.\BBCQ{}
+\newblock{}\Bem{Journal of Experimental Psychology}, \Bem{49}(5), 323.
+
+\bibitem[\protect\BCAY{Few}{Few}{2004}]{few2004show}
+Few, S.
+\newblock{}\BBOP{}2004\BBCP{}.
+\newblock{}\BBOQ{}Show me the numbers: Designing tables and graphs to
+  enlighten.\BBCQ{}
+\newblock{}
+
+\bibitem[\protect\BCAY{Fienberg}{Fienberg}{1979}]{fienberg1979graphical}
+Fienberg, S.
+\newblock{}\BBOP{}1979\BBCP{}.
+\newblock{}\BBOQ{}Graphical methods in statistics.\BBCQ{}
+\newblock{}\Bem{The American Statistician}, \Bem{33}(4), 165--178.
+
+\bibitem[\protect\BCAY{Frerichs}{Frerichs}{2007}]{frerichs2007ghost}
+Frerichs, R.
+\newblock{}\BBOP{}2007\BBCP{}.
+\newblock{}\BBOQ{}The ghost map.\BBCQ{}
+\newblock{}\Bem{Emerging Infectious Diseases}, 1134.
+
+\bibitem[\protect\BCAY{Friendly}{Friendly}{2008}]{friendly2008golden}
+Friendly, M.
+\newblock{}\BBOP{}2008\BBCP{}.
+\newblock{}\BBOQ{}The golden age of statistical graphics.\BBCQ{}
+\newblock{}\Bem{Statistical Science}, 502--535.
+
+\bibitem[\protect\BCAY{Friendly \BBA{} Denis}{Friendly \BBA{}
+  Denis}{2000}]{friendly2000discussion}
+Friendly, M.\BCBT{} \BBA{} Denis, D.
+\newblock{}\BBOP{}2000\BBCP{}.
+\newblock{}\BBOQ{}Discussion and comments. approche graphique en analyse des
+  donn{\'e}es. the roots and branches of modern statistical graphics.\BBCQ{}
+\newblock{}\Bem{Journal de la soci{\'e}t{\'e} fran{\c{c}}aise de statistique},
+  \Bem{141}(4), 51--60.
+
 \bibitem[\protect\BCAY{Friendly \BBA{} Denis}{Friendly \BBA{}
   Denis}{2001}]{friendly2001milestones}
 Friendly, M.\BCBT{} \BBA{} Denis, D.
@@ -8,11 +86,46 @@ Friendly, M.\BCBT{} \BBA{} Denis, D.
   statistical graphics, and data visualization.\BBCQ{}
 \newblock{}\Bem{Accessed: March}, \Bem{18}, 2010.
 
+\bibitem[\protect\BCAY{Gantt}{Gantt}{1919}]{gantt1919organization}
+Gantt, H.
+\newblock{}\BBOP{}1919\BBCP{}.
+\newblock{}\Bem{Organization for work.}
+\newblock{}London: Allen and Unwin.
+
+\bibitem[\protect\BCAY{Govan}{Govan}{2009}]{caves}
+Govan, F.
+\newblock{}\BBOP{}2009\BBCP{}.
+\newblock{}\BBOQ{}World's oldest map: Spanish cave has landscape from 14,000
+  years ago.\BBCQ{}
+\newblock{}\Bem{The Telegraph}.
+\newblock{}(http://www.telegraph.co.uk/news/worldnews/europe/spain/5978900/Wor%
+lds-oldest-map-Spanish-cave-has-landscape-from-14000-years-ago.html)
+
 \bibitem[\protect\BCAY{Hampson}{Hampson}{2011}]{champ}
 Hampson, C.
 \newblock{}\BBOP{}2011\BBCP{}.
 \newblock{}\Bem{An expert supported approach to data exploration.}
 \newblock{}\BUPhD, Trinity College Dublin.
+
+\bibitem[\protect\BCAY{Haskell}{Haskell}{1919}]{haskell1919make}
+Haskell, A.
+\newblock{}\BBOP{}1919\BBCP{}.
+\newblock{}\Bem{How to make and use graphic charts.}
+\newblock{}Codex book company inc.
+
+\bibitem[\protect\BCAY{Jacobson \BBA{} Wurman}{Jacobson \BBA{}
+  Wurman}{1999}]{jacobson1999information}
+Jacobson, R.\BCBT{} \BBA{} Wurman, R.
+\newblock{}\BBOP{}1999\BBCP{}.
+\newblock{}\Bem{Information design.}
+\newblock{}Mit Press London.
+
+\bibitem[\protect\BCAY{Mackinlay}{Mackinlay}{1986}]{mackinlay1986automating}
+Mackinlay, J.
+\newblock{}\BBOP{}1986\BBCP{}.
+\newblock{}\BBOQ{}Automating the design of graphical presentations of
+  relational information.\BBCQ{}
+\newblock{}\Bem{ACM Transactions on Graphics (TOG)}, \Bem{5}(2), 110--141.
 
 \bibitem[\protect\BCAY{Mazza}{Mazza}{2009}]{mazza2009introduction}
 Mazza, R.
@@ -20,15 +133,44 @@ Mazza, R.
 \newblock{}\Bem{Introduction to information visualization.}
 \newblock{}Springer.
 
+\bibitem[\protect\BCAY{Miller}{Miller}{1956}]{Mil56}
+Miller, G.
+\newblock{}\BBOP{}1956\BBCP{}.
+\newblock{}\BBOQ{}The magical number seven, plus or minus two: Some limits on
+  our capacity for processing information.\BBCQ{}
+\newblock{}\Bem{The Psychological Review}, \Bem{63}, 81-97.
+
+\bibitem[\protect\BCAY{Myers}{Myers}{1998}]{myers1998brief}
+Myers, B.
+\newblock{}\BBOP{}1998\BBCP{}.
+\newblock{}\BBOQ{}A brief history of human-computer interaction
+  technology.\BBCQ{}
+\newblock{}\Bem{interactions}, \Bem{5}(2), 44--54.
+
 \bibitem[\protect\BCAY{oed31}{oed31}{2013}]{oed31}
 \Bem{{Oxford English Dictionary Online, 2nd edition}.}
 \newblock{}\BBOP{}2013, July\BBCP{}.
 \newblock{}\url{http://www.oed.com/}.
+
+\bibitem[\protect\BCAY{Shneiderman \BBA{} Wattenberg}{Shneiderman \BBA{}
+  Wattenberg}{2001}]{shneiderman2001ordered}
+Shneiderman, B.\BCBT{} \BBA{} Wattenberg, M.
+\newblock{}\BBOP{}2001\BBCP{}.
+\newblock{}\BBOQ{}Ordered treemap layouts.\BBCQ{}
+\newblock{}In \Bem{Proceedings of the ieee symposium on information
+  visualization 2001}\ (\BVOL\ 73078).
+\newblock{}
 
 \bibitem[\protect\BCAY{Spence}{Spence}{2001}]{spence2001information}
 Spence, R.
 \newblock{}\BBOP{}2001\BBCP{}.
 \newblock{}\Bem{Information visualization.}
 \newblock{}Addison-Wesley.
+
+\bibitem[\protect\BCAY{Tukey}{Tukey}{1962}]{tukey1962future}
+Tukey, J.
+\newblock{}\BBOP{}1962\BBCP{}.
+\newblock{}\BBOQ{}The future of data analysis.\BBCQ{}
+\newblock{}\Bem{The Annals of Mathematical Statistics}, \Bem{33}(1), 1--67.
 
 \end{thebibliography}

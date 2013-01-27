@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.23)  26 JAN 2013 21:50
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.23)  27 JAN 2013 20:29
 entering extended mode
  %&-line parsing enabled.
 **./final.tex
@@ -334,11 +334,7 @@ Package: `setspace' 6.7 <2000/12/01>
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytrees
 .code.tex
 File: tikzlibrarytrees.code.tex 2008/02/24 v2.10 (rcs-revision 1.2)
-) (./final.aux
-
-LaTeX Warning: Label `f:t' multiply defined.
-
-)
+) (./final.aux)
 \openout1 = `final.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
@@ -402,70 +398,115 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 113.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 118.
-
-
-LaTeX Warning: Citation `bagrow2009history' on page 2 undefined on input line 1
-27.
-
-
-LaTeX Warning: Citation `caves' on page 2 undefined on input line 127.
-
-
-LaTeX Warning: Citation `frerichs2007ghost' on page 2 undefined on input line 1
-33.
-
-<snow.jpg, id=14, 3056.41875pt x 2850.65pt>
+ [2]
+<snow.jpg, id=18, 3056.41875pt x 2850.65pt>
 File: snow.jpg Graphic file (type jpg)
  <use snow.jpg>
-<Minard.png, id=15, 1447.5681pt x 690.1785pt>
+<Minard.png, id=19, 1447.5681pt x 690.1785pt>
 File: Minard.png Graphic file (type png)
  <use Minard.png>
 
-LaTeX Warning: Citation `mackinlay1986automating' on page 2 undefined on input 
-line 155.
+LaTeX Warning: Reference `fig::march' on page 3 undefined on input line 155.
 
-[2]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[3] [4 <./snow.jpg> <./Minard.png (PNG copy)>]
+<Mackinlay_PerceptualTask.jpg, id=27, 548.0475pt x 288.3272pt>
+File: Mackinlay_PerceptualTask.jpg Graphic file (type jpg)
 
-File: Minard.png Graphic file (type png)
+<use Mackinlay_PerceptualTask.jpg>
+! Illegal parameter number in definition of \reserved@a.
+<to be read again> 
+                   3
+l.205 ... of data \cite{mackinlay1986automating}.}
+                                                  
+? 
+! Illegal parameter number in definition of \reserved@a.
+<to be read again> 
+                   2
+l.205 ... of data \cite{mackinlay1986automating}.}
+                                                  
+? 
+! Argument of \@caption has an extra }.
+<inserted text> 
+                \par 
+l.205 ... of data \cite{mackinlay1986automating}.}
+                                                  
+? 
+Runaway argument?
+\@captype {\@cite }\def \reserved@b {\@cite <>}\futurelet \@let@token \ETC.
+! Paragraph ended before \@caption was complete.
+<to be read again> 
+                   \par 
+l.205 ... of data \cite{mackinlay1986automating}.}
+                                                  
+? 
 
-<use Minard.png> [3 <./snow.jpg> <./Minard.png (PNG copy)>] (./final.bbl
-Underfull \hbox (badness 4242) in paragraph at lines 18--22
+LaTeX Warning: Citation `shneiderman2001ordered' on page 5 undefined on input l
+ine 213.
+
+<treemap.png, id=28, 627.34375pt x 453.695pt>
+File: treemap.png Graphic file (type png)
+ <use treemap.png>
+Underfull \hbox (badness 1946) in paragraph at lines 225--226
+[]\OT1/ptm/m/n/10 Multivariate Anal-y-sis deals with data with var-i-ous
+ []
+
+[5] (./final.bbl [6 <./Mackinlay_PerceptualTask.jpg> <./treemap.png>]
+Overfull \hbox (95.90117pt too wide) in paragraph at lines 96--103
+\OT1/ptm/m/n/10 (http://www.telegraph.co.uk/news/worldnews/europe/spain/5978900
+/Worlds-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--103
+\OT1/ptm/m/n/10 oldest-map-Spanish-cave-has-landscape-from-
+ []
+
+
+Underfull \hbox (badness 4242) in paragraph at lines 131--135
 []\OT1/ptm/m/n/10 Mazza, R.  (2009).  |   []   |   []   |   []
  []
 
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 26.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 153.
+
 (/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 5260) in paragraph at lines 24--27
+Underfull \hbox (badness 5260) in paragraph at lines 151--154
 []|   []  \OT1/ptm/m/n/10 (2013,
  []
 
-) [4
+
+Underfull \hbox (badness 1675) in paragraph at lines 157--163
+[]\OT1/ptm/m/n/10 Shneiderman, B., & Wat-ten-berg, M.  (2001).  Or-
+ []
+
+) [7
 
 ] (./final.aux)
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 9978 strings out of 495061
- 185679 string characters out of 1182620
- 226652 words of memory out of 3000000
- 12932 multiletter control sequences out of 15000+50000
+ 10044 strings out of 495061
+ 187001 string characters out of 1182620
+ 226976 words of memory out of 3000000
+ 12996 multiletter control sequences out of 15000+50000
  25283 words of font info for 61 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 56i,9n,55p,1173b,558s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,9n,55p,1255b,558s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
 ve/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/ty
 pe1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/u
 hvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/font
 s/type1/urw/times/utmri8a.pfb>
-Output written on final.pdf (5 pages, 1955835 bytes).
+Output written on final.pdf (8 pages, 2221629 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
+ 63 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

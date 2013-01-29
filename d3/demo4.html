@@ -1,0 +1,102 @@
+<html>
+
+
+<head>
+
+<script src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" id="chart">
+
+//Helper functions, brek these out
+function isNumber(n) {
+	return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+
+
+function draw(data) {
+	"use strict";
+	//First two methods can pretty much always stay like this
+	var containerDimensions = {width: 900, height: 400},
+		margins = {top: 10, right:20, bottom: 30, left: 60},
+		chartDimensions = {
+			width : containerDimensions.width - margins.left - margins.right,
+			height : containerDimensions.height - margins.top - margins.bottom
+		};
+
+	var g = d3.select("#chart_area")
+	  .append('svg')
+	  	.attr("width", containerDimensions.width)
+	  	.attr("height", containerDimensions.height)
+	  .append("g")
+	  	.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+	  	.attr("id", "chart");
+
+	
+
+	//ROUGH: Presume first elemnt exists and pull the keys off that
+	//Needs work
+	var keys = d3.keys(data[0]);
+	if(isNumber(data[0][keys[0]])) {
+		var nums = keys[0];
+		var labels = keys[1];
+	} else {
+		var nums = keys[1];
+		var labels = keys[0];
+	}
+
+
+	//Determine X Axis automatically
+	var x_extent = d3.extent(data, function(d) { return d[nums] }); 
+	var x_scale = d3.scale.linear()
+		.domain(x_extent)
+		.range([0, chartDimensions.width]);
+	var x_axis = d3.svg.axis().
+		scale(x_scale);
+
+
+	//Add x-axis
+	g.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0, " + chartDimensions.height + ")" )
+		.call(x_axis);
+
+	d3.select(".x.axis")
+		.append("text")
+		.text("hello")
+		.attr('transform', "rotate (-270, 0, 0)")
+        .attr('x', 100)
+        .attr('y', 50);
+
+    g.selectAll("circle")
+    	.data(data)
+    	.enter()
+    	.append("circle")
+    	.attr("cx", function(d) { return x_scale(d[nums])})
+    	.attr("cy", 10 )
+    	.attr("r", 10);
+
+    console.log(g);
+
+}
+
+
+
+ 
+</script>
+</head>
+
+
+<body>
+view-source:http://examples.oreilly.com/0636920025429/mikedewar-getting_started_with_d3-bdfc34e/visualisations/subway_wait_assessment_UI.html
+<a href="">Source</a>
+	<div id="chart_area"></div>
+
+
+	<script>
+		d3.csv("data/edu.csv", draw)
+	</script>
+
+
+</body>
+
+</html>

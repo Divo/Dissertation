@@ -1,0 +1,36 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\BCAY{Descartes}{Descartes}{1637}]{Descartes1637}
+Descartes, R.
+\newblock{}\BBOP{}1637\BBCP{}.
+\newblock{}\Bem{Discourse on method.}
+\newblock{}Indianapolis, IL: Bobbs-Merrill Educational Publishing.
+\newblock{}(Laurence, J. Lafleur (Trans.), 1950, reprinted 1984.)
+
+\bibitem[\protect\BCAY{Garey and Johnson}{Garey and Johnson}{1979}]{Gar79}
+Garey, M.~R.\BCBT{} \BBA{} Johnson, D.~S.
+\newblock{}\BBOP{}1979\BBCP{}.
+\newblock{}\Bem{Computers and intractibility: A guide to the theory of
+  np-completeness.}
+\newblock{}New York: W. H. Freeman and Co.
+
+\bibitem[\protect\BCAY{Kuhn}{Kuhn}{1970}]{Kuh70}
+Kuhn, T.~S.
+\newblock{}\BBOP{}1970\BBCP{}.
+\newblock{}\Bem{The structure of scientific revolutions.}
+\newblock{}Chicago: University of Chicago Press.
+
+\bibitem[\protect\BCAY{Morton}{Morton}{1976}]{Morton76}
+Morton, J.
+\newblock{}\BBOP{}1976\BBCP{}.
+\newblock{}\BBOQ{}On recursive reference.\BBCQ{}
+\newblock{}\Bem{Cognition}, \Bem{4}, 309.
+
+\bibitem[\protect\BCAY{Quine}{Quine}{1953}]{Quine2d53}
+Quine, W. V.~O.
+\newblock{}\BBOP{}1953\BBCP{}.
+\newblock{}\BBOQ{}Two dogmas of empiricism.\BBCQ{}
+\newblock{}In \Bem{From a logical point of view}\ (\BPGS\ 20--46).
+\newblock{}Cambridge, Mass: Harvard University Press.
+
+\end{thebibliography}

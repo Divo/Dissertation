@@ -8,9 +8,26 @@
 
 
 <body>
-http://www.recursion.org/d3-for-mere-mortals/
+
+<a href="">Source</a>
 <div id="demo"></div>
-<script type="text/javascript" id="rect-demo-js">
+<script type="text/javascript" id="chart">
+
+var containerDimensions = {width: 900, height: 400},
+	margins = {top: 10, right:20, bottom: 30, left: 60},
+	charDimensions = {
+		width : containerDimensions.width - margins.left - margins.right,
+		height : containerDimensions.height -margins.top - margins.bottom;
+	};
+
+var chart = d3.select("#chart").
+  append("svg")
+  	.attr("width", containerDimensions.width)
+  	.attr("height", containerDimensions.height)
+  .append("g")
+  	.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+  	.attr("id", "chart");
+
  
 </script>
 </body>

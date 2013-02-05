@@ -3,7 +3,7 @@
 
 <head>
 
-<script src="http://d3js.org/d3.v2.js"></script>
+<script src="d3.v2.js"></script>
 <script type="text/javascript" id="chart">
 
 //Helper functions, brek these out
@@ -17,7 +17,7 @@ function draw(data) {
 	"use strict";
 	//First two methods can pretty much always stay like this
 	var containerDimensions = {width: 900, height: 400},
-		margins = {top: 10, right:20, bottom: 30, left: 60},
+		margins = {top: 30, right:20, bottom: 40, left: 100},
 		chartDimensions = {
 			width : containerDimensions.width - margins.left - margins.right,
 			height : containerDimensions.height - margins.top - margins.bottom
@@ -31,7 +31,7 @@ function draw(data) {
 	  	.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
 	  	.attr("id", "chart");
 
-	
+	var fill = d3.scale.category20b();
 
 	//ROUGH: Presume first elemnt exists and pull the keys off that
 	//Needs work
@@ -46,34 +46,85 @@ function draw(data) {
 
 
 	//Determine X Axis automatically
-	var x_extent = d3.extent(data, function(d) { return d[nums] }); 
+	var y_extent = d3.extent(data, function(d) { return d[nums] }); 
+
+	var y_scale = d3.scale.linear()
+		.domain(y_extent)
+		.range([0, chartDimensions.height]);
+	var y_axis = d3.svg.axis()
+		.scale(y_scale)
+		.orient("left");
+
 	var x_scale = d3.scale.linear()
-		.domain(x_extent)
+		.domain([0, data.length])
 		.range([0, chartDimensions.width]);
-	var x_axis = d3.svg.axis().
-		scale(x_scale);
 
+	var x_axis = d3.svg.axis()
+		.scale(x_scale)
+		.ticks(0);
 
-	//Add x-axis
+	var barWidth = chartDimensions.width / data.length;
+	console.log(barWidth);
+
+	//Add y-axis
 	g.append("g")
-		.attr("class", "x axis")
-		.attr("transform", "translate(0, " + chartDimensions.height + ")" )
-		.call(x_axis);
+		.attr("class", "y axis")
+		.call(y_axis);
 
-	d3.select(".x.axis")
+	d3.select(".y.axis")
 		.append("text")
-		.text("hello")
-		.attr('transform', "rotate (-270, 0, 0)")
-        .attr('x', 100)
-        .attr('y', 50);
+		.text(nums)
+		.attr("transform", "rotate (-270, 0, 0)")
+        .attr("x", chartDimensions.height / 2)
+        .attr("y", 70);
 
-    g.selectAll("circle")
+    g.append("g")
+    	.attr("class", "x axis")
+    	.attr("transform", "translate(0," + chartDimensions.height + ")")
+    	.call(x_axis);
+
+    d3.select(".x.axis")
+    	.append("text")
+    	.text(labels)
+    	.attr("x", chartDimensions.width / 2)
+    	.attr("y", 35);
+
+
+
+   /*g.selectAll("circle")
     	.data(data)
     	.enter()
     	.append("circle")
-    	.attr("cx", function(d) { return x_scale(d[nums])})
-    	.attr("cy", 10 )
-    	.attr("r", 10);
+    	.attr("cx", 10)
+    	.attr("cy", function(d) { return y_scale(d[nums])})
+    	.attr("r", 10);*/
+
+
+
+    g.selectAll("rect")
+    	.data(data)
+    	.enter()
+    	.append("rect")
+    	.attr("x", function(d, i) { return barWidth * i})
+    	//.attr("y", function(d) { return chartDimensions.height - y_scale(d[nums]) })
+    	.attr("height", function(d) { return y_scale(d[nums])})
+    	.attr("width", barWidth)
+    	.attr("fill", function(d, i) { return fill(d[nums])});
+
+    g.selectAll("rect")
+    	.on("mouseover.tooltip", function(d) {
+    		g.append("text")
+    		.text(d[labels] + " " + d[nums])
+    		.attr("class", "label")
+    		.attr("x", -10)
+    		.attr("y", -10);
+    	});
+
+
+    g.selectAll("rect")
+    	.on("mouseout.tooltip", function(d) {
+    		g.select(".label").remove();
+    	});
 
     console.log(g);
 

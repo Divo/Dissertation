@@ -45,12 +45,15 @@ function draw(data) {
 	}
 
 
-	//Determine X Axis automatically
-	var y_extent = d3.extent(data, function(d) { return d[nums] }); 
+	//var y_extent = d3.extent(data, function(d) { return d[nums] }); 
+
+	var data_max = d3.max(data, function(d) { return d[nums] });
 
 	var y_scale = d3.scale.linear()
-		.domain(y_extent)
-		.range([0, chartDimensions.height]);
+		.domain([0, data_max])
+		.range([chartDimensions.height, 0]);
+
+
 	var y_axis = d3.svg.axis()
 		.scale(y_scale)
 		.orient("left");
@@ -105,9 +108,9 @@ function draw(data) {
     	.data(data)
     	.enter()
     	.append("rect")
-    	.attr("x", function(d, i) { return barWidth * i})
-    	//.attr("y", function(d) { return chartDimensions.height - y_scale(d[nums]) })
-    	.attr("height", function(d) { return y_scale(d[nums])})
+    	.attr("x", function(d, i) { return x_scale(i)} )
+    	.attr("y", function(d) { return y_scale(d[nums]) })
+    	.attr("height", function(d) { return chartDimensions.height - y_scale(d[nums])})
     	.attr("width", barWidth)
     	.attr("fill", function(d, i) { return fill(d[nums])});
 

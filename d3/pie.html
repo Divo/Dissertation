@@ -1,0 +1,78 @@
+<html>
+
+
+<head>
+
+<script src="d3.v2.js"></script>
+<script type="text/javascript" id="chart">
+
+//Helper functions, brek these out
+function isNumber(n) {
+	return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+
+function draw(data) {
+	"use strict";
+
+	var containerDimensions = {width: 900, height: 400},
+		margins = {top: 30, right:20, bottom: 40, left: 100},
+		chartDimensions = {
+			width : containerDimensions.width - margins.left - margins.right,
+			height : containerDimensions.height - margins.top - margins.bottom
+		};
+
+		var g = d3.select("#chart_area")
+	  .append('svg')
+	  	.attr("width", containerDimensions.width)
+	  	.attr("height", containerDimensions.height)
+	  .append("g")
+	  	.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+	  	.attr("id", "chart");
+
+	  var fill = d3.scale.category20b();
+
+
+	  var pie = d3.layout.pie()
+	  	.value(function(d) { return d.Amount});
+
+	  var arc = d3.svg.arc();
+
+	  g.append("svg:path")
+	  	.style("fill", function(d) { return fill( d.Area )})
+	  	.data(function() { return pie(symbols)})
+
+
+
+
+
+}
+
+
+ 
+</script>
+</head>
+
+
+<body>
+view-source:http://examples.oreilly.com/0636920025429/mikedewar-getting_started_with_d3-bdfc34e/visualisations/subway_wait_assessment_UI.html
+
+
+Also have a good look here http://mbostock.github.com/d3/talk/20111018/#0
+
+http://bl.ocks.org/1203641
+
+http://jsfiddle.net/seamusleahy/2Pwn4/ Include d3
+d3
+< href="">Source</a>
+	<div id="chart_area"></div>
+
+
+	<script>
+		d3.csv("data/edu.csv", draw)
+	</script>
+
+
+</body>
+
+</html>

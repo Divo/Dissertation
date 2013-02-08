@@ -23,7 +23,7 @@ function draw(data) {
 			height : containerDimensions.height - margins.top - margins.bottom
 		};
 
-	var g = d3.select("#chart_area")
+	var svg = d3.select("#chart_area")
 	  .append('svg')
 	  	.attr("width", containerDimensions.width)
 	  	.attr("height", containerDimensions.height)
@@ -69,8 +69,35 @@ function draw(data) {
 	var barWidth = chartDimensions.width / data.length;
 	console.log(barWidth);
 
+
+    var g = svg.selectAll("rect")
+    	.data(data)
+      .enter()
+      	.append("rect")
+    	.attr("x", function(d, i) { return x_scale(i)} )
+    	.attr("y", function(d) { return y_scale(d[nums]) })
+    	.attr("height", function(d) { return chartDimensions.height - y_scale(d[nums])})
+    	.attr("width", barWidth)
+    	.attr("fill", function(d, i) { return fill(d[nums])});
+
+
+    //svg.selectAll("rect")
+
+    g.on("mouseover.tooltip", function(d) {
+    		svg.append("text")
+    		.text(d[labels] + " " + d[nums])
+    		.attr("class", "label")
+    		.attr("x", -10)
+    		.attr("y", -10);
+    	});
+
+
+    g.on("mouseout.tooltip", function(d) {
+    		svg.select(".label").remove();
+    	});
+
 	//Add y-axis
-	g.append("g")
+	svg.append("g")
 		.attr("class", "y axis")
 		.call(y_axis);
 
@@ -81,7 +108,7 @@ function draw(data) {
         .attr("x", chartDimensions.height / 2)
         .attr("y", 70);
 
-    g.append("g")
+    svg.append("g")
     	.attr("class", "x axis")
     	.attr("transform", "translate(0," + chartDimensions.height + ")")
     	.call(x_axis);
@@ -104,32 +131,7 @@ function draw(data) {
 
 
 
-    g.selectAll("rect")
-    	.data(data)
-    	.enter()
-    	.append("rect")
-    	.attr("x", function(d, i) { return x_scale(i)} )
-    	.attr("y", function(d) { return y_scale(d[nums]) })
-    	.attr("height", function(d) { return chartDimensions.height - y_scale(d[nums])})
-    	.attr("width", barWidth)
-    	.attr("fill", function(d, i) { return fill(d[nums])});
 
-    g.selectAll("rect")
-    	.on("mouseover.tooltip", function(d) {
-    		g.append("text")
-    		.text(d[labels] + " " + d[nums])
-    		.attr("class", "label")
-    		.attr("x", -10)
-    		.attr("y", -10);
-    	});
-
-
-    g.selectAll("rect")
-    	.on("mouseout.tooltip", function(d) {
-    		g.select(".label").remove();
-    	});
-
-    console.log(g);
 
 }
 

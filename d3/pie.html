@@ -22,28 +22,57 @@ function draw(data) {
 			height : containerDimensions.height - margins.top - margins.bottom
 		};
 
-		var g = d3.select("#chart_area")
+	var outerRadius = Math.min(chartDimensions.width, chartDimensions.height) / 2,
+		innerRadius = 0;
+
+
+	var fill = d3.scale.category20b();
+
+
+	var pie = d3.layout.pie()
+	  	.value(function(d) { return d.Amount; });
+
+	var arc = d3.svg.arc()
+		.innerRadius(innerRadius)
+		.outerRadius(outerRadius);
+
+
+	var svg = d3.select("#chart_area")
 	  .append('svg')
 	  	.attr("width", containerDimensions.width)
 	  	.attr("height", containerDimensions.height)
 	  .append("g")
-	  	.attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+	  	.attr("transform", "translate(" + chartDimensions.width / 2 + "," + chartDimensions.height / 2 + ")")
 	  	.attr("id", "chart");
 
-	  var fill = d3.scale.category20b();
+	  //
 
+	var g = svg.selectAll(".arc")
+		.data(pie(data))
+	.enter().append("g")
+		.attr("class", "arc");
 
-	  var pie = d3.layout.pie()
-	  	.value(function(d) { return d.Amount});
+	g.append("path")
+		.attr("d", arc)
+		.style("fill", function(d, i) { return fill(i); });
 
-	  var arc = d3.svg.arc();
+	g.on("mouseover.tooltip", function(d) {
+    	  svg.append("text")
+    		.text(d.data.Area + " " + d.data.Amount)
+    		.attr("class", "label")
+    		.attr("x", 100)
+    		.attr("y", 100);
 
-	  g.append("svg:path")
-	  	.style("fill", function(d) { return fill( d.Area )})
-	  	.data(function() { return pie(symbols)})
+    		console.log(d.data);
+    	});
 
+	g.on("mouseout.tooltip", function(d) {
+    		svg.select(".label").remove();
+    	});
 
+	
 
+	
 
 
 }

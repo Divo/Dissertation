@@ -1,0 +1,197 @@
+<html>
+
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="d3.v2.js"></script>
+<script type="text/javascript" id="chart">
+
+chart.barchart = function() {
+var containerDimensions = {width: 900, height: 400},
+		margins = {top: 30, right:50, bottom: 30, left: 50},
+		chartDimensions = {
+			width : containerDimensions.width - margins.left - margins.right,
+			height : containerDimensions.height - margins.top - margins.bottom
+		},
+      xValue = function(d) { return d[0]; },
+      yValue = function(d) { return d[1]; },
+      xScale = d3.scale.linear(),
+      yScale = d3.scale.linear(),
+      xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(0),
+      yAxis = d3.svg.axis().scale(yScale).orient("left"),
+      fill = d3.scale.category20b();
+
+
+
+  function chart(selection) {
+    selection.each(function(data) {
+
+      	// Convert data to standard representation greedily;
+      	// this is needed for nondeterministic accessors.
+    	data = data.map(function(d, i) {
+        	return [xValue.call(data, d, i), yValue.call(data, d, i)];
+      	});
+
+      	// Update the x-scale.
+     	 xScale
+        	.domain([0, data.length])
+          .range([0, chartDimensions.width]);
+
+      	// Update the y-scale.
+      	yScale
+          	.domain([0, d3.max(data, function(d) { return d[1]; })])
+          	.range([chartDimensions.height, 0]);
+
+      	// Select the svg element, if it exists.
+      	var svg = d3.select(this).selectAll("svg").data([data]);
+
+
+      	// Otherwise, create the skeletal chart.
+      	var gEnter = svg.enter()
+            .append("svg")
+            .append("g").attr("id", "chart");
+
+
+        gEnter.selectAll("rect")
+            .data(data)
+          .enter()
+            .append("rect")
+            .attr("x", function(d, i) { return xScale(i)} )
+            .attr("y", function(d) { return yScale(d[1]) })
+            .attr("height", function(d) { return chartDimensions.height - yScale(d[1])})
+            .attr("width", chartDimensions.width / data.length)
+            .attr("fill", function(d, i) { return fill(d[1])});
+      	gEnter.append("g").attr("class", "x axis");
+      	gEnter.append("g").attr("class", "y axis");
+
+      	// Update the outer dimensions.
+      	svg
+      		.attr("width", containerDimensions.width)
+            .attr("height", containerDimensions.height);
+       
+
+
+          // Update the inner dimensions.
+        var g = svg.select("g")
+            .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
+        
+       
+      
+      // Update the x-axis.
+      	svg.select(".x.axis")
+          	.attr("transform", "translate(0," + yScale.range()[0] + ")")
+          	.call(xAxis);
+
+        
+
+        g.select(".y.axis")
+          	.call(yAxis);
+
+        g.on("mouseover.tooltip", function(d, i) {
+            svg.append("text")
+            .text(d[i])
+            .attr("class", "label")
+            .attr("x", 20)
+            .attr("y", 20);
+        });
+
+
+        g.on("mouseout.tooltip", function(d) {
+            svg.select(".label").remove();
+        });
+
+
+
+
+
+    });
+  }
+
+  // The x-accessor for the path generator; xScale âˆ˜ xValue.
+  function X(d) {
+    return xScale(d[0]);
+  }
+
+  // The x-accessor for the path generator; yScale âˆ˜ yValue.
+  function Y(d) {
+    return yScale(d[1]);
+  }
+
+  chart.margin = function(_) {
+    if (!arguments.length) return margins;
+    margins = _;
+    return chart;
+  };
+
+  chart.width = function(_) {
+    if (!arguments.length) return containerDimensions.width;
+    containerDimensions.width = _;
+    return chart;
+  };
+
+  chart.height = function(_) {
+    if (!arguments.length) return containerDimensions.height;
+    containerDimensions.height = _;
+    return chart;
+  };
+
+  chart.x = function(_) {
+    if (!arguments.length) return xValue;
+    xValue = _;
+    return chart;
+  };
+
+  chart.y = function(_) {
+    if (!arguments.length) return yValue;
+    yValue = _;
+    return chart;
+  };
+
+  return chart;
+}
+
+
+function draw(data) {
+	"use strict";
+	//var formatDate = d3.time.format("%Y");
+
+	d3.select("#chart_area")
+		.datum(data)
+	  .call(chart.barchart()
+	  	.x(function(d) { return d.Area; } )
+	  	.y(function(d) { return +d.Amount; })); //Plus is very important, turns string into a number
+	
+	
+
+}
+
+
+
+ 
+</script>
+</head>
+
+
+<body>
+view-source:http://examples.oreilly.com/0636920025429/mikedewar-getting_started_with_d3-bdfc34e/visualisations/subway_wait_assessment_UI.html
+
+
+Also have a good look here http://mbostock.github.com/d3/talk/20111018/#0
+
+http://bl.ocks.org/1203641
+
+http://jsfiddle.net/seamusleahy/2Pwn4/ Include d3
+d3
+< href="">Source</a>
+	<div id="chart_area"></div>
+
+
+	<script>
+		d3.csv("data/edu.csv", draw)
+		//d3.csv("data/population_filterd.csv", draw)
+	</script>
+
+
+</body>
+
+</html>

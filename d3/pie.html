@@ -4,6 +4,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="d3.v2.js"></script>
+<script src="common.js"></script>
 <script type="text/javascript" id="chart">
 
 //Helper functions, brek these out
@@ -15,12 +16,7 @@ function isNumber(n) {
 function draw(data) {
 	"use strict";
 
-	var containerDimensions = {width: 900, height: 400},
-		margins = {top: 30, right:20, bottom: 40, left: 100},
-		chartDimensions = {
-			width : containerDimensions.width - margins.left - margins.right,
-			height : containerDimensions.height - margins.top - margins.bottom
-		};
+	
 
 	var outerRadius = Math.min(chartDimensions.width, chartDimensions.height) / 2,
 		innerRadius = 0;

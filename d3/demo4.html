@@ -4,6 +4,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="d3.v2.js"></script>
+<script src="common.js"></script>
 <script type="text/javascript" id="chart">
 
 //Helper functions, brek these out
@@ -15,13 +16,7 @@ function isNumber(n) {
 
 function draw(data) {
 	"use strict";
-	//First two methods can pretty much always stay like this
-	var containerDimensions = {width: 900, height: 400},
-		margins = {top: 30, right:20, bottom: 40, left: 100},
-		chartDimensions = {
-			width : containerDimensions.width - margins.left - margins.right,
-			height : containerDimensions.height - margins.top - margins.bottom
-		};
+	console.log(data)
 
 	var svg = d3.select("#chart_area")
 	  .append('svg')
@@ -67,7 +62,6 @@ function draw(data) {
 		.ticks(0);
 
 	var barWidth = chartDimensions.width / data.length;
-	console.log(barWidth);
 
 
     var g = svg.selectAll("rect")

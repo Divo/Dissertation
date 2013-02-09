@@ -2,7 +2,7 @@
 
 
 <head>
-
+<link rel="stylesheet" type="text/css" href="style.css">
 <script src="d3.v2.js"></script>
 <script type="text/javascript" id="chart">
 
@@ -101,7 +101,7 @@ function draw(data) {
 		.attr("class", "y axis")
 		.call(y_axis);
 
-	d3.select(".y.axis")
+	svg.select(".y.axis")
 		.append("text")
 		.text(nums)
 		.attr("transform", "rotate (-270, 0, 0)")
@@ -113,7 +113,7 @@ function draw(data) {
     	.attr("transform", "translate(0," + chartDimensions.height + ")")
     	.call(x_axis);
 
-    d3.select(".x.axis")
+    svg.select(".x.axis")
     	.append("text")
     	.text(labels)
     	.attr("x", chartDimensions.width / 2)

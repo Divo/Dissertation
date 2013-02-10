@@ -27,8 +27,11 @@ var containerDimensions = {width: 900, height: 400},
   function chart(selection) {
     selection.each(function(data) {
 
-      	// Convert data to standard representation greedily;
-      	// this is needed for nondeterministic accessors.
+
+        var keys = d3.keys(data[0]);
+
+        // Convert data to standard representation greedily;
+        // this is needed for nondeterministic accessors.
     	data = data.map(function(d, i) {
         	return [xValue.call(data, d, i), yValue.call(data, d, i)];
       	});
@@ -43,37 +46,32 @@ var containerDimensions = {width: 900, height: 400},
           	.domain([0, d3.max(data, function(d) { return d[1]; })])
           	.range([chartDimensions.height, 0]);
 
-      	// Select the svg element, if it exists.
-      	var svg = d3.select(this).selectAll("svg").data([data]);
+        var svg = d3.select(this)
+          .append("svg")
+            .attr("width", containerDimensions.width)
+            .attr("height", containerDimensions.height)
+          .append("g")
+            .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+            .attr("id", "chart");
 
-      	// Otherwise, create the skeletal chart.
-      	var gEnter = svg.enter().append("svg").append("g");
-      	gEnter.append("path").attr("class", "area");
-      	gEnter.append("path").attr("class", "line");
-      	gEnter.append("g").attr("class", "x axis");
-      	gEnter.append("g").attr("class", "y axis");
+        var g = svg.selectAll("line")
+            .data([data])
+          .enter()
+            .append("path")
+            .attr("class", "line")
+            .attr("d", line);
 
-      	// Update the outer dimensions.
-      	svg
-      		.attr("width", containerDimensions.width)
-          	.attr("height", containerDimensions.height);
-
-      // Update the inner dimensions.
-      	var g = svg.select("g")
-          	.attr("transform", "translate(" + margins.left + "," + margins.top + ")");
+        svg.append("g").attr("class", "x axis").call(xAxis);
+        svg.append("g").attr("class", "y axis").call(yAxis);
 
       
 
-      // Update the line path.
-      	g.select(".line")
-          	.attr("d", line);
 
-      // Update the x-axis.
-      	g.select(".x.axis")
+      	svg.select(".x.axis")
           	.attr("transform", "translate(0," + yScale.range()[0] + ")")
           	.call(xAxis);
 
-        g.select(".y.axis")
+        svg.select(".y.axis")
           	.call(yAxis);
 
 
@@ -130,7 +128,7 @@ function draw(data) {
 	var formatDate = d3.time.format("%Y");
 
 	d3.select("#chart_area")
-		  .datum(data)
+		.datum(data)
 	  .call(chart.linechart()
 	  	.x(function(d) { return formatDate.parse(d.Date); } )
 	  	.y(function(d) { return +d.Value; })); //Plus is very important, turns string into a number

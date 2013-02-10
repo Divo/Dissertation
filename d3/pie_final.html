@@ -27,7 +27,7 @@ chart.piechart = function(data) {
 		innerRadius = 0,
 		pie = d3.layout.pie().value(function(d) { return d[1]}),
 		arc = d3.svg.arc(),
-      	fill = d3.scale.category20b();
+      	fill = d3.scale.category20();
 
 	function chart(selection) {
 		selection.each(function(data) {
@@ -121,8 +121,8 @@ function draw(data) {
 	d3.select("#chart_area")
 		.datum(data)
 	  .call(chart.piechart()
-	  	.label(function(d) { return d.Date; } )
-	  	.amount(function(d) { return +d.Value; } ));	
+	  	.label(function(d) { return d.Area; } )
+	  	.amount(function(d) { return +d.Amount; } ));	
 }
 
 
@@ -146,7 +146,7 @@ d3
 
 
 	<script>
-		d3.csv("data/single_population.csv", draw)
+		d3.csv("data/edu.csv", draw)
 	</script>
 
 

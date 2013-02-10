@@ -17,7 +17,7 @@ var containerDimensions = {width: 900, height: 400},
       yValue = function(d) { return d[1]; },
       xScale = d3.scale.linear(),
       yScale = d3.scale.linear(),
-      xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(0),
+      xAxis = d3.svg.axis().scale(xScale).orient("bottom"),
       yAxis = d3.svg.axis().scale(yScale).orient("left"),
       fill = d3.scale.category20b();
 

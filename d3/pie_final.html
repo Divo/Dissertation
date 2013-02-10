@@ -1,0 +1,155 @@
+<html>
+
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="d3.v2.js"></script>
+<script src="common.js"></script>
+<script type="text/javascript" id="chart">
+
+//Helper functions, brek these out
+function isNumber(n) {
+	return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+
+chart.piechart = function(data) {
+	"use strict";
+	var containerDimensions = {width: 900, height: 400},
+		margins = {top: 30, right:50, bottom: 30, left: 100},
+		chartDimensions = {
+			width : containerDimensions.width - margins.left - margins.right,
+			height : containerDimensions.height - margins.top - margins.bottom
+		},
+      	labelValue = function(d) { return d[0]; },
+      	amountValue = function(d) { return d[1]; },
+      	outerRadius = Math.min(chartDimensions.width, chartDimensions.height) / 2,
+		innerRadius = 0,
+		pie = d3.layout.pie().value(function(d) { return d[1]}),
+		arc = d3.svg.arc(),
+      	fill = d3.scale.category20b();
+
+	function chart(selection) {
+		selection.each(function(data) {
+
+
+			var keys = d3.keys(data[0]); //Pull axis labels off data
+
+      		// Convert data to standard representation greedily;
+      		// this is needed for nondeterministic accessors (Array style access).
+    		data = data.map(function(d, i) {
+        		return [labelValue.call(data, d, i), amountValue.call(data, d, i)];
+      		});
+
+			arc
+				.innerRadius(innerRadius)
+				.outerRadius(outerRadius);
+
+			var svg = d3.select(this)
+			  .append("svg")
+			  	.attr("width", containerDimensions.width)
+            	.attr("height", containerDimensions.height)
+          	  .append("g")
+            	.attr("transform", "translate(" + (margins.left + (chartDimensions.width / 2)) + "," + (margins.top + (chartDimensions.height /2)) + ")")
+            	.attr("id", "chart");
+
+            var g = svg.selectAll(".arc")
+            	.data(pie(data))
+              .enter()
+              	.append("g")
+              	.attr("class", "arc");
+
+            g.append("path")
+            	.attr("d", arc)
+            	.style("fill", function(d, i) { return fill(i); });
+
+            g.on("mouseover.tooltip", function(d) {
+    	  	  svg.append("text")
+    			.text(keys[0] + ": " + d.data[0] + " " + keys[1] + ": " +d.data[1]) //Need to go into data as arc objects are being passed in
+    			.attr("class", "label")
+    			.attr("x", 0)
+    			.attr("y", chartDimensions.height / 2 + margins.bottom / 2)
+    			.attr("text-anchor", "middle");
+    		});
+
+			g.on("mouseout.tooltip", function(d) {
+    			svg.select(".label").remove();
+    		});
+
+		});
+	}
+
+
+  	chart.margin = function(_) {
+   		if (!arguments.length) return margins;
+   		margins = _;
+    	return chart;
+  	};
+
+  	chart.width = function(_) {
+    	if (!arguments.length) return containerDimensions.width;
+    	containerDimensions.width = _;
+    	return chart;
+  	};
+
+  	chart.height = function(_) {
+    	if (!arguments.length) return containerDimensions.height;
+    	containerDimensions.height = _;
+    	return chart;
+  	};
+
+
+  	chart.label = function(_) {
+  		if(!arguments.length) return labelValue;
+  		labelValue = _;
+   		return chart;
+  	}
+
+  	chart.amount = function(_) {
+  		if(!arguments.length) return amountValue;
+  		amountValue = _;
+    	return chart;
+  	}
+
+
+	return chart;
+	
+}
+
+
+function draw(data) {
+	d3.select("#chart_area")
+		.datum(data)
+	  .call(chart.piechart()
+	  	.label(function(d) { return d.Date; } )
+	  	.amount(function(d) { return +d.Value; } ));	
+}
+
+
+ 
+</script>
+</head>
+
+
+<body>
+view-source:http://examples.oreilly.com/0636920025429/mikedewar-getting_started_with_d3-bdfc34e/visualisations/subway_wait_assessment_UI.html
+
+
+Also have a good look here http://mbostock.github.com/d3/talk/20111018/#0
+
+http://bl.ocks.org/1203641
+
+http://jsfiddle.net/seamusleahy/2Pwn4/ Include d3
+d3
+< href="">Source</a>
+	<div id="chart_area"></div>
+
+
+	<script>
+		d3.csv("data/single_population.csv", draw)
+	</script>
+
+
+</body>
+
+</html>

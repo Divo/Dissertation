@@ -5,6 +5,8 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="d3.v2.js"></script>
 <script src="charts/charts.js"></script>
+<script src="charts/classification.js"></script>
+
 <script type="text/javascript" id="draw_chart">
 "use strict"
 
@@ -14,8 +16,8 @@
         d3.select("#bar_chart_area")
             .datum(data)
           .call(charts.barchart()
-                .x(function(d) { return d.date; } )
-                .y(function(d) { return +d.price; })); //"Plus" is very important, turns string into a number  
+                .x(function(d) { return d.Area; } )
+                .y(function(d) { return +d.Amount; })); //"Plus" is very important, turns string into a number  
     }
 
     function draw_pie_chart(data) {
@@ -47,18 +49,18 @@
 
     function draw_line_chart(data) {
         var formatDate = d3.time.format("%b %Y");
-
         d3.select("#line_chart_area")
             .datum(data)
           .call(charts.linechart()
             .x(function(d) { return formatDate.parse(d.date); })
             .y(function(d) { return +d.price; }));
+
+        var foo = new Classifier(data);
+        console.log(foo.element);
+
     }
 
 
-
-
- 
 </script>
 </head>
 
@@ -82,7 +84,7 @@ d3
 
 
     <script>
-        d3.csv("data/date,price.csv", draw_bar_chart)
+        d3.csv("data/edu.csv", draw_bar_chart)
         d3.csv("data/edu.csv", draw_pie_chart)
         d3.csv("data/single_population.csv", draw_bar_chart2)
         d3.csv("data/single_population.csv", draw_pie_chart2)

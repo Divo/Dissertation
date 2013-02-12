@@ -125,13 +125,13 @@ var containerDimensions = {width: 900, height: 400},
 
 function draw(data) {
 	"use strict";
-	var formatDate = d3.time.format("%Y");
+	var formatDate = d3.time.format("%b %Y");
 
 	d3.select("#chart_area")
 		.datum(data)
 	  .call(chart.linechart()
-	  	.x(function(d) { return formatDate.parse(d.Date); } )
-	  	.y(function(d) { return +d.Value; })); //Plus is very important, turns string into a number
+	  	.x(function(d) { return formatDate.parse(d.date); } )
+	  	.y(function(d) { return +d.price; })); //Plus is very important, turns string into a number
 	
 	
 
@@ -159,7 +159,7 @@ d3
 
 
 	<script>
-		d3.csv("data/single_population.csv", draw)
+		d3.csv("data/date,price.csv", draw)
 		//d3.csv("data/population_filterd.csv", draw)
 	</script>
 

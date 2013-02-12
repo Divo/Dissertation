@@ -1,0 +1,96 @@
+<html>
+
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="d3.v2.js"></script>
+<script src="charts/charts.js"></script>
+<script type="text/javascript" id="draw_chart">
+"use strict"
+
+
+    function draw_bar_chart(data) {
+       //var formatDate = d3.time.format("%Y");
+        d3.select("#bar_chart_area")
+            .datum(data)
+          .call(charts.barchart()
+                .x(function(d) { return d.date; } )
+                .y(function(d) { return +d.price; })); //"Plus" is very important, turns string into a number  
+    }
+
+    function draw_pie_chart(data) {
+        d3.select("#pie_chart_area")
+            .datum(data)
+          .call(charts.piechart()
+            .label(function(d) { return d.Area; })
+            .amount(function(d) { return +d.Amount; }));
+    }
+
+
+
+    function draw_bar_chart2(data) {
+      //var formatDate = d3.time.format("%Y");
+        d3.select("#bar_chart_area2")
+            .datum(data)
+          .call(charts.barchart()
+                .x(function(d) { return d.Date; } )
+                .y(function(d) { return +d.Value; })); //"Plus" is very important, turns string into a number
+    }
+
+    function draw_pie_chart2(data) {
+        d3.select("#pie_chart_area2")
+            .datum(data)
+          .call(charts.piechart()
+            .label(function(d) { return d.Date; })
+            .amount(function(d) { return +d.Value; }));
+    }
+
+    function draw_line_chart(data) {
+        var formatDate = d3.time.format("%b %Y");
+
+        d3.select("#line_chart_area")
+            .datum(data)
+          .call(charts.linechart()
+            .x(function(d) { return formatDate.parse(d.date); })
+            .y(function(d) { return +d.price; }));
+    }
+
+
+
+
+ 
+</script>
+</head>
+
+
+<body>
+view-source:http://examples.oreilly.com/0636920025429/mikedewar-getting_started_with_d3-bdfc34e/visualisations/subway_wait_assessment_UI.html
+
+
+Also have a good look here http://mbostock.github.com/d3/talk/20111018/#0
+
+http://bl.ocks.org/1203641
+
+http://jsfiddle.net/seamusleahy/2Pwn4/ Include d3
+d3
+<a href="">Source</a>
+    <div id="bar_chart_area"></div>
+    <div id="pie_chart_area"></div>
+    <div id="bar_chart_area2"></div>
+    <div id="pie_chart_area2"></div>
+    <div id="line_chart_area"></div>
+
+
+    <script>
+        d3.csv("data/date,price.csv", draw_bar_chart)
+        d3.csv("data/edu.csv", draw_pie_chart)
+        d3.csv("data/single_population.csv", draw_bar_chart2)
+        d3.csv("data/single_population.csv", draw_pie_chart2)
+        d3.csv("data/date,price.csv", draw_line_chart)
+        //d3.csv("data/population_filterd.csv", draw)
+    </script>
+
+
+</body>
+
+</html>

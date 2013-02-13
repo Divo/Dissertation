@@ -18,6 +18,7 @@
           .call(charts.barchart()
                 .x(function(d) { return d.Area; } )
                 .y(function(d) { return +d.Amount; })); //"Plus" is very important, turns string into a number  
+          var foo = new Classifier(data);
     }
 
     function draw_pie_chart(data) {
@@ -54,8 +55,6 @@
           .call(charts.linechart()
             .x(function(d) { return formatDate.parse(d.date); })
             .y(function(d) { return +d.price; }));
-
-        var foo = new Classifier(data);
 
     }
 

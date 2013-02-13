@@ -14,28 +14,36 @@
 		simply look at the size of each data element.
 		Univariate: One dimension varies with respect to another. Or length = 2
 */
+function Dataset(size, dimension, keys, types) {
+	this.size = size;
+	this.dimension = dimension;
+	this.keys = keys;
+	this.types = types;
+}
+
 
 
 //http://phrogz.net/JS/classes/OOPinJS.html
 function Classifier(data){
 	if ( !(this instanceof arguments.callee) ) 
    		throw new Error("Constructor called as a function");
-	//Private
-	var element = data[0];
+	this.row = data[0];
 
-	//Privileged
-	this.element = function() { return element; }
-
+	
 	//Public properties
-	this.length = data.length;
-	this.keys = d3.keys(element);
+	this.size = data.length;
+	this.dimension = this.countProperties(row);
+	this.keys = d3.keys(row);
+	this.types = this.determineTypes();
 
-	this.determine_type = function() {
-		console.log(element);
-	}
+	
+
+	
 
 
-	this.determine_type();
+
+	this.determineTypes();
+	console.log(this.types);
 
 	/*Function created every time a new classifier is created
 	//Function is private
@@ -48,9 +56,48 @@ function Classifier(data){
 
 }
 
+//Adding functions to the prototype limits access permissions but is more efficient
 Classifier.prototype.test = function() {
 	console.log("Hello");
 }
+
+Classifier.prototype.countProperties = function(obj) { 
+	var count = 0;
+
+	for(var prop in obj) {
+		if(obj.hasOwnProperty(prop))
+			++count;
+	}
+	return count;
+}
+
+Classifier.prototype.isNumber = function(n) {
+	return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+
+Classifier.prototype.determineTypes = function() {
+	var result = new Array(this.dimension);
+
+	for(var i=0; i < this.dimension; i++) {
+
+		var element = this.row[this.keys[i]];
+		console.log(this.row);
+
+		if (this.isNumber(element)) {
+			result[i] = "quantitative";
+		} else { //if element is categorical or nominal
+			result[i] = "categorical";
+		}
+
+	}
+	return result;
+}
+
+
+
+
+
 
 
 /*function Classifier(data) {

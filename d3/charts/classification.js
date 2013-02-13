@@ -15,7 +15,21 @@
 		Univariate: One dimension varies with respect to another. Or length = 2
 */
 
-function Classifier(data) {
+function Classifier(data){
+	//Private
+	var element = data[0];
+
+	//Public
+	this.length = data.length;
+	this.keys = d3.keys(element);
+
+}
+
+Classifier.prototype.test = function() {
+	console.log(this.keys);
+}
+
+/*function Classifier(data) {
 	if ( !(this instanceof arguments.callee) ) 
    		throw new Error("Constructor called as a function");
 	var element = data[0];
@@ -23,14 +37,16 @@ function Classifier(data) {
 	this.length = data.length;
 	this.keys = d3.keys(this.element);
 
+	determine_type();
+
 	this.test = function() {
 		return "this is a public function";
 	}
 
 
 	function determine_type(data) {
-		for(var i=0; i<data.length; i++) {
-			//console.log(data[i]);
+		for(var i=0; i<this.length; i++) {
+			console.log(data[i]);
 			}
 		}
 
@@ -39,19 +55,7 @@ function Classifier(data) {
 	}
 
 
-}
-
-(function() {
-	classification = {
-		version: "0.1"
-	};
-
-
-	var dimensions = {
-		Univariate : 2		
-	};
+}*/
 
 
 	
-	
-})();

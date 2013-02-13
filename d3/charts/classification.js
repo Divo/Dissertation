@@ -15,19 +15,40 @@
 		Univariate: One dimension varies with respect to another. Or length = 2
 */
 
+
+//http://phrogz.net/JS/classes/OOPinJS.html
 function Classifier(data){
+	if ( !(this instanceof arguments.callee) ) 
+   		throw new Error("Constructor called as a function");
 	//Private
 	var element = data[0];
+	function determine_type() {
+		console.log(element);
+	}
+
+	determine_type();
 
 	//Public
 	this.length = data.length;
 	this.keys = d3.keys(element);
 
+
+
+	/*Function created every time a new classifier is created
+	//Function is private
+	function determine_type(data) {		
+		console.log(keys);
+	}*/
+
+
+
+
 }
 
 Classifier.prototype.test = function() {
-	console.log(this.keys);
+	console.log("Hello");
 }
+
 
 /*function Classifier(data) {
 	if ( !(this instanceof arguments.callee) ) 

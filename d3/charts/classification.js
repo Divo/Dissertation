@@ -22,17 +22,20 @@ function Classifier(data){
    		throw new Error("Constructor called as a function");
 	//Private
 	var element = data[0];
-	function determine_type() {
-		console.log(element);
-	}
 
-	determine_type();
+	//Privileged
+	this.element = function() { return element; }
 
-	//Public
+	//Public properties
 	this.length = data.length;
 	this.keys = d3.keys(element);
 
+	this.determine_type = function() {
+		console.log(element);
+	}
 
+
+	this.determine_type();
 
 	/*Function created every time a new classifier is created
 	//Function is private

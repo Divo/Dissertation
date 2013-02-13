@@ -15,11 +15,18 @@
 		Univariate: One dimension varies with respect to another. Or length = 2
 */
 function Dataset(size, dimension, keys, types) {
+	if ( !(this instanceof arguments.callee) ) 
+   		throw new Error("Constructor called as a function");
+
 	this.size = size;
 	this.dimension = dimension;
 	this.keys = keys;
 	this.types = types;
 }
+
+/*REDUNEDNTDataset.prototype.toString = function() {
+	return "Size: ";//+ this.size + " Dimensions: " + this.dimensions = " Keys: " + this.keys + " Types: " this.types; 
+}*/
 
 
 
@@ -27,34 +34,19 @@ function Dataset(size, dimension, keys, types) {
 function Classifier(data){
 	if ( !(this instanceof arguments.callee) ) 
    		throw new Error("Constructor called as a function");
-	this.row = data[0];
 
-	
-	//Public properties
+   	//Underscore is the convention for private in this language...
+	this._row = data[0];
+
 	this.size = data.length;
-	this.dimension = this.countProperties(row);
-	this.keys = d3.keys(row);
+	this.dimension = this.countProperties(this._row);
+	this.keys = d3.keys(this._row);
 	this.types = this.determineTypes();
 
-	
-
-	
-
-
-
-	this.determineTypes();
-	console.log(this.types);
-
-	/*Function created every time a new classifier is created
-	//Function is private
-	function determine_type(data) {		
-		console.log(keys);
-	}*/
-
-
-
+	var properties = new Dataset(this.size, this.dimension, this.keys, this.types);
 
 }
+
 
 //Adding functions to the prototype limits access permissions but is more efficient
 Classifier.prototype.test = function() {
@@ -81,9 +73,7 @@ Classifier.prototype.determineTypes = function() {
 
 	for(var i=0; i < this.dimension; i++) {
 
-		var element = this.row[this.keys[i]];
-		console.log(this.row);
-
+		var element = this._row[this.keys[i]];
 		if (this.isNumber(element)) {
 			result[i] = "quantitative";
 		} else { //if element is categorical or nominal
@@ -92,6 +82,10 @@ Classifier.prototype.determineTypes = function() {
 
 	}
 	return result;
+}
+
+Classifier.prototype.getProperties = function() {
+	return this.properties; //Even if the object is public you never know when a getter will save yous
 }
 
 

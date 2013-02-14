@@ -14,7 +14,10 @@
 		simply look at the size of each data element.
 		Univariate: One dimension varies with respect to another. Or length = 2
 */
-function Dataset(size, dimension, keys, types) {
+
+//http://blog.visual.ly/maximum-elements-for-visualization-types/
+
+function Properties(size, dimension, keys, types) {
 	if ( !(this instanceof arguments.callee) ) 
    		throw new Error("Constructor called as a function");
 
@@ -43,7 +46,7 @@ function Classifier(data){
 	this.keys = d3.keys(this._row);
 	this.types = this.determineTypes();
 
-	var properties = new Dataset(this.size, this.dimension, this.keys, this.types);
+	this.properties = new Properties(this.size, this.dimension, this.keys, this.types);
 
 }
 
@@ -88,6 +91,44 @@ Classifier.prototype.getProperties = function() {
 	return this.properties; //Even if the object is public you never know when a getter will save yous
 }
 
+Classifier.prototype.selectChart = function() {
+	var rankings = new Array(0);
+
+	rankings.push([charts.piechart(), this._rankChart(this.properties, charts.piechart().properties()) ]);
+	rankings.push([charts.barchart(), this._rankChart(this.properties, charts.barchart().properties()) ]);
+	console.log(rankings);
+
+	var max = 0;
+	var result = 0; //This is probably flawed
+	for(var i=0; i < rankings.length; i++) {
+		if(max < rankings[i][1]) {
+			max = rankings[i][1];
+			result = i;
+		}
+	}
+	return rankings[result][0];
+}
+
+Classifier.prototype._rankChart = function(dataProps, chartProps) {
+	if(dataProps.dimension == chartProps.dimension) {
+
+		//Check if chart and data contain the same types of data
+		for(var i=0; i < dataProps.types.length; i++) {
+			if(chartProps.types.indexOf(dataProps.types[i]) <= -1) { 
+				return 0;
+			}
+		}
+
+		if(dataProps.size <= chartProps.size) {
+			return 10;
+		} else {
+			return 5;
+		}
+
+	} else {
+		return 0;
+	}
+}
 
 
 

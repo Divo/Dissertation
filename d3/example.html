@@ -16,9 +16,11 @@
         d3.select("#bar_chart_area")
             .datum(data)
           .call(charts.barchart()
-                .x(function(d) { return d.Area; } )
-                .y(function(d) { return +d.Amount; })); //"Plus" is very important, turns string into a number  
-          var foo = new Classifier(data);
+                .label(function(d) { return d.Area; } )
+                .amount(function(d) { return +d.Amount; })); //"Plus" is very important, turns string into a number  
+          //var foo = new Classifier(data);
+          //console.log(charts.barchart().properties());
+          //console.log(foo.selectChart());
     }
 
     function draw_pie_chart(data) {
@@ -29,15 +31,13 @@
             .amount(function(d) { return +d.Amount; }));
     }
 
-
-
     function draw_bar_chart2(data) {
       //var formatDate = d3.time.format("%Y");
         d3.select("#bar_chart_area2")
             .datum(data)
           .call(charts.barchart()
-                .x(function(d) { return d.Date; } )
-                .y(function(d) { return +d.Value; })); //"Plus" is very important, turns string into a number
+                .label(function(d) { return d.Date; } )
+                .amount(function(d) { return +d.Value; })); //"Plus" is very important, turns string into a number
     }
 
     function draw_pie_chart2(data) {
@@ -56,6 +56,19 @@
             .x(function(d) { return formatDate.parse(d.date); })
             .y(function(d) { return +d.price; }));
 
+    }
+
+    function pickChart(data) {
+        var classifier = new Classifier(data);
+        //console.log(classifier.selectChart());
+        //console.log(charts.barchart())
+        var keys = classifier.properties.keys;
+        console.log(data[0][keys[0]]);
+        d3.select("#chart_area_classified")
+            .datum(data)
+          .call(classifier.selectChart()
+            .label(function(d) { return d[keys[0]]; } )
+            .amount(function(d) { return +d[keys[1]]; }));
     }
 
 
@@ -79,6 +92,7 @@ d3
     <div id="bar_chart_area2"></div>
     <div id="pie_chart_area2"></div>
     <div id="line_chart_area"></div>
+    <div id="chart_area_classified"></div>
 
 
     <script>
@@ -87,6 +101,7 @@ d3
         d3.csv("data/single_population.csv", draw_bar_chart2)
         d3.csv("data/single_population.csv", draw_pie_chart2)
         d3.csv("data/date,price.csv", draw_line_chart)
+        d3.csv("data/edu.csv", pickChart);
         //d3.csv("data/population_filterd.csv", draw)
     </script>
 

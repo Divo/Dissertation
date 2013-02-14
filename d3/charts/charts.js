@@ -152,13 +152,16 @@ charts.piechart = function(data) {
       width : containerDimensions.width - margins.left - margins.right,
       height : containerDimensions.height - margins.top - margins.bottom
     },
-        labelValue = function(d) { return d[0]; },
-        amountValue = function(d) { return d[1]; },
-        outerRadius = Math.min(chartDimensions.width, chartDimensions.height) / 2,
+    labelValue = function(d) { return d[0]; },
+    amountValue = function(d) { return d[1]; },
+    outerRadius = Math.min(chartDimensions.width, chartDimensions.height) / 2,
     innerRadius = 0,
     pie = d3.layout.pie().value(function(d) { return d[1]}),
     arc = d3.svg.arc(),
-        fill = d3.scale.category20();
+    fill = d3.scale.category20();
+
+    var properties = new Properties(12, 2, null, ["categorical", "quantitative"]);
+
 
   function chart(selection) {
     selection.each(function(data) {
@@ -170,7 +173,8 @@ charts.piechart = function(data) {
           // this is needed for nondeterministic accessors (Array style access).
       data = data.map(function(d, i) {
          return [labelValue.call(data, d, i), amountValue.call(data, d, i)];
-         });
+         });      
+
 
       arc
         .innerRadius(innerRadius)
@@ -242,6 +246,10 @@ charts.piechart = function(data) {
       return chart;
     }
 
+    chart.properties = function() {
+        return properties;
+    }
+
 
   return chart;
   
@@ -264,7 +272,9 @@ charts.barchart = function() {
       yAxis = d3.svg.axis().scale(yScale).orient("left"),
       fill = d3.scale.category20b();
 
+      var properties = new Properties(50, 2, null, ["categorical", "quantitative"]);
 
+    
 
    function chart(selection) {
       selection.each(function(data) {
@@ -355,8 +365,8 @@ charts.barchart = function() {
 
 
 
-    });
-  }
+        });
+    }
 
 
    chart.margins = function(_) {
@@ -377,17 +387,24 @@ charts.barchart = function() {
       return chart;
    };
 
-   chart.x = function(_) {
+   chart.label = function(_) {
       if (!arguments.length) return xValue;
       xValue = _;
       return chart;
    };
 
-   chart.y = function(_) {
+   chart.amount = function(_) {
       if (!arguments.length) return yValue;
       yValue = _;
       return chart;
    };
+
+
+   chart.properties = function() {
+        return properties;
+    }
+
+
 
    return chart;
 }

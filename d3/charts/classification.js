@@ -70,6 +70,13 @@ Classifier.prototype.isNumber = function(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+Classifier.prototype.checkDate = function(d) {
+	var format = d3.time.format("%d %m %Y");
+	d = new Date(Date.parse(d));
+	console.log(d.getFullYear());
+	return format(d);
+}
+
 
 Classifier.prototype.determineTypes = function() {
 	var result = new Array(this.dimension);
@@ -96,7 +103,6 @@ Classifier.prototype.selectChart = function() {
 
 	rankings.push([charts.piechart(), this._rankChart(this.properties, charts.piechart().properties()) ]);
 	rankings.push([charts.barchart(), this._rankChart(this.properties, charts.barchart().properties()) ]);
-	console.log(rankings);
 
 	var max = 0;
 	var result = 0; //This is probably flawed

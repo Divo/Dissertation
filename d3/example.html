@@ -62,15 +62,14 @@
 
     function pickChart(data) {
         var classifier = new Classifier(data);
-        //console.log(classifier.selectChart());
-        //console.log(charts.barchart())
         var keys = classifier.properties.keys;
-        console.log(data[0][keys[0]]);
         d3.select("#chart_area_classified")
             .datum(data)
           .call(classifier.selectChart()
             .label(function(d) { return d[keys[0]]; } )
             .amount(function(d) { return +d[keys[1]]; }));
+
+        console.log(classifier.checkDate("1990"));
     }
 
 

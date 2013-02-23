@@ -255,6 +255,55 @@ charts.piechart = function(data) {
   
 }
 
+charts.scatterplot = function() {
+    var containerDimensions = {width: 900, height: 400},
+    margins = {top: 30, right:50, bottom: 50, left: 100},
+    chartDimensions = {
+        width : containerDimensions.width - margins.left - margins.right,
+        height : containerDimensions.height - margins.top - margins.bottom
+    },
+    xValue = function(d) { return d[0]; },
+    yValue = function(d) { return d[1]; },
+    xScale = d3.scale.linear(),
+    yScale = d3.scale.linear(),
+    xAxis  = d3.svg.axis().scale(xScale).orient("bottom"),
+    yAxis  = d3.svg.axis().scale(yScale).orient("left"),
+    fill   = d3.scale.category20b();
+
+    //var properties;
+
+    function chart(selection) {
+        selection.each(function(data) {
+
+            var keys = d3.keys(data[0]);
+
+            data = data.map(function(d, i) {
+                return [xValue.call(data, d, i), yValue.call(data, d, i)];
+            });
+
+            xScale
+                .domain(d3.extent(data, xValue)) //Not sure if xValue will work here
+                .range([0, chartDimensions.width]);
+
+            yScale
+                .domain(d3.extent(data, yValue))// function(d) { return d[1]; }
+                .range([chartDimensions.height, 0]);
+
+            var svg = d3.select(this)
+              .append("svg")
+                .attr("width", containerDimensions.width)
+                .attr("height", containerDimensions.height)
+              .append("g")
+                 .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+                .attr("id", "chart");
+
+        });
+
+    }
+
+
+}
+
 
 
 charts.barchart = function() {

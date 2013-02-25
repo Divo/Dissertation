@@ -10,6 +10,16 @@
 <script type="text/javascript" id="draw_chart">
 "use strict"
 
+    function draw_scatter_plot(data) {
+        d3.select("#scatter_plot_area")
+            .datum(data)
+          .call(charts.scatterplot()
+            .label(function(d)   { return d.Name; })
+            .amountx(function(d) { return d.x2011; })
+            .amounty(function(d) { return +d.y2006; }));
+
+    }
+
 
     function draw_bar_chart(data) {
        //var formatDate = d3.time.format("%Y");
@@ -18,8 +28,8 @@
         d3.select("#bar_chart_area")
             .datum(data)
           .call(charts.barchart()
-                .label(function(d) { return formatDate.parse(d.date); } )
-                .amount(function(d) { return +d.price; })); //"Plus" is very important, turns string into a number  
+            .label(function(d) { return formatDate.parse(d.date); } )
+            .amount(function(d) { return +d.price; })); //"Plus" is very important, turns string into a number  
           //var foo = new Classifier(data);
           //console.log(charts.barchart().properties());
           //console.log(foo.selectChart());
@@ -88,7 +98,7 @@ http://bl.ocks.org/1203641
 http://jsfiddle.net/seamusleahy/2Pwn4/ Include d3
 d3
 <a href="">Source</a>
-    <div id="bar_chart_area"></div>
+    <div id="scatter_plot_area"></div>
     <div id="pie_chart_area"></div>
     <div id="bar_chart_area2"></div>
     <div id="pie_chart_area2"></div>
@@ -97,12 +107,12 @@ d3
 
 
     <script>
-        d3.csv("data/date,price.csv", draw_bar_chart)
-        d3.csv("data/edu.csv", draw_pie_chart)
+        d3.csv("data/population_filterd_diddle.csv", draw_scatter_plot)
+       /* d3.csv("data/edu.csv", draw_pie_chart)
         d3.csv("data/single_population.csv", draw_bar_chart2)
         d3.csv("data/single_population.csv", draw_pie_chart2)
         d3.csv("data/date,price.csv", draw_line_chart)
-        d3.csv("data/single_population.csv", pickChart);
+        d3.csv("data/single_population.csv", pickChart);*/
         //d3.csv("data/population_filterd.csv", draw)
     </script>
 

@@ -262,8 +262,9 @@ charts.scatterplot = function() {
         width : containerDimensions.width - margins.left - margins.right,
         height : containerDimensions.height - margins.top - margins.bottom
     },
-    xValue = function(d) { return d[0]; },
-    yValue = function(d) { return d[1]; },
+    labelValue = function(d) { return d[0]; },
+    xValue = function(d) { return d[1]; },
+    yValue = function(d) { return d[2]; },
     xScale = d3.scale.linear(),
     yScale = d3.scale.linear(),
     xAxis  = d3.svg.axis().scale(xScale).orient("bottom"),
@@ -278,15 +279,15 @@ charts.scatterplot = function() {
             var keys = d3.keys(data[0]);
 
             data = data.map(function(d, i) {
-                return [xValue.call(data, d, i), yValue.call(data, d, i)];
+                return [labelValue.call(data, d, i), xValue.call(data, d, i), yValue.call(data, d, i)];
             });
 
             xScale
-                .domain(d3.extent(data, xValue)) //Not sure if xValue will work here
+                .domain([0, d3.max(d3.extent(data, function(d) {return d[1]; })) ]) //Not sure if xValue will work here
                 .range([0, chartDimensions.width]);
 
             yScale
-                .domain(d3.extent(data, yValue))// function(d) { return d[1]; }
+                .domain([0, d3.max(d3.extent(data, function(d) { return d[2]; })) ])// function(d) { return d[1]; }
                 .range([chartDimensions.height, 0]);
 
             var svg = d3.select(this)
@@ -294,12 +295,96 @@ charts.scatterplot = function() {
                 .attr("width", containerDimensions.width)
                 .attr("height", containerDimensions.height)
               .append("g")
-                 .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+                .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
                 .attr("id", "chart");
+
+            var g = svg.selectAll(".dot")
+                .data(data)
+              .enter()
+                .append("circle")
+                .attr("class", "dot")
+                .attr("id", function(d) { return d[0]; })
+                .attr("r", 3.5)
+                .attr("fill", function(d) { return fill(d[0]); })
+                .attr("cx", function(d) { return xScale(d[1]); })
+                .attr("cy", function(d) { return yScale(d[2]); });
+
+            svg.append("g").attr("class", "x axis").call(xAxis);
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            svg.select(".x.axis")
+                .attr("transform", "translate(0," + yScale.range()[0] + ")")
+                .call(xAxis);
+
+            svg.select(".y.axis").call(yAxis);
+
+            svg.select(".x.axis")
+                .append("text")
+                .text(keys[1])
+                .attr("x", chartDimensions.width / 2)
+                .attr("y", margins.bottom * 0.75)
+                .attr("text-anchor", "middle");
+
+
+            svg.select(".y.axis")
+                .append("text")
+                .text(keys[2])
+                .attr("transform", "rotate (-270, 0, 0)")
+                .attr("x", chartDimensions.height / 2)
+                .attr("y", margins.left * 0.75)
+                .attr("text-anchor", "middle");
+
+
 
         });
 
     }
+
+    chart.margins = function(_) {
+      if (!arguments.length) return margins;
+      margins = _;
+      return chart;
+    };
+
+   chart.width = function(_) {
+      if (!arguments.length) return containerDimensions.width;
+      containerDimensions.width = _;
+      return chart;
+   };
+
+   chart.height = function(_) {
+      if (!arguments.length) return containerDimensions.height;
+      containerDimensions.height = _;
+      return chart;
+   };
+
+   chart.label = function(_) {
+      if (!arguments.length) return xValue;
+      labelValue = _;
+      return chart;
+   };
+
+
+   chart.amountx = function(_) {
+      if( !arguments.length) return xValuel
+      xValue = _;
+      return chart;
+   };
+
+   chart.amounty = function(_) {
+      if (!arguments.length) return yValue;
+      yValue = _;
+      return chart;
+   };
+
+
+
+   chart.properties = function() {
+        return properties;
+    };
+
+    return chart;
+
 
 
 }
@@ -451,7 +536,7 @@ charts.barchart = function() {
 
    chart.properties = function() {
         return properties;
-    }
+    };
 
 
 

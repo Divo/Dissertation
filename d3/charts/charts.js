@@ -270,6 +270,7 @@ charts.scatterplot = function() {
     xAxis  = d3.svg.axis().scale(xScale).orient("bottom"),
     yAxis  = d3.svg.axis().scale(yScale).orient("left"),
     fill   = d3.scale.category20b();
+    
 
     //var properties;
 

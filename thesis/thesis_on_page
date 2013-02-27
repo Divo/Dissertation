@@ -1,0 +1,126 @@
+% Example LaTeX document for GP111 - note % sign indicates a comment
+
+\documentclass[12pt]{article}
+% Default margins are too wide all the way around.  I reset them here
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{.125in}
+\setlength{\textwidth}{6.25in}
+\usepackage{setspace}
+\usepackage[pdftex]{graphicx}
+\begin{document}
+\title{Browser-based Categorisation of Data towards Automated Visualisation}
+
+
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+One copy of an abstract, printed on a single sheet of A4 paper,
+must be submitted loose with each copy of the soft‐bound thesis. The abstract must
+contain the title of the thesis and the author's full names as a heading and may be
+single spaced. Two copies of an abstract must be submitted loose with the final
+hard‐bound copy.
+\\
+
+It is suggested that the abstract be structured as follows:
+\newline
+Problem: What you tackled, and why this needed a solution
+\newline
+Objectives: What you set out to achieve, and how this addressed the problem
+\newline
+Methodology: How you went about solving the problem
+\newline
+Achievements: What you managed to achieve, and how far it meets your objectives.
+\clearpage
+
+\section*{Attestation}
+\addcontentsline{toc}{section}{Attestation}
+I understand the nature of plagiarism, and I am aware of the University’s policy on this.
+I certify that this dissertation reports original work by me during my University project except for the following :
+\newline
+The technology review in Section 2.5 was largely taken from REF.
+\newline
+The code discussed in Section 3.1 was created by Acme Corporation (www.acme-corp.com/JavaExpert) and was used in accordance with the licence supplied.
+\newline
+\\
+\null
+\vfill
+\noindent\begin{tabular}{ll}
+\makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
+Signature & Date\\[8ex]% adds space between the two sets of signatures
+\end{tabular}
+\clearpage
+
+\section*{Summary}
+\addcontentsline{toc}{section}{Summary}
+A succinct summary of the methods used and the major findings
+of the thesis must be bound into each copy of the thesis following the declaration
+page. It must not exceed {\bf two pages} of typescript.
+\clearpage
+
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+\clearpage
+
+\tableofcontents
+\clearpage
+
+\section*{List of Figures}
+\addcontentsline{toc}{section}{List of Figures}
+\clearpage
+
+\section{Introduction}
+\subsection{Background and Context}
+\subsection{Scope and Objectives}
+\subsection{Achievements}
+\subsection{Overview of Dissertation}
+
+\section{State of The Art}
+Summarise current knowledge and what others have done in the various topics of your dissertation – in the application area and in the various technologies that you might have used or did use. Write for someone familiar with computing, but not necessarily expert in the particular topics of your project. Give references to other work by using cross-references to entries in the References section, like this REF
+
+\section{Technical Chapters}
+\subsection{Subsection one}
+\subsubsection{SubSub one}
+\subsubsection{SubSub two}
+
+\subsection{Subsection two}
+\subsubsection{SubSub one}
+\subsubsection{SubSub two}
+
+\section{Conclusion}
+\subsection{Summary}
+\subsection{Evaluation}
+\subsection{Future Work}
+\clearpage
+
+\section{References}
+\clearpage
+
+\section{Appendix 1 - Technical References}
+You may have one or more appendices containing detail, bulky or reference material that is relevant though supplementary to the main text: perhaps additional specifications, tables or diagrams that would distract the reader if placed in the main part of the dissertation. Make sure that you place appropriate cross-references in the main text to direct the reader to the relevant appendices.
+Note that you should not include your program listings as an appendix or appendices. You should submit one copy of such bulky text as a separate item, perhaps on a disk.
+\clearpage
+\section{Appendix 2 - UserGuide}
+If you produced software that is intended for others to use, or that others may wish to ex-tend/improve, then a user guide and an installation guide appendices are essential.
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+\end{verbatim}
+\end{document}

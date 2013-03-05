@@ -257,7 +257,7 @@ charts.piechart = function(data) {
 
 charts.scatterplot = function() {
     var containerDimensions = {width: 900, height: 400},
-    margins = {top: 30, right:50, bottom: 50, left: 100},
+    margins = {top: 30, right:100, bottom: 50, left: 100},
     chartDimensions = {
         width : containerDimensions.width - margins.left - margins.right,
         height : containerDimensions.height - margins.top - margins.bottom
@@ -284,12 +284,14 @@ charts.scatterplot = function() {
             });
 
             xScale
-                .domain([0, d3.max(d3.extent(data, function(d) {return d[1]; })) ]) //Not sure if xValue will work here
+                .domain([0, d3.max(data, function(d) {return +d[1]; }) ]) //Not sure if xValue will work here
                 .range([0, chartDimensions.width]);
 
             yScale
-                .domain([0, d3.max(d3.extent(data, function(d) { return d[2]; })) ])// function(d) { return d[1]; }
+                .domain([0, d3.max(data, function(d) { return +d[2]; }) ])
                 .range([chartDimensions.height, 0]);
+
+            console.log(d3.max(data , function(d) {return +d[1]; }));
 
             var svg = d3.select(this)
               .append("svg")
@@ -334,6 +336,25 @@ charts.scatterplot = function() {
                 .attr("x", chartDimensions.height / 2)
                 .attr("y", margins.left * 0.75)
                 .attr("text-anchor", "middle");
+
+            var legend = svg.selectAll(".legend")
+                .data(fill.domain())
+              .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")";});
+
+            legend.append("rect")
+                .attr("x", chartDimensions.width + margins.right / 2 )
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", fill);
+
+            legend.append("text")
+                .attr("x", chartDimensions.width + (margins.right / 2) -6 )
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function(d) { return d; });
 
 
 

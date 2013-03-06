@@ -160,7 +160,7 @@ charts.piechart = function(data) {
     arc = d3.svg.arc(),
     fill = d3.scale.category20();
 
-    var properties = new Properties(12, 2, null, ["categorical", "quantitative"]);
+    //var properties = new Properties(12, 2, null, ["categorical", "quantitative"]);
 
 
   function chart(selection) {
@@ -272,7 +272,7 @@ charts.scatterplot = function() {
     fill   = d3.scale.category20b();
     
 
-    //var properties;
+    //var properties = new Properties()
 
     function chart(selection) {
         selection.each(function(data) {

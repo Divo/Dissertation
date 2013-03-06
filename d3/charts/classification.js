@@ -27,6 +27,7 @@ function Properties(size, dimension, keys, types) {
 	this.types = types;
 }
 
+
 /*REDUNEDNTDataset.prototype.toString = function() {
 	return "Size: ";//+ this.size + " Dimensions: " + this.dimensions = " Keys: " + this.keys + " Types: " this.types; 
 }*/
@@ -95,10 +96,10 @@ Classifier.prototype.determineTypes = function() {
 }
 
 Classifier.prototype.getProperties = function() {
-	return this.properties; //Even if the object is public you never know when a getter will save yous
+	return this.properties; 
 }
 
-Classifier.prototype.selectChart = function() {
+/*Classifier.prototype.selectChart = function() {
 	var rankings = new Array(0);
 
 	rankings.push([charts.piechart(), this._rankChart(this.properties, charts.piechart().properties()) ]);
@@ -113,11 +114,43 @@ Classifier.prototype.selectChart = function() {
 		}
 	}
 	return rankings[result][0];
+}*/
+
+Classifier.prototype.selectChart = function() {
+	var chartProps = this.chartProperties();
+
+	var max = 0;
+	var result = null; //Function pointer
+	for(var i = 0; i < chartProps.length; i++) {
+		var rank = this._rankChart(this.properties, chartProps[i][1]);
+		if(max < rank) {
+			max = rank;
+			result = chartProps[i][0];
+		}
+	}
+
+	return result;
 }
+
+Classifier.prototype.chartProperties = function() {
+	var properties = new Array(0);
+
+	properties.push([charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ]);
+	properties.push([charts.barchart(), new Properties(50, 2, null, ["categorical", "quantitative"]) ]);
+	properties.push([charts.linechart(), new Properties(1000, 2, null, ["quantitative", "quantitative"]) ]);
+
+	//Will need to do something about the lack of labels.
+	properties.push([charts.scatterplot(), new Properties(50, 2, null, ["quantitative", "quantitative"]) ]);
+	properties.push([charts.scatterplot(), new Properties(50, 3, null, ["categorical", "quantitative", "quantitative"]) ]);
+
+
+	return properties;
+
+}
+
 
 Classifier.prototype._rankChart = function(dataProps, chartProps) {
 	if(dataProps.dimension == chartProps.dimension) {
-
 		//Check if chart and data contain the same types of data
 		for(var i=0; i < dataProps.types.length; i++) {
 			if(chartProps.types.indexOf(dataProps.types[i]) <= -1) { 

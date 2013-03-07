@@ -15,8 +15,8 @@
             .datum(data)
           .call(charts.scatterplot()
             .label(function(d)   { return d.Name; })
-            .amountx(function(d) { return d.x2011; })
-            .amounty(function(d) { return +d.y2006; }));
+            .amount(function(d) { return d.x2011; })
+            .amount2(function(d) { return +d.y2006; }));
 
     }
 
@@ -73,13 +73,30 @@
     function pickChart(data) {
         var classifier = new Classifier(data);
         var keys = classifier.properties.keys;
-        d3.select("#chart_area_classified")
-            .datum(data)
-          .call(classifier.selectChart()
-            .label(function(d) { return d[keys[0]]; } )
-            .amount(function(d) { return +d[keys[1]]; }));
+        var chart = classifier.selectChart();
 
-        console.log(classifier.checkDate("1990"));
+        console.log(classifier.getChartProperties(chart));
+
+        if(classifier.properties.dimension === 2) {
+
+            d3.select("#chart_area_classified")
+                .datum(data)
+              .call(classifier.selectChart()
+                .label(function(d) { return d[keys[0]]; })
+                .amount(function(d) { return +d[keys[1]]; }) );
+
+        } else if (classifier.properties.dimension === 3) {
+            
+            d3.select("#chart_area_classified")
+                .datum(data)
+              .call(classifier.selectChart()
+                .label(function(d) { return d[keys[0]]; })
+                .amount(function(d) { return +d[keys[1]]; }) 
+                .amount2(function(d) { return +d[keys[2]]; }) );
+
+        }
+
+
     }
 
 
@@ -90,6 +107,7 @@
 <body>
 view-source:http://examples.oreilly.com/0636920025429/mikedewar-getting_started_with_d3-bdfc34e/visualisations/subway_wait_assessment_UI.html
 
+awk -F "," '{print $1 "," $2}' filename.csv
 
 Also have a good look here http://mbostock.github.com/d3/talk/20111018/#0
 
@@ -107,12 +125,12 @@ d3
 
 
     <script>
-        d3.csv("data/population_filterd_diddle.csv", draw_scatter_plot)
+        d3.csv("data/population3.csv", pickChart)
        /* d3.csv("data/edu.csv", draw_pie_chart)
         d3.csv("data/single_population.csv", draw_bar_chart2)
         d3.csv("data/single_population.csv", draw_pie_chart2)
         d3.csv("data/date,price.csv", draw_line_chart)*/
-        d3.csv("data/edu.csv", pickChart);
+        //d3.csv("data/edu.csv", pickChart);
         //d3.csv("data/population_filterd.csv", draw)
     </script>
 

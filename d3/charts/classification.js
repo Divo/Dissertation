@@ -74,7 +74,6 @@ Classifier.prototype.isNumber = function(n) {
 Classifier.prototype.checkDate = function(d) {
 	var format = d3.time.format("%d %m %Y");
 	d = new Date(Date.parse(d));
-	console.log(d.getFullYear());
 	return format(d);
 }
 
@@ -135,7 +134,7 @@ Classifier.prototype.selectChart = function() {
 Classifier.prototype.chartProperties = function() {
 	var properties = new Array(0);
 
-	properties.push([charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ]);
+	properties.push(piechart : [charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ]);
 	properties.push([charts.barchart(), new Properties(50, 2, null, ["categorical", "quantitative"]) ]);
 	properties.push([charts.linechart(), new Properties(1000, 2, null, ["quantitative", "quantitative"]) ]);
 
@@ -148,6 +147,9 @@ Classifier.prototype.chartProperties = function() {
 
 }
 
+Classifier.prototype.getChartProperties = function(chart) {
+	return this.chartProperties()[0][1];
+}
 
 Classifier.prototype._rankChart = function(dataProps, chartProps) {
 	if(dataProps.dimension == chartProps.dimension) {

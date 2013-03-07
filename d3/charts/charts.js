@@ -291,7 +291,6 @@ charts.scatterplot = function() {
                 .domain([0, d3.max(data, function(d) { return +d[2]; }) ])
                 .range([chartDimensions.height, 0]);
 
-            console.log(d3.max(data , function(d) {return +d[1]; }));
 
             var svg = d3.select(this)
               .append("svg")
@@ -381,19 +380,19 @@ charts.scatterplot = function() {
    };
 
    chart.label = function(_) {
-      if (!arguments.length) return xValue;
+      if (!arguments.length) return labelValue;
       labelValue = _;
       return chart;
    };
 
 
-   chart.amountx = function(_) {
-      if( !arguments.length) return xValuel
+   chart.amount = function(_) {
+      if( !arguments.length) return xValue;
       xValue = _;
       return chart;
    };
 
-   chart.amounty = function(_) {
+   chart.amount2 = function(_) {
       if (!arguments.length) return yValue;
       yValue = _;
       return chart;

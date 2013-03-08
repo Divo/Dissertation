@@ -27,6 +27,18 @@ function Properties(size, dimension, keys, types) {
 	this.types = types;
 }
 
+	var properties = new Array(0);
+
+	properties["piechart"] = [charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ];
+	properties["barchart"] = [charts.barchart(), new Properties(50, 2, null, ["categorical", "quantitative"]) ];
+	properties["linechart"] = [charts.linechart(), new Properties(1000, 2, null, ["quantitative", "quantitative"]) ];
+	properties["scatterplot"] = [charts.scatterplot(), new Properties(50, 3, null, ["categorical", "quantitative", "quantitative"]) ];
+
+	//Will need to do something about the lack of labels.
+	//properties[charts.scatterplot()] = new Properties(50, 2, null, ["quantitative", "quantitative"]);
+	//properties["scatterplot"] = [charts.scatterplot(), new Properties(50, 3, null, ["categorical", "quantitative", "quantitative"])];
+
+
 
 /*REDUNEDNTDataset.prototype.toString = function() {
 	return "Size: ";//+ this.size + " Dimensions: " + this.dimensions = " Keys: " + this.keys + " Types: " this.types; 
@@ -116,39 +128,28 @@ Classifier.prototype.getProperties = function() {
 }*/
 
 Classifier.prototype.selectChart = function() {
-	var chartProps = this.chartProperties();
-
 	var max = 0;
 	var result = null; //Function pointer
-	for(var i = 0; i < chartProps.length; i++) {
-		var rank = this._rankChart(this.properties, chartProps[i][1]);
+	for(key in this.chartProperties()) {
+		var rank = this._rankChart(this.properties, this.chartProperties()[key][1]);
 		if(max < rank) {
 			max = rank;
-			result = chartProps[i][0];
+			result = key;
 		}
 	}
-
-	return result;
+	return this.chartProperties()[result][0];
 }
 
 Classifier.prototype.chartProperties = function() {
-	var properties = new Array(0);
-
-	properties.push(piechart : [charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ]);
-	properties.push([charts.barchart(), new Properties(50, 2, null, ["categorical", "quantitative"]) ]);
-	properties.push([charts.linechart(), new Properties(1000, 2, null, ["quantitative", "quantitative"]) ]);
-
-	//Will need to do something about the lack of labels.
-	properties.push([charts.scatterplot(), new Properties(50, 2, null, ["quantitative", "quantitative"]) ]);
-	properties.push([charts.scatterplot(), new Properties(50, 3, null, ["categorical", "quantitative", "quantitative"]) ]);
-
-
 	return properties;
 
 }
 
 Classifier.prototype.getChartProperties = function(chart) {
-	return this.chartProperties()[0][1];
+	if(chart in this.chartProperties()) {
+		return this.chartProperties()[chart][1];
+	}
+	return null;
 }
 
 Classifier.prototype._rankChart = function(dataProps, chartProps) {

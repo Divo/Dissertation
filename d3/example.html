@@ -75,13 +75,16 @@
         var keys = classifier.properties.keys;
         var chart = classifier.selectChart();
 
-        console.log(classifier.getChartProperties(chart));
+        console.log(classifier.properties);
+
+       //console.log(classifier.properties);
+
 
         if(classifier.properties.dimension === 2) {
 
             d3.select("#chart_area_classified")
                 .datum(data)
-              .call(classifier.selectChart()
+              .call(chart
                 .label(function(d) { return d[keys[0]]; })
                 .amount(function(d) { return +d[keys[1]]; }) );
 
@@ -89,7 +92,7 @@
             
             d3.select("#chart_area_classified")
                 .datum(data)
-              .call(classifier.selectChart()
+              .call(chart
                 .label(function(d) { return d[keys[0]]; })
                 .amount(function(d) { return +d[keys[1]]; }) 
                 .amount2(function(d) { return +d[keys[2]]; }) );

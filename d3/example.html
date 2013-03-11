@@ -75,7 +75,8 @@
         var keys = classifier.properties.keys;
         var chart = classifier.selectChart();
 
-        console.log(classifier.properties);
+        console.log(classifier.keys);
+        console.log(classifier);
 
        //console.log(classifier.properties);
 
@@ -112,6 +113,8 @@ view-source:http://examples.oreilly.com/0636920025429/mikedewar-getting_started_
 
 awk -F "," '{print $1 "," $2}' filename.csv
 
+awk -F "," '{print "{\n\t\"name\" : " "\"" $1 "\""  "," "\"2011\" : " "\""  $2 "\", ""\"2006\" : " "\""$3 "\"\n},"}' ./population3.csv >> population3.json
+
 Also have a good look here http://mbostock.github.com/d3/talk/20111018/#0
 
 http://bl.ocks.org/1203641
@@ -128,7 +131,7 @@ d3
 
 
     <script>
-        d3.csv("data/population3.csv", pickChart)
+        d3.json("data/population3.json", pickChart)
        /* d3.csv("data/edu.csv", draw_pie_chart)
         d3.csv("data/single_population.csv", draw_bar_chart2)
         d3.csv("data/single_population.csv", draw_pie_chart2)

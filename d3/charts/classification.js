@@ -27,12 +27,12 @@ function Properties(size, dimension, keys, types) {
 	this.types = types;
 }
 
-	var properties = new Array(0);
+	var chartPropertiesList = new Array(0);
 
-	properties["piechart"] = [charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ];
-	properties["barchart"] = [charts.barchart(), new Properties(50, 2, null, ["categorical", "quantitative"]) ];
-	properties["linechart"] = [charts.linechart(), new Properties(1000, 2, null, ["quantitative", "quantitative"]) ];
-	properties["scatterplot"] = [charts.scatterplot(), new Properties(50, 3, null, ["categorical", "quantitative", "quantitative"]) ];
+	chartPropertiesList["piechart"] = [charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ];
+	chartPropertiesList["barchart"] = [charts.barchart(), new Properties(50, 2, null, ["categorical", "quantitative"]) ];
+	chartPropertiesList["linechart"] = [charts.linechart(), new Properties(1000, 2, null, ["quantitative", "quantitative"]) ];
+	chartPropertiesList["scatterplot"] = [charts.scatterplot(), new Properties(50, 3, null, ["categorical", "quantitative", "quantitative"]) ];
 
 	//Will need to do something about the lack of labels.
 	//properties[charts.scatterplot()] = new Properties(50, 2, null, ["quantitative", "quantitative"]);
@@ -54,6 +54,7 @@ function Classifier(data){
    	//Underscore is the convention for private in this language...
 	this._row = data[0];
 
+	//redo this
 	this.size = data.length;
 	this.dimension = this.countProperties(this._row);
 	this.keys = d3.keys(this._row);
@@ -61,6 +62,10 @@ function Classifier(data){
 
 	this.properties = new Properties(this.size, this.dimension, this.keys, this.types);
 
+}
+
+Classifier.prototype.getProperties = function() {
+	return this.properties;
 }
 
 
@@ -106,48 +111,29 @@ Classifier.prototype.determineTypes = function() {
 	return result;
 }
 
-Classifier.prototype.getProperties = function() {
-	return this.properties; 
-}
-
-/*Classifier.prototype.selectChart = function() {
-	var rankings = new Array(0);
-
-	rankings.push([charts.piechart(), this._rankChart(this.properties, charts.piechart().properties()) ]);
-	rankings.push([charts.barchart(), this._rankChart(this.properties, charts.barchart().properties()) ]);
-
-	var max = 0;
-	var result = 0; //This is probably flawed
-	for(var i=0; i < rankings.length; i++) {
-		if(max < rankings[i][1]) {
-			max = rankings[i][1];
-			result = i;
-		}
-	}
-	return rankings[result][0];
-}*/
 
 Classifier.prototype.selectChart = function() {
 	var max = 0;
 	var result = null; //Function pointer
-	for(key in this.chartProperties()) {
-		var rank = this._rankChart(this.properties, this.chartProperties()[key][1]);
+	for(key in this.getChartPropertiesList()) {
+		var rank = this._rankChart(this.properties, this.getChartPropertiesList()[key][1]);
 		if(max < rank) {
 			max = rank;
 			result = key;
 		}
 	}
-	return this.chartProperties()[result][0];
+	return this.getChartPropertiesList()[result][0];
 }
 
-Classifier.prototype.chartProperties = function() {
-	return properties;
+Classifier.prototype.getChartPropertiesList = function() {
+	return chartPropertiesList;
 
 }
 
+//for debugging
 Classifier.prototype.getChartProperties = function(chart) {
-	if(chart in this.chartProperties()) {
-		return this.chartProperties()[chart][1];
+	if(chart in this.getChartPropertiesList()) {
+		return this.getChartPropertiesList()[chart][1];
 	}
 	return null;
 }
@@ -172,38 +158,3 @@ Classifier.prototype._rankChart = function(dataProps, chartProps) {
 	}
 }
 
-
-
-
-
-
-/*function Classifier(data) {
-	if ( !(this instanceof arguments.callee) ) 
-   		throw new Error("Constructor called as a function");
-	var element = data[0];
-
-	this.length = data.length;
-	this.keys = d3.keys(this.element);
-
-	determine_type();
-
-	this.test = function() {
-		return "this is a public function";
-	}
-
-
-	function determine_type(data) {
-		for(var i=0; i<this.length; i++) {
-			console.log(data[i]);
-			}
-		}
-
-	function isNumber(n) {
-		return !isNaN(parseFloat(n)) && isFinite(n);
-	}
-
-
-}*/
-
-
-	

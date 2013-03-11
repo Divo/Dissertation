@@ -27,6 +27,8 @@ Collection of charts implemented as closures
          area = d3.svg.area().x(X).y1(Y),
          line = d3.svg.line().x(X).y(Y);
 
+    
+	  var title = "linechart";
 
 
   function chart(selection) {
@@ -99,6 +101,11 @@ Collection of charts implemented as closures
     });
   }
 
+  //"name" must be a keyword or sometihng
+  chart.title = function() {
+    return title;
+  };
+  
   // The x-accessor for the path generator; 
   function X(d) {
     return xScale(d[0]);
@@ -160,6 +167,8 @@ charts.piechart = function(data) {
     arc = d3.svg.arc(),
     fill = d3.scale.category20();
 
+    var title = "piechart";
+
     //var properties = new Properties(12, 2, null, ["categorical", "quantitative"]);
 
 
@@ -213,6 +222,10 @@ charts.piechart = function(data) {
 
     });
   }
+
+    chart.title = function() {
+      return title;
+    };
 
 
     chart.margin = function(_) {
@@ -271,6 +284,7 @@ charts.scatterplot = function() {
     yAxis  = d3.svg.axis().scale(yScale).orient("left"),
     fill   = d3.scale.category10();
     
+    var title = "scatterplot";
 
     //var properties = new Properties()
 
@@ -361,6 +375,10 @@ charts.scatterplot = function() {
 
     }
 
+    chart.title = function() {
+      return title;
+    };
+
     chart.margins = function(_) {
       if (!arguments.length) return margins;
       margins = _;
@@ -400,10 +418,6 @@ charts.scatterplot = function() {
 
 
 
-   chart.properties = function() {
-        return properties;
-    };
-
     return chart;
 
 
@@ -427,9 +441,10 @@ charts.barchart = function() {
       yAxis = d3.svg.axis().scale(yScale).orient("left"),
       fill = d3.scale.category20b();
 
-      var properties = new Properties(50, 2, null, ["categorical", "quantitative"]);
+      var title = "barchart";
 
-    
+
+        
 
    function chart(selection) {
       selection.each(function(data) {
@@ -522,6 +537,10 @@ charts.barchart = function() {
 
         });
     }
+
+    chart.title = function() {
+      return title;
+    };
 
 
    chart.margins = function(_) {

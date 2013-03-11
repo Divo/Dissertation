@@ -75,8 +75,8 @@
         var keys = classifier.properties.keys;
         var chart = classifier.selectChart();
 
-        console.log(classifier.keys);
-        console.log(classifier);
+        keys = matchKeys(classifier.getChartProperties(chart.title()).types, classifier.getProperties().types, keys);
+
 
        //console.log(classifier.properties);
 
@@ -100,6 +100,35 @@
 
         }
 
+
+    }
+
+    //This method got out of hand
+    //Match the data type to the keys
+    function matchKeys(chartTypes, dataTypes, keys) {
+        console.log(chartTypes, dataTypes, keys);
+        //Clone input to mess with
+        var ct = chartTypes.slice(0); 
+        var dt = dataTypes.slice(0);
+        var k = keys.slice(0);
+
+        var result = new Array(keys.length);
+        for(var i = 0; i < result.length; i++) {
+            var type = ct[i];
+            console.log("Outer " + type);
+            for(var j = 0; j < dt.length; j++) {
+                console.log("Inner " +dt[j]);
+                if(type === dt[j]) {
+                    console.log("Passed " + dt, j);
+                    delete dt[j]
+                    result[i] = k[j];
+                    delete k[j];
+                    break;
+                }
+            }
+        }
+
+        return result;
 
     }
 

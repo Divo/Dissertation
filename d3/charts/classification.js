@@ -29,10 +29,11 @@ function Properties(size, dimension, keys, types) {
 
 	var chartPropertiesList = new Array(0);
 
-	chartPropertiesList["piechart"] = [charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ];
-	chartPropertiesList["barchart"] = [charts.barchart(), new Properties(50, 2, null, ["categorical", "quantitative"]) ];
-	chartPropertiesList["linechart"] = [charts.linechart(), new Properties(1000, 2, null, ["quantitative", "quantitative"]) ];
-	chartPropertiesList["scatterplot"] = [charts.scatterplot(), new Properties(50, 3, null, ["categorical", "quantitative", "quantitative"]) ];
+	chartPropertiesList[charts.piechart().title()] = [charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ];
+	chartPropertiesList[charts.barchart().title()] = [charts.barchart(), new Properties(50, 2, null, ["categorical", "quantitative"]) ];
+	chartPropertiesList[charts.linechart().title()] = [charts.linechart(), new Properties(1000, 2, null, ["quantitative", "quantitative"]) ];
+	chartPropertiesList[charts.scatterplot().title()] = [charts.scatterplot(), new Properties(50, 3, null, ["categorical", "quantitative", "quantitative"]) ];
+	//chartPropertiesList["scatterplot2D"]
 
 	//Will need to do something about the lack of labels.
 	//properties[charts.scatterplot()] = new Properties(50, 2, null, ["quantitative", "quantitative"]);
@@ -70,9 +71,6 @@ Classifier.prototype.getProperties = function() {
 
 
 //Adding functions to the prototype limits access permissions but is more efficient
-Classifier.prototype.test = function() {
-	console.log("Hello");
-}
 
 Classifier.prototype.countProperties = function(obj) { 
 	var count = 0;

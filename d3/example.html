@@ -70,9 +70,20 @@
 
     }
 
+    function draw_bubble_chart(data) {
+        d3.select("#chart_area")
+            .datum(data)
+          .call(charts.bubblechart()
+             .label(function(d) { return d.Area; })
+            .amount(function(d) { return +d.Amount; }));
+    }
+
+
+
     function pickChart(data) {
         var classifier = new Classifier(data);
         var keys = classifier.properties.keys;
+        //var chart = charts.bubblechart();
         var chart = classifier.selectChart();
 
         keys = matchKeys(classifier.getChartProperties(chart.title()).types, classifier.getProperties().types, keys);
@@ -83,7 +94,7 @@
 
         if(classifier.properties.dimension === 2) {
 
-            d3.select("#chart_area_classified")
+            d3.select("#chart_area")
                 .datum(data)
               .call(chart
                 .label(function(d) { return d[keys[0]]; })
@@ -91,7 +102,7 @@
 
         } else if (classifier.properties.dimension === 3) {
             
-            d3.select("#chart_area_classified")
+            d3.select("#chart_area")
                 .datum(data)
               .call(chart
                 .label(function(d) { return d[keys[0]]; })
@@ -106,7 +117,6 @@
     //This method got out of hand
     //Match the data type to the keys
     function matchKeys(chartTypes, dataTypes, keys) {
-        console.log(chartTypes, dataTypes, keys);
         //Clone input to mess with
         var ct = chartTypes.slice(0); 
         var dt = dataTypes.slice(0);
@@ -115,11 +125,8 @@
         var result = new Array(keys.length);
         for(var i = 0; i < result.length; i++) {
             var type = ct[i];
-            console.log("Outer " + type);
             for(var j = 0; j < dt.length; j++) {
-                console.log("Inner " +dt[j]);
                 if(type === dt[j]) {
-                    console.log("Passed " + dt, j);
                     delete dt[j]
                     result[i] = k[j];
                     delete k[j];
@@ -156,11 +163,11 @@ d3
     <div id="bar_chart_area2"></div>
     <div id="pie_chart_area2"></div>
     <div id="line_chart_area"></div>
-    <div id="chart_area_classified"></div>
+    <div id="chart_area"></div>
 
 
     <script>
-        d3.json("data/population3.json", pickChart)
+        d3.csv("data/edu.csv", draw_bubble_chart)
        /* d3.csv("data/edu.csv", draw_pie_chart)
         d3.csv("data/single_population.csv", draw_bar_chart2)
         d3.csv("data/single_population.csv", draw_pie_chart2)

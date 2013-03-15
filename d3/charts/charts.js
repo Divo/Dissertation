@@ -583,5 +583,105 @@ charts.barchart = function() {
    return chart;
 }
 
+charts.bubblechart = function() {
+   var containerDimensions = {width: 900, height: 900},
+   margins = {top: 30, right:50, bottom: 50, left: 100},
+   chartDimensions = {
+      width : containerDimensions.width - margins.left - margins.right,
+      height : containerDimensions.height - margins.top - margins.bottom
+   },
+      labelValue = function(d) { return d[0]; },
+      amountValue = function(d) { return d[1]; },
+      bubble = d3.layout.pack()
+                .children( function(d) { return d;})
+                .sort(null).size([chartDimensions.width, chartDimensions.height])
+                .padding(1.5);
+      format = d3.format(",d"),
+      fill = d3.scale.category20b();
+
+      var title = "bubblechart";
+
+
+        
+
+   function chart(selection) {
+      selection.each(function(data) {
+
+
+         var keys = d3.keys(data[0]); //Pull axis labels off data
+
+         // Convert data to standard representation greedily;
+         // this is needed for nondeterministic accessors (Array style access).
+         data = data.map(function(d, i) {
+            return [labelValue.call(data, d, i), amountValue.call(data, d, i)];
+         });
+
+
+        var svg = d3.select(this)
+          .append("svg")
+            .attr("width", containerDimensions.width)
+            .attr("height", containerDimensions.height)
+          .append("g")
+            .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+            .attr("id", "chart");
+
+       // console.log(bubble.nodes(data));
+
+        var g = svg.selectAll(".node")
+            .data(bubble.nodes(data))
+          .enter()
+            .append("g")
+            .attr("class", "node");
+            //.attr("transform", function(d) { return "translate(" + d.x + "," d.y + ")"; });
+
+        g.append("circle")
+            .attr("r", function(d) {return d.Amount; });
+
+
+
+        
+
+        });
+    }
+
+
+    chart.title = function() {
+      return title;
+    };
+
+
+   chart.margins = function(_) {
+      if (!arguments.length) return margins;
+      margins = _;
+      return chart;
+   };
+
+   chart.width = function(_) {
+      if (!arguments.length) return containerDimensions.width;
+      containerDimensions.width = _;
+      return chart;
+   };
+
+   chart.height = function(_) {
+      if (!arguments.length) return containerDimensions.height;
+      containerDimensions.height = _;
+      return chart;
+   };
+
+   chart.label = function(_) {
+      if (!arguments.length) return xValue;
+      labelValue = _;
+      return chart;
+   };
+
+   chart.amount = function(_) {
+      if (!arguments.length) return yValue;
+      amountValue = _;
+      return chart;
+   };
+
+   return chart;
+}
+
 
 })();

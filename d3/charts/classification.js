@@ -109,18 +109,44 @@ Classifier.prototype.determineTypes = function() {
 	return result;
 }
 
+//Return [name, rank] list of charts
+Classifier.prototype.rankCharts = function() {
+	var result = new Array(0);
+	for(key in this.getChartPropertiesList()) {
+		var rank = this._rankChart(this.properties, this.getChartPropertiesList()[key][1])
+		result.push([key, rank]);	
+	}
 
+	return result;
+
+}
+
+//Return most suitable chart
 Classifier.prototype.selectChart = function() {
+	var ranks = this.rankCharts();
 	var max = 0;
 	var result = null; //Function pointer
-	for(key in this.getChartPropertiesList()) {
-		var rank = this._rankChart(this.properties, this.getChartPropertiesList()[key][1]);
+	for(var i = 0; i < ranks.length; i++){
+		var rank = ranks[i][1];
 		if(max < rank) {
 			max = rank;
-			result = key;
+			result = ranks[i][0];
 		}
 	}
+
 	return this.getChartPropertiesList()[result][0];
+}
+
+//Return all charts along with their score
+Classifier.prototype.selectCharts = function() {
+	var ranks = this.rankCharts();
+	var charts = this.getChartPropertiesList();
+	for(var i = 0; i < ranks.length; i++) {
+		//Data structures are getting messy
+		ranks[i] = ([ranks[i][1], charts[ranks[i][0]] [0]]);
+	}
+
+	return ranks;
 }
 
 Classifier.prototype.getChartPropertiesList = function() {

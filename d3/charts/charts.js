@@ -123,15 +123,17 @@ Collection of charts implemented as closures
   };
 
   chart.width = function(_) {
-    if (!arguments.length) return containerDimensions.width;
-    containerDimensions.width = _;
-    return chart;
+      if (!arguments.length) return containerDimensions.width;
+      containerDimensions.width = _;
+      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
+      return chart;
   };
 
   chart.height = function(_) {
-    if (!arguments.length) return containerDimensions.height;
-    containerDimensions.height = _;
-    return chart;
+      if (!arguments.length) return containerDimensions.height;
+      containerDimensions.height = _;
+      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
+      return chart;
   };
 
   chart.x = function(_) {
@@ -223,6 +225,10 @@ charts.piechart = function(data) {
     });
   }
 
+    function calcOuterRadius() {
+
+    }
+
     chart.title = function() {
       return title;
     };
@@ -234,17 +240,19 @@ charts.piechart = function(data) {
       return chart;
     };
 
-    chart.width = function(_) {
+     chart.width = function(_) {
       if (!arguments.length) return containerDimensions.width;
       containerDimensions.width = _;
+      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
       return chart;
-    };
+   };
 
-    chart.height = function(_) {
+   chart.height = function(_) {
       if (!arguments.length) return containerDimensions.height;
       containerDimensions.height = _;
+      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
       return chart;
-    };
+   };
 
 
     chart.label = function(_) {
@@ -385,15 +393,17 @@ charts.scatterplot = function() {
       return chart;
     };
 
-   chart.width = function(_) {
+    chart.width = function(_) {
       if (!arguments.length) return containerDimensions.width;
       containerDimensions.width = _;
+      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
       return chart;
    };
 
    chart.height = function(_) {
       if (!arguments.length) return containerDimensions.height;
       containerDimensions.height = _;
+      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
       return chart;
    };
 
@@ -552,12 +562,14 @@ charts.barchart = function() {
    chart.width = function(_) {
       if (!arguments.length) return containerDimensions.width;
       containerDimensions.width = _;
+      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
       return chart;
    };
 
    chart.height = function(_) {
       if (!arguments.length) return containerDimensions.height;
       containerDimensions.height = _;
+      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
       return chart;
    };
 
@@ -656,15 +668,17 @@ charts.bubblechart = function() {
       return chart;
    };
 
-   chart.width = function(_) {
+    chart.width = function(_) {
       if (!arguments.length) return containerDimensions.width;
       containerDimensions.width = _;
+      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
       return chart;
    };
 
    chart.height = function(_) {
       if (!arguments.length) return containerDimensions.height;
       containerDimensions.height = _;
+      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
       return chart;
    };
 

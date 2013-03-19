@@ -25,9 +25,16 @@ function pickChart(data) {
 	if(classifier.properties.dimension === 2) {
 
 		for(var i = 0; i < charts.length; i++) {
+			//If score > 0
 			if(charts[i][0] > 0) {
 				var div = createDiv(i);
-				div.innerHTML("Score " + charts[i][0]);
+				var rating;
+				if(charts[i][0] === 10) {
+					rating = "Very suitable";
+				} else {
+					rating = "Somewhat suitable";
+				}
+				div.innerHTML = rating;
 				document.getElementById("chart_area").appendChild(div);
 
 				var current_chart = charts[i][1];

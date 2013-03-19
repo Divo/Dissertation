@@ -449,7 +449,7 @@ charts.barchart = function() {
       yScale = d3.scale.linear(),
       xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(0),
       yAxis = d3.svg.axis().scale(yScale).orient("left"),
-      fill = d3.scale.category20b();
+      fill = d3.scale.category20();
 
       var title = "barchart";
 
@@ -467,6 +467,10 @@ charts.barchart = function() {
          data = data.map(function(d, i) {
             return [xValue.call(data, d, i), yValue.call(data, d, i)];
          });
+
+         if(data.length >= 20) {
+          fill = function(_) { return d3.rgb("#06f"); }
+         }
 
 
          // Update the x-scale.

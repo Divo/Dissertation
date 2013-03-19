@@ -17,11 +17,12 @@
 
 //http://blog.visual.ly/maximum-elements-for-visualization-types/
 
-function Properties(size, dimension, keys, types) {
+function Properties(softSize, hardSize, dimension, keys, types) {
 	if ( !(this instanceof arguments.callee) ) 
    		throw new Error("Constructor called as a function");
 
-	this.size = size;
+	this.softSize = softSize;
+	this.hardSize = hardSize; 
 	this.dimension = dimension;
 	this.keys = keys;
 	this.types = types;
@@ -29,10 +30,10 @@ function Properties(size, dimension, keys, types) {
 
 	var chartPropertiesList = new Array(0);
 
-	chartPropertiesList[charts.piechart().title()] = [charts.piechart(), new Properties(12, 2, null, ["categorical", "quantitative"]) ];
-	chartPropertiesList[charts.barchart().title()] = [charts.barchart(), new Properties(50, 2, null, ["categorical", "quantitative"]) ];
-	chartPropertiesList[charts.linechart().title()] = [charts.linechart(), new Properties(1000, 2, null, ["quantitative", "quantitative"]) ];
-	chartPropertiesList[charts.scatterplot().title()] = [charts.scatterplot(), new Properties(50, 3, null, ["categorical", "quantitative", "quantitative"]) ];
+	chartPropertiesList[charts.piechart().title()] = [charts.piechart(), new Properties(12, 12, 2, null, ["categorical", "quantitative"]) ];
+	chartPropertiesList[charts.barchart().title()] = [charts.barchart(), new Properties(50, 1000, 2, null, ["categorical", "quantitative"]) ];
+	chartPropertiesList[charts.linechart().title()] = [charts.linechart(), new Properties(1000, 1000, 2, null, ["quantitative", "quantitative"]) ];
+	chartPropertiesList[charts.scatterplot().title()] = [charts.scatterplot(), new Properties(50, 50, 3, null, ["categorical", "quantitative", "quantitative"]) ];
 	//chartPropertiesList["scatterplot2D"]
 
 	//Will need to do something about the lack of labels.
@@ -61,7 +62,7 @@ function Classifier(data){
 	this.keys = d3.keys(this._row);
 	this.types = this.determineTypes();
 
-	this.properties = new Properties(this.size, this.dimension, this.keys, this.types);
+	this.properties = new Properties(this.size, this.size, this.dimension, this.keys, this.types);
 
 }
 
@@ -171,9 +172,10 @@ Classifier.prototype._rankChart = function(dataProps, chartProps) {
 			}
 		}
 
-		if(dataProps.size <= chartProps.size) {
+		//Check soft size limits
+		if(dataProps.softSize <= chartProps.softSize) {
 			return 10;
-		} else {
+		} else if(dataProps.hardSize <= chartProps.hardSize) {
 			return 5;
 		}
 

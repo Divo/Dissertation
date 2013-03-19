@@ -8,11 +8,34 @@ function createDiv(id) {
 function labelSuitability(score) {
 	var rating;
 	if(score === 10) {
-		rating = "Very suitable";
+		rating = "Very suitable: " + score;
 	} else {
-		rating = "Somewhat suitable";
+		rating = "Somewhat suitable: " + score;
 	}
 	return rating;
+}
+
+function createChartArea(i, chart) {
+	var div = createDiv(i);
+	div.innerHTML = labelSuitability(chart);
+	document.getElementById("chart_area").appendChild(div);
+
+	return div;
+
+}
+
+function createParseDate(classifier) {
+	var result = function(_) { return _; }
+
+	if(classifier.containsDate() != null) {
+		result = function(d) {
+			var format = d3.time.format("%d %m %Y");
+			d = new Date(Date.parse(d));
+			return d;
+		}
+	}
+
+	return result;
 }
 
 function pickChart(data) {
@@ -37,22 +60,11 @@ function pickChart(data) {
 		for(var i = 0; i < charts.length; i++) {
 			//If score > 0
 			if(charts[i][0] > 0) {
-				var div = createDiv(i);
-				div.innerHTML = labelSuitability(charts[i][0]);
-				document.getElementById("chart_area").appendChild(div);
-
-				var parseDate = function(_) { return _; }
-				if(classifier.containsDate() != null){
-					parseDate = function(d) {
-						var format = d3.time.format("%d %m %Y");
-						d = new Date(Date.parse(d));
-						return d;
-					}
-
-				}
-
-
 				var current_chart = charts[i][1];
+				var div = createChartArea(i, charts[i][0]);
+				var parseDate = createParseDate(classifier);
+
+				
 				d3.select(div)
 					.datum(data)
 				  .call(current_chart
@@ -64,12 +76,22 @@ function pickChart(data) {
 
 	} else if (classifier.properties.dimension === 3) {
 
-		d3.select("#chart_area")
-			.datum(data)
-	      .call(chart
-			.label(function(d) { return d[keys[0]]; })
-			.amount(function(d) { return +d[keys[1]]; }) 
-			.amount2(function(d) { return +d[keys[2]]; }) );
+		for(var i = 0; i < charts.length; i++) {
+			//If score > 0
+			if(charts[i][0] > 0) {
+				var current_chart = charts[i][1];
+				var div = createChartArea(i, charts[i][0]);
+				var parseDate = createParseDate(classifier);
+
+			d3.select(div)
+				.datum(data)
+	      	  .call(current_chart
+				.label(function(d) { return parseDate(d[keys[0]]); })
+				.amount(function(d) { return +d[keys[1]]; }) 
+				.amount2(function(d) { return +d[keys[2]]; }) )
+			}
+
+		}
 
 	}
 }

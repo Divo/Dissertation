@@ -5,6 +5,16 @@ function createDiv(id) {
 	return chart;
 }   
 
+function labelSuitability(score) {
+	var rating;
+	if(score === 10) {
+		rating = "Very suitable";
+	} else {
+		rating = "Somewhat suitable";
+	}
+	return rating;
+}
+
 function pickChart(data) {
 	var classifier = new Classifier(data);
 	var keys = classifier.properties.keys;
@@ -28,20 +38,25 @@ function pickChart(data) {
 			//If score > 0
 			if(charts[i][0] > 0) {
 				var div = createDiv(i);
-				var rating;
-				if(charts[i][0] === 10) {
-					rating = "Very suitable";
-				} else {
-					rating = "Somewhat suitable";
-				}
-				div.innerHTML = rating;
+				div.innerHTML = labelSuitability(charts[i][0]);
 				document.getElementById("chart_area").appendChild(div);
+
+				var parseDate = function(_) { return _; }
+				if(classifier.containsDate() != null){
+					parseDate = function(d) {
+						var format = d3.time.format("%d %m %Y");
+						d = new Date(Date.parse(d));
+						return d;
+					}
+
+				}
+
 
 				var current_chart = charts[i][1];
 				d3.select(div)
 					.datum(data)
 				  .call(current_chart
-					.label(function(d) { return d[keys[0]]; })
+					.label(function(d) { return parseDate(d[keys[0]]); })
 					.amount(function(d) { return +d[keys[1]]; }) );
 			}
 

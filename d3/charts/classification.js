@@ -31,8 +31,8 @@ function Properties(softSize, hardSize, dimension, keys, types) {
 	var chartPropertiesList = new Array(0);
 
 	chartPropertiesList[charts.piechart().title()] = [charts.piechart(), new Properties(12, 12, 2, null, ["categorical", "quantitative"]) ];
-	chartPropertiesList[charts.barchart().title()] = [charts.barchart(), new Properties(50, 1000, 2, null, ["categorical", "quantitative"]) ];
-	chartPropertiesList[charts.linechart().title()] = [charts.linechart(), new Properties(1000, 1000, 2, null, ["quantitative", "quantitative"]) ];
+	chartPropertiesList[charts.barchart().title()] = [charts.barchart(), new Properties(50, 100000, 2, null, ["categorical", "quantitative"]) ];
+	chartPropertiesList[charts.linechart().title()] = [charts.linechart(), new Properties(100000, 100000, 2, null, ["quantitative", "quantitative"]) ];
 	chartPropertiesList[charts.scatterplot().title()] = [charts.scatterplot(), new Properties(50, 50, 3, null, ["categorical", "quantitative", "quantitative"]) ];
 	//chartPropertiesList["scatterplot2D"]
 
@@ -93,6 +93,16 @@ Classifier.prototype.checkDate = function(d) {
 	return format(d);
 }
 
+//Very basic function to check if "Date" is in the keys
+Classifier.prototype.containsDate = function (){
+	for(var i = 0; i < this.keys.length; i++) {
+		if(this.keys[i].toUpperCase() === "DATE") {
+			return i;
+		}
+	}
+	return null;
+}
+
 
 Classifier.prototype.determineTypes = function() {
 	var result = new Array(this.dimension);
@@ -105,7 +115,11 @@ Classifier.prototype.determineTypes = function() {
 		} else { //if element is categorical or nominal
 			result[i] = "categorical";
 		}
+	}
 
+	var date = this.containsDate();
+	if(date != null) {
+		result[date] = "quantitative";
 	}
 	return result;
 }
@@ -167,8 +181,11 @@ Classifier.prototype._rankChart = function(dataProps, chartProps) {
 	if(dataProps.dimension == chartProps.dimension) {
 		//Check if chart and data contain the same types of data
 		for(var i=0; i < dataProps.types.length; i++) {
-			if(chartProps.types.indexOf(dataProps.types[i]) <= -1) { 
-				return 0;
+			//Match up the data types. Can have quantities as categories but not the other way around.
+			if(dataProps.types[i] !== "quantitative"){
+				if(chartProps.types.indexOf(dataProps.types[i]) <= -1) { 
+					return 0;
+				}	
 			}
 		}
 
@@ -177,6 +194,8 @@ Classifier.prototype._rankChart = function(dataProps, chartProps) {
 			return 10;
 		} else if(dataProps.hardSize <= chartProps.hardSize) {
 			return 5;
+		} else {
+			return 0;
 		}
 
 	} else {

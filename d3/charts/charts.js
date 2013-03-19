@@ -21,6 +21,7 @@ Collection of charts implemented as closures
          xValue = function(d) { return d[0]; },
          yValue = function(d) { return d[1]; },
          xScale = d3.time.scale(),
+         //xScale = d3.scale.linear(),
          yScale = d3.scale.linear(),
          xAxis = d3.svg.axis().scale(xScale).orient("bottom"),
          yAxis = d3.svg.axis().scale(yScale).orient("left")
@@ -111,6 +112,7 @@ Collection of charts implemented as closures
     return xScale(d[0]);
   }
 
+
   // The x-accessor for the path generator; 
   function Y(d) {
     return yScale(d[1]);
@@ -136,13 +138,14 @@ Collection of charts implemented as closures
       return chart;
   };
 
-  chart.x = function(_) {
+  //Strictly speaking "label" does not make sense for a linechart
+  chart.label = function(_) {
     if (!arguments.length) return xValue;
     xValue = _;
     return chart;
   };
 
-  chart.y = function(_) {
+  chart.amount = function(_) {
     if (!arguments.length) return yValue;
     yValue = _;
     return chart;
@@ -468,9 +471,10 @@ charts.barchart = function() {
             return [xValue.call(data, d, i), yValue.call(data, d, i)];
          });
 
-         if(data.length >= 20) {
-          fill = function(_) { return d3.rgb("#06f"); }
-         }
+        //If the 
+        if(data.length >= 50) {
+            fill = function(_) { return d3.rgb("#06f"); }
+        }
 
 
          // Update the x-scale.

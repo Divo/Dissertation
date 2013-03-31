@@ -293,7 +293,7 @@ charts.scatterplot = function() {
     yScale = d3.scale.linear(),
     xAxis  = d3.svg.axis().scale(xScale).orient("bottom"),
     yAxis  = d3.svg.axis().scale(yScale).orient("left"),
-    fill   = d3.scale.category10();
+    fill   = d3.scale.category20b();
     
     var title = "scatterplot";
 
@@ -452,7 +452,7 @@ charts.barchart = function() {
       yScale = d3.scale.linear(),
       xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(0),
       yAxis = d3.svg.axis().scale(yScale).orient("left"),
-      fill = d3.scale.category20();
+      fill = d3.scale.category20b();
 
       var title = "barchart";
 

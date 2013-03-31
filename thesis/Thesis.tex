@@ -1,0 +1,170 @@
+\documentclass[a4paper, 11pt, titlepage]{article}
+%\usepackage{color}
+%\definecolor{light-gray}{gray}{0.95}
+
+\usepackage{xcolor}
+\usepackage{alltt}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{ulem}
+\usepackage{setspace}
+\usetikzlibrary{trees}
+
+\newcommand
+{\image}[2]{\vspace{10 mm} \includegraphics[width=\textwidth]{#1}
+\begin{center} \caption{#2} \end{center}
+\vspace{10 mm}
+}
+
+
+\definecolor{light-gray}{gray}{0.95}
+% Compensate for fbox sep:
+\newcommand\Hi[2][light-gray]{%
+  \hspace*{-\fboxsep}%
+  \colorbox{#1}{#2}%
+  \hspace*{-\fboxsep}%
+}
+
+% Command for inserting a todo item
+%http://midtiby.blogspot.ie/2007/09/todo-notes-in-latex.html
+\newcommand{\todo}[1]{%
+% Add to todo list
+\addcontentsline{tdo}{todo}{\protect{#1}}%
+%
+\begin{tikzpicture}[remember picture, baseline=-0.75ex]%
+\node [coordinate] (inText) {};
+\end{tikzpicture}%
+%
+% Make the margin par
+\marginpar{%
+\begin{tikzpicture}[remember picture]%
+\definecolor{orange}{rgb}{1,0.5,0}
+\draw node[draw=black, fill=orange, text width = 3cm] (inNote)
+{#1};%
+\end{tikzpicture}%
+}%
+%
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[draw = orange, thick]
+([yshift=-0.2cm] inText)
+-| ([xshift=-0.2cm] inNote.west)
+-| (inNote.west);
+\end{tikzpicture}%
+%
+}%
+
+\definecolor{light-gray}{gray}{0.95}
+% Compensate for fbox sep:
+\newcommand\Hi[2][light-gray]{%
+  \hspace*{-\fboxsep}%
+  \colorbox{#1}{#2}%
+  \hspace*{-\fboxsep}%
+}
+
+\title{Browser-based Categorization of Data Towards Automated Visualization}
+\author{Steven Diviney}
+
+\begin{document}
+\onehalfspacing
+\maketitle
+
+\newpage
+
+\begin{abstract}
+This paper presents a system to automatically generate suitable visualizations given arbitrary data. Data Visualization is an increasingly common technique used to reinforce human cognition. In many areas of human activity the volume of data being generated is increasing. New methods must be employed to assist in the comprehension of this data. There has been a good amount of research performed to assess what factors contribute to the creation of an effective visualization. Many new and novel visualizations have been created. However, automatic generation of visualizations has received little attention.
+
+Such a tool would help to combine these two areas of research. An understanding of what factors contribute to an effective visualization are encoded into the system presented. Given an arbitrary dataset the system attempts to select the most appropriate visualization. This paper also discusses to what extent this process is viable.
+
+Using the limited amount of information contained in a raw dataset it is possible to select a comprehensible visualization. As the dataset becomes increasingly complex the effectiveness of such a system diminishes. A number of datasets are input to the system and an evaluation is undertaken. The results presented show that such a system can be used to assist users in the creation of suitable visualizations while avoiding the creation of inappropriate or even misleading visualizations.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+ 
+\section{Introduction} 
+ 
+\subsection{Motivation and Description} 
+
+DRAFT
+Information visualization is a growing area of research. Presently there is a good amount of discussion surrounding new and novel visualization techniques and how to create effective visualizations \cite{IEEE Visualization Journal} but very little on the process of creating a visualization. There have been a number of books published on the subject \todo{Mazza, Shneiderman, Approche Graphique, Haskell etc}. These works outline the steps needed to visualize different types of data but do not attempt to automate the process.
+
+The majority of new techniques exists in some degree of isolation. The majority of individual implementations exists in near complete isolation, often with the dataset hard coded in \todo{How do you back up a claim like this?}  There are a number of products \todo{ref state of the art} that attempt to create a complete end to end process for visualizing data sets. These products are either highly specialized \todo{again, state of the art, gretl would be a good example, need more} or lack complex visualizations and require user input throughout the process \todo{Excel}. 
+
+Highly specialized applications such as gretl can afford to make numerous assumptions about the input dataset. It is assumed they will be used as part of a specific suite of tools and as such are able to directly process the proprietary output of such tools. Such output is often rich with meta-data which is used to assist the visualization process \todo{Example of stock trading software, although this might stray into NDA territory. Excel also does this for stock charts}.
+
+General purpose tools such as Microsoft Excel contain a number of simple charts and graphs. They require a basic level of user training to create and offer no assistance in selecting the most appropriate chart for a given dataset. This often leads to unsatisfactory, confusing or even misleading results \todo{Show a really bad example of excel output}. 
+
+With a few exceptions, such as gretl, these tools are proprietary and lack documentation on the techniques they use \todo{This is a rather bold claim}.
+
+They system presented here \todo{NAME it} aims to address these deficiencies by providing a fully automated end to end visualization tool for arbitrary datasets. There have been some notable projects that accomplish such a goal. \todo{Polaris, Mackinlay. Need to look back over these and pick out what was expanded upon.} Emphasis has been placed on areas where previous works have relied on human actors to complete the process.
+
+-User Need
+-Gap in research
+	-Expose deficiencies of state of the art
+	-Outline what was taken from SOA, outline what was added.
+
+
+	\subsection{Research Question}
+
+I need help with phrasing this. 
+-Objectives. Be clear and consistent.
+
+	\subsection{Evaluation}
+
+-Probably going to be paper based
+
+	\subsection{Overview}
+ 
+
+-Go into contents of each chapter a bit
+-Expose the argument thread. THIS is the focus. Stay with argument.
+
+
+	\section{State Of The Art}
+
+	\subsection{Automated Visualization}
+
+		\subsubsection{Polaris}
+
+		\subsubsection{A Presentation Tool}
+
+\todo{Published in 1986, perhaps too old?}
+ 
+	\subsection{Visualization Process}
+
+		\subsubsection{The Eyes have it}
+
+
+		\subsubsection{Introduction to Information Visualization}
+
+\section{Design}
+
+
+	\subsection{Technologies used}
+
+	\subsection{Overview of Data Visualization Process}
+
+\todo{This will probably be broken down}
+
+
+\todo{Section may be somewhat redundant due to section 2.2}
+
+	\subsection{Architecture}
+
+\todo{This will probably be broken down}
+
+
+\section{Implementation}
+
+
+\section{Evaluation and Discussion}
+
+
+\section{Future Work and Conclusions}
+
+
+\appendix
+\section{Appendix A}
+
+\end{document} 

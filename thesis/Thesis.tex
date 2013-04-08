@@ -1,4 +1,4 @@
-\documentclass[a4paper, 11pt, titlepage]{article}
+\documentclass[a4paper, 11pt, titlepage, onehalfspacing]{article}
 %\usepackage{color}
 %\definecolor{light-gray}{gray}{0.95}
 
@@ -8,6 +8,7 @@
 \usepackage{tikz}
 \usepackage{ulem}
 \usepackage{setspace}
+\usepackage{apacite}
 \usetikzlibrary{trees}
 
 \newcommand
@@ -55,7 +56,7 @@
 
 \definecolor{light-gray}{gray}{0.95}
 % Compensate for fbox sep:
-\newcommand\Hi[2][light-gray]{%
+\newcommand\hilight[2][light-gray]{%
   \hspace*{-\fboxsep}%
   \colorbox{#1}{#2}%
   \hspace*{-\fboxsep}%
@@ -83,11 +84,14 @@ Using the limited amount of information contained in a raw dataset it is possibl
 \newpage
  
 \section{Introduction} 
+This section introduces the dissertation topic and explains the motivation behind the work. A research question is purposed and a number of objectives are outlined in an attempt to satisfy it. This is followed by evaluation criteria and finally by a summary of the document structure.
  
 \subsection{Motivation and Description} 
 
+Information Visualization is defined as an internal construction in the mind. The field of Information Visualization is connected with creating visual artifacts in order to facilitate individuals in building an internal representation of a dataset \cite{spence2001information}. 
+
 DRAFT
-Information visualization is a growing area of research. Presently there is a good amount of discussion surrounding new and novel visualization techniques and how to create effective visualizations \cite{IEEE Visualization Journal} but very little on the process of creating a visualization. There have been a number of books published on the subject \todo{Mazza, Shneiderman, Approche Graphique, Haskell etc}. These works outline the steps needed to visualize different types of data but do not attempt to automate the process.
+Information visualization is a growing area of research. Presently there is a good amount of discussion surrounding new and novel visualization techniques and how to create effective visualizations \todo{IEEEVisualizationJournal} but very little on the process of creating a visualization. There have been a number of books published on the subject \todo{Mazza, Shneiderman, Approche Graphique, Haskell etc}. These works outline the steps needed to visualize different types of data but do not attempt to automate the process.
 
 The majority of new techniques exists in some degree of isolation. The majority of individual implementations exists in near complete isolation, often with the dataset hard coded in \todo{How do you back up a claim like this?}  There are a number of products \todo{ref state of the art} that attempt to create a complete end to end process for visualizing data sets. These products are either highly specialized \todo{again, state of the art, gretl would be a good example, need more} or lack complex visualizations and require user input throughout the process \todo{Excel}. 
 
@@ -163,6 +167,8 @@ I need help with phrasing this.
 
 \section{Future Work and Conclusions}
 
+\bibliographystyle{apacite}
+\bibliography{bibliography}
 
 \appendix
 \section{Appendix A}

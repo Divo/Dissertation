@@ -9,6 +9,7 @@
 \usepackage{ulem}
 \usepackage{setspace}
 \usepackage{apacite}
+\usepackage{wasysym}
 \usetikzlibrary{trees}
 
 \newcommand
@@ -85,44 +86,71 @@ Using the limited amount of information contained in a raw dataset it is possibl
  
 \section{Introduction} 
 This section introduces the dissertation topic and explains the motivation behind the work. A research question is purposed and a number of objectives are outlined in an attempt to satisfy it. This is followed by evaluation criteria and finally by a summary of the document structure.
+
+\subsection{On Visualization}
+There are three fields subfields of Information Visualization. The boundaries between them are not particularly distinct and they are referred to somewhat interchangeably in academic literature. There are many other types but these three are of particular interest as their primary concern is the visualization of large volumes of data almost always with the aid of a computer.
+\subsubsection{Information Visualization}
+Information visualization is perhaps the most broadly used and can be thought to encompass all of the fields of visualization. After all, almost anything if sufficiently organized, is information of a sort \cite{friendly2001milestones}. Friendly notes that tables, graphs, maps and even text, whether static or dynamic, provide some means to see what lies within, determine the answer to a question, find relations, and perhaps apprehend things which could not be seen so readily in other forms. 
+
+The term today is generally applied to the visual representation of large-scale collections of non-numerical information, such as text in a book or files on a hard-disk. The distinction between this definition and that of Data Visualization seems to be quite poor. The type of the data in question is used to distinguish the two. The terms ``information" and ``data" are not so easily distinguished. Information can be thought of as a level of abstraction above data. The mere fact that a dataset is non-numerical does not identify it as information. A set of ordinal labels or categories is just as meaningless as a set of numbers. Information is created by organizing such data and presenting it with context.
+
+Information visualization is concerned with representing more abstract topics. A good example is process visualization. Each element in a process visualization represents a complex topic.
+
+\subsubsection{Data Visualization}
+Data Visualization is the science of visual representation of data, defined as ``facts and statistics collected together for reference or analysis" \cite{oed31}. As stated the distinction between data and Information Visualization is not very concrete. In researching for this paper I have come across several examples of one labeled as the other. As far as I can tell there have been no calls to address this issue and the two are used interchangeably to a large extent.
+
+Interestingly the majority of literature I have come across states it is concerned with Information Visualization, and then goes on to outline steps to transform data into a visual artifact in order to help the synthesis of information. From this it would seem quite clear that the distinction is not regarded as important but I would like to point out my topic of study is concerned with Data Visualization. The synthesis of new information through the creation of visual artifacts.
+
+\subsubsection{Scientific Visualization}
+Fortunately Scientific Visualization is very well defined. It is concerned primarily with the visualization of objects in three dimensional space with an emphasis on realistic rendering. This emphasis on realism is primarily what distinguishes it from other forms of visualization. This is not to say that the other forms may distort the data, rather that abstract data does not necessarily have a spatial dimension. How would one realistically visualize the lines of a book? Novel ways must be invented to accomplish this.
+
  
 \subsection{Motivation and Description} 
 
-Information Visualization is defined as an internal construction in the mind. The field of Information Visualization is connected with creating visual artifacts in order to facilitate individuals in building an internal representation of a dataset \cite{spence2001information}. 
+Information Visualization is defined as an internal construction in the mind. The field of Information Visualization is connected with creating visual artifacts in order to facilitate individuals in building an internal representation of a dataset \cite{spence2001information}. Information Visualization is not a new field but it has only become an established area of scientific research in recent years. The volume of data a typical computer can generate and process far exceeds what a human can comprehend. Information Visualization is becoming an increasingly popular technique to aid this comprehension.
 
-DRAFT
-Information visualization is a growing area of research. Presently there is a good amount of discussion surrounding new and novel visualization techniques and how to create effective visualizations \todo{IEEEVisualizationJournal} but very little on the process of creating a visualization. There have been a number of books published on the subject \todo{Mazza, Shneiderman, Approche Graphique, Haskell etc}. These works outline the steps needed to visualize different types of data but do not attempt to automate the process.
+Information visualization is a growing area of research. Presently there is a good amount of discussion surrounding new and novel visualization techniques and how to create effective visualizations \todo{Cite IEEE Visualization Journal, Sage and others}. The articles presented in these journals typically focus on the creation of specific visualizations, new and interesting ways to graphically present specific types of data. Very little is said on the process of creating a visualization. There have been a number of books published on the subject \todo{Mazza, Shneiderman, Approche Graphique, Haskell etc}. These works outline the steps needed to visualize different types of data but do not attempt to automate the process.
 
-The majority of new techniques exists in some degree of isolation. The majority of individual implementations exists in near complete isolation, often with the dataset hard coded in \todo{How do you back up a claim like this?}  There are a number of products \todo{ref state of the art} that attempt to create a complete end to end process for visualizing data sets. These products are either highly specialized \todo{again, state of the art, gretl would be a good example, need more} or lack complex visualizations and require user input throughout the process \todo{Excel}. 
+The majority of new techniques exists in some degree of isolation. The majority of individual implementations exists in near complete isolation, often with the dataset hard coded in \todo{How do you back up a claim like this? Perhaps get rid of it}  There are a number of products \todo{Ref state of the art or just leave for SOA?} that attempt to create a complete end to end process for visualizing data sets. These products are either highly specialized \todo{again, state of the art, gretl would be a good example, need more} or lack complex visualizations and require user input throughout the process \todo{Excel}. 
 
 Highly specialized applications such as gretl can afford to make numerous assumptions about the input dataset. It is assumed they will be used as part of a specific suite of tools and as such are able to directly process the proprietary output of such tools. Such output is often rich with meta-data which is used to assist the visualization process \todo{Example of stock trading software, although this might stray into NDA territory. Excel also does this for stock charts}.
 
 General purpose tools such as Microsoft Excel contain a number of simple charts and graphs. They require a basic level of user training to create and offer no assistance in selecting the most appropriate chart for a given dataset. This often leads to unsatisfactory, confusing or even misleading results \todo{Show a really bad example of excel output}. 
 
-With a few exceptions, such as gretl, these tools are proprietary and lack documentation on the techniques they use \todo{This is a rather bold claim}.
+With a few exceptions, such as gretl, these tools are proprietary and lack documentation on the techniques they use \todo{This is another rather bold claim}.
 
-They system presented here \todo{NAME it} aims to address these deficiencies by providing a fully automated end to end visualization tool for arbitrary datasets. There have been some notable projects that accomplish such a goal. \todo{Polaris, Mackinlay. Need to look back over these and pick out what was expanded upon.} Emphasis has been placed on areas where previous works have relied on human actors to complete the process.
+This paper aims to address these deficiencies by providing a fully automated end to end visualization tool for arbitrary datasets. There have been some notable projects that accomplish such a goal. \todo{Polaris, Mackinlay. Need to look back over these and pick out what was expanded upon.} Emphasis has been placed on areas where previous works have relied on human actors to complete the process.
 
--User Need
--Gap in research
-	-Expose deficiencies of state of the art
-	-Outline what was taken from SOA, outline what was added.
+%-User Need
+%-Gap in research
+%	-Expose deficiencies of state of the art
+%	-Outline what was taken from SOA, outline what was added.
+%	-DO SOA first I suppose.
 
 
 	\subsection{Research Question}
 
-I need help with phrasing this. 
--Objectives. Be clear and consistent.
+The objective of this project is to determine to what extent can suitable visualizations be dynamically and automatically generated using browser based technologies. The Automatic Classifier and Data Visualizer, or AC\lightning{}DV is presented. The goals for the project are as follows:
+\begin{itemize}
+\item Design and develop software capable of accepting arbitrary data in a specific format and display it using suitable visualizations. This should be done without an intervention from the user.
+\item Access the level of benefit that the visualizations can bring to potential users from various fields.
+\item Investigate to what extent visualizations can be generated given only an input dataset.
+\item Elaborate on the potential of a more sophisticated version of the software using additional techniques to determine features of input datasets.
+\end{itemize}
+
+
 
 	\subsection{Evaluation}
 
--Probably going to be paper based
+The system will be evaluated by inputting a number of datasets and assessing the output against the previously stated goals. A number of use cases have been drawn up to determine how beneficial such a tool is in aiding various users in visualizing data. \todo{Switching between tenses a bit here}. AC\lightning{}DV is not intended as an application suitable for end users so the user experience is not relevant to the evaluation. The goal of the system is to allow users to quickly produce effective visualizations that represent the data accurately.
+
+Key to the evaluation is the notion of suitable visualizations. In order for a visualization to be considered useful it must meet several criteria. This will be outlined in detail in later sections \todo{Ref appropriate section}. Visualizations are composed of many individual elements with different attributes such as colour, size and spatial location. These elements have been the subject of previous research and a number of guidelines exists outlining their usage \todo{Cite Mazza, Jock etc}. However these guidelines are not hard rules and their exists no formal way to evaluate a complete visualization. Methods from the field of Human Computer Interaction are typically used, specifically user evaluations and trails. AC\lightning{}DV generates visualizations that are well understood, thus eliminating the need for lengthy user evaluations. The guidelines stated above are used by the system to pick appropriate visualizations. These guidelines will be used to benchmark the effectiveness of visualizations produced by the system.
 
 	\subsection{Overview}
  
-
--Go into contents of each chapter a bit
--Expose the argument thread. THIS is the focus. Stay with argument.
+This chapter is followed by a survey of the State of the Art in the areas of automated visualization and the visualization process. Section 3 examines the design of the visualization tool and gives an overview of the process of Information Visualization. Section 4 gives a complete description of the projects implementation and any problems encountered. Section 5 is an evaluation of the project and a discussion of its merits and failures. The extent to which such a system is viable is also discussed in this section. The paper concludes with a look at potential future work that could extend AC\lightning{}DV.
+%-Go into contents of each chapter a bit
+%-Expose the argument thread. THIS is the focus. Stay with argument.
 
 
 	\section{State Of The Art}

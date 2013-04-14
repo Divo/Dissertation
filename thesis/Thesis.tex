@@ -85,6 +85,7 @@ Using the limited amount of information contained in a raw dataset it is possibl
 \newpage
  
 \section{Introduction} 
+\todo{10/04/2013 changes in onenote}
 This section introduces the dissertation topic and explains the motivation behind the work. A research question is purposed and a number of objectives are outlined in an attempt to satisfy it. This is followed by evaluation criteria and finally by a summary of the document structure.
 
 \subsection{On Visualization}
@@ -140,7 +141,7 @@ Browser based technologies have been selected due to their wide-scale support. T
 
 The system will be evaluated by inputting a number of datasets and assessing the output against the previously stated goals. A number of use cases have been drawn up to determine how beneficial such a tool is in aiding various users in visualizing data. \todo{Switching between tenses a bit here}. AC\lightning{}DV is not intended as an application suitable for end users so the user experience is not relevant to the evaluation. The goal of the system is to quickly produce effective visualizations that represent the data accurately.
 
-Key to the evaluation is the notion of suitable visualizations. In order for a visualization to be considered useful it must meet several criteria. This will be outlined in detail in later sections \todo{Ref appropriate section}. Visualizations are composed of many individual elements with different attributes such as colour, size and spatial location. These elements have been the subject of previous research and a number of guidelines exists outlining their usage \todo{Cite Mazza, Jock etc}. However these guidelines are not hard rules and their exists no formal way to evaluate a complete visualization. Methods from the field of Human Computer Interaction are typically used, specifically user evaluations and trails. AC\lightning{}DV generates visualizations that are well understood, thus eliminating the need for lengthy user evaluations concerning the effectiveness of the individual output visualizations. The guidelines stated above are used by the system to pick appropriate visualizations. These guidelines will be used to benchmark the effectiveness of visualizations produced by the system.
+Key to the evaluation is the notion of suitable visualizations. In order for a visualization to be considered useful it must meet several criteria. This will be outlined in detail in later sections \todo{Ref appropriate section}. Visualizations are composed of many individual elements with different attributes such as colour, size and spatial location. These elements have been the subject of previous research and a number of guidelines exists outlining their usage \todo{Cite Mazza, Jock etc. CALL them retinal variables}. However these guidelines are not hard rules and their exists no formal way to evaluate a complete visualization. Methods from the field of Human Computer Interaction are typically used, specifically user evaluations and trails. AC\lightning{}DV generates visualizations that are well understood, thus eliminating the need for lengthy user evaluations concerning the effectiveness of the individual output visualizations. The guidelines stated above are used by the system to pick appropriate visualizations. These guidelines will be used to benchmark the effectiveness of visualizations produced by the system.
 
 	\subsection{Overview}
  
@@ -151,20 +152,29 @@ This chapter is followed by a survey of the State of the Art in the areas of aut
 
 	\section{State Of The Art}
 
-	\subsection{Automated Visualization}
+This section presents work currently being undertaken in two main areas of research discussed in this paper; automated visualization and the visualization process. An analysis of these projects conclude this section.
 
-		\subsubsection{Polaris}
-
-		\subsubsection{A Presentation Tool}
-
-\todo{Published in 1986, perhaps too old?}
- 
 	\subsection{Visualization Process}
 
 		\subsubsection{The Eyes have it}
 
 
 		\subsubsection{Introduction to Information Visualization}
+
+
+	\subsection{Automated Visualization}
+
+The focus of this paper is automated visualization, taking a dataset and generating a visualization from it without any user input. There are a few projects that incorporate some kind of automated data visualizer. Generally such a visualizer is part of a larger project and requires user interaction to function. This section presents two such projects with varying degrees of automation.
+
+		\subsubsection{Polaris}
+Polaris extends the well known pivot table \ref{citation} interface to display information visually. It acts as an interface for large multi-dimensional databases. The visualizations acts as interactive query builders that allow users to explore large datasets quite rapidly. First published in 2000 it has evolved into Tableau, a commercial visualizations product. 
+
+Polaris consists of two main components. A graphic generator and a database query generator.
+
+		\subsubsection{A Presentation Tool}
+
+\todo{Published in 1986, perhaps too old?}
+ 
 
 \section{Design}
 

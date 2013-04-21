@@ -10,6 +10,7 @@
 \usepackage{setspace}
 \usepackage{apacite}
 \usepackage{wasysym}
+\usepackage{tabularx}
 \usetikzlibrary{trees}
 
 \newcommand
@@ -134,14 +135,18 @@ The objective of this project is to determine to what extent can suitable visual
 \item Investigate to what extent visualizations can be generated given only an input dataset.
 \item Elaborate on the potential of a more sophisticated version of the software using additional techniques to determine features of input datasets.
 \end{itemize}
-Browser based technologies have been selected due to their wide-scale support. The goal of the system is to simplify the process of visualization creation. Browser based technologies require no setup or configuration and thus simplify the process. \todo{But it's not an end user app so is this sufficient justification?}
+Key to this project is the notion of suitable visualizations. In order for a visualization to be considered useful it must meet several criteria. This will be outlined in detail in later sections \todo{Ref appropriate chapter}. 
+
+Browser based technologies have been selected due to their wide-scale support. The goal of the system is to simplify the process of visualization creation. Browser based technologies require no setup or configuration and thus simplify the process. \todo{But it's not an end user app so is this sufficient justification?}. The use of browser based technologies also help to offload the vast majority of computation to the client. Were AC\lightning{}DV to be developed further this approach would significantly reduce the cost needed to operate it as a service.
 
 
 	\section{Evaluation}
 
-The system will be evaluated by inputting a number of datasets and assessing the output against the previously stated goals. A number of use cases have been drawn up to determine how beneficial such a tool is in aiding various users in visualizing data. \todo{Switching between tenses a bit here}. AC\lightning{}DV is not intended as an application suitable for end users so the user experience is not relevant to the evaluation. The goal of the system is to quickly produce effective visualizations that represent the data accurately.
+The system will be evaluated by inputting a number of datasets and assessing the output against the previously stated goals. A number of use cases have been drawn up to determine how beneficial such a tool is in aiding various users in visualizing data. These use cases entail typical visualization tasks a user from any number of different fields may encounter, i.e. visualizing expenditure and returns for different products.
 
-Key to the evaluation is the notion of suitable visualizations. In order for a visualization to be considered useful it must meet several criteria. This will be outlined in detail in later sections \todo{Ref appropriate chapter}. Visualizations are composed of many individual elements with different attributes such as colour, size and spatial location. These elements have been the subject of previous research and a number of guidelines exists outlining their usage \todo{Cite Mazza, Jock etc. CALL them retinal variables}. However these guidelines are not hard rules and their exists no formal way to evaluate a complete visualization. Methods from the field of Human Computer Interaction are typically used, specifically user evaluations and trails. AC\lightning{}DV generates visualizations that are well understood, thus eliminating the need for lengthy user evaluations concerning the effectiveness of the individual output visualizations. The guidelines stated above are used by the system to pick appropriate visualizations. These guidelines will be used to benchmark the effectiveness of visualizations produced by the system.
+\todo{Switching between tenses a bit here}. AC\lightning{}DV is not intended as an application suitable for direct use by end users. It is the potential core of an easy to use visualization tool. For this reason an evaluation of the user experience is not needed. The goal of the system is to quickly produce effective visualizations that represent the data accurately.
+
+Visualizations are composed of many individual elements with different attributes such as colour, size and spatial location. These elements have been the subject of previous research and a number of guidelines exists outlining their usage \todo{Cite Mazza, Jock etc. CALL them retinal variables}. However these guidelines are not hard rules and their exists no formal way to evaluate a complete visualization. Methods from the field of Human Computer Interaction are typically used, specifically user evaluations and trails. AC\lightning{}DV generates visualizations that are well understood, thus eliminating the need for lengthy user evaluations concerning the effectiveness of the individual output visualizations. The guidelines stated above are used by the system to pick appropriate visualizations. These guidelines will be used to benchmark the effectiveness of visualizations produced by the system.
 
 	\section{Overview}
  
@@ -152,21 +157,22 @@ This chapter is followed by a survey of the State of the Art in the areas of aut
 
 	\chapter{State Of The Art}
 
-This chapter presents work currently being undertaken in two main areas of research discussed in this paper; automated visualization and the visualization process. An analysis of these projects conclude this chapter.
+This chapter presents work currently being undertaken in the two main areas of research discussed in this paper; automated visualization and the visualization process. An analysis of these projects conclude this chapter.
 
 	\section{Visualization Process}
+An understanding of how to create a visualization is key to this thesis. This process has been the subject of a good amount of discussion and seems to be fairly well understood but there are still discrepancies and differences of opinion. This thesis uses a model based off of Bertin's retinal variables \cite{bertin1973semiologie}. This is a cognitive model that ranks the effectives of various visual attributes, i.e. size, colour, at conveying various types of information, i.e. quantity, frequency etc. This section presents an overview of two works detailing this model. The model will be detailed in full in a later section.
 
 
 		\subsection{Introduction to Information Visualization}
-Introduction to Information Visualization \cite{mazza2009introduction} is one of the most recent texts providing a state of the art in the field of information visualization. As well as listing many examples of newer more novel visualization techniques in the later chapters it also contains a substantial amount of information about the process of information visualization. This set of first principles has influenced the work presented in this paper quite heavily. The author acknowledges that given an arbitrary set of data there is no way to determine, automatically or otherwise, what visualization is a suitable representation of that data. There is in fact no agreed criteria to evaluate a finished visualization.
+Introduction to Information Visualization \cite{mazza2009introduction} is one of the most recent texts providing a state of the art in the field of information visualization. As well as listing many examples of newer more novel visualization techniques in the later chapters it also contains a substantial amount of information about the process of information visualization. This set of first principles has influenced the thesis presented in this paper quite heavily. The author acknowledges that given an arbitrary set of data there is no way to determine, automatically or otherwise, what visualization is a suitable representation of that data. There is in fact no agreed criteria to evaluate the effectiveness of a finished visualization.
 
 However there are certain characteristics of data that can be used to help select an appropriate type of visualization. These steps are outlined as follows:
 \begin{itemize}
-\item Define the problem: Is the goal of the visualization to communicate some meaning in the data, allow the user to explore the data or confirm a hypothesis.
+\item Define the problem: Is the goal of the visualization to communicate some meaning in the data, allow the user to explore the data or confirm a hypothesis?
 \item Examine the nature of the data to represent: What type of data is being dealt with; ordinal, quantitative or categorical.
-\item What is the dimensionality of the data: The number of attributes of the dataset. In a univariate dataset one attribute varies with respect to another. Bivariate and trivariate extend this with multivariate extending to four or more dimensions.
-\item What is the structure of the data: This can be more easily understood by defining what types of data structures can be used to store the data; linear data structures such as vectors and tables, temporal data, spatial data hierarchies and networks.
-\item What type of interaction will the user have with the data: can the user transform the data by modifying it, can the modify parameters used to display the data or is the visualization static.
+\item Dimensionality of the data: The number of attributes of the dataset. In a univariate dataset one attribute varies with respect to another. Bivariate and trivariate extend this with multivariate meaning four or more dimensions.
+\item Structure of the data: This can be more easily understood by defining what types of data structures can be used to store the data; linear data structures such as vectors and tables, temporal data, spatial data hierarchies and networks.
+\item Type of interaction will the user have with the data: can the user transform the data by modifying it, can the modify parameters used to display the data or is the visualization static.
 \end{itemize}
 
 This process is summarized in Table \ref{mazzatable} \cite{mazza2009introduction}. It will be revisited in later sections.
@@ -186,14 +192,14 @@ This process is summarized in Table \ref{mazzatable} \cite{mazza2009introduction
     \label{mazzatable}
 \end{table}
 
-This process eliminates visualizations that are not suitable for a given data set. Deciding on an individual visualization to use is a decidedly harder task. The effectiveness of a visualization is dependent on the perceptual capabilities of the viewer. As there is no empirically verified model of human perceptual abilities one is purposed. This model is based off the work of Jacques Bertin \cite{bertin1973semiologie}. Bertin was the first person to define a set of ``retinal variables"; how different properties of graphics can be used to convey various types of information. His work has been extended since it's original publication and the model presented here is perhaps one of the most up to date. A list of retinal variables is presented in order of effectiveness conveying different types information. This idea will be revisited throughout this paper and a complete model will be detailed in a later chapter. 
+This process eliminates visualizations that are not suitable for a given data set. Deciding on an individual visualization to use is a decidedly harder task. The effectiveness of a visualization is dependent on the perceptual capabilities of the viewer. As there is no empirically verified model of human perceptual abilities one is purposed. This model is based off the work of Jacques Bertin \cite{bertin1973semiologie}. Bertin was the first person to define a set of ``retinal variables"; how different properties of graphics can be used to convey various types of information. His work has been extended since it's original publication and the model presented here is perhaps one of the most up to date. A list of retinal variables is presented in order of effectiveness conveying different types of information. This idea will be revisited throughout this paper and a complete model will be detailed in a later chapter. 
 
-Mazza's work is a very complete introduction to information visualization and draws attention to all of the factors that need to be considered when creating a visualization. It is perhaps the most complete state of the art currently available and builds on a large amount of influential publications in the field. It has been very influential in the design of the system presented in this paper.
+Mazza's work is a very complete introduction to information visualization and draws attention to all of the factors that need to be considered when creating a visualization. It is perhaps the most complete state of the art currently available and builds on a large amount of influential publications in the field. It has been very influential in the design of the system presented in this thesis.
 
 
-		\subsection{Structure of the Information Visualization Design Space}
+		\subsection{The Structure of the Information Visualization Design Space}
 
-Structure of the Information Visualization Design Space provides an overview of the field of data visualization as it was in 1997. An organization of information visualization literature is purposed and several examples are provided. The organization technique is then used as a framework for new designs. The paper builds on Bertins work \cite{bertin1973semiologie} which has been expanded on by Mackinlay \cite{mackinlay1986automating}. Visualization techniques are grouped based on similarities of their data to visualization mappings.
+The Structure of the Information Visualization Design Space provides an overview of the field of data visualization as it was in 1997. An organization of information visualization literature is purposed and several examples are provided. The organization technique is then used as a framework for new designs. The paper builds on Bertins work \cite{bertin1973semiologie} which has been expanded on by Mackinlay \cite{mackinlay1986automating}. Visualization techniques are grouped based on similarities of their data to visualization mappings.
 
 A series of steps that need to be preformed to create a visualization are given. 
 
@@ -207,15 +213,15 @@ Data is defined as a set of values taken on my a set of variables. It is an obvi
 Data is further divided into the original dataset $D$ and data $D'$ that has been selected from this set and possibly transformed by some filter $F$.
 
 \paragraph{Visualizations}
-Visualizations are defined as being composed marks, their graphical properties and elements requiring human controlled processing. Human visual processing works on two levels.
+Visualizations are defined as being of composed marks, their graphical properties and elements requiring human controlled processing. Human visual processing works on two levels.
 \begin{itemize}
-\item Automatic Processing: Works on visual properties such as position and in colour. These are Bertins retinal variables \cite{bertin1973semiologie}. This processing occurs at a subconscious level and as a result is very fast but limited in power.
+\item Automatic Processing: Works on visual properties such as position and colour. These are Bertins retinal variables \cite{bertin1973semiologie}. This processing occurs at a subconscious level and as a result is very fast but limited in power.
 \item Controlled processing: This can be easily thought of as conscious thought. It is very powerful but limited in capacity. These limitations are fairly well understood \cite{Mil56}.
 \end{itemize}
 
 Visual presentations consist of a set of marks ( points, lines etc ), a position in space ( X and Y ) and a set of retinal properties (colour and size ). This distinction is a somewhat different grouping to the ones purposed by Bertin and Mackinlay. One can only assume the reason for this grouping is to limit the number of attributes or combination of attributes of a visualization. Connectedness and enclosure are also given as attributes. 
 
-These attributes are then arranged in table \ref{struct_table} to categorize various visualizations. The version shown here is simplified.
+These attributes are then arranged in a table to categorize various visualizations. An example is shown in Table \ref{struct_table}. This example has been simplified to two dimensions.
 
 \begin{table}[!ht]
 \centering
@@ -241,7 +247,16 @@ The focus of this paper is automated visualization, taking a dataset and generat
 		\subsection{Polaris}
 Polaris extends the well known pivot table interface \todo{citation} to display information visually. Multiple visualizations are displayed on a pivot table which the user can interact with by selecting or ``brushing" data-points to filter the displayed data. The visualizations act as interactive query builder that allow user to explore large datasets quite rapidly. First published in 2000 it has evolved into Tableau, a commercial visualizations product.
 
-Polaris consists of two main components. A graphic generator and a database query generator. The database query generator will be omitted in this discussion as it is not relevant to AC\lightning{}DV. The graphic generator makes several assumptions about the nature of the input data. These assumptions are also made by AC\lightning{}DV\todo{Should this just go in design?}. Data is characterized as either quantitative or ordinal. Nominal data is assigned an ordering by the system and treated as ordinal data. Polaris assumes all nominal fields are dimensions, or independent variables, and all quantitative fields are measures, or dependent variables. Three different types of graphics can be generated based on the input data. User input is then used to refine this to a single generated graphic.
+Polaris consists of two main components. A graphic generator and a database query generator. The database query generator will be omitted in this discussion as it is not relevant to AC\lightning{}DV. The graphic generator makes several assumptions about the nature of the input data. These assumptions are also made by AC\lightning{}DV\todo{Should this just go in design?}. 
+\begin{itemize} 
+\item Data is characterized as either quantitative or ordinal.
+\item Nominal data is assigned an ordering and treated as ordinal.
+\item Nominal fields are dimensions, or independent variables.
+\item Quantitative fields are measures, or dependent variables.
+\end{itemize}
+ Three different types of graphics can be generated based on the input data. User input is then used to refine this to a 
+single generated graphic.
+
 
 The user interacts with a relatively complex UI. The UI contains a number of ``shelves" onto which the user places data-sources and data records. The user also selects what type of mark to associate with each record. The selected mark and nature of the data is used by the system to determine what type of visualization to render. For example, if the data-source contains an ordinal and quantitative field and the user selects a bar as the mark to use a bar chart is generated. If the user selects a dot as the mark a dot plot is generated. An understanding of Bertins retinal variables \cite{bertin1973semiologie} is encoded into the system to ensure the visualizations are comprehensible. It is not clear how Polaris handles input that cannot be effectively displayed using these rules, e.g. when the input data set is too large to be displayed.
 
@@ -253,7 +268,7 @@ A Presentation Tool, henceforth referred to as APT, is an application-independen
 
 APT is divided into three parts, expressiveness, effectiveness and composition. Expressiveness determines how the input information can be expressed in a graphical language. It is encoded into a formal language. This languages main purpose is to ensure that any graphic encodes all of the input data and only the input data. It is not used to select entire graphics, rather it is used to test individual graphical mappings, i.e. to a single axis or type of mark.
 
-Effectiveness is is used to determine which of the sentences generated by the expressiveness phase is most effective at displaying the data in a useful manner \todo{Double check expressiveness and effectiveness synchronous w.r.t each other.} It is dependent on the capabilities of the user. There is a difficulty in that no verified theory of human perceptual capabilities exists so one is purposed. It is based off Bertins retinal variables \cite{bertin1973semiologie} which have been ranked in order of effectiveness by Cleveland and McGill \cite{cleveland1984graphical}. This ranking has been extended to include rankings ordinal and nominal types of data although this extension has not been empirically verified \todo{Does Mazza match up with this ranking?}.
+Effectiveness is is used to determine which of the sentences generated by the expressiveness phase is most effective at displaying the data in a useful manner \todo{Double check expressiveness and effectiveness synchronous w.r.t each other.} It is dependent on the capabilities of the user. There is a difficulty in that no verified theory of human perceptual capabilities exists so one is purposed. It is based off Bertins retinal variables \cite{bertin1973semiologie} which have been ranked in order of effectiveness by Cleveland and McGill \cite{cleveland1984graphical}. This ranking has been extended to include rankings of ordinal and nominal types of data although this extension has not been empirically verified \todo{Does Mazza match up with this ranking?}.
 
 The system generates multi-dimensional graphics by combining the effectively one dimensional or single data series sentences generated in the expressiveness and effectiveness stages. Designs are merged on common data. The types of data to merge on are ordered in terms of effectiveness.
 \begin{itemize}
@@ -270,14 +285,26 @@ APT combines these three stages using artificial intelligence techniques. The al
 \end{itemize}
 \todo{Example in notes of bar-chart rule.}
 
-Overall APT is a very robust and complex system. However it is perhaps somewhat dated. It is only capable of generating static graphics. It can also factor in the output media into the design choices, i.e. if the screen is monochrome colour is omitted for the effectiveness stage. \todo{More bad things because APT is pretty cool}
+Overall APT is a very robust and complex system. However it is perhaps somewhat dated. It is only capable of generating static graphics. It can also factor in the output media into the design choices, i.e. if the screen is monochrome colour is omitted for the effectiveness stage. The use of A.I. techniques is a novel and somewhat unique approach. The parameters of APT are not made completely clear, it is not clear what the limits of its capabilities are.
 
 \todo{Published in 1986, perhaps too old?}
 
 \section{Analysis}
 Presently there is a good amount of literature surrounding individual visualization as demonstrated by \cite{mazza2009introduction}, \todo{Cite Structure of information} and large degree of consensus on how to go about creating a visualization. However there have only been a few attempts to automate such a system. Such an application would not only allow users to quickly produce useful and accurate visualizations but would also server to validate the process that has become agreed upon. Such an evaluation is frequently omitted from these publications. Mazza outlines a set of criteria to evaluate individual visualizations \cite{mazza2009introduction} but the focus of this thesis is testing if the entire process is valid. 
 
-Works such as Polaris \todo{citation} and APT \todo{citation} suggest that this process is indeed valid. However Polaris does rely on the user for some tasks. APT appears to be a very robust and complex system but is somewhat dated and cannot generate visualizations with any interactivity. Given the ubiquity of powerful computing platforms this seams to be quite a large deficiency. The project presented in this thesis aims to create an automated version of the visualization process. 
+Works such as Polaris \todo{citation} and APT \todo{citation} suggest that this process is indeed valid. However Polaris does rely on the user for some tasks. APT appears to be a very robust and complex system but is somewhat dated and cannot generate visualizations with any interactivity. Given the ubiquity of powerful computing platforms this seams to be quite a large deficiency. The project presented in this thesis aims to create an automated version of the visualization process. The interesting aspects and possible deficiencies of the various systems examined in this chapter are summarized in the table below. 
+\begin{table}
+
+\begin{tabularx}{\textwidth}{X|X|X}
+\hline
+\textbf{Systems}                                                     & Features of Note                                                            & Possible deficiencies                                         \\ \hline
+Polaris                                                     & Automatic data characterization. Encoding of retinal variables. Interactive & Requires user input. Limited to 2-dimensional visualizations. \\ \hline
+APT                                                         & Very Robust, complex. Encoding of retinal variables                         & Limits of use not clear.  No interaction.                     \\ \hline
+Introduction to Information Visualization                   & Very detailed description of visualization process.                         & Manual process.                                               \\ \hline
+The Structure of the Information Visualization Design Space & Very succinct classification of visualizations.                             & Manual process.                                               \\ \hline
+    \end{tabularx}
+    \caption{Summary of systems examined}
+    \end{table} 
 
 This thesis will attempt to determine to what extent can suitable visualization be dynamically and automatically be generated from arbitrary data using browser based technologies. At no point should the user have to provide input. Browser based technologies have in recent years become very powerful platforms and are perhaps the most ubiquitous software platforms in existence. 
 

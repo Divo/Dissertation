@@ -247,7 +247,7 @@ The focus of this paper is automated visualization, taking a dataset and generat
 		\subsection{Polaris}
 Polaris extends the well known pivot table interface \todo{citation} to display information visually. Multiple visualizations are displayed on a pivot table which the user can interact with by selecting or ``brushing" data-points to filter the displayed data. The visualizations act as interactive query builder that allow user to explore large datasets quite rapidly. First published in 2000 it has evolved into Tableau, a commercial visualizations product.
 
-Polaris consists of two main components. A graphic generator and a database query generator. The database query generator will be omitted in this discussion as it is not relevant to AC\lightning{}DV. The graphic generator makes several assumptions about the nature of the input data. These assumptions are also made by AC\lightning{}DV\todo{Should this just go in design?}. 
+Polaris consists of two main components. A graphic generator and a database query generator. The database query generator will be omitted in this discussion as it is not relevant this thesis. The graphic generator makes several assumptions about the nature of the input data. Similar assumptions are made in this thesis. 
 \begin{itemize} 
 \item Data is characterized as either quantitative or ordinal.
 \item Nominal data is assigned an ordering and treated as ordinal.
@@ -287,6 +287,29 @@ APT combines these three stages using artificial intelligence techniques. The al
 
 Overall APT is a very robust and complex system. However it is perhaps somewhat dated. It is only capable of generating static graphics. It can also factor in the output media into the design choices, i.e. if the screen is monochrome colour is omitted for the effectiveness stage. The use of A.I. techniques is a novel and somewhat unique approach. The parameters of APT are not made completely clear, it is not clear what the limits of its capabilities are.
 
+\section{Data Visualization Tools}
+Thus far a reasonably complete examination of various visualization systems and processes have been discussed. However in order to get a more complete sense of the state of the art of automated visualization a broader approach is needed. This section presents brief summaries of a number of visualization design tools. These tools are then used to create a feature matrix presented in Table \ref{feature_matrix}. \todo{Blurb here about general groupings of tools}
+
+\paragraph{Gretl}
+Gretl is a software package for econometric analysis\todo{Citation}. It provides a wide variety of financial calculations and ,notably , visualizations. It is a highly specialized application and generally expects data formatted in a certain way. The user must pick the type of chart to render. No further user input is needed. Admittedly very few intermediary processing steps are needed to generate a specific visualization given a pre-defined data format. However Gretl can handle some variation in this format so the process is not a straight mapping. The types of visualizations generated include line graphs, box blots, scatter plots and other graphics typical of econometric analysis. Gretl automatically ranges the dataset so the output visualizations are always comprehensible.
+
+\paragraph{Microsoft Excel}
+Microsoft Excel is a substantial data analysis tool that centers around a pivot table display \todo{Citation for excel and pivot table}. Users can visualize the data they are working with by selecting the relevant table entries and selecting a chart type. Excel then automatically generates the visualization. Some user training is required in order to produce effective and correct visualizations. It is very easy for a novice user to create nonsensical visualizations, or in the worst case misleading ones. An new version of the software attempts to remedy this by providing functionality to automatically recommend the most effective visualization. A number of visualizations are available but are generally limited to no more than three dimensions. Any exceptions expect data of a specific format, i.e. Candle stick graphs expect specific labels.
+
+\paragraph{Google Charts API}
+Google Charts API is a browser based charts library \todo{citation}. It is an API aimed at developers and is not suitable for end users. User friendly interfaces do exist \todo{Cite Hohi Charts} but it is debatable how easy they are to use without training. The API provides a wide number of visualizations. These visualizations also contain elements of interactivity, leveraging the features of modern browsers to do so. Although it is an API the software is not completely manual. Given an input dataset it is capable of automatically generating visual mappings. However it should again be noted that this process is greatly simplified by having the user select the output visualization to generate. 
+
+\paragraph{Tableau}
+Tableau was born out of the research done by Mackinlay\cite{mackinlay1986automating}. Like APT it appears to be a very robust and complex system. Interestingly it makes use of the visual shelving system presented by Polaris \todo{citation}. The user inputs a data source and then select the attributes to visualize. Again, as in Polaris, the data is divided into dimensions and measures. As the user selects attributes to visualize various types of applicable charts are made available. It is not made clear which one of the available visualizations is most effective so the user is left to decide. As it is a progression of the work presented by Mackinlay it is assumed an encoding retinal variables is present.
+
+\paragraph{ManyEyes}
+Many eyes is a web based collaborative visualization authoring tool. Multiple users can work to create a visualization. It offers a wide variety of visualizations but leaves the task of selection completely to the user. If the system cannot generate the selected visualization it notifies the user. Aside from this the user can generate any visualization they see fit. Without an understanding of the various visualizations a user can easily generate ineffective graphics. While the focus of this tool is collaborative authoring it does contain features that automate various aspects of the visualization process. Data can be input in a variety of of formats and the system appears to do a good job of mapping them to appropriate visual features. The visualization engine is Java based \todo{Expand or is that enough for anyone to know?}
+
+\paragraph{OpenHeatMap}
+OpenHeatMap is a web based geographic visualization tool. It allows users to overlay data across various maps. It is very easy to use. A dataset is uploaded and the visualization is presented. It is not clear what the formatting restrictions of the input data is but it appears to be relatively robust if occasionally fickle. The software is flash based and struggles noticeably with even moderately sized datasets. The user can zoom and pan the visualization interactively.
+\paragraph{D3}
+D3 is a browser based charts library. It offers much more control and flexibility then Google Charts API and as a result requires a substantially greater amount of developer effort. Whereas Google Charts offers complete visualizations D3 sits at a much lower level of abstraction. It is a tool set developers can use to create their own visualizations from scratch. 
+
 \todo{Published in 1986, perhaps too old?}
 
 \section{Analysis}
@@ -301,9 +324,10 @@ Works such as Polaris \todo{citation} and APT \todo{citation} suggest that this 
 Polaris                                                     & Automatic data characterization. Encoding of retinal variables. Interactive & Requires user input. Limited to 2-dimensional visualizations. \\ \hline
 APT                                                         & Very Robust, complex. Encoding of retinal variables                         & Limits of use not clear.  No interaction.                     \\ \hline
 Introduction to Information Visualization                   & Very detailed description of visualization process.                         & Manual process.                                               \\ \hline
-The Structure of the Information Visualization Design Space & Very succinct classification of visualizations.                             & Manual process.                                               \\ \hline
+The Structure of the Information Visualization Design Space & Very succinct classification of visualizations.                             & Manual process.                                               \\ \hlin
     \end{tabularx}
     \caption{Summary of systems examined}
+    \label{feature_matrix}
     \end{table} 
 
 This thesis will attempt to determine to what extent can suitable visualization be dynamically and automatically be generated from arbitrary data using browser based technologies. At no point should the user have to provide input. Browser based technologies have in recent years become very powerful platforms and are perhaps the most ubiquitous software platforms in existence. 

@@ -329,16 +329,34 @@ Works such as Polaris \todo{citation} and APT \todo{citation} suggest that this 
     Google Charts API & x                    & ~                       & ~                         & x                   & x                              & x           & x                               & ~                      & ~                             \\ \hline
     Tableau           & ~                    & x                       & x                         & x                   & x                              & x           & x                               & ~                      & x                             \\ \hline
     ManyEyes          & ~                    & x                       & x                         & x                   & x                              & x           & x                               & ~                      & ~                             \\ \hline
-    OpenHea Map       & ~                    & x                       & x                         & ~                   & ~                              & x           & x                               & x                      & ~                             \\ \hline
+    OpenHea Map       & ~                    & x                       & x                         & ~                   & ~                              & x           & ~                               & x                      & ~                             \\ \hline
     D3                & x                    & ~                       & ~                         & x                   & x                              & x           & ~                               & ~                      & ~                             \\ \hline
     Polaris           & ~                    & x                       & x                         & x                   & x                              & x           & x                               & ~                      & x                             \\ \hline
-    APT               & ~                    & x                       & x                         & x                   & x                              & ~           & x                               & x                      & x                             \\ 
+    APT               & ~                    & x                       & x                         & x                   & x                              & ~           & x                               & ~                      & x                             \\ 
  \end{tabularx}
 \caption{Summary of systems examined}
 \label{feature_matrix}
 \end{sidewaystable} 
 
-\paragraph{}
+\paragraph{Native Browser Based.} The systems runs in a web-browser environment using native web technologies. These technologies, i.e. HTML5, SVG, EMCAScript etc, arguably compose the most widely adopted software platform in history. These technologies are described via specifications and implemented by multiple vendors. This approach has several benefits compared to older container based web-technologies such as Java or Flash. \todo{Citations everywhere} \todo{Go into this more back in the intro and ref from here}
+
+\paragraph{Automatic Visualization.} Given a dataset the system should be capable of automatically generating visualizations with no user input during the visualization process. Tasks such as selecting which entries to visualize or what visualization to output are not included as user tasks in this context, only the tasks involved in mapping data entries to graphical marks.
+
+\paragraph{No User Training Required.}
+This is somewhat hard to quantify meaningfully as it depends on the capabilities of each user. Low level technologies such as APIs are not intended for end users and require training to use. Complex applications with many features may also require user training. Any system that allows the user to generate incomprehensible visualization requires training to be used successfully.
+
+\paragraph{Generic Application.} A wide array of datasets can be input to generic systems. Such systems do not make assumptions about the structure of the input data, i.e. Each record must contain a data, certain number of variables etc.
+
+\paragraph{Large Number Of Visualizations.} The systems can output a wide array of visualizations. Of particular importance is the systems ability to output different types of visualization, i.e. Two dimensional, three dimensional etc.
+
+\paragraph{Interactive.} The system should provide some sort of interaction. This can be as simple as scroll over text or as complex as multiple nested visualizations than can be panned and enlarged. 
+
+\paragraph{Automatic Feature Determination.} The system should be able to automatically determine the features of the dataset. These include attributes such as dimensionality and types of data. Systems with a limited number of uses typically have this information hard coded in based on data labels and do not determine it at runtime. \todo{This is weak, maybe take it out}
+
+\paragraph{No User Input Required.} At no point should the user have input information into the system. This extends automatic visualization requirement by including such actions as selecting an output visualization.
+
+\paragraph{Encoding of Retinal Variables.}
+The work started by Bertin \cite{bertin1973semiologie} has been incredibly influential. Most visualization systems and visualizations incorporate it to some degree. Furthermore Bertin's original work has evolved substantially and can be found under different names in many publications outlining the visualization process. For our purposes it is assumed that some knowledge of retinal variables are encoded in a system if there is some mention of them or if it is not possible for the user to generate visualizations that clearly violate the rules outlined by Bertin and others \cite{card1999readings}, \cite{mazza2009introduction}, \cite{spence2001information}, \cite{cleveland1984graphical}. 
 
 This thesis will attempt to determine to what extent can suitable visualization be dynamically and automatically be generated from arbitrary data using browser based technologies. At no point should the user have to provide input. Browser based technologies have in recent years become very powerful platforms and are perhaps the most ubiquitous software platforms in existence. 
 
@@ -349,10 +367,34 @@ Chapter 2 \todo{Replace section with chapter in the text} introduced a state of 
  
 
 \chapter{Design}
+\todo{Take ACDV out of intro?}
+This chapter introduces the design principles and core technologies used in this project. The architecture for the Automatic Classifier and Data Visualizer, henceforth referred to as AC\lightning{}DV, is presented. The visualization process is also described. The chapter concludes with \todo{SOMETHING}.
 
-	\section{Technologies used}
+\section{Technologies used}
+This section describes the technologies used in this project and the motivation for choosing said technologies. One of the main aims of the project was to quickly generate visualizations. This extends to any system setup the user may have to perform before inputting data. Extendability was another key consideration. The system should allow new visualizations to be added with relative ease.
 
-	\section{Overview of Data Visualization Process}
+Browser based technologies have been selected for use in this project. The core technologies used are SVG, Javascript and HTML. Modern web-browsers allow for near seamless interoperability between these technologies. Such technologies offer many advantages over more traditional standalone executable binaries. If new visualizations need to be added they need only be appended to the existing software. They are then instantly available. The web browser if perhaps the most ubiquitous software platform in history making cross compatibility for applications within it almost a non-issue. The technologies used are freely available and exists as standards, not just implementations. This can lead to unexpected behavior in separate implementations but this is becoming less common as these standards and their implementations mature. As these technologies are not maintained by a single vendor they are far more resilient to an organization discontinuing their support. A short description of all the technologies used follows:
+
+\paragraph{Javascript} is a loosely typed interpreted programming language. It is defined in ECMA-262 standard. It was originally implemented as a client side scripting language. Javascript functions can be embedded or included in HTML pages and they can interact with the DOM. It is a dynamic language, a feature that was utilized extensively.
+
+\paragraph{Document Object Model (DOM)} is a convention used to represent and interact with objects in HTML and XML. The objects are stored in a tree structure that can be addressed and manipulated. This project creates graphics by generating and placing multiple SVG objects into the DOM using Javascript.
+
+\paragraph{Scalable Vector Graphics} is an XML based vector image standard created by the World Wide Web Consortium. SVG images support interaction and animation. The images and their behavior are are defined in XML which allows them to be manipulated and generated like any DOM object. The ability to generate interactive graphics at runtime makes them ideal for this project.
+
+\paragraph{HyperText Markup Language (HTML)} is a markup language that allows the creation of web pages that can embed objects such as SVG images. AC\lightning{}DV uses HTML as a simple container to link together its various components. Google Chrome was used to render the HTML pages.
+
+\paragraph{D3} is an open source Javascript library for manipulating DOM based on Data. It allows data to be bound to a DOM and then apply data-driven transformations to the document. A simple example would be generating a HTML table from an array of numbers. It greatly simplifies the modification of DOM compared to the W3C DOM API. The key difference is D3 uses a declarative approach instead of the W3C imperative approach. D3 was used extensively in the creation of AC\lightning{}DV.
+
+\paragraph{Cascading Style Sheets (CSS)} is a style sheet language that expresses the presentation of structured documents. The key benefit offered by CSS is the separation of the presentation of DOM element. It is not used extensively in AC\lightning{}DV.
+
+\paragraph{Web Server.} Although AC\lightning{}DV runs entirely on the clients computer almost every web browser does not support cross-origin resource sharing from local files. Such requests must be sent using HTTP. This means that data stored in an external file can not be loaded into AC\lightning{}DV without the use of a web server. A very simple python server was used in this project but any HTTP server is sufficient. 
+
+
+PUT AT THE END
+One area of concern was performance. Standalone executables have greater access to a machines resources and can take advantages of optimization techniques such as multi-threading \todo{Need citation?} or specialized instruction sets such as SSE \todo{Citation}. This is not usually a problem for browser-based applications but as AC\lightning{}DV may have to process thousands of records some effort has been made to evaluate the its performance and keep it reasonable bounds.
+
+
+\section{Overview of Data Visualization Process}
 
 \todo{This will probably be broken down}
 

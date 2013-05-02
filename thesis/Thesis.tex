@@ -389,17 +389,90 @@ Browser based technologies have been selected for use in this project. The core 
 
 \paragraph{Web Server.} Although AC\lightning{}DV runs entirely on the clients computer almost every web browser does not support cross-origin resource sharing from local files. Such requests must be sent using HTTP. This means that data stored in an external file can not be loaded into AC\lightning{}DV without the use of a web server. A very simple python server was used in this project but any HTTP server is sufficient. 
 
-
-PUT AT THE END
-One area of concern was performance. Standalone executables have greater access to a machines resources and can take advantages of optimization techniques such as multi-threading \todo{Need citation?} or specialized instruction sets such as SSE \todo{Citation}. This is not usually a problem for browser-based applications but as AC\lightning{}DV may have to process thousands of records some effort has been made to evaluate the its performance and keep it reasonable bounds.
+One area of concern was performance. Standalone executables have greater access to a machines resources and can take advantages of optimization techniques such as multi-threading \todo{Need citation?} or specialized instruction sets such as SSE \todo{Citation}. This is not usually a problem for browser-based applications but as AC\lightning{}DV may have to process thousands of records some effort has been made to evaluate the its performance and keep it within a reasonable bounds.
 
 
 \section{Overview of Data Visualization Process}
+A variety of different techniques have been purposed to crate date visualizations. The technique purposed by Mazza \cite{mazza2009introduction} is one of the few constructed from a sequence of complete steps. These steps do not vary based on the nature of the data or the desired output making the process one of the most suitable for automation. The process was outlined in Table \ref{mazzatable} and will now be expanded on.
+\begin{enumerate}
+  \item \textbf{Define the problem.} This step depends on the goal the user is trying to accomplish. It is also necessary to make note of the perceptual capabilities of the user as these can be used to inform decisions later in the process. There are three main problems data visualization can help to solve.
 
-\todo{This will probably be broken down}
+    \begin{itemize}
+    \item Communicate. Visualizations can be used to quickly communicate information present in a data set. This is the most general task and can be thought of as presenting the entire dataset for easy consumption by the user.
+    \item Explore. Visualizations can be used to explore datasets. Exploratory analysis is often used to form new hypothesis that may not have been considered with more formal techniques \todo{Cite Tucky}. Such visualizations summarize the main characteristics of the data set and then  allow the user to filter the data and focus on subsets.
+    \item Confirm. Here the data is being analyzed to confirm a specific hypothesis.
+  \end{itemize}
+
+  \item \textbf{Nature of the data.} Here the data is classified into one of three types. This classification is later used to inform the visual mapping.
+  \begin{itemize}
+    \item Quantitative or numeric data, e.g. real numbers. 
+    \item Ordinal or non-numeric data which does have an intrinsic ordering, e.g. days of the week.
+    \item Categorical or non-numeric data with no ordering, e.g. names.
+  \end{itemize}
+
+  \item \textbf{Dimensionality.} The number of dimensions, or attributes, of a dataset determine what representation to use. These attributes can be dependent or independent. The dependent attributes are generally the ones of interest and are analyzed with respect to the independent attributes. The number of dependent attributes determine the dimensionality.
+  \begin{itemize}
+    \item Univariate. One dependent attribute varies with respect to an independent variable. Example visualizations include Bar and pie charts.
+    \item Bivariate. Two dependent attributes vary with respect to an independent variable. Example visualizations include Histograms. 
+    \item Trivariate. Three dependent attributes vary with respect to an independent variable. Example visualizations include Bubble charts and Tree Maps.
+    \item Multivariate. Four or more dependent attributes vary with respect to an independent variable. This is where visualization becomes much more difficult because people are not used to working in four or more dimensions. Example visualization include Parallel Coordinates \todo{citation} and Scatter-plot Matrices. \todo{Citation}
+  \end{itemize}
+
+  Generally multiple instances of the same type of visualization can be combined to create a visualization of greater dimensionality, i.e. Clustered bar charts can be used to show data with many dimensions. There are limits on the combination of visualizations. These limitations vary depending on the specific type of visualization. These limitations will be addressed in Section \ref{section:VMapping}.
+
+  \item \textbf{Data structures.} These are used to contain the data and are derived from the nature of said data.
+  \begin{itemize}
+    \item Linear.
+    \item Temporal.
+    \item Spatial.
+    \item Hierarchical.
+    \item Network.
+  \end{itemize}
+
+This is somewhat difficult to automate completely and generally involves pattern matching the data against known templates. For example there are a myriad of ways to represent a valid date.
+
+  \item \textbf{Type of interaction.} This depends largely on the initial needs of the user but is also decided by factors such as the scale of the dataset (large set may necessitate interaction as they cannot be displayed completely) and the medium used. A visualization can be:
+  \begin{itemize}
+    \item Static. Not modifiable.
+    \item Transformable. The user can modify and transform the data by filtering entries, choosing different visual mappings etc.
+  \item Manipulable. The user manipulate the view by zooming or rotating the image.
+  \end{itemize}
 
 
-\todo{chapter may be somewhat redundant due to chapter 2.2}
+\end{enumerate}
+
+Each of the options described here help to point a specific visualization technique. The architecture of AC\lightning{}DV is a simplified version.
+
+
+
+\section{Visual Mapping}
+\label{section:VMapping}
+Visual Mapping is the most important aspect of creating a visualization. If the elements of a dataset are mapped to visual elements effectively any patterns in that dataset are easily perceivable. A poor mapping results in these patterns becoming almost imperceptible. Creating an effective mapping is done by understanding and exploiting the way humans perceive what they see. Certain visual properties will more readily draw greater focus. There is a model detailing the effectiveness of various visual properties although it is not concrete. This model of human perception began with the work of Bertin \cite{bertin1973semiologie} and has been expanded upon by many others \todo{Lots of citations here}. 
+
+\subsection{Memory}
+Human perception is composed of human vision and human memory. What we see is stored in memory and then processed. There are three basic types of memory:
+
+\begin{itemize}
+\item \textbf{Sensory Memory.} All input from sense organs is stored in memory for a very short time. Such memory is independent of conscious control and is processed automatically. For this reason the processing that takes place is called \textit{preattentive processing}. During preattentive processing only a limited set of basic features are considered. These are the \textit{retinal variables} and includ attributes such as colour, size and position. An understanding of these attributes and how they can be used to convey different types of information is absolutely key to creating an effective visualization. Preattentive processing is extremely fast and allows a detailed mental picture of a scene to be built very quickly.
+\item \textbf{Short-term memory.} Short term memory is where some of the information from sensory memory is transfered. Information can persists here for up to a minute but the capacity is extremely limited compared to sensory memory. The general rule is that 5 to 9 items can be stored in short term memory although this depends on the type of information being stored \cite{Mil56}.
+\item \textbf{Long-term memory.} Items in short-term memory can be committed to long term memory by repeated rehearsal.
+\end{itemize}
+
+\subsection{Retinal Variables}
+A number of preventative visual properties have been identified. These visual properties have been ranked in order of effectiveness at conveying different types of information although such rankings do not seem to have been completely verified \cite{mackinlay1986automating} \cite{mazza2009introduction}. 
+
+Ths visual properties can be grouped into four categories: \textit{colour, form, movement and position.} 
+
+\paragraph{Colours} can be expressed in different ways. Red, Green and Blue values are typically used when expressing the colours on a computer screen. For the purpose of data visualization it is more efficient to talk about colour in terms Hue, Saturation and Lightness as they map to preventative attributes far more readily. Hue is the aspect of colour we typically refer to by name and is usefully for labeling different sets. Saturation and Lightness describe the intensity of the Hue. A colour with a high intensity is more distinguishable from its surroundings so intensity is used to give certain elements a kind of visual precedence.
+
+\paragraph{Motion} is the most effective way for an attribute to gain focus. It should be used sparingly else the visualization quickly descends into a distracting mass of flickering objects.
+
+\paragraph{Position} is the most accurate attribute for encoding quantitative data in graphics.
+
+\paragraph{Form} is the most comprehensive of the visual attributes. There are many attributes that make up the form of an object, all of which are capable of representing various types of data at various levels of effectiveness. 
+
+
+
 
 	\section{Architecture}
 

@@ -564,9 +564,8 @@ The system also contains a notion of ``soft" and ``hard" size for each visualiza
 This is a very hard problem to automate and was ultimately abandoned. The last item is attempted with the notion of ``soft" and ``hard" size. If the dataset is within the soft size limit then every mark will be unique. If it is within the ``hard" limit AC\lightning{}DV will modify the output visualization. An example is the bar chart. Many unique entries quickly become hard to distinguish but if there are sufficient entries ( between the two size limits ) the system considers them part of a single series. The colour for every bar is then set to the same value and the visualization resembles a time series plot. However this may not always produce the desired result so exceeding the soft size limit is reflected in the confidence score. 
 
 
-
-
 \subsection{API}
+The API consists of a collection of visualizations with shared declaration attributes. The design is based of off Mike Bostock's, the creator of D3, convention for reusable charts \todo{Citation}. All visualization are designed as Javascript closures. Each chart only expects input data and a mapping of each data dimension to visualization ``axis" ( the notion of axis can be unique to each visualization ) , which the classification engine can provide automatically. Attributes such as size and position can be adjusted after declaration if desired. Charts could be extended to included customizable colours and marks like similar libraries \todo{Cite Dc.js again}. However such customization would allow interference with the decisions made in encoding the various retinal attributes.  
 
 
 

@@ -59,7 +59,7 @@
 %
 }%
 
-\definecolor{light-gray}{gray}{0.95}
+\definecolor{light-gray}{gray}{0.5}
 % Compensate for fbox sep:
 \newcommand\hilight[2][light-gray]{%
   \hspace*{-\fboxsep}%
@@ -184,7 +184,7 @@ This process is summarized in Table \ref{mazzatable} \cite{mazza2009introduction
 \centering
     \begin{tabular}{lllll}
     \hline
-    Problem       & Data type    & Dimension    & Data Structures & Type of Interaction \\ \hline
+    Problem       & Data type    & Dimension    & Data Structures & Interaction \\ \hline
     Communicative & Quantitative & Univariate   & Linear          & Static              \\
     Explore       & Ordinal      & Bivariate    & Temporal        & Transformable       \\
     Confirm       & Categorical  & Trivariate   & Spatial         & Manipulable         \\
@@ -396,6 +396,7 @@ One area of concern was performance. Standalone executables have greater access 
 \section{Overview of Data Visualization Process}
 A variety of different techniques have been purposed to crate date visualizations. The technique purposed by Mazza \cite{mazza2009introduction} is one of the few constructed from a sequence of complete steps. These steps do not vary based on the nature of the data or the desired output making the process one of the most suitable for automation. The process was outlined in Table \ref{mazzatable} and will now be expanded on.
 \begin{enumerate}
+\label{Mazza_Process}
   \item \textbf{Define the problem.} This step depends on the goal the user is trying to accomplish. It is also necessary to make note of the perceptual capabilities of the user as these can be used to inform decisions later in the process. There are three main problems data visualization can help to solve.
 
     \begin{itemize}
@@ -519,8 +520,55 @@ The combination of attributes is a far harder problem and has not been the subje
 
 Short term memory and pre-attentive processing play en extremely important role in the design of effective visualizations. An understanding of these pre-attentive attributes can be used to make the most important information draw the focus of the viewer. If the rules surrounding these are ignored it can result in incomprehensible visualizations.
 
+\section{Architecture}
+AC\lightning{}DV consists of two main components. A chart API and a classifier. Data is input to the classifier where an appropriate charts is determined and displayed in the view. The two components are distinct. The chart API can be used completely independently. Similar chart APIs do exist \todo{reference DC.js} but are relatively complex. The goal of AC\lightning{}DV was to create a chart API that used an minimum of parameters. \todo{Diagrams}
 
-	\section{Architecture}
+The system has been designed in this way to reflect the visualization process described above. The classifier encodes a paired down version of the process outlined by Mazza detailed in section \ref{Mazza_Process}. This approach also has the benefit of yielding a chart API that can be used by developers who wish to easily create a specific type of visualization.
+
+\subsection{Classifier}
+As mentioned the classifier based on the process outlined by Mazza. It is summarized in Table \ref{my_table}.
+
+\begin{table}[!ht]
+\centering
+    \begin{tabular}{l|lll|l}
+    \hline
+    Problem       & Data type    & Dimension    & Data Structures & Interaction \\ \hline
+    Communicative & Quantitative & Univariate   & Linear          &  \textcolor{light-gray}{Static}              \\
+    \textcolor{light-gray}{Explore}       & Ordinal      & Bivariate    & Temporal        &  \textcolor{light-gray}{Transformable}       \\
+    \textcolor{light-gray}{Confirm}       &  \textcolor{light-gray}{Categorical}  & Trivariate   &  \textcolor{light-gray}{Spatial}         & Manipulable         \\
+    ~             & ~            &  \textcolor{light-gray}{Multivariate} &  \textcolor{light-gray}{Hierarchical}    & ~                   \\ 
+    ~             & ~            & ~            &  \textcolor{light-gray}{Network}         & ~                   \\ \hline
+    \end{tabular}
+\caption{Variables to consider when designing visual representations. Grayed out entries have been omitted from AC\lightning{}DV.}
+    \label{my_table}
+\end{table}
+
+The first and last stages of the pipeline are fixed as they depend on the needs of the user. The most generic choices have instead been selected. A communicative visualization gives an overview of the dataset while a manipulable view allows the system to create an interactive visualization. AC\lightning{}DV is not a data processing tool so any transformations on the dataset must be done using other tools. The middle three stages of the pipeline have been the focus of the project.
+
+AC\lightning{}DV reduces the categorization of data to ordinal and quantitative by assigning an implicit ordering to all nominal fields and subsequently treating them as ordinal. The assigned ordering is not important, indeed with many visualizations preserving the ordering of ordinal variables is not important for the final output. All nominal fields are treated as independent variables and quantitative fields treated as dependent variables. These are the same assumptions made by Polaris \todo{Citation}.
+
+The current implementation of AC\lightning{}DV is limited to producing three visualizations with three or less dimensions. There is no technical reason for this limitation. The classification engine is designed to be extended easily.
+
+AC\lightning{}DV uses a single data structure for all processing. The system can test if a quantitative variable represents a date, hence the inclusion of temporal data structures. The design could be extended to detect the remaining types of data as such a task can be accomplished, to a high degree of reliability, with pattern matching, but this was out of scope.
+
+The classifier determines these attributes at run time from the dataset. Each chart in the API has a similar set of properties. The system then attempts to match the characteristics of the dataset to the characteristics of a chart. AC\lightning{}DV returns a confidence score along with the visualization to give an indication of how suitable the visualization is. This score is determined from how closely the two sets of characteristics match. Some characteristics must match for the visualization to be considered such as the dimensionality and types of information to be displayed, i.e. if no chart can display two independent variables then no chart will be returned.
+
+The encoding of the charts properties is a manual step that must be done by an expert. It is here that the retinal variables are considered. The mapping from data to marks is encoded into each visualization and it is up to the expert to decided how to bound them. As mentioned there are no hard rules to go by but a conservative approach has been adopted. 
+
+The system also contains a notion of ``soft" and ``hard" size for each visualization. These are the limits on how many records may be displayed in each visualization. Like the mapping to graphical marks and their associated retinal variables this notion of size is fixed. Deciding on the maximum number of entries for each visualization is quite tricky. It depends on 
+\begin{itemize}
+  \item The pre-attentive attributes used in the visualization. 
+  \item The number of items the user can commit to short term memory, which again is somewhat dependent on the pre-attentive attributes used \cite{Mil56}.
+  \item The task of the user. If they are investigating specific entries they will have to memorize them while the compare them to other entries. If they want an overview of an patterns in the data retaining specific entries is less important. 
+\end{itemize}
+This is a very hard problem to automate and was ultimately abandoned. The last item is attempted with the notion of ``soft" and ``hard" size. If the dataset is within the soft size limit then every mark will be unique. If it is within the ``hard" limit AC\lightning{}DV will modify the output visualization. An example is the bar chart. Many unique entries quickly become hard to distinguish but if there are sufficient entries ( between the two size limits ) the system considers them part of a single series. The colour for every bar is then set to the same value and the visualization resembles a time series plot. However this may not always produce the desired result so exceeding the soft size limit is reflected in the confidence score. 
+
+
+
+
+\subsection{API}
+
+
 
 \todo{This will probably be broken down}
 

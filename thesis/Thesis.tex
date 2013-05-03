@@ -13,6 +13,7 @@
 \usepackage{tabularx}
 \usepackage{rotating}
 \usepackage{array}
+\usepackage{amsfonts}
 \usetikzlibrary{trees}
 
 \newcommand
@@ -453,7 +454,7 @@ Visual Mapping is the most important aspect of creating a visualization. If the 
 Human perception is composed of human vision and human memory. What we see is stored in memory and then processed. There are three basic types of memory:
 
 \begin{itemize}
-\item \textbf{Sensory Memory.} All input from sense organs is stored in memory for a very short time. Such memory is independent of conscious control and is processed automatically. For this reason the processing that takes place is called \textit{preattentive processing}. During preattentive processing only a limited set of basic features are considered. These are the \textit{retinal variables} and includ attributes such as colour, size and position. An understanding of these attributes and how they can be used to convey different types of information is absolutely key to creating an effective visualization. Preattentive processing is extremely fast and allows a detailed mental picture of a scene to be built very quickly.
+\item \textbf{Sensory Memory.} All input from sense organs is stored in memory for a very short time. Such memory is independent of conscious control and is processed automatically. For this reason the processing that takes place is called \textit{preattentive processing}. During preattentive processing only a limited set of basic features are considered. These are the \textit{retinal variables} and includ attributes such as colour, size and position. An understanding of these attributes and how they can be used to convey different types of information is absolutely key to creating an effective visualization. Pre-attentive processing is extremely fast and allows a detailed mental picture of a scene to be built very quickly.
 \item \textbf{Short-term memory.} Short term memory is where some of the information from sensory memory is transfered. Information can persists here for up to a minute but the capacity is extremely limited compared to sensory memory. The general rule is that 5 to 9 items can be stored in short term memory although this depends on the type of information being stored \cite{Mil56}.
 \item \textbf{Long-term memory.} Items in short-term memory can be committed to long term memory by repeated rehearsal.
 \end{itemize}
@@ -469,9 +470,54 @@ Ths visual properties can be grouped into four categories: \textit{colour, form,
 
 \paragraph{Position} is the most accurate attribute for encoding quantitative data in graphics.
 
-\paragraph{Form} is the most comprehensive of the visual attributes. There are many attributes that make up the form of an object, all of which are capable of representing various types of data at various levels of effectiveness. 
+\paragraph{Form} is the most comprehensive of the visual attributes. There are many attributes that make up the form of an object, all of which are capable of representing various types of data with various levels of effectiveness. 
+\begin{itemize}
+\item Orientation
+\item Length
+\item Width
+\item Size
+\item Collinearity
+\item Curvature
+\item Spatial Grouping
+\item Added Marks
+\item Shape
+\item Numerosity
+\end{itemize}
 
 
+There are a number of different rules governing the use of these attributes. These rules are primarily concerned with the number of attributes to use and which attributes are the most suitable to use for different types of data.
+
+The number of different pre-attentive attributes to use in a visualization is quite important. If it is too great an incomprehensible visualization is produced. If the number is too low then the full capabilities of the medium have not been exploited. The latter is the more desirable so a conservative approach is best adopted.. Millers work on human information processing capacity \cite{Mil56} is the most widely known put does not deal with specifically with preventative loading. Similar studies specifically with visualization in mind have also been conducted \cite{few2004show}, \cite{ware2012information}. These studies have not come to the same conclusions so the limits they purpose are not hard rules. Ware suggests no more than ten distinct values for pre-attentive attributes, although there are several exceptions, while Few limits this number to four.
+
+The combination of attributes is a far harder problem and has not been the subject of much research. However different attributes are better than others at conveying different types of information. This has been the subject of a relatively large amount of work. Cleveland and McGill purposed and verified a ranking of of attributes in terms of their ability to convey quantitative information. Mackinlay expanded, although he did not verify, this ranking to include ordinal and categorical information \cite{mackinlay1986automating}. More recent research has shown that the issue is more complicated \cite{spence2001information} so a definitive raking does not exists. Mazza extends the work done by Few \cite{few2004show} to purpose an ``indicative rule of thumb" for the three data types \cite{mazza2009introduction}. Mazzas work is a simplified ranking the groups the pre-attentive attributes into one of three groups for each data type: suitable, limited suitability and not suitable. It is shown in Table \ref{attribute_table}.
+
+\begin{table}[!ht]
+\centering
+    \begin{tabular}{lccc}
+    \hline
+    Attribute        & Quantitative & Ordinal      & Categorical  \\ \hline
+    Hue              & $\times$     & $\times$     & $\checkmark$ \\
+    Intensity        & $-$          & $\checkmark$ & $\times$     \\ \hline
+    Orientation      & $-$          & $-$          & $\times$     \\
+    Length           & $\checkmark$ & $-$          & $\times$     \\
+    Width            & $-$          & $-$          & $\times$     \\
+    Size             & $-$          & $-$          & $\times$     \\
+    Collinearity     & $\times$     & $\times$     & $\times$     \\
+    Curvature        & $-$          & $-$          & $\times$     \\
+    Spatial Grouping & $\times$     & $\times$     & $\times$     \\
+    Added Marks      & $\times$     & $\times$     & $\checkmark$ \\
+    Shape            & $\times$     & $\times$     & $\checkmark$ \\
+    Numerosity       & $\checkmark$ & $\checkmark$ & $\times$     \\ \hline
+    Position         & $\checkmark$ & $\checkmark$ & $-$          \\ \hline
+    Flicker          & $\times$     & $\times$     & $-$          \\
+    Motion           & $-$          & $-$          & $\times$     \\
+    \end{tabular}
+    \caption{ Encoding the three data types with pre-attentive attributes \protect\cite{mazza2009introduction}. $\checkmark$ indicates the attribute is suitable for the given data type. $-$ indicates the attribute has limited suitability. $\times$ indicates the attribute is not suitable. }
+    \label{attribute_table}
+
+\end{table}
+
+Short term memory and pre-attentive processing play en extremely important role in the design of effective visualizations. An understanding of these pre-attentive attributes can be used to make the most important information draw the focus of the viewer. If the rules surrounding these are ignored it can result in incomprehensible visualizations.
 
 
 	\section{Architecture}

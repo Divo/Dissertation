@@ -293,7 +293,7 @@ charts.scatterplot = function() {
     yScale = d3.scale.linear(),
     xAxis  = d3.svg.axis().scale(xScale).orient("bottom"),
     yAxis  = d3.svg.axis().scale(yScale).orient("left"),
-    fill   = d3.scale.category20b();
+    fill   = d3.scale.category20();
     
     var title = "scatterplot";
 
@@ -303,6 +303,9 @@ charts.scatterplot = function() {
         selection.each(function(data) {
 
             var keys = d3.keys(data[0]);
+
+            console.log(data[0]);
+
 
             data = data.map(function(d, i) {
                 return [labelValue.call(data, d, i), xValue.call(data, d, i), yValue.call(data, d, i)];
@@ -436,6 +439,201 @@ charts.scatterplot = function() {
 
 
 }
+
+charts.bubbleplot = function() {
+    var containerDimensions = {width: 900, height: 400},
+    margins = {top: 30, right:100, bottom: 50, left: 100},
+    chartDimensions = {
+        width : containerDimensions.width - margins.left - margins.right,
+        height : containerDimensions.height - margins.top - margins.bottom
+    },
+    labelValue = function(d) { return d[0]; },
+    xValue = function(d) { return d[1]; },
+    yValue = function(d) { return d[2]; },
+    zValue = function(d) { return d[2]; },
+    xScale = d3.scale.linear(),
+    yScale = d3.scale.linear(),
+    zScale = d3.scale.linear(),
+    xAxis  = d3.svg.axis().scale(xScale).orient("bottom"),
+    yAxis  = d3.svg.axis().scale(yScale).orient("left"),
+    fill   = d3.scale.category20();
+    
+    var title = "bubbleplot";
+
+    //var properties = new Properties()
+
+    function chart(selection) {
+        selection.each(function(data) {
+
+            var keys = d3.keys(data[0]);
+
+            console.log(data[0]);
+
+
+            data = data.map(function(d, i) {
+                return [labelValue.call(data, d, i), xValue.call(data, d, i), yValue.call(data, d, i), zValue.call(data, d, i)];
+            });
+
+            xScale
+                .domain([0, d3.max(data, function(d) {return +d[1]; }) ]) //Not sure if xValue will work here
+                .range([0, chartDimensions.width]);
+
+            yScale
+                .domain([0, d3.max(data, function(d) { return +d[2]; }) ])
+                .range([chartDimensions.height, 0]);
+
+            zScale
+                .domain([0, d3.max(data, function(d) { return +d[3]; }) ])
+                .range([3, chartDimensions.height / 10]); //Restrict size of bubbles, arbitrary number
+
+            console.log(zScale);
+
+            var svg = d3.select(this)
+              .append("svg")
+                .attr("width", containerDimensions.width)
+                .attr("height", containerDimensions.height)
+              .append("g")
+                .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+                .attr("id", "chart");
+
+            var g = svg.selectAll(".dot")
+                .data(data)
+              .enter()
+                .append("circle")
+                .attr("class", "dot")
+                .attr("id", function(d) { return d[0]; })
+                .attr("r", function(d) { return zScale(d[3]); })
+                .attr("fill", function(d) { return fill(d[0]); })
+                .attr("cx", function(d) { return xScale(d[1]); })
+                .attr("cy", function(d) { return yScale(d[2]); });
+
+
+
+            svg.append("g").attr("class", "x axis").call(xAxis);
+            svg.append("g").attr("class", "y axis").call(yAxis);
+
+            svg.select(".x.axis")
+                .attr("transform", "translate(0," + yScale.range()[0] + ")")
+                .call(xAxis);
+
+            svg.select(".y.axis").call(yAxis);
+
+            svg.select(".x.axis")
+                .append("text")
+                .text(keys[1] + ", Area:"+ keys[3]).html("hello")
+                .attr("x", chartDimensions.width / 2)
+                .attr("y", margins.bottom * 0.75)
+                .attr("text-anchor", "middle");
+
+
+            svg.select(".y.axis")
+                .append("text")
+                .text(keys[2])
+                .attr("transform", "rotate (-270, 0, 0)")
+                .attr("x", chartDimensions.height / 2)
+                .attr("y", margins.left * 0.75)
+                .attr("text-anchor", "middle");
+
+
+            var legend = svg.selectAll(".legend")
+                .data(fill.domain())
+              .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")";});
+
+            legend.append("rect")
+                .attr("x", chartDimensions.width + margins.right / 2 )
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", fill);
+
+            legend.append("text")
+                .attr("x", chartDimensions.width + (margins.right / 2) -6 )
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function(d) { return d; });
+
+            g.on("mouseover.tooltip", function(d) {
+              var text = keys[0] + ": " + d[0] + ", "
+              + keys[1] + ": " + d[1] + ", "
+              + keys[2] + ": " + d[2] + ", "
+              + keys[3] + ": " + d[3];
+              console.log(text);
+              svg.append("text")
+              .text(text)
+              .attr("class", "label")
+              .attr("x", chartDimensions.height)
+              .attr("y",  margins.bottom * 0.75)
+              .attr("text-anchor", "middle");
+            });
+
+            g.on("mouseout.tooltip", function(d) {
+              svg.select(".label").remove();
+            });
+
+
+        });
+
+    }
+
+    chart.title = function() {
+      return title;
+    };
+
+    chart.margins = function(_) {
+      if (!arguments.length) return margins;
+      margins = _;
+      return chart;
+    };
+
+    chart.width = function(_) {
+      if (!arguments.length) return containerDimensions.width;
+      containerDimensions.width = _;
+      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
+      return chart;
+   };
+
+   chart.height = function(_) {
+      if (!arguments.length) return containerDimensions.height;
+      containerDimensions.height = _;
+      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
+      return chart;
+   };
+
+   chart.label = function(_) {
+      if (!arguments.length) return labelValue;
+      labelValue = _;
+      return chart;
+   };
+
+
+   chart.amount = function(_) {
+      if( !arguments.length) return xValue;
+      xValue = _;
+      return chart;
+   };
+
+   chart.amount2 = function(_) {
+      if (!arguments.length) return yValue;
+      yValue = _;
+      return chart;
+   };
+
+   chart.amount3 = function(_) {
+      if(!arguments.length) return zValue;
+      zValue = _;
+      return chart;
+   }
+
+
+
+    return chart;
+
+
+
+}
+
 
 
 

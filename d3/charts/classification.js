@@ -34,6 +34,7 @@ function Properties(softSize, hardSize, dimension, keys, types) {
 	chartPropertiesList[charts.barchart().title()] = [charts.barchart(), new Properties(50, 100000, 2, null, ["categorical", "quantitative"]) ];
 	chartPropertiesList[charts.linechart().title()] = [charts.linechart(), new Properties(100000, 100000, 2, null, ["quantitative", "quantitative"]) ];
 	chartPropertiesList[charts.scatterplot().title()] = [charts.scatterplot(), new Properties(50, 50, 3, null, ["categorical", "quantitative", "quantitative"]) ];
+	chartPropertiesList[charts.bubbleplot().title()] = [charts.bubbleplot(), new Properties(50, 50, 4, null, ["categorical", "quantitative", "quantitative", "quantitative"]) ];
 	//chartPropertiesList["scatterplot2D"]
 
 	//Will need to do something about the lack of labels.
@@ -157,7 +158,7 @@ Classifier.prototype.selectCharts = function() {
 	var ranks = this.rankCharts();
 	var charts = this.getChartPropertiesList();
 	for(var i = 0; i < ranks.length; i++) {
-		//Data structures are getting messy
+		//Data structures are getting messy...
 		ranks[i] = ([ranks[i][1], charts[ranks[i][0]] [0]]);
 	}
 

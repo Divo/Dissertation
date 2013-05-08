@@ -15,8 +15,8 @@ function labelSuitability(score) {
 	return rating;
 }
 
-function createChartArea(i, chart) {
-	var div = createDiv(i);
+function createChartArea(id, chart) {
+	var div = createDiv(id);
 	div.innerHTML = labelSuitability(chart);
 	document.getElementById("chart_area").appendChild(div);
 
@@ -38,10 +38,11 @@ function createParseDate(classifier) {
 	return result;
 }
 
+
 function pickChart(data) {
 	var classifier = new Classifier(data);
 	var keys = classifier.properties.keys;
-	//var chart = charts.bubblechart();
+	//var chart = charts.scatterplot();
 	var chart = classifier.selectChart();
 	var charts = classifier.selectCharts();
 
@@ -93,6 +94,24 @@ function pickChart(data) {
 
 		}
 
+	} else if (classifier.properties.dimension === 4) {
+
+		for(var i = 0; i < charts.length; i++) {
+			//If score > 0
+			if(charts[i][0] > 0) {
+				var current_chart = charts[i][1];
+				var div = createChartArea(i, charts[i][0]);
+				var parseDate = createParseDate(classifier);
+
+			d3.select(div)
+				.datum(data)
+	      	  .call(current_chart
+				.label(function(d) { return parseDate(d[keys[0]]); })
+				.amount(function(d) { return +d[keys[1]]; }) 
+				.amount2(function(d) { return +d[keys[2]]; })
+				.amount3(function(d) { return +d[keys[3]]; }) )
+			}
+		}
 	}
 }
 

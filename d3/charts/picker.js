@@ -1,6 +1,7 @@
 
 function createDiv(id) {
 	var chart = document.createElement("div");
+	console.log(id)
 	chart.id = "chart" + id;
 	return chart;
 }   

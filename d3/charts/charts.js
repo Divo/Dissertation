@@ -11,37 +11,38 @@ Collection of charts implemented as closures
    };
    "use strict"; //Does this even have effect here?
 
-   charts.linechart = function() {
-      var containerDimensions = {width: 900, height: 400},
-   		margins = {top: 30, right:50, bottom: 50, left: 100},
-   		chartDimensions = {
-   			width : containerDimensions.width - margins.left - margins.right,
-   			height : containerDimensions.height - margins.top - margins.bottom
-   		},
-         xValue = function(d) { return d[0]; },
-         yValue = function(d) { return d[1]; },
-         xScale = d3.time.scale(),
+charts.linechart = function() {
+    var containerDimensions = {width: 900, height: 400},
+    margins = {top: 30, right:50, bottom: 50, left: 100},
+   	chartDimensions = {
+   		width : containerDimensions.width - margins.left - margins.right,
+   		height : containerDimensions.height - margins.top - margins.bottom
+   	},
+
+    xValue = function(d) { return d[0]; },
+    yValue = function(d) { return d[1]; },
+    xScale = d3.time.scale(),
          //xScale = d3.scale.linear(),
-         yScale = d3.scale.linear(),
-         xAxis = d3.svg.axis().scale(xScale).orient("bottom"),
-         yAxis = d3.svg.axis().scale(yScale).orient("left")
-         area = d3.svg.area().x(X).y1(Y),
-         line = d3.svg.line().x(X).y(Y);
+    yScale = d3.scale.linear(),
+    xAxis = d3.svg.axis().scale(xScale).orient("bottom"),
+    yAxis = d3.svg.axis().scale(yScale).orient("left")
+    area = d3.svg.area().x(X).y1(Y),
+    line = d3.svg.line().x(X).y(Y);
 
     
-	  var title = "linechart";
+	var title = "linechart";
 
 
-  function chart(selection) {
-      selection.each(function(data) {
+    function chart(selection) {
+        selection.each(function(data) {
 
 
-         var keys = d3.keys(data[0]);
+            var keys = d3.keys(data[0]);
 
-           // Convert data to standard representation greedily;
-           // this is needed for nondeterministic accessors.
-       	data = data.map(function(d, i) {
-           	return [xValue.call(data, d, i), yValue.call(data, d, i)];
+            // Convert data to standard representation greedily;
+            // this is needed for nondeterministic accessors.
+       	    data = data.map(function(d, i) {
+                return [xValue.call(data, d, i), yValue.call(data, d, i)];
          	});
 
          	// Update the x-scale.
@@ -50,119 +51,119 @@ Collection of charts implemented as closures
             .range([0, chartDimensions.width]);
 
          	// Update the y-scale.
-         yScale
+             yScale
             .domain([0, d3.max(data, function(d) { return d[1]; })])
-             .range([chartDimensions.height, 0]);
+            .range([chartDimensions.height, 0]);
 
-         var svg = d3.select(this)
-           .append("svg")
-            .attr("width", containerDimensions.width)
-            .attr("height", containerDimensions.height)
-           .append("g")
-            .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
-            .attr("id", "chart");
+            var svg = d3.select(this)
+                .append("svg")
+                .attr("width", containerDimensions.width)
+                .attr("height", containerDimensions.height)
+              .append("g")
+                .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+                .attr("id", "chart");
 
-         var g = svg.selectAll("line")
-            .data([data])
-           .enter()
-            .append("path")
-            .attr("class", "line")
-            .attr("d", line);
+            var g = svg.selectAll("line")
+                .data([data])
+              .enter()
+                .append("path")
+                .attr("class", "line")
+                .attr("d", line);
 
-         svg.append("g").attr("class", "x axis").call(xAxis);
-         svg.append("g").attr("class", "y axis").call(yAxis);
+            svg.append("g").attr("class", "x axis").call(xAxis);
+            svg.append("g").attr("class", "y axis").call(yAxis);
 
          
 
 
-         svg.select(".x.axis")
-             .attr("transform", "translate(0," + yScale.range()[0] + ")")
+            svg.select(".x.axis")
+                .attr("transform", "translate(0," + yScale.range()[0] + ")")
              	.call(xAxis);
 
-         svg.select(".y.axis")
+            svg.select(".y.axis")
              	.call(yAxis);
 
                 //Axis labels
-         svg.select(".x.axis")
-            .append("text")
-            .text(keys[0])
-            .attr("x", chartDimensions.width / 2)
-            .attr("y", margins.bottom * 0.75)
-            .attr("text-anchor", "middle");
+            svg.select(".x.axis")
+                .append("text")
+                .text(keys[0])
+                .attr("x", chartDimensions.width / 2)
+                .attr("y", margins.bottom * 0.75)
+                .attr("text-anchor", "middle");
 
-         svg.select(".y.axis")
-            .append("text")
-            .text(keys[1])
-            .attr("transform", "rotate (-270, 0, 0)") //Flipped so x is y and y is x
-            .attr("x", chartDimensions.height / 2)
-            .attr("y", margins.left * 0.75)
-            .attr("text-anchor", "middle");
+            svg.select(".y.axis")
+                .append("text")
+                .text(keys[1])
+                .attr("transform", "rotate (-270, 0, 0)") //Flipped so x is y and y is x
+                .attr("x", chartDimensions.height / 2)
+                .attr("y", margins.left * 0.75)
+                .attr("text-anchor", "middle");
 
 
-    });
+        });
   }
 
-  //"name" must be a keyword or sometihng
-  chart.title = function() {
-    return title;
-  };
+    //"name" must be a keyword or sometihng
+    chart.title = function() {
+        return title;
+    };
   
-  // The x-accessor for the path generator; 
-  function X(d) {
-    return xScale(d[0]);
-  }
+    // The x-accessor for the path generator; 
+    function X(d) {
+        return xScale(d[0]);
+    }
 
 
-  // The x-accessor for the path generator; 
-  function Y(d) {
-    return yScale(d[1]);
-  }
+    // The x-accessor for the path generator; 
+    function Y(d) {
+        return yScale(d[1]);
+    }
 
-  chart.margin = function(_) {
-    if (!arguments.length) return margins;
-    margins = _;
-    return chart;
-  };
+    chart.margin = function(_) {
+        if (!arguments.length) return margins;
+        margins = _;
+        return chart;
+    };
 
-  chart.width = function(_) {
-      if (!arguments.length) return containerDimensions.width;
-      containerDimensions.width = _;
-      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
-      return chart;
-  };
+    chart.width = function(_) {
+        if (!arguments.length) return containerDimensions.width;
+        containerDimensions.width = _;
+        chartDimensions.width = containerDimensions.width - margins.left - margins.right;
+        return chart;
+    };
 
   chart.height = function(_) {
-      if (!arguments.length) return containerDimensions.height;
-      containerDimensions.height = _;
-      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
-      return chart;
-  };
+        if (!arguments.length) return containerDimensions.height;
+        containerDimensions.height = _;
+        chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
+        return chart;
+    };
 
-  //Strictly speaking "label" does not make sense for a linechart
-  chart.label = function(_) {
-    if (!arguments.length) return xValue;
-    xValue = _;
+    //Strictly speaking "label" does not make sense for a linechart
+    chart.label = function(_) {
+        if (!arguments.length) return xValue;
+        xValue = _;
+        return chart;
+    };
+
+    chart.amount = function(_) {
+        if (!arguments.length) return yValue;
+        yValue = _;
+        return chart;
+    };
+
     return chart;
-  };
-
-  chart.amount = function(_) {
-    if (!arguments.length) return yValue;
-    yValue = _;
-    return chart;
-  };
-
-  return chart;
 }
 
 
 
 charts.piechart = function(data) {
-  "use strict";
-  var containerDimensions = {width: 900, height: 400},
+    "use strict";
+    var containerDimensions = {width: 900, height: 400},
     margins = {top: 30, right:50, bottom: 50, left: 100},
     chartDimensions = {
-      width : containerDimensions.width - margins.left - margins.right,
-      height : containerDimensions.height - margins.top - margins.bottom
+        width : containerDimensions.width - margins.left - margins.right,
+        height : containerDimensions.height - margins.top - margins.bottom
     },
     labelValue = function(d) { return d[0]; },
     amountValue = function(d) { return d[1]; },
@@ -177,53 +178,53 @@ charts.piechart = function(data) {
     //var properties = new Properties(12, 2, null, ["categorical", "quantitative"]);
 
 
-  function chart(selection) {
-    selection.each(function(data) {
+    function chart(selection) {
+        selection.each(function(data) {
 
 
-      var keys = d3.keys(data[0]); //Pull axis labels off data
+            var keys = d3.keys(data[0]); //Pull axis labels off data
 
-          // Convert data to standard representation greedily;
-          // this is needed for nondeterministic accessors (Array style access).
-      data = data.map(function(d, i) {
-         return [labelValue.call(data, d, i), amountValue.call(data, d, i)];
-         });      
+            // Convert data to standard representation greedily;
+            // this is needed for nondeterministic accessors (Array style access).
+            data = data.map(function(d, i) {
+                return [labelValue.call(data, d, i), amountValue.call(data, d, i)];
+            });      
 
 
-      arc
-        .innerRadius(innerRadius)
-        .outerRadius(outerRadius);
+            arc
+                .innerRadius(innerRadius)
+                .outerRadius(outerRadius);
 
-      var svg = d3.select(this)
-        .append("svg")
-          .attr("width", containerDimensions.width)
-              .attr("height", containerDimensions.height)
-              .append("g")
-              .attr("transform", "translate(" + (margins.left + (chartDimensions.width / 2)) + "," + (margins.top + (chartDimensions.height /2)) + ")")
-              .attr("id", "chart");
+            var svg = d3.select(this)
+                .append("svg")
+              .attr("width", containerDimensions.width)
+                .attr("height", containerDimensions.height)
+                .append("g")
+                .attr("transform", "translate(" + (margins.left + (chartDimensions.width / 2)) + "," + (margins.top + (chartDimensions.height /2)) + ")")
+                .attr("id", "chart");
 
-      var g = svg.selectAll(".arc")
-         .data(pie(data))
-        .enter()
-         .append("g")
-         .attr("class", "arc");
+            var g = svg.selectAll(".arc")
+                .data(pie(data))
+              .enter()
+                .append("g")
+                .attr("class", "arc");
 
-      g.append("path")
-         .attr("d", arc)
-         .style("fill", function(d, i) { return fill(i); });
+            g.append("path")
+                .attr("d", arc)
+                .style("fill", function(d, i) { return fill(i); });
 
-      g.on("mouseover.tooltip", function(d) {
-        svg.append("text")
-         .text(keys[0] + ": " + d.data[0] + " " + keys[1] + ": " +d.data[1]) //Need to go into data as arc objects are being passed in
-         .attr("class", "label")
-         .attr("x", 0)
-         .attr("y", chartDimensions.height / 2 + margins.bottom / 2)
-         .attr("text-anchor", "middle");
-        });
+            g.on("mouseover.tooltip", function(d) {
+                svg.append("text")
+                .text(keys[0] + ": " + d.data[0] + " " + keys[1] + ": " +d.data[1]) //Need to go into data as arc objects are being passed in
+                .attr("class", "label")
+                .attr("x", 0)
+                .attr("y", chartDimensions.height / 2 + margins.bottom / 2)
+                .attr("text-anchor", "middle");
+            });
 
-      g.on("mouseout.tooltip", function(d) {
-         svg.select(".label").remove();
-         });
+            g.on("mouseout.tooltip", function(d) {
+                svg.select(".label").remove();
+            });
 
     });
   }
@@ -233,41 +234,41 @@ charts.piechart = function(data) {
     }
 
     chart.title = function() {
-      return title;
+        return title;
     };
 
 
     chart.margin = function(_) {
-      if (!arguments.length) return margins;
-      margins = _;
-      return chart;
+        if (!arguments.length) return margins;
+        margins = _;
+        return chart;
     };
 
      chart.width = function(_) {
-      if (!arguments.length) return containerDimensions.width;
-      containerDimensions.width = _;
-      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
-      return chart;
-   };
+        if (!arguments.length) return containerDimensions.width;
+        containerDimensions.width = _;
+        chartDimensions.width = containerDimensions.width - margins.left - margins.right;
+        return chart;
+    };
 
    chart.height = function(_) {
-      if (!arguments.length) return containerDimensions.height;
-      containerDimensions.height = _;
-      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
-      return chart;
-   };
+        if (!arguments.length) return containerDimensions.height;
+        containerDimensions.height = _;
+        chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
+        return chart;
+    };
 
 
     chart.label = function(_) {
-      if(!arguments.length) return labelValue;
-      labelValue = _;
-      return chart;
+        if(!arguments.length) return labelValue;
+        labelValue = _;
+        return chart;
     }
 
     chart.amount = function(_) {
-      if(!arguments.length) return amountValue;
-      amountValue = _;
-      return chart;
+        if(!arguments.length) return amountValue;
+        amountValue = _;
+        return chart;
     }
 
     chart.properties = function() {
@@ -278,6 +279,8 @@ charts.piechart = function(data) {
   return chart;
   
 }
+
+
 
 charts.scatterplot = function() {
     var containerDimensions = {width: 900, height: 400},
@@ -304,7 +307,6 @@ charts.scatterplot = function() {
 
             var keys = d3.keys(data[0]);
 
-            console.log(data[0]);
 
 
             data = data.map(function(d, i) {
@@ -383,6 +385,21 @@ charts.scatterplot = function() {
                 .style("text-anchor", "end")
                 .text(function(d) { return d; });
 
+            g.on("mouseover.tooltip", function(d) {
+                var text = keys[0] + ": " + d[0] + ", "
+                + keys[1] + ": " + d[1] + ", "
+                + keys[2] + ": " + d[2];
+                svg.append("text")
+                .text(text)
+                .attr("class", "label")
+                .attr("x", chartDimensions.height)
+                .attr("y",  margins.bottom * 0.75)
+                .attr("text-anchor", "middle");
+            });
+
+            g.on("mouseout.tooltip", function(d) {
+                svg.select(".label").remove();
+            });
 
 
         });
@@ -390,55 +407,52 @@ charts.scatterplot = function() {
     }
 
     chart.title = function() {
-      return title;
+        return title;
     };
 
     chart.margins = function(_) {
-      if (!arguments.length) return margins;
-      margins = _;
-      return chart;
+        if (!arguments.length) return margins;
+        margins = _;
+        return chart;
     };
 
     chart.width = function(_) {
-      if (!arguments.length) return containerDimensions.width;
-      containerDimensions.width = _;
-      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
-      return chart;
+        if (!arguments.length) return containerDimensions.width;
+        containerDimensions.width = _;
+        chartDimensions.width = containerDimensions.width - margins.left - margins.right;
+        return chart;
    };
 
    chart.height = function(_) {
-      if (!arguments.length) return containerDimensions.height;
-      containerDimensions.height = _;
-      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
-      return chart;
+        if (!arguments.length) return containerDimensions.height;
+        containerDimensions.height = _;
+        chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
+        return chart;
    };
 
    chart.label = function(_) {
-      if (!arguments.length) return labelValue;
-      labelValue = _;
-      return chart;
+        if (!arguments.length) return labelValue;
+        labelValue = _;
+        return chart;
    };
 
 
    chart.amount = function(_) {
-      if( !arguments.length) return xValue;
-      xValue = _;
-      return chart;
+        if( !arguments.length) return xValue;
+        xValue = _;
+        return chart;
    };
 
    chart.amount2 = function(_) {
-      if (!arguments.length) return yValue;
-      yValue = _;
-      return chart;
+        if (!arguments.length) return yValue;
+        yValue = _;
+        return chart;
    };
 
-
-
     return chart;
-
-
-
 }
+
+
 
 charts.bubbleplot = function() {
     var containerDimensions = {width: 900, height: 400},
@@ -467,7 +481,6 @@ charts.bubbleplot = function() {
 
             var keys = d3.keys(data[0]);
 
-            console.log(data[0]);
 
 
             data = data.map(function(d, i) {
@@ -486,7 +499,6 @@ charts.bubbleplot = function() {
                 .domain([0, d3.max(data, function(d) { return +d[3]; }) ])
                 .range([3, chartDimensions.height / 10]); //Restrict size of bubbles, arbitrary number
 
-            console.log(zScale);
 
             var svg = d3.select(this)
               .append("svg")
@@ -555,21 +567,20 @@ charts.bubbleplot = function() {
                 .text(function(d) { return d; });
 
             g.on("mouseover.tooltip", function(d) {
-              var text = keys[0] + ": " + d[0] + ", "
-              + keys[1] + ": " + d[1] + ", "
-              + keys[2] + ": " + d[2] + ", "
-              + keys[3] + ": " + d[3];
-              console.log(text);
-              svg.append("text")
-              .text(text)
-              .attr("class", "label")
-              .attr("x", chartDimensions.height)
-              .attr("y",  margins.bottom * 0.75)
-              .attr("text-anchor", "middle");
+                var text = keys[0] + ": " + d[0] + ", "
+                + keys[1] + ": " + d[1] + ", "
+                + keys[2] + ": " + d[2] + ", "
+                + keys[3] + ": " + d[3];
+                svg.append("text")
+                .text(text)
+                .attr("class", "label")
+                .attr("x", chartDimensions.height)
+                .attr("y",  margins.bottom * 0.75)
+                .attr("text-anchor", "middle");
             });
 
             g.on("mouseout.tooltip", function(d) {
-              svg.select(".label").remove();
+                svg.select(".label").remove();
             });
 
 
@@ -578,47 +589,47 @@ charts.bubbleplot = function() {
     }
 
     chart.title = function() {
-      return title;
+        return title;
     };
 
     chart.margins = function(_) {
-      if (!arguments.length) return margins;
-      margins = _;
-      return chart;
-    };
+        if (!arguments.length) return margins;
+        margins = _;
+        return chart;
+        };
 
     chart.width = function(_) {
-      if (!arguments.length) return containerDimensions.width;
-      containerDimensions.width = _;
-      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
-      return chart;
-   };
+        if (!arguments.length) return containerDimensions.width;
+        containerDimensions.width = _;
+        chartDimensions.width = containerDimensions.width - margins.left - margins.right;
+        return chart;
+    };
 
    chart.height = function(_) {
-      if (!arguments.length) return containerDimensions.height;
-      containerDimensions.height = _;
-      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
-      return chart;
-   };
+        if (!arguments.length) return containerDimensions.height;
+        containerDimensions.height = _;
+        chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
+        return chart;
+    };
 
    chart.label = function(_) {
-      if (!arguments.length) return labelValue;
-      labelValue = _;
-      return chart;
-   };
+        if (!arguments.length) return labelValue;
+        labelValue = _;
+        return chart;
+    };
 
 
    chart.amount = function(_) {
-      if( !arguments.length) return xValue;
-      xValue = _;
-      return chart;
-   };
+        if( !arguments.length) return xValue;
+        xValue = _;
+        return chart;
+    };
 
    chart.amount2 = function(_) {
-      if (!arguments.length) return yValue;
-      yValue = _;
-      return chart;
-   };
+        if (!arguments.length) return yValue;
+        yValue = _;
+        return chart;
+    };
 
    chart.amount3 = function(_) {
       if(!arguments.length) return zValue;
@@ -626,11 +637,7 @@ charts.bubbleplot = function() {
       return chart;
    }
 
-
-
     return chart;
-
-
 
 }
 
@@ -638,157 +645,154 @@ charts.bubbleplot = function() {
 
 
 charts.barchart = function() {
-   var containerDimensions = {width: 900, height: 400},
-   margins = {top: 30, right:50, bottom: 50, left: 100},
-   chartDimensions = {
+    var containerDimensions = {width: 900, height: 400},
+    margins = {top: 30, right:50, bottom: 50, left: 100},
+    chartDimensions = {
       width : containerDimensions.width - margins.left - margins.right,
       height : containerDimensions.height - margins.top - margins.bottom
-   },
-      xValue = function(d) { return d[0]; },
-      yValue = function(d) { return d[1]; },
-      xScale = d3.scale.linear(),
-      yScale = d3.scale.linear(),
-      xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(0),
-      yAxis = d3.svg.axis().scale(yScale).orient("left"),
-      fill = d3.scale.category20b();
+    },
+    xValue = function(d) { return d[0]; },
+    yValue = function(d) { return d[1]; },
+    xScale = d3.scale.linear(),
+    yScale = d3.scale.linear(),
+    xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(0),
+    yAxis = d3.svg.axis().scale(yScale).orient("left"),
+    fill = d3.scale.category20b();
 
-      var title = "barchart";
-
-
-        
-
-   function chart(selection) {
-      selection.each(function(data) {
-
-
-         var keys = d3.keys(data[0]); //Pull axis labels off data
-
-         // Convert data to standard representation greedily;
-         // this is needed for nondeterministic accessors (Array style access).
-         data = data.map(function(d, i) {
-            return [xValue.call(data, d, i), yValue.call(data, d, i)];
-         });
-
-        //If the 
-        if(data.length >= 50) {
-            fill = function(_) { return d3.rgb("#06f"); }
-        }
-
-
-         // Update the x-scale.
-         xScale
-            .domain([0, data.length])
-            .range([0, chartDimensions.width]);
-
-         // Update the y-scale.
-         yScale
-            .domain([0, d3.max(data, function(d) { return d[1]; })])
-            .range([chartDimensions.height, 0]);
-
-        // Select the svg element, if it exists.
-        var svg = d3.select(this)
-          .append("svg")
-            .attr("width", containerDimensions.width)
-            .attr("height", containerDimensions.height)
-          .append("g")
-            .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
-            .attr("id", "chart");
+    var title = "barchart";
 
 
         
 
-
-         var g = svg.selectAll("rect")
-            .data(data)
-          .enter()
-            .append("rect")
-            .attr("x", function(d, i) { return xScale(i)} )
-            .attr("y", function(d) { return yScale(d[1]) })
-            .attr("height", function(d) { return chartDimensions.height - yScale(d[1])})
-            .attr("width", chartDimensions.width / data.length)
-            .attr("fill", function(d, i) { return fill(d[1])});
+    function chart(selection) {
+        selection.each(function(data) {
 
 
-         svg.append("g").attr("class", "x axis").call(xAxis);
-         svg.append("g").attr("class", "y axis").call(yAxis);
+             var keys = d3.keys(data[0]); //Pull axis labels off data
 
-         // Update the x-axis.
-         svg.select(".x.axis")
-            .attr("transform", "translate(0," + yScale.range()[0] + ")")
-            .call(xAxis);
+            // Convert data to standard representation greedily;
+            // this is needed for nondeterministic accessors (Array style access).
+            data = data.map(function(d, i) {
+                return [xValue.call(data, d, i), yValue.call(data, d, i)];
+            });
 
-         //Axis labels
-         svg.select(".x.axis")
-            .append("text")
-            .text(keys[0])
-            .attr("x", chartDimensions.width / 2)
-            .attr("y", margins.bottom * 0.75)
-            .attr("text-anchor", "middle");
-
-         svg.select(".y.axis")
-            .append("text")
-            .text(keys[1])
-            .attr("transform", "rotate (-270, 0, 0)") //Flipped so x is y and y is x
-            .attr("x", chartDimensions.height / 2)
-            .attr("y", margins.left * 0.75)
-            .attr("text-anchor", "middle");
-
-         g.on("mouseover.tooltip", function(d, i) {
-            svg.select(".x.axis").append("text") //Append label to axis to align text
-            .text(keys[0] + ": " + d[0] + " " + keys[1] + ": " + d[1])
-            .attr("class", "label")
-            .attr("x", 0)
-            .attr("y", margins.bottom * 0.75);
-        });
+            //If the 
+            if(data.length >= 50) {
+                fill = function(_) { return d3.rgb("#06f"); }
+            }
 
 
-         g.on("mouseout.tooltip", function(d) {
-            svg.select(".label")
-            .remove();
-        });
+             // Update the x-scale.
+             xScale
+                .domain([0, data.length])
+                .range([0, chartDimensions.width]);
+
+             // Update the y-scale.
+             yScale
+                .domain([0, d3.max(data, function(d) { return d[1]; })])
+                .range([chartDimensions.height, 0]);
+
+            // Select the svg element, if it exists.
+            var svg = d3.select(this)
+              .append("svg")
+                .attr("width", containerDimensions.width)
+                .attr("height", containerDimensions.height)
+              .append("g")
+                .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+                .attr("id", "chart");
 
 
+            
 
+
+             var g = svg.selectAll("rect")
+                .data(data)
+              .enter()
+                .append("rect")
+                .attr("x", function(d, i) { return xScale(i)} )
+                .attr("y", function(d) { return yScale(d[1]) })
+                .attr("height", function(d) { return chartDimensions.height - yScale(d[1])})
+                .attr("width", chartDimensions.width / data.length)
+                .attr("fill", function(d, i) { return fill(d[1])});
+
+
+             svg.append("g").attr("class", "x axis").call(xAxis);
+             svg.append("g").attr("class", "y axis").call(yAxis);
+
+             // Update the x-axis.
+             svg.select(".x.axis")
+                .attr("transform", "translate(0," + yScale.range()[0] + ")")
+                .call(xAxis);
+
+             //Axis labels
+             svg.select(".x.axis")
+                .append("text")
+                .text(keys[0])
+                .attr("x", chartDimensions.width / 2)
+                .attr("y", margins.bottom * 0.75)
+                .attr("text-anchor", "middle");
+
+             svg.select(".y.axis")
+                .append("text")
+                .text(keys[1])
+                .attr("transform", "rotate (-270, 0, 0)") //Flipped so x is y and y is x
+                .attr("x", chartDimensions.height / 2)
+                .attr("y", margins.left * 0.75)
+                .attr("text-anchor", "middle");
+
+             g.on("mouseover.tooltip", function(d, i) {
+                svg.select(".x.axis").append("text") //Append label to axis to align text
+                .text(keys[0] + ": " + d[0] + " " + keys[1] + ": " + d[1])
+                .attr("class", "label")
+                .attr("x", 0)
+                .attr("y", margins.bottom * 0.75);
+            });
+
+
+             g.on("mouseout.tooltip", function(d) {
+                svg.select(".label")
+                .remove();
+            });
 
 
         });
     }
 
     chart.title = function() {
-      return title;
+        return title;
     };
 
 
    chart.margins = function(_) {
-      if (!arguments.length) return margins;
-      margins = _;
-      return chart;
+        if (!arguments.length) return margins;
+        margins = _;
+        return chart;
    };
 
    chart.width = function(_) {
-      if (!arguments.length) return containerDimensions.width;
-      containerDimensions.width = _;
-      chartDimensions.width = containerDimensions.width - margins.left - margins.right;
-      return chart;
+        if (!arguments.length) return containerDimensions.width;
+        containerDimensions.width = _;
+        chartDimensions.width = containerDimensions.width - margins.left - margins.right;
+        return chart;
    };
 
    chart.height = function(_) {
-      if (!arguments.length) return containerDimensions.height;
-      containerDimensions.height = _;
-      chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
-      return chart;
+        if (!arguments.length) return containerDimensions.height;
+        containerDimensions.height = _;
+        chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
+        return chart;
    };
 
    chart.label = function(_) {
-      if (!arguments.length) return xValue;
-      xValue = _;
-      return chart;
+        if (!arguments.length) return xValue;
+        xValue = _;
+        return chart;
    };
 
    chart.amount = function(_) {
-      if (!arguments.length) return yValue;
-      yValue = _;
-      return chart;
+        if (!arguments.length) return yValue;
+        yValue = _;
+        return chart;
    };
 
 
@@ -801,6 +805,173 @@ charts.barchart = function() {
    return chart;
 }
 
+charts.groupedbarchart = function() {
+    var containerDimensions = {width: 900, height: 400},
+    margins = {top: 30, right:50, bottom: 50, left: 100},
+    chartDimensions = {
+      width : containerDimensions.width - margins.left - margins.right,
+      height : containerDimensions.height - margins.top - margins.bottom
+    },
+    xValue = function(d) { return d[0]; },
+    yValue = function(d) { return d[1]; },
+    zValue = function(d) { return d[2]; },
+
+    xScale = d3.scale.ordinal().rangeBoundBands([0, width], .1),
+    yScale = d3.scale.linear(),
+    zScale = d3.scale.ordinal(),
+
+    xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(0),
+    yAxis = d3.svg.axis().scale(yScale).orient("left"),
+    fill = d3.scale.category20b();
+
+    var title = "groupedbarchart";
+
+
+        
+
+    function chart(selection) {
+        selection.each(function(data) {
+
+
+            var keys = d3.keys(data[0]); //Pull axis labels off data
+
+            // Convert data to standard representation greedily;
+            // this is needed for nondeterministic accessors (Array style access).
+            data = data.map(function(d, i) {
+                return [xValue.call(data, d, i), yValue.call(data, d, i)];
+            });
+
+            //If the 
+            if(data.length >= 50) {
+                fill = function(_) { return d3.rgb("#06f"); }
+            }
+
+
+             // Update the x-scale.
+             xScale
+                .domain([0, data.length])
+                .range([0, chartDimensions.width]);
+
+             // Update the y-scale.
+             yScale
+                .domain([0, d3.max(data, function(d) { return d[1]; })])
+                .range([chartDimensions.height, 0]);
+
+            // Select the svg element, if it exists.
+            var svg = d3.select(this)
+              .append("svg")
+                .attr("width", containerDimensions.width)
+                .attr("height", containerDimensions.height)
+              .append("g")
+                .attr("transform", "translate(" + margins.left + "," + margins.top + ")")
+                .attr("id", "chart");
+
+
+            
+
+
+             var g = svg.selectAll("rect")
+                .data(data)
+              .enter()
+                .append("rect")
+                .attr("x", function(d, i) { return xScale(i)} )
+                .attr("y", function(d) { return yScale(d[1]) })
+                .attr("height", function(d) { return chartDimensions.height - yScale(d[1])})
+                .attr("width", chartDimensions.width / data.length)
+                .attr("fill", function(d, i) { return fill(d[1])});
+
+
+             svg.append("g").attr("class", "x axis").call(xAxis);
+             svg.append("g").attr("class", "y axis").call(yAxis);
+
+             // Update the x-axis.
+             svg.select(".x.axis")
+                .attr("transform", "translate(0," + yScale.range()[0] + ")")
+                .call(xAxis);
+
+             //Axis labels
+             svg.select(".x.axis")
+                .append("text")
+                .text(keys[0])
+                .attr("x", chartDimensions.width / 2)
+                .attr("y", margins.bottom * 0.75)
+                .attr("text-anchor", "middle");
+
+             svg.select(".y.axis")
+                .append("text")
+                .text(keys[1])
+                .attr("transform", "rotate (-270, 0, 0)") //Flipped so x is y and y is x
+                .attr("x", chartDimensions.height / 2)
+                .attr("y", margins.left * 0.75)
+                .attr("text-anchor", "middle");
+
+             g.on("mouseover.tooltip", function(d, i) {
+                svg.select(".x.axis").append("text") //Append label to axis to align text
+                .text(keys[0] + ": " + d[0] + " " + keys[1] + ": " + d[1])
+                .attr("class", "label")
+                .attr("x", 0)
+                .attr("y", margins.bottom * 0.75);
+            });
+
+
+             g.on("mouseout.tooltip", function(d) {
+                svg.select(".label")
+                .remove();
+            });
+
+
+        });
+    }
+
+    chart.title = function() {
+        return title;
+    };
+
+
+   chart.margins = function(_) {
+        if (!arguments.length) return margins;
+        margins = _;
+        return chart;
+   };
+
+   chart.width = function(_) {
+        if (!arguments.length) return containerDimensions.width;
+        containerDimensions.width = _;
+        chartDimensions.width = containerDimensions.width - margins.left - margins.right;
+        return chart;
+   };
+
+   chart.height = function(_) {
+        if (!arguments.length) return containerDimensions.height;
+        containerDimensions.height = _;
+        chartDimensions.height = containerDimensions.height - margins.top - margins.bottom
+        return chart;
+   };
+
+   chart.label = function(_) {
+        if (!arguments.length) return xValue;
+        xValue = _;
+        return chart;
+   };
+
+   chart.amount = function(_) {
+        if (!arguments.length) return yValue;
+        yValue = _;
+        return chart;
+   };
+
+
+   chart.properties = function() {
+        return properties;
+    };
+
+
+
+   return chart;
+}
+
+
+//NOT WORKING
 charts.bubblechart = function() {
    var containerDimensions = {width: 900, height: 900},
    margins = {top: 30, right:50, bottom: 50, left: 100},

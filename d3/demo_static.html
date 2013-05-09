@@ -21,7 +21,7 @@
 <body>
 
 
-    <select name="aa" onchange="draw(this.value)"> 
+    <select name="aa" onchange="draw(this.value);"> 
         <option value="">Please select</option>
         <option value="data/tests/barchart_test_edu.csv">Children in school, 42 entries</option>
         <option value="data/tests/piechart_test_edu.csv">Children in school, 11 entries</option>
@@ -33,13 +33,11 @@
         <option value="data/tests/population_unemployed.csv">Unemployment vs Population</option>
         <option value="data/tests/unemployment.csv">Unemployment</option>
         <option value="data/tests/population.csv">Population</option>
-
-
     </select>
-
+    <input id="clickMe" type="button" value="Clear" onclick="clear_area();" />
     <div id="chart_area"></div>
 
-    <script>
+    <script type="text/javascript">
         //d3.csv("data/tests/barchart_test_edu.csv", pickChart);
         //d3.csv("data/tests/piechart_test_edu.csv", pickChart);
         //d3.csv("data/tests/barchart_dateprice_test.csv", pickChart);
@@ -49,8 +47,11 @@
        // d3.csv("data/population3.csv", pickChart);
 
        function draw(period) {
-            document.getElementById("chart_area").innerHTML = "";
             d3.csv(period, pickChart);
+        }
+
+        function clear_area() {
+            document.getElementById("chart_area").innerHTML = "";
         }
 
 

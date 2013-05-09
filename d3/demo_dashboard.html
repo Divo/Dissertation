@@ -1,0 +1,43 @@
+<html>
+
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="d3.v2.js"></script>
+<script src="charts/charts.js"></script>
+<script src="charts/classification.js"></script>
+<script src="charts/picker.js"></script>
+
+<script type="text/javascript" id="draw_chart">
+
+   
+	function draw1(data) {
+		d3.select("chart_area")
+			.datum(data)
+		  .call(charts.barchart()
+			.label(function(d) { return parseDate(d[keys[0]]); })
+			.amount(function(d) { return +d[keys[1]]; }) );
+	}
+
+
+</script>
+</head>
+
+
+<body>
+
+
+    <div id="chart_area"></div>
+
+    <script type="text/javascript">
+
+
+	d3.csv("data/tests/population.csv", draw1);
+
+  
+    </script>
+
+
+</body>
+
+</html>

@@ -612,8 +612,24 @@ Dix et al. outline evaluation criteria for a system in HCI \todo{Citation} which
 \paragraph{Usefulness.} Use cases again. Probably have to think of something more concrete.
 
 \section{Comparison to Existing Tools}
-Bring back the table.
-
+ \begin{sidewaystable}
+    \small
+    \begin{tabularx}{\textwidth}{>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X}
+    ~                 & Native Browser Based & Automatic Visualization & No User Training Required & Generic Application & Large Number of Visualizations & Interactive & Automatic Feature Determination & No User Input Required & Encoding of Retinal Variables \\ \hline
+    Gretl             & ~                    & x                       & x                         & ~                   & ~                              & x           & ~                               & ~                      & ~                             \\ \hline
+    Excel             & ~                    & ~                       & ~                         & x                   & x                              & ~           & x                               & ~                      & ~                             \\ \hline
+    Google Charts API & x                    & ~                       & ~                         & x                   & x                              & x           & x                               & ~                      & ~                             \\ \hline
+    Tableau           & ~                    & x                       & x                         & x                   & x                              & x           & x                               & ~                      & x                             \\ \hline
+    ManyEyes          & ~                    & x                       & x                         & x                   & x                              & x           & x                               & ~                      & ~                             \\ \hline
+    OpenHea Map       & ~                    & x                       & x                         & ~                   & ~                              & x           & ~                               & x                      & ~                             \\ \hline
+    D3                & x                    & ~                       & ~                         & x                   & x                              & x           & ~                               & ~                      & ~                             \\ \hline
+    Polaris           & ~                    & x                       & x                         & x                   & x                              & x           & x                               & ~                      & x                             \\ \hline
+    APT               & ~                    & x                       & x                         & x                   & x                              & ~           & x                               & ~                      & x                             \\ \hline
+    AC\lightning{}DV             & x                    & x                       & x                         & x                   & ~                              & x           & x                               & x                      & x                             \\   
+ \end{tabularx}
+\caption{Summary of systems examined}
+\label{feature_matrix}
+\end{sidewaystable} 
 
 \section{Discussion}
 Research question goes here

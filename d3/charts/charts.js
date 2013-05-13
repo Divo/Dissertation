@@ -804,7 +804,7 @@ charts.barchart = function() {
 
    return chart;
 }
-
+/*
 charts.groupedbarchart = function() {
     var containerDimensions = {width: 900, height: 400},
     margins = {top: 30, right:50, bottom: 50, left: 100},
@@ -1076,3 +1076,4 @@ charts.bubblechart = function() {
 
 
 })();
+*/

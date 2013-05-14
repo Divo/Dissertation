@@ -14,6 +14,8 @@
 \usepackage{rotating}
 \usepackage{array}
 \usepackage{amsfonts}
+\usepackage{pdfpages}
+
 \usetikzlibrary{trees}
 
 \newcommand
@@ -605,7 +607,32 @@ Dix et al. outline evaluation criteria for a system in HCI \todo{Citation} which
 \item Effectiveness of the system. Does the system generate visualizations that provide potential users with better knowledge of the data.
 \item Usefulness of the system. Is the information provided by the system useful. \todo{This is weak, maybe cut it}
 \end{itemize}
-\paragraph{Functionality.} Go back to design and pull out requirements.
+\paragraph{Functionality.} Overall AC\lightning{}DV meets the requirements set out in Table \ref{feature_matrix} \todo{Make sure these are explicitly stated as requirements in design}. A brief discussion of each requirement is given below:
+
+\paragraph{Native Browser Based.} AC\lightning{}DV runs entirely in a web browser. As stated in the state of the art the technologies used exist as standards, not implementations. While this offers many benefits it does make metering performance somewhat tricky. Older browsers may not support newer version of certain web technologies and different implementations will preform differently. This was not of much significance to the project. As long as standards are used they will be adopted by all platforms in time. AC\lightning{}DV does not use any particularly new or novel features of the technologies used. The system was developed using Chromium version 18. It was also tested in Firefox Version 11 as well as the latest version at the time of writing, version 20. Version 11 was released as stable over a year ago. None of these platform had exhibited any problems and no errors were logged. Performance in Chromium was benchmarked ten times using a dataset of 5000 entries and the system returned a result, on average, in 4 ms. For comparison the time required by the browser to fetch the system code averaged 10 ms and when third part libraries are accounted for the time averaged at 55 ms. The times listed here will of course vary depending on different circumstances. It is the ratio that is important. Although this was only a small test it shows quite clearly that web technologies in their current state are more than capable of handling large datasets. The system was used extensively during development and at no point was there any appreciable delays in either page loading or interaction.
+
+\paragraph{Automatic Visualization.} AC\lightning{}DV is completely automated. The only input required is the data file. As the system was not developed to be used off the shelf by an end user how the file is loaded is not of great importance. It is not sufficient to abandon the topic here though. If AC\lightning{}DV is to be used as part of a more complete system intended for an end user it should be easy to integrate into said system. To this end the system is successful. A developer need only provide an element for the chart to attach to and call a single function. This is absolute minimum needed to use AC\lightning{}DV.
+
+\begin{verbatim}
+<div id="chart_area"></div>
+<script>
+    d3.csv("data/edu.csv", pickChart)
+</script>
+\end{verbatim}
+
+If desired the Chart API can be used in isolation as shown in Section \todo{Ref implementation}. Such a small footprint allows more complex user interaction to be added with relative ease. It was envisaged that AC\lightning{}DV would be a component in a larger system. A small mock system was created that allowed users to compose a web page containing various visualizations from predetermined data. This was done with a minimum of effort and the results are quite useful. 
+
+The use case in Section \todo{Reference Fingal use case} consists of two complementary datasets showing unemployment and population statistics respectively. These datasets are were merged using external tools and visualized using AC\lightning{}DV. The shared trend in the data is obvious from the visualization. Unemployment and population are proportional. The obvious out-lier in the unemployment dataset is also clearly visible and further illustrated in the scatter plot. \todo{Illustrate outlier in image}
+
+These three visualizations were then composed into a simple web page shown below in Figure \ref{example_composition}. As these visualizations are rendered in isolation they do not share any attributes, such as the colour labels used which are random. Sharing such attributes may be required if AC\lightning{}DV were to developed further. \todo{Merge in image}
+
+
+\begin{figure}[htp] \centering{
+\includegraphics[scale=0.75]{output.pdf}}
+\caption{Example composition.}
+\label{example_composition}
+\end{figure}
+
 
 \paragraph{Effectiveness.} Use cases here, walk through.
 

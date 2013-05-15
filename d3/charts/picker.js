@@ -1,7 +1,6 @@
 
 function createDiv(id) {
 	var chart = document.createElement("div");
-	console.log(id)
 	chart.id = "chart" + id;
 	return chart;
 }   
@@ -84,6 +83,8 @@ function pickChart(data) {
 				var current_chart = charts[i][1];
 				var div = createChartArea(i, charts[i][0]);
 				var parseDate = createParseDate(classifier);
+
+				
 
 			d3.select(div)
 				.datum(data)

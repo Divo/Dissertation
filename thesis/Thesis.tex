@@ -15,6 +15,7 @@
 \usepackage{array}
 \usepackage{amsfonts}
 \usepackage{pdfpages}
+\usepackage{graphicx}
 
 \usetikzlibrary{trees}
 
@@ -569,28 +570,9 @@ The last item is attempted with the notion of ``soft" and ``hard" size. If the d
 \subsection{API}
 The API consists of a collection of visualizations with shared declaration attributes. The design is based of off Mike Bostock's, the creator of D3, convention for reusable charts \todo{Citation}. All visualization are designed as Javascript closures. Each chart only expects input data and a mapping of each data dimension to visualization ``axis" ( the notion of axis can be unique to each visualization ) , which the classification engine can provide automatically. Attributes such as size and position can be adjusted after declaration if desired. Charts could be extended to included customizable colours and marks like similar libraries \todo{Cite Dc.js again}. However such customization would allow interference with the decisions made in encoding the various retinal attributes.  
 
-\section{Example Usage} \todo{I need to make these longer but can't really think of how to without making it sound stupid. Come back too}
-A number of use cases are now presented to illustrate the operation of Ac\lightning{}DV.
-\todo{Lots of pictures}
-\subsection{Example 1}
-
-Tom has been tasked with cutting expenses for his company, a coffee chain. He has several datasets detailing the various expenses and profits associated with each product. These datasets are stored as comma separated value files and have been collected by other tools. To get an initial understanding of the situation Tom inputs the broadest dataset into AC\lightning{}DV which has the total profit and expenses for every product. AC\lightning{}DV outputs a scatter plot which clearly shows some products are not selling enough to justify their costs. \todo{Scatter plot here.}
-
-Tom decides to investigate further and inputs the expense information for the product. AC\lightning{}DV outputs a pie chart that shows every expense associated for that product. Most of the expenses look normal except for marketing. Tom concludes that the aggressive marketing for the product is not working. \todo{Bar chart}
-
-Tom shows this information to his superiors using the visualizations provided by AC\lightning{}DV to illustrate his point. Using this information they decided to drop the aggressive marketing for a trial period and see it affects sales. \todo{Maybe drop that last bit}
-
-\subsection{Example 2}
-
-Alice works for Fingal County Council. She is part of a committee tasked with drafting new proposals to help combat unemployment. Part of this work involves identifying the areas of highest unemployment within Fingal. She has access to the unemployment and population statistics for each region area within Fingal. She combines these datasets and inputs them into AC\lightning{}DV. The dataset, consisting of one categorical variable and two quantitative variables, is matched to a scatter plot. The scatter plot indicates what areas have the highest unemployment compared to population. 
-
-To further illustrate her point Alice divides the unemployment figures into the population and inputs it to AC\lightning{}DV. A bar chart is returned which shows quite clearly which area has the highest percentage unemployment. 
-
-Using these illustrations as part of a body of evidence the committee are able to target the new proposals to have the greatest effect.
-
 
 \section{Conclusion}
-This chapter has introduced and discussed aspects relating to the design of this project. The technologies used and the architecture of the system were presented and discussed. The visualization principles outlined were key to this discussion. The design of the system is broken into two sections. Finally some use cases were presented to illustrate the operation of the system and its applications.
+This chapter has introduced and discussed aspects relating to the design of this project. The technologies used and the architecture of the system were presented and discussed. The visualization principles outlined were key to this discussion. The design of the system is broken into two sections.
 
 
 
@@ -601,11 +583,10 @@ This chapter has introduced and discussed aspects relating to the design of this
 This chapter describes the evaluation of AC\lightning{}DV. Visualizations are usually evaluated using empirical methods, e.g. user trials. AC\lightning{}DV is not an end user tool so such evaluations would not be relevant. Instead an analytic approach is adopted. The functionality of the AC\lightning{}DV is assessed with respect to the project goals and research question. A comparison between AC\lightning{}DV and the existing tools described in the state of the art is then given.
 
 \section{Evaluation of Functional Requirements}
-Dix et al. outline evaluation criteria for a system in HCI \todo{Citation} which is elaborated by Mazza \cite{mazza2009introduction}. The process presented here is a modified version which aims to assess only the technical aspects of a system. Three criteria are used:
+Dix et al. outline evaluation criteria for a system in HCI \todo{Citation} which is elaborated by Mazza \cite{mazza2009introduction}. The process presented here is a modified version which aims to assess only the technical aspects of a system. The evaluation is divided into two parts.
 \begin{itemize}
 \item Functionality of the system. Does it achieve the intended goal.
 \item Effectiveness of the system. Does the system generate visualizations that provide potential users with better knowledge of the data.
-\item Usefulness of the system. Is the information provided by the system useful. \todo{This is weak, maybe cut it}
 \end{itemize}
 \section{Functionality} Overall AC\lightning{}DV meets the requirements set out in Table \ref{feature_matrix} \todo{Make sure these are explicitly stated as requirements in design}. A brief discussion of each requirement is given below:
 
@@ -632,7 +613,9 @@ This is done at the cost of users customization. This may not be ideal for exper
 
 These guidelines were drawn up with the most common cases in that mind so it follows that by using them the most common visualization tasks are catered for.
 
-\paragraph{Generic Application.} \todo{Redo this section} AC\lightning{}DV makes no assumptions about the data other than it's basic organization in a file. Currently comma separated value \todo{Cite rfc} files and json \todo{Cite rfc} are supported. Support for different file formats was not a goal of the project but json was included as an exercise to determine the difficulty of including new file formats. Some minor changes had to be made to accommodate jsons object oriented description of data but these changes were generic and do not interfere with record based processing. They were the result of flawed assumptions made about the output of D3s data parser. AC\lightning{}DV does not distinguish between the two data formats explicitly. D3 is used to parse input data files into a common format. It is this common data format that is passed into AC\lightning{}DV. The data format must be discriminated here, not during AC\lightning{}DVs subsequent operation. 
+\paragraph{Generic Application.}
+\label{generic_application}
+\todo{Redo this section} AC\lightning{}DV makes no assumptions about the data other than it's basic organization in a file. Currently comma separated value \todo{Cite rfc} files and json \todo{Cite rfc} are supported. Support for different file formats was not a goal of the project but json was included as an exercise to determine the difficulty of including new file formats. Some minor changes had to be made to accommodate jsons object oriented description of data but these changes were generic and do not interfere with record based processing. They were the result of flawed assumptions made about the output of D3s data parser. AC\lightning{}DV does not distinguish between the two data formats explicitly. D3 is used to parse input data files into a common format. It is this common data format that is passed into AC\lightning{}DV. The data format must be discriminated here, not during AC\lightning{}DVs subsequent operation. 
 
 After the file has been parsed and input into AC\lightning{}DV no additional assumptions about the data are made. There are however limitations that were outlined in Table \ref{my_table}. Only three dimensional datasets or less or supported. This was not due to any technical limitations. The Chart API simply does not contain any multivariate visualizations are there was insufficient time to create any. It was observed during research for this project that multivariate visualizations typically accommodate a much smaller range of datasets than more traditional statistical graphics. The system is intended to visualize the widest range of possible datasets so effort was concentrated on visualizations with the greatest applicability.
 
@@ -661,18 +644,36 @@ The view manipulation supported by the system allows multiple records to be disp
 
 The visualizations included in the Chart API were created during the 19th century \cite{friendly2001milestones}. They were not created with interaction in mind. Beyond the inspection of individual elements there is not much scope for interaction with such visualizations. The ability to view individual details is however not to be underestimated. Shneiderman coined the visual information seeking mantra ``Overview first, zoom and filter, then details-on-demand" \cite{shneiderman1996eyes}. This idea has taken root and is widely cited. Although AC\lightning{}DV does not support filtering, as it is not a data manipulation tool, the goal of the system is to provide and overview visualization. The interaction described provides the ``details-on-demand". Shneirderman argues that this principle is key to creating an effective visualization. By emptying the screen of visual clutter the user is able to quickly build an internal representation of the data more easily. If they desire individual records can then be investigated after such a representation had been constructed. Investigating individual entires before this takes place is as tedious as viewing the raw dataset and attempting to extract meaning by reading each entry.
 
+\paragraph{Automatic Feature Determination.}
+AC\lightning{}DVs classification component is responsible for determining the features of a dataset. The features used to classify a dataset are taken from the visualization process defined by Mazza and outlined in Section \ref{Mazza_Process}. These features, or properties, are determined automatically by the classifier.
 
+The variable names in a dataset can be used inform the classification process. As stated above in section \ref{generic_application} AC\lightning{}DV illustrates this but assuming variables labeled with the string ``date" represent timestamps. However AC\lightning{}DV does not depend on this assumption and also pattern matches for dates. Systems that require certain information to be encoded within the input dataset are typically quite limited to specific applications. Omission of specific labels renders the unable to create visualizations. Using labels to inform the visualization process results in a more robust system. If no labels are found then pattern matching can be performed. If pattern matching fails then all variables will be classified as quantitative or ordinal. This still provides the system with enough information to produce useful visualizations. All datasets are assigned a minimum number of features:
+\begin{itemize}
+\item Data types
+\item Dimensions
+\item Size
+\end{itemize}
+These properties are determined from analysis of the first record in a dataset, not the complete dataset. It is presumed that the first data record in a dataset is representative of the dataset as a whole. This assumption is perfectly valid when dealing with relational information.
 
-\begin{figure}[htp] \centering{
-\includegraphics[scale=0.75]{output.pdf}}
-\caption{Example composition.}
-\label{example_composition}
-\end{figure}
+Every variable in a dataset is classified as an ordinal or quantitative data type. If the entries are numeric they are classified as quantitative, otherwise they are classified as ordinal. This assumption will fail to correctly identify numeric labels. However without additional information it is not possible to infer if a variable is intended as a data point or a label. Classifying all numbers as quantities, or data points, and all other string strings as labels is the only reasonable way to infer type information from raw data. As Javascript is loosely typed determining if a string represents a number can be somewhat difficult. An elegant solution was provided by a language expert \todo{Cite stackoverflow}.
 
+Dimensionality is determined by the number of records in a dataset. Dimensionality is defined as the number of dependent variables with respect to the number of independent variables as discussed in section \ref{Mazza_Process}. All visualizations in AC\lightning{}DV contain only one ordinal field. This was observed to be the case for most visualizations in general. This means dimensionality can be determined merely from the number of fields in a dataset.
 
-\paragraph{Effectiveness.} Use cases here, walk through.
+AC\lightning{}DV extends Mazza's process somewhat by adding size as a feature. This is determined simply from the number of records in the dataset.
 
-\paragraph{Usefulness.} Use cases again. Probably have to think of something more concrete.
+\paragraph{No user input required.} This is an extension of the automatic visualization requirement. Automatic visualization only applies to the mapping of data entries to graphical marks. No user input applies to the complete end-to-end process. After data is input AC\lightning{}DV requires no additional input from the user. No user input was one of the main goals in designing AC\lightning{}DV. Not many systems are described as fully automated visualizations systems so they do not attempt to meet this requirement. In order for AC\lightning{}DV to be part of an end-user system some user input would be required if only to select what data entries are to visualized. To this end a fully automated system is not possible. However, as acknowledged in the automatic visualization requirement, such tasks are not part of the visualization process. Many systems allow the user to select the data to visualize and then automatically produce visualizations. Such systems typically require the user to also select the output visualization. This is where user error can be introduced. The robustness of the visualization component of a system is irrelevant if a user selects an inappropriate visualization.
+
+AC\lightning{}DV appears to be somewhat unique in this respect. By automatically selecting the most appropriate type of visualization user error is eliminated. With further work it could be ensured that AC\lightning{}DV will always output appropriate visualizations. At present there are limitations on the range of input as discussed in above requirement evaluations. 
+
+\paragraph{Encoding of retinal variables.} As described in the design chapter the retinal properties of the visualizations in the Chart API are not determined automatically. Rather they must be described by an expert user when encoding the properties of a visualizations. The visualizations in the Chart API follow the guideline purposed by Mazza \cite{mazza2009introduction}, Mackinlay \cite{mackinlay1986automating} and others.
+
+One important point that needs to be re-iterated is the classification of categorical data types as ordinal. Ordinal data types are assigned an ordering by the system as a consequence of its design but communicating this ordering to the user is generally not important. Ordinal and categorical data types are largely interchangeable: they are used as labels.
+
+All labels are distinguished with different colour hues. Aside from shape there are no other effective ways to encode such information. Quantitative values are encoded primary encoded by length and position as these are the most effective pre-attentive attributes at conveying quantitative information. In the case of bubble plots the size of a mark is also used to encode a quantitative attribute. Size had a limited suitability for this task. Different sized marks are effective at communicating various magnitudes of a quantitative variable but are not effective for determining specific values. Interaction is used for this purpose. The attribute encoded in this way is last variable in the input dataset and is presumed to be of least significance.
+
+Pie-charts also encode quantitative variables as size but this is supplemented by encoding the same variable as the arc length.
+
+AC\lightning{}DV uses no more than three retinal variables for any one graphical mark. Such a conservative approach is based off the work of Ware \cite{ware2012information} who recommends no more than four attributes be used. This approach was used in order to better ensure comprehensible visualizations are returned even if the potential of the medium is not fully exploited. 
 
 \section{Comparison to Existing Tools}
  \begin{sidewaystable}
@@ -690,12 +691,40 @@ The visualizations included in the Chart API were created during the 19th centur
     APT               & ~                    & x                       & x                         & x                   & x                              & ~           & x                               & ~                      & x                             \\ \hline
     AC\lightning{}DV             & x                    & x                       & x                         & x                   & ~                              & x           & x                               & x                      & x                             \\   
  \end{tabularx}
-\caption{Summary of systems examined}
+\caption{AC\lightning{}DV compared to systems evaluated.}
 \label{feature_matrix}
 \end{sidewaystable} 
 
+\begin{figure}[htp] \centering
+\includegraphics[scale=0.75]{output.pdf}
+\caption{Example composition.}
+\label{example_composition}
+\end{figure}
+
+
+\section{Effectiveness.} In order to evaluate the effectiveness of AC\lightning{}DV two use cases have been created. 
+
+\todo{Lots of pictures}
+\subsection{Coffee Chain Expenses}
+
+Tom has been tasked with cutting expenses for his company, a coffee chain. He has several datasets detailing the various expenses and profits associated with each product. These datasets are stored as comma separated value files and have been collected by other tools. To get an initial understanding of the situation Tom inputs the broadest dataset into AC\lightning{}DV which has the total profit and expenses for every product. AC\lightning{}DV outputs a scatter plot which clearly shows some products are not selling enough to justify their costs. \todo{Scatter plot here.}
+
+Tom decides to investigate further and inputs the expense information for the product. AC\lightning{}DV outputs a pie chart that shows every expense associated for that product. Most of the expenses look normal except for marketing. Tom concludes that the aggressive marketing for the product is not working. \todo{Bar chart}
+
+Tom shows this information to his superiors using the visualizations provided by AC\lightning{}DV to illustrate his point. Using this information they decided to drop the aggressive marketing for a trial period and see it affects sales. \todo{Maybe drop that last bit}
+
+\subsection{Fingal County Council}
+
+Alice works for Fingal County Council. She is part of a committee tasked with drafting new proposals to help combat unemployment. Part of this work involves identifying the areas of highest unemployment within Fingal. She has access to the unemployment and population statistics for each region area within Fingal. She combines these datasets and inputs them into AC\lightning{}DV. The dataset, consisting of one categorical variable and two quantitative variables, is matched to a scatter plot. The scatter plot indicates what areas have the highest unemployment compared to population. 
+
+To further illustrate her point Alice divides the unemployment figures into the population and inputs it to AC\lightning{}DV. A bar chart is returned which shows quite clearly which area has the highest percentage unemployment. 
+
+Using these illustrations as part of a body of evidence the committee are able to target the new proposals to have the greatest effect.
+
+
+
+
 \section{Discussion}
-Research question goes here
 
 
 \chapter{Future Work and Conclusions}

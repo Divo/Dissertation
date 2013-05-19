@@ -583,7 +583,7 @@ This chapter has introduced and discussed aspects relating to the design of this
 
 
 \chapter{Evaluation and Discussion}
-This chapter describes the evaluation of AC\lightning{}DV. Visualizations are usually evaluated using empirical methods, e.g. user trials. AC\lightning{}DV is not an end user tool so such evaluations would not be relevant. Instead an analytic approach is adopted. The functionality of the AC\lightning{}DV is assessed with respect to the project goals and research question. A comparison between AC\lightning{}DV and the existing tools described in the state of the art is then given.
+This chapter describes the evaluation of AC\lightning{}DV. Visualizations are usually evaluated using empirical methods, e.g. user trials. AC\lightning{}DV is not an end user tool so such evaluations would not be relevant. Instead an analytic approach is adopted. The functionality of the AC\lightning{}DV is assessed with respect to the project goals and research question.
 
 The objective of this project was to determine to what extent can suitable visualizations be dynamically and automatically be generated using browser based technologies. This question was posed with a number of goals for the project. 
 
@@ -676,7 +676,9 @@ The variable names in a dataset can be used to inform the classification process
 \end{itemize}
 These properties are determined from analysis of the first record in a dataset, not the complete dataset. It is presumed that the first data record in a dataset is representative of the dataset as a whole. This assumption is perfectly valid when dealing with relational data.
 
-Every variable in a dataset is classified as an ordinal or quantitative data type. If the entries are numeric they are classified as quantitative, otherwise they are classified as ordinal. This assumption will fail to correctly identify numeric labels. However without additional information it is not possible to infer if a variable is intended as a data point or a label. Classifying all numbers as quantities, or data points, and all other strings as labels is the only reasonable way to infer type information from raw data. As Javascript is loosely typed determining if a string represents a number can be somewhat difficult. An elegant solution was provided by a language expert \todo{Cite stackoverflow}.
+Every variable in a dataset is classified as an ordinal or quantitative data type. If the entries are numeric they are classified as quantitative, otherwise they are classified as ordinal. Without additional information it is not possible to infer if a variable is intended as a data point or a label. Classifying all numbers as quantities, or data points, and all other strings as labels is the only reasonable way to infer type information from raw data. However, if a dataset does not contain any ordinal variables a quantitative variable can used instead. This may not be ideal in all cases but ensures a visualization will be generated. Furthermore data without any labels is meaningless. If one of the quantitative variables is not intended as a label there is no visualization that will help the user understand the data. It will merely be a meaningless table of numbers.
+
+As Javascript is loosely typed determining if a string represents a number can be somewhat difficult. An elegant solution was provided by a language expert \todo{Cite stackoverflow}.
 
 Dimensionality is determined by the number of records in a dataset. Dimensionality is defined as the number of dependent variables with respect to the number of independent variables as discussed in section \ref{Mazza_Process}. All visualizations in AC\lightning{}DV contain only one ordinal field. This was observed to be the case for most visualizations in general. This means dimensionality can be determined merely from the number of fields in a dataset.
 
@@ -697,9 +699,7 @@ All labels are distinguished with different colour hues. Aside from shape there 
 Pie-charts also encode quantitative variables as size but this is supplemented by encoding the same variable as the arc length.
 
 AC\lightning{}DV uses no more than three retinal variables for any one graphical mark. Such a conservative approach is based off the work of Ware \cite{ware2012information} who recommends no more than four attributes be used. This approach was used in order to better ensure comprehensible visualizations are returned even if the potential of the medium is not fully exploited. 
-
-\section{Comparison to Existing Tools}
- \begin{sidewaystable}
+\begin{sidewaystable}
     \small
     \begin{tabularx}{\textwidth}{>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering}X|>{\centering\arraybackslash}X}
     ~                 & Native Browser Based & Automatic Visualization & No User Training Required & Generic Application & Large Number of Visualizations & Interactive & Automatic Feature Determination & No User Input Required & Encoding of Retinal Variables \\ \hline
@@ -718,11 +718,6 @@ AC\lightning{}DV uses no more than three retinal variables for any one graphical
 \label{feature_matrix}
 \end{sidewaystable} 
 
-\begin{figure}[htp] \centering
-\includegraphics[scale=0.75]{output.pdf}
-\caption{Example composition.}
-\label{example_composition}
-\end{figure}
 
 
 \section{Effectiveness.} In order to evaluate the effectiveness of AC\lightning{}DV two use cases have been created. 
@@ -743,6 +738,13 @@ Alice works for Fingal County Council. She is part of a committee tasked with dr
 To further illustrate her point Alice divides the unemployment figures into the population and inputs it to AC\lightning{}DV. A bar chart is returned which shows quite clearly which area has the highest percentage unemployment. 
 
 Using these illustrations as part of a body of evidence the committee are able to target the new proposals to have the greatest effect.
+
+\begin{figure}[htp] \centering
+\includegraphics[scale=0.75]{output.pdf}
+\caption{Example composition.}
+\label{example_composition}
+\end{figure}
+
 
 \subsection{extra to include}
 
@@ -765,7 +767,29 @@ Each point is addressed below.
 \subsection{Suitable Visualizations}
 The idea of suitable visualizations was key to this project. As noted in Section \ref{Intro_to_info_vis} the suitability of a visualization depends on the capabilities of the viewer. Since such capabilities are not sufficiently modeled a collection of related rules created from the results of human perceptual evaluations were used.
 
-As discussed above a conservative approach was adopted. The number of data elements mapped to retinal attributes never exceeds three. While AC\lightning{}DV allows a large amount of individual elements to be displayed at once, far more than can be processed by sensory memory, the comprehension of of the overall visualization is assisted by interaction and labeling. 
+The visualizations are given a set of properties derived from the visualization process described by Mazza \cite{mazza2009introduction}. The same properties are automatically determined for an entered dataset. The properties are then matched and the most suitable visualization is selected. This ensures that the visualization is capable of displaying the information effectively, guaranteeing suitability. The Chart API contains visualizations that are known to be effective as demonstrated by their widespread use.
+
+A harder problem is determining the how suitable a given visualization is. The initial selection process provides a base level, ensuring all of the data will be visualized. As discussed a conservative approach was adopted. The number of data elements mapped to retinal attributes never exceeds three. While AC\lightning{}DV allows a large amount of individual elements to be displayed at once, far more than can be processed by sensory memory, the comprehension of of the overall visualization is assisted by interaction and labeling. The retinal attributes are encoded manually when the visualization is being created. While an automated solution would be more desirable the manual encoding is done using an informed process. 
+
+The lack of user selection is key to AC\lightning{}DV. If however this is desired the visualizations can be used without the classification component.
+
+
+All of the chart allow details to be viewed on demand. This is one of the keys to creating effective visualizations \cite{shneiderman1996eyes}. 
+
+\subsection{Automatic Generation}
+AC\lightning{}DV is completely automated and is designed to be extensible. No user intervention is needed at any stage as detailed above in section \ref{Functionality}. Again this may be seen as limiting user choice by the visualizations can be used independently if desired. Some trade-offs were made in order to support this behavior. A more complex Chart API would allow more features. For example a less restrictive notion about the dimensionality of information a visualization can display might allow visualizations to display more data. A barchart could be used to display univariate information or could form groups of bars to display information of many dimensions. Currently AC\lightning{}DV would need a unique entry in the API for every dimension.
+
+A single internal data structure is used to simplify the visualization process. The meta-data generated to guide the process is associated but separated from the raw data. The visualizations in the Chart API need only process the basic raw data. This allows the meta-data to be extended, i.e. the identification of dates, without effecting other parts of the system. 
+
+Some assumptions about dependent and independent variables have been made. These assumption appear to be reasonable and other systems have made similar assumptions \cite{stolte2002polaris}. They may limit the system from visualizing certain types of information but then searching for examples not a single instance could be found. 
+
+\subsection{Browser Based Technologies}
+Web browsers are a suitable platform for data visualization. One of the motivations for using visualization is to assist users in the speedy comprehension of a dataset. Browsers are ideal for this as they are ubiquitous and generally do not require the user to preform any setup when running an application for the first time.
+
+One of the main concerns was performance. AC\lightning{}DV demonstrates that modern web browsers are more than capable of processing and visualizing large amount of data. The limits of performance were not investigated but the browser appears to more than capable of intensive user tasks.
+
+The addition of more meta-data would incur a performance overhead which may need to be considered if AC\lightning{}DV were to be extended. However as the execution time of the program is so small a significant amount of data would need to be added to be noticeable.
+
 
 
 

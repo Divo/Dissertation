@@ -199,7 +199,7 @@ This process is summarized in Table \ref{mazzatable} \cite{mazza2009introduction
     \label{mazzatable}
 \end{table}
 
-This process eliminates visualizations that are not suitable for a given data set. Deciding on an individual visualization to use is a decidedly harder task. The effectiveness of a visualization is dependent on the perceptual capabilities of the viewer. As there is no empirically verified model of human perceptual abilities one is purposed. This model is based off the work of Jacques Bertin \cite{bertin1973semiologie}. Bertin was the first person to define a set of ``retinal variables"; how different properties of graphics can be used to convey various types of information. His work has been extended since it's original publication and the model presented here is perhaps one of the most up to date. A list of retinal variables is presented in order of effectiveness conveying different types of information. This idea will be revisited throughout this paper and a complete model will be detailed in a later chapter. 
+This process eliminates visualizations that are not suitable for a given data set. Deciding on an individual visualization to use is a decidedly harder task. The effectiveness of a visualization is dependent on the perceptual capabilities of the viewer. As there is no empirically verified model of human perceptual abilities one is purposed. This model is based off the work of Jacques Bertin \cite{bertin1973semiologie}. Bertin was the first person to define a set of ``retinal variables"; how different properties of graphics can be used to convey various types of information. His work has been extended since its original publication and the model presented here is perhaps one of the most up to date. A list of retinal variables is presented in order of effectiveness conveying different types of information. This idea will be revisited throughout this paper and a complete model will be detailed in a later chapter. 
 
 Mazza's work is a very complete introduction to information visualization and draws attention to all of the factors that need to be considered when creating a visualization. It is perhaps the most complete state of the art currently available and builds on a large amount of influential publications in the field. It has been very influential in the design of the system presented in this thesis.
 
@@ -630,7 +630,7 @@ These guidelines were drawn up with the most common cases in that mind so it fol
 
 \paragraph{Generic Application.}
 \label{generic_application}
-AC\lightning{}DV makes no assumptions about the data other than it's basic organization in a file. Currently comma separated value \todo{Cite rfc} files and json \todo{Cite rfc} are supported. Support for different file formats was not a goal of the project but json was included as an exercise to determine the difficulty of including new formats. Some minor changes had to be made to accommodate jsons object oriented description of data but these changes were generic and do not interfere with record based processing. They were the result of flawed assumptions made about the output of D3s data parser. AC\lightning{}DV does not distinguish between the two data formats explicitly. D3 is used to parse input data files into a common format. It is this common data format that is passed into AC\lightning{}DV. The data format must be discriminated at this stage, not during AC\lightning{}DVs subsequent operation. 
+AC\lightning{}DV makes no assumptions about the data other than its basic organization in a file. Currently comma separated value \todo{Cite rfc} files and json \todo{Cite rfc} are supported. Support for different file formats was not a goal of the project but json was included as an exercise to determine the difficulty of including new formats. Some minor changes had to be made to accommodate jsons object oriented description of data but these changes were generic and do not interfere with record based processing. They were the result of flawed assumptions made about the output of D3s data parser. AC\lightning{}DV does not distinguish between the two data formats explicitly. D3 is used to parse input data files into a common format. It is this common data format that is passed into AC\lightning{}DV. The data format must be discriminated at this stage, not during AC\lightning{}DVs subsequent operation. 
 
 After the file has been parsed and input into AC\lightning{}DV no additional assumptions are made about the data. There are however limitations that were outlined in Table \ref{my_table}. Only three dimensional datasets or less or supported. This was not due to any technical limitations. The Chart API simply does not contain any multivariate visualizations as there was insufficient time to create any. It was observed during research for this project that multivariate visualizations typically accommodate a much smaller range of datasets than more traditional statistical graphics. The system is intended to visualize the widest range of possible datasets so effort was concentrated on visualizations with the greatest applicability.
 
@@ -722,7 +722,6 @@ AC\lightning{}DV uses no more than three retinal variables for any one graphical
 
 \section{Effectiveness.} In order to evaluate the effectiveness of AC\lightning{}DV two use cases have been created. 
 
-\todo{Lots of pictures}
 \subsection{Coffee Chain Expenses}
 
 Tom has been tasked with cutting expenses for his company, a coffee chain. He has several datasets detailing the various expenses and profits associated with each product. These datasets are stored as comma separated value files and have been collected by other tools. To get an initial understanding of the situation Tom inputs the broadest dataset into AC\lightning{}DV which has the total profit and expenses for every product. AC\lightning{}DV outputs a scatter plot which clearly shows some products are not selling enough to justify their costs. \todo{Scatter plot here.}
@@ -745,8 +744,6 @@ Using these illustrations as part of a body of evidence the committee are able t
 \label{example_composition}
 \end{figure}
 
-
-\subsection{extra to include}
 
 The use case in Section \todo{Reference Fingal use case} consists of two complementary datasets showing unemployment and population statistics respectively. These datasets are were merged using external tools and visualized using AC\lightning{}DV. The shared trend in the data is obvious from the visualization. Unemployment and population are proportional. The obvious out-lier in the unemployment dataset is also clearly visible and further illustrated in the scatter plot. \todo{Illustrate outlier in image}
 
@@ -793,18 +790,48 @@ The addition of more meta-data would incur a performance overhead which may need
 
 
 
-
-
-
-
-
 \chapter{Future Work and Conclusions}
 \label{future}
+This dissertation presents an investigate into the feasibility of automated visualization using browser based technologies. In this final chapter, ideas for the future development of AC\lightning{}DV are presented followed by some concluding remarks about the project.
+
+\section{Future Work}
+Data visualization is a complex topic. It is difficult to create visualizations because their effectiveness depends on the capabilities of the viewers. Perhaps the most important thing to come out of the evaluation of this dissertation was an understanding of the limitations and difficulties of an automated visualization system. Possible future work to address these issues is presented below.
+
+\subsection{Extension of Chart API}
+The strength of a generic visualization systems is dependent largely on the variety of visualizations it can produce. While AC\lightning{}DV has a good range of visualization capable of displaying a broad range of data there is room for improvement. 
+
+Additional univariate, bivariate and trivariate visualizations would allow for the same dataset to be viewed in many different ways, perhaps assisting the viewers comprehension. Aside from creating the visualizations no effort would be needed to do this other than adding their properties into the classification engine.
+
+Multivariate visualizations are rather more complex and generally fall into two categories. Lower dimensional visualizations can generally be composed together to form multivariate visualizations, i.e. Grouped or stacked barcharts. Such visualizations can in theory be extended to many dimensions but in reality their are practical limits on their effectiveness. There does not seem to be much research evaluating the effectiveness and limits of these composed visualizations. Additionally an understanding of these limitations would also have to be encoded in AC\lightning{}DV. This would involve reworking the systems use of dimensionality as an attribute used during classification.
+
+The second type of multivariate visualizations are specialized and intended to only visualize data of a specific dimensionality. These visualizations are often only capable of visualizing a relatively narrow range of data. Furthermore some greater insight about the data is needed to determine if they are appropriate.
+
+\subsection{Inclusion of Additional Meta-Data}
+AC\lightning{}DV generates meta data from the input dataset. This meta data is then used to select the most appropriate visualization. There is only a limited amount of information that can be gleaned from raw data. The inclusion of additional meta data could further inform and refine the selection process. This information could be supplied by an automated process or by user input.
+
+Additional meta data could be supplied by extending the automated classification component of AC\lightning{}DV. One way to gain additional information about an input dataset would be to pattern match the entries against known data types. For example, if geographical coordinates were identified the data could be overlaid on a map. Creating a robust pattern recognition system is a hard problem and such systems are not completely accurate. However such a system would only have to correctly identify data, not extract it from a noisy medium, which would simplify the task.
+
+User provided meta data has the capacity to provide a large amount of information about not just the types of data, but also to give the data context. Providing context and expert knowledge is a very powerful feature and is currently the subject of a large amount of research. The Knowledge and Data Engineering Group (KDEG) at Trinity College Dublin have developed a system to allow for easy encoding of subject matter expertise. The system allows the SME to be reconciled with multiple data sources that share a common domain \cite{champ}. It is envisaged that a system like AC\lightning{}DV would be integrated into this framework to create complex visualizations that leverage the knowledge of domain experts.
+
+\subsection{Improved Understanding of Suitability}
+Improving the understanding of suitability and the limitations of various visualizations is a task for further research studies. The mapping of data elements to graphical marks is fairly well understood, if somewhat unverified and has been discussed at length throughout this paper. How combinations of these graphical marks interact and influence the viewer is notably less understood and does not appear to be the subject of much research.
+
+An understanding of how to combine multiple elements to create effective visualizations appears to be key. AC\lightning{}DV attempts to solve this problem with the properties used to describe visualizations and datasets, namely the soft and hard sizes. This is something of a crude solution.
+
+The choice of well known and understood visualizations included in AC\lightning{}DV was a deliberate attempt to further address this issue. It was thought that such visualizations would have had a body of research surrounding them detailing their limitations. This was not found to be the case.
+
+Further work needs to be done to understand the limitations of data visualizations. A lot of existing work that purposes various rules lack any evaluation \cite{card1999readings} \cite{mazza2009introduction}. This would seem to be quite a serious omission for such a user dependent process. Any work done to understand the limitations of visualizations should included a complete evaluation.
+
+One of the reasons AC\lighting{}DV only employees well known visualizations was to avoid user evaluation of novel visualization techniques as developing such techniques were not the goal of the project. User evaluation of the visualizations produced by AC\lightning{}DV should be considered for future work. However it would be both more efficient and beneficial to purpose and evaluate a model for combining elements in a visualization. Such an undertaking would would best be done as a separate project.
+
+\sectopn{Conclusion}
+
+
+
+
 
 \bibliographystyle{apacite}
 \bibliography{bibliography}
 
-\appendix
-\chapter{Appendix A}
 
 \end{document} 

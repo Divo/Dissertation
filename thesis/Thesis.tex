@@ -611,7 +611,7 @@ The parsed data is then feed into the classification component. Classification i
 The first object is then classified and the properties returned are associated with the dataset. These properties are:
 \begin{itemize}
 \item Size: the number of entries in the dataset.
-\item Dimensionality: the number of variables in the dataset minus 1. It is assumed all input datasets have a single independent variable.
+\item Dimensionality: the number of variables in the dataset minus 1. It is assumed all input datasets have a single independent variable whether it be quantitative, ordinal or categorical.
 \item Keys: the variable names. These are used to label the data when it is displayed in the view. They are also used by the system to access the data during processing.
 \item Data types: The type of each element is determined. 
 \end{itemize}
@@ -626,7 +626,72 @@ Determining if a string represents a number in Javascript is somewhat tricky. Th
 These properties are associated with the dataset and used to by the visualization selection stage.
 
 \subsection{Visualization Selection}
+The properties created by the classifier are then used to select a visualization. Each visualization in the Chart API has a set of properties associated with it. These properties are not stored inside the visualization code. While this results in more work to add a new visualization it reinforces the Chart API as a separate component. The Chart API is only exists to visualize input data. It has no knowledge of the classification system.
 
+The same data structure is used to store data properties returned from the classifier and visualization properties. The visualization properties are extended to include a second ``soft" size limit. The visualization properties are stored in a hashmap along with the function used to invoke them and indexed by their name. 
+
+The data properties and visualization properties are then compared to find the most suitable visualizations. The comparison consists of a number of tests:
+\begin{itemize}
+\item Dimensions; If the visualization and data are of different dimensionality the visualization is not suitable and the next set of visualization properties are tested.
+\item Data Types; The variable types supported by the visualization and present in the dataset are compared. If they do not match the next set of visualization properties are tested. The variables do not have to be in the same order. AC\lightning{}DV allows quantitative variables to be used as ordinal labels.
+\item Size; The size of the dataset is compared to the number of elements the visualization can display. Visualizations have a ``hard" and ``soft" size. Hard size is an absolute limit, if the data set contains more elements than the hard size the next set of visualization properties are tested. If a data set contains more entires than the soft size limit the visualization is of limited suitability. A visualization may change certain attributes of the elements displayed if the soft size limit is exceeded.
+\end{itemize}
+
+The suitable visualizations are returned along with a confidence score. Visualizations can be suitable, have limited suitability or not suitable.
+
+Javascripts loose typing system was used extensively throughout the implementation. The properties associated with a visualization are stored along side a pointer to the visualization. Complete functions are returned from functions and used directly to continue execution flow. Javascripts loose typing and dynamic behavior can be at times tricky to work with and often produces unexpected behavior. If used effectively Javascript code can be quite concise and efficient.  
+
+
+\subsection{Rendering}
+The selected visualizations are sorted in order of the confidence scores. A ``div" element is created to bind the visualization to. If the classification engine determined an element in the dataset represents a date a date formatter is constructed. The dataset is then passed into each suitable visualization from the Chart API. Relevant entries are converted to dates. Every visualization in the Chart API requires each variable to be passed into it explicitly resulting in a different number of parameters depending on the dimensionality of the visualization. The result is that univariate, bivariate and trivariate visualizations require separate sections of code to invoke them. This is a rather ugly compromise and is due to the design of the Chart API.
+
+\section{Chart API}
+The Chart API uses D3 \todo{This better be cited earlier} extensively. The creator of D3 has purposed a set of guidelines for creating reusable visualizations \todo{citation}. These guidelines influenced the design of the Chart API heavily. They can be summarized as ``implement visualizations as closures with getter-setter methods".
+
+Closures are a tricky concept to grasp. They can be summarized as an expression, usually a function, that can have free variables together with an environment that those variables. There are several advantages and drawbacks to using them. AC\lightning{}DV uses them primarily for two reasons; they allow visualizations to be encapsulated easily and improve performance by reducing the cost associated with instantiating objects.
+
+Every visualization is initialized the same way:
+
+\begin{verbatim}
+d3.select("#exampleChart")
+  .datum(data)
+  .call(example_chart
+  .label(function(d) { return d.Area; } )
+  .amount(function(d) { return +d.Amount; } )); 
+\end{verbatim} 
+A ``selection" in D3 is an array of DOM elements. The ``div" argument is the DOM element to bind the visualization too. Data is bound to this element and a visualization is called. Every visualization expects an independent variable to be passed in as a label and a number of quantitative variables passed in as amounts.
+
+This string of methods calls will look unusual to those not familiar declarative programming. Every call returns an object used by the next call. So ``select" returns a selection, in this case a new div element identified by ``exampleChart". The ``datum" call is a setter for the selection object which then returns that selection object. The ``call" function executes an arbitrary function, in this case ``barchart" which expects a selection as an argument. Setter methods ``label" and ``amount" are then called. Functions are passed as argument which define how the data is to be accessed.
+
+Every visualization in the Chart API shares a common structure and interface. A number of properties defining attributes such as size, margins, axis and any D3 layout functions are defined in the outer scope. This means this information does not have to be re-initialized every time the visualization is invoked. The visualization logic is contained in the inner scope as a ``chart" method. 
+
+This ``chart" method follows the same model in all visualizations. 
+\begin{itemize}
+\item The data is transformed to allow non-deterministic access. This transformation is applied to all entries as they will all be accessed.
+\item An svg contain is created. Various attributes such as width and height are set.
+\item A group to contain the elements of the visualization is created. By grouping the elements they can be easily modified or searched as a complete set. It also simplifies the outputted DOM.
+\item The data is bound to the element group. D3 groups the data into two structures. The ``enter" group contains data elements with no corresponding data elements. The ``exit" group contains graphical elements with no corresponding data or data elements that have been filtered out.
+\item The elements of the enter group are assigned graphical properties.
+\begin{verbatim}
+var g = svg.selectAll(".dot")
+    .data(data)
+  .enter()
+    .append("circle")
+    .attr("class", "dot")
+    .attr("id", function(d) { return d[0]; })
+    .attr("r", 3.5)
+    .attr("fill", function(d) { return fill(d[0]); })
+    .attr("cx", function(d) { return xScale(d[1]); })
+    .attr("cy", function(d) { return yScale(d[2]); });
+\end{verbatim}
+\item Axis and legends, if needed, are created and labeled.
+\item Mouse over behavior is defined.
+\end{itemize} 
+
+By modifying only the attributes that actually change, D3 reduces overhead and allows greater graphical complexity at high frame rates.
+
+\section{Conclusion}
+WRITE ME PLEASE
 
 \chapter{Evaluation and Discussion}
 This chapter describes the evaluation of AC\lightning{}DV. Visualizations are usually evaluated using empirical methods, e.g. user trials. AC\lightning{}DV is not an end user tool so such evaluations would not be relevant. Instead an analytic approach is adopted. The functionality of the AC\lightning{}DV is assessed with respect to the project goals and research question.

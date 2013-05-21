@@ -579,7 +579,53 @@ This chapter has introduced and discussed aspects relating to the design of this
 
 \chapter{Implementation}
 
- D3s data parser returns an array of objects. Each object corresponds to a single record in the dataset. The object contains a number of name value pairs. Json files are organized in this way but for CSV files it is assumed that the first line is the header. This header is mandatory, not optional as defined in the CSV RFC \todo{Cite again}.
+The implementation of AC\lightning{}DV followed the design quite closely. For this reason the implementation of the classification system will be described as the respective components are triggered during an example execution flow. The implementation process and any issues encountered will be described in the course of this description. This is followed by a description of the Chart API.
+
+\section{Classification Component}
+Although the Chart API required the bulk of the implementation effort the classification component contains the application logic.
+
+\subsection{Data input}
+AC\lightning{}DV is begins with data input. Two data formats are supported, comma separated value files, or CSV \todo{cite rfc}, and json \todo{Cite rfc}. Input is parsed using D3. An example call is shown below. The ``pickChart" call executes AC\lightning{}DV. It requires no parameters other than the input data file. Such a small code footprint makes it relatively easy construct a user interface around AC\lightning{}DV. A simple example that allows users to load in and compare multiple datasets was created to illustrate the use cases presented in section \ref{use_cases}. 
+
+\begin{verbatim}
+d3.csv("data/edu.csv", pickChart)
+\end{verbatim}
+
+The D3 parser returns a common data format for all types of input. These data object contain a number of name value pairs. Each object corresponds to a single record in the dataset. The object contains a number of name value pairs. Json files are organized in this way but for CSV files it is assumed that the first line is the header. This header is mandatory, not optional as defined in the CSV RFC \todo{Cite again}. An example entry from a trivariate dataset is shown below. The quoted entries are taken from the elements of the data set. The key values associated with them are taken from the first row in the case of CSV.
+
+
+
+\begin{verbatim}
+Third: "50"
+Name: "CLONMETHAN"
+Population 2006: "625"
+Unemployed 2006: "19"
+\end{verbatim}
+
+One small problem was presented by this data format. It is designed for deterministic access. The whole idea behind AC\lightning{}DV was to build a generic data visualizer so the data needs to be modified to allow non-deterministic, i.e. array style, access. The final implementation of the classification component simply extracts the keys at runtime and uses them to access the data like so: $data[keys[1]]$.  
+
+
+\subsection{Classifier}
+The parsed data is then feed into the classification component. Classification is only performed on the first data object, or the first entry of the dataset. This is done to speed up system execution. It is assumed that all data entries share the same properties. This assumption is valid when working with relational data.
+
+The first object is then classified and the properties returned are associated with the dataset. These properties are:
+\begin{itemize}
+\item Size: the number of entries in the dataset.
+\item Dimensionality: the number of variables in the dataset minus 1. It is assumed all input datasets have a single independent variable.
+\item Keys: the variable names. These are used to label the data when it is displayed in the view. They are also used by the system to access the data during processing.
+\item Data types: The type of each element is determined. 
+\end{itemize}
+
+Type determination involved a number of challenges. Numbers are classified as quantitative variables and all other input is classified as ordinal. Dates are an exception. While a date is typically represented by an alphanumeric character string it can be thought of as both an ordinal label or a quantity. The internal representation of a date is a number so dates are classified as quantitative variables by AC\lightning{}DV. 
+
+Determining if a string represents a number in Javascript is somewhat tricky. The language is loosely typed and generally seems to be somewhat sloppy when determining type information. An elegant solution was ultimately provided by a language expert \todo{Citation}; 
+\begin{verbatim}
+!isNaN(parseFloat(n)) && isFinite(n);
+\end{verbatim}
+
+These properties are associated with the dataset and used to by the visualization selection stage.
+
+\subsection{Visualization Selection}
 
 
 \chapter{Evaluation and Discussion}
@@ -720,7 +766,9 @@ AC\lightning{}DV uses no more than three retinal variables for any one graphical
 
 
 
-\section{Effectiveness.} In order to evaluate the effectiveness of AC\lightning{}DV two use cases have been created. 
+\section{Effectiveness.} 
+\label{use_cases}
+In order to evaluate the effectiveness of AC\lightning{}DV two use cases have been created. 
 
 \subsection{Coffee Chain Expenses}
 

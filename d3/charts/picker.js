@@ -65,7 +65,7 @@ function pickChart(data) {
 				var div = createChartArea(i, charts[i][0]);
 				var parseDate = createParseDate(classifier);
 
-				
+
 				d3.select(div)
 					.datum(data)
 				  .call(current_chart
@@ -104,6 +104,9 @@ function pickChart(data) {
 				var current_chart = charts[i][1];
 				var div = createChartArea(i, charts[i][0]);
 				var parseDate = createParseDate(classifier);
+
+								console.log(data);
+
 
 			d3.select(div)
 				.datum(data)

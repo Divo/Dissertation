@@ -79,6 +79,32 @@
 
 \newpage
 
+
+\null
+\vfill
+\begin{center} 
+Submitted to Graduate Faculty of \\
+Department of Computer Science\\
+Of the requirements for the degree of\\
+Masters Computer Science (MCS)\\
+\end{center}
+\clearpage
+
+\chapter*{Declaration}
+I declare that this thesis has not been submitted as an exercise for a degree at this or
+any other university and it is entirely my own work.
+I agree to deposit this thesis in the University’s open access institutional repository or
+allow the library to do so on my behalf, subject to Irish Copyright Legislation and
+Trinity College Library conditions of use and acknowledgement.
+\null
+\vfill
+\noindent\begin{tabular}{ll}
+\makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
+Signature & Date\\[8ex]% adds space between the two sets of signatures
+\end{tabular}
+\clearpage
+
+
 \begin{abstract}
 This paper presents a system to automatically generate suitable visualizations given arbitrary data. Data Visualization is an increasingly common technique used to reinforce human cognition. In many areas of human activity the volume of data being generated is increasing rapidly. New methods must be employed to assist in the comprehension of this data. There has been a good amount of research performed to assess what factors contribute to the creation of an effective visualization. Additionally many new and novel visualizations have been created. However, automatic generation of visualizations has received little attention.
 
@@ -87,12 +113,30 @@ Such a tool would help to combine these two areas of research. An understanding 
 Using the limited amount of information contained in a raw dataset it is possible to select a comprehensible visualization. As the dataset becomes increasingly complex the effectiveness of such a system diminishes. A number of datasets are input to the system and an evaluation is undertaken. The results presented show that such a system can be used to assist users in the creation of suitable visualizations while avoiding the creation of inappropriate or even misleading visualizations.
 \end{abstract}
 
+
+\chapter*{Attestation}
+I understand the nature of plagiarism, and I am aware of the University’s policy on this.
+I certify that this dissertation reports original work by me during my University project.
+\\
+\null
+\vfill
+\noindent\begin{tabular}{ll}
+\makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
+Signature & Date\\[8ex]% adds space between the two sets of signatures
+\end{tabular}
+\clearpage
+
+
+
+\chapter*{Acknowledgements}
+\clearpage
+
 \tableofcontents
+\clearpage
 
 \newpage
  
 \chapter{Introduction} 
-\todo{10/04/2013 changes in onenote}
 This chapter introduces the dissertation topic and explains the motivation behind the work. A research question is purposed and a number of objectives are outlined in an attempt to satisfy it. This is followed by evaluation criteria and finally by a summary of the document structure.
 
 \section{On Visualization}
@@ -111,19 +155,26 @@ Scientific Visualization is concerned primarily with the visualization of object
  
 \section{Motivation and Description} 
 
-Data Visualization is defined as an internal construction in the mind. The field of Data Visualization is connected with creating visual artifacts in order to facilitate individuals in building an internal representation of a dataset \cite{spence2001information}. Data Visualization is not a new field but it has only become an established area of scientific research in recent years \todo{Cite journal dates}. The volume of data a typical computer can generate and process far exceeds what a human can comprehend. Data Visualization is becoming an increasingly popular technique to aid this comprehension.
+Data Visualization is defined as an internal construction in the mind. The field of Data Visualization is connected with creating visual artifacts in order to facilitate individuals in building an internal representation of a dataset \cite{spence2001information}. Data Visualization is not a new field but it has only become an established area of scientific research in recent years \cite{friendly2001milestones}. The volume of data a typical computer can generate and process far exceeds what a human can comprehend. Data Visualization is becoming an increasingly popular technique to aid this comprehension.
 
-Information visualization is a growing area of research. Presently there is a good amount of discussion surrounding new and novel visualization techniques and how to create effective visualizations \todo{Cite IEEE Visualization Journal, Sage and others}. The articles presented in these journals typically focus on the creation of specific visualizations, new and interesting ways to graphically represent specific types of data. There is also a suitable body of literature concerning the  process of creating a visualization. There have been a number of books published on the subject \todo{Mazza, Shneiderman, Approche Graphique, Haskell etc}. These works outline the steps needed to visualize different types of data but do not attempt to automate the process.
+Information visualization is a growing area of research. Presently there is a good amount of discussion surrounding new and novel visualization techniques and how to create effective visualizations. The articles presented in these journals typically focus on the creation of specific visualizations, new and interesting ways to graphically represent specific types of data. There is also a suitable body of literature concerning the  process of creating a visualization. There have been a number of works published on the subject \cite{mazza2009introduction}, \cite{shneiderman1996eyes}, \cite{bertin1973semiologie}, \cite{haskell1919make}. These works outline the steps needed to visualize different types of data but do not attempt to automate the process.
 
-The majority of new techniques exists in some degree of isolation. Individual implementations typically exist in near complete isolation, often with the dataset hard coded into the software. \todo{How do you back up a claim like this? Perhaps get rid of it}  There are a number of products \todo{Ref state of the art or just leave for SOA?} that attempt to create a complete end to end process for visualizing data sets. These products are either highly specialized \todo{again, state of the art, gretl would be a good example, need more} or lack complex visualizations and require user input throughout the process \todo{Excel}. 
+The majority of new techniques exists in some degree of isolation. Individual implementations typically exist in near complete isolation, often with the dataset hard coded into the software.  There are a number of products that attempt to create a complete end to end process for visualizing data sets. These products are either highly specialized or lack complex visualizations and require user input throughout the process. An evaluation of a number of such systems is presented in section \ref{viz_tools}
 
-Highly specialized applications such as gretl can afford to make numerous assumptions about the input dataset. It is assumed they will be used as part of a specific suite of tools and as such are able to directly process the proprietary output of such tools. Such output is often rich with meta-data which is used to assist the visualization process \todo{Either cover this in SOA or get rid of it}.
+Highly specialized applications such as gretl can afford to make numerous assumptions about the input dataset. It is assumed they will be used as part of a specific suite of tools and as such are able to directly process the proprietary output of such tools. Such output is often rich with meta-data which is used to assist the visualization process.
 
-General purpose tools such as Microsoft Excel contain a number of simple charts and graphs. They require a basic level of user training to create and offer no assistance in selecting the most appropriate chart for a given dataset. This often leads to unsatisfactory, confusing or even misleading results \todo{Show a really bad example of excel output}. 
+General purpose tools such as Microsoft Excel contain a number of simple charts and graphs. They require a basic level of user training to create and offer no assistance in selecting the most appropriate chart for a given dataset. This often leads to unsatisfactory, confusing or even misleading results. Figure \ref{excel_example} shows a snippet from an example data set and two visualizations produces by excel. The pie-chart omits a variable as it is not intended to visualize bivariate data. The scatter plot has plotted each variable independently. It is possible to combine them but the user may require training to do so. 
 
-With a few exceptions, such as gretl, these tools are proprietary and lack documentation on the techniques they use \todo{This is another rather bold claim}.
+\begin{figure}[htp] \centering
+\includegraphics[width=\textwidth]{excel.png}
+\caption{Example dataset and Excel visualization output.}
+\label{excel_example}
+\end{figure}
 
-This paper aims to address these deficiencies by providing a fully automated end to end visualization tool for arbitrary datasets. There have been some notable projects that accomplish such a goal. \todo{Polaris, Mackinlay. Need to look back over these and pick out what was expanded upon.} Emphasis has been placed on areas where previous works have relied on human actors to complete the process.
+
+With a few exceptions these tools are proprietary and lack documentation on the techniques they use.
+
+This paper aims to address these deficiencies by providing a fully automated end to end visualization tool for arbitrary datasets. There have been some notable projects that accomplish such a goal \cite{stolte2002polaris}, \cite{mackinlay1986automating}. Emphasis has been placed on areas where previous works have relied on human actors to complete the process.
 
 %-User Need
 %-Gap in research
@@ -134,29 +185,29 @@ This paper aims to address these deficiencies by providing a fully automated end
 
 	\section{Research Question}
 
-The objective of this project is to determine to what extent can suitable visualizations be dynamically and automatically generated using browser based technologies. The Automatic Classifier and Data Visualizer, or AC\lightning{}DV is presented. The goals for the project are as follows:
+The objective of this project is to determine to what extent can suitable visualizations be dynamically and automatically generated using browser based technologies. The goals for the project are as follows:
 \begin{itemize}
 \item Design and develop software capable of accepting arbitrary data in a specific format and display it using suitable visualizations. This should be done without an intervention from the user.
 \item Access the level of benefit that the visualizations can bring to potential users from various fields.
 \item Investigate to what extent visualizations can be generated given only an input dataset.
 \item Elaborate on the potential of a more sophisticated version of the software using additional techniques to determine features of input datasets.
 \end{itemize}
-Key to this project is the notion of suitable visualizations. In order for a visualization to be considered useful it must meet several criteria. This will be outlined in detail in later sections \todo{Ref appropriate chapter}. 
+Key to this project is the notion of suitable visualizations. In order for a visualization to be considered useful it must meet several criteria. These criteria will be outlined in detail in section \ref{section:VMapping} 
 
-Browser based technologies have been selected due to their wide-scale support. The goal of the system is to simplify the process of visualization creation. Browser based technologies require no setup or configuration and thus simplify the process. \todo{But it's not an end user app so is this sufficient justification?}. The use of browser based technologies also help to offload the vast majority of computation to the client. Were AC\lightning{}DV to be developed further this approach would significantly reduce the cost needed to operate it as a service.
+Browser based technologies have been selected due to their wide-scale support. The goal of the system is to simplify the process of visualization creation. Browser based technologies require no setup or configuration and thus simplify the process. The use of browser based technologies also help to offload the vast majority of computation to the client. Furthermore client side technologies allow the bulk of computational effort to be offloaded from the server. These technologies have matured to a point where very elaborate applications can be run on a clients machine with the server merely providing data.
 
 
 	\section{Evaluation}
 
 The system will be evaluated by inputting a number of datasets and assessing the output against the previously stated goals. A number of use cases have been drawn up to determine how beneficial such a tool is in aiding various users in visualizing data. These use cases entail typical visualization tasks a user from any number of different fields may encounter, i.e. visualizing expenditure and returns for different products.
 
-\todo{Switching between tenses a bit here}. AC\lightning{}DV is not intended as an application suitable for direct use by end users. It is the potential core of an easy to use visualization tool. For this reason an evaluation of the user experience is not needed. The goal of the system is to quickly produce effective visualizations that represent the data accurately.
+The intention is not to create a system suitable for direct use by end users. It is the potential core of an easy to use visualization tool. For this reason an evaluation of the user experience is not needed. The goal of the system is to quickly produce effective visualizations that represent the data accurately.
 
-Visualizations are composed of many individual elements with different attributes such as colour, size and spatial location. These elements have been the subject of previous research and a number of guidelines exists outlining their usage \todo{Cite Mazza, Jock etc. CALL them retinal variables}. However these guidelines are not hard rules and their exists no formal way to evaluate a complete visualization. Methods from the field of Human Computer Interaction are typically used, specifically user evaluations and trails. AC\lightning{}DV generates visualizations that are well understood, thus eliminating the need for lengthy user evaluations concerning the effectiveness of the individual output visualizations. The guidelines stated above are used by the system to pick appropriate visualizations. These guidelines will be used to benchmark the effectiveness of visualizations produced by the system.
+Visualizations are composed of many individual elements with different attributes such as colour, size and spatial location. These elements have been the subject of previous research and a number of guidelines exists outlining their usage. However these guidelines are not hard rules and their exists no formal way to evaluate a complete visualization. Methods from the field of Human Computer Interaction are typically used, specifically user evaluations and trails. Visualizations that are well understood are used, thus eliminating the need for lengthy user evaluations concerning the effectiveness of the individual output visualizations. The guidelines stated above are used by the system to pick appropriate visualizations. These guidelines will be used to benchmark the effectiveness of visualizations produced by the system.
 
 	\section{Overview}
  
-This chapter is followed by a survey of the State of the Art in the areas of automated visualization and the visualization process. chapter 3 examines the design of the visualization tool and gives an overview of the process of Information Visualization. chapter 4 gives a complete description of the projects implementation and any problems encountered. chapter 5 is an evaluation of the project and a discussion of its merits and failures. The extent to which such a system is viable is also discussed in this chapter. The paper concludes with a look at potential future work that could extend AC\lightning{}DV.
+This chapter is followed by a survey of the State of the Art in the areas of automated visualization and the visualization process. chapter 3 examines the design of the visualization tool and gives an overview of the process of Information Visualization. chapter 4 gives a complete description of the projects implementation and any problems encountered. chapter 5 is an evaluation of the project and a discussion of its merits and failures. The extent to which such a system is viable is also discussed in this chapter. The paper concludes with a look at potential future work.
 %-Go into contents of each chapter a bit
 %-Expose the argument thread. THIS is the focus. Stay with argument.
 
@@ -252,7 +303,7 @@ Structure of the Information Visualization Design Space presents a good overview
 The focus of this paper is automated visualization, taking a dataset and generating a visualization from it without any user input. There are a few projects that incorporate some kind of automated data visualizer. Generally such a visualizer is part of a larger project and requires user interaction to function. This chapter presents two such projects with varying degrees of automation.
 
 		\subsection{Polaris}
-Polaris extends the well known pivot table interface \todo{citation} to display information visually. Multiple visualizations are displayed on a pivot table which the user can interact with by selecting or ``brushing" data-points to filter the displayed data. The visualizations act as interactive query builder that allow user to explore large datasets quite rapidly. First published in 2000 it has evolved into Tableau, a commercial visualizations product.
+Polaris extends the well known pivot table interface to display information visually \cite{stolte2002polaris}. Multiple visualizations are displayed on a pivot table which the user can interact with by selecting or ``brushing" data-points to filter the displayed data. The visualizations act as interactive query builder that allow user to explore large datasets quite rapidly. First published in 2000 it has evolved into Tableau, a commercial visualizations product.
 
 Polaris consists of two main components. A graphic generator and a database query generator. The database query generator will be omitted in this discussion as it is not relevant this thesis. The graphic generator makes several assumptions about the nature of the input data. Similar assumptions are made in this thesis. 
 \begin{itemize} 
@@ -267,7 +318,7 @@ single generated graphic.
 
 The user interacts with a relatively complex UI. The UI contains a number of ``shelves" onto which the user places data-sources and data records. The user also selects what type of mark to associate with each record. The selected mark and nature of the data is used by the system to determine what type of visualization to render. For example, if the data-source contains an ordinal and quantitative field and the user selects a bar as the mark to use a bar chart is generated. If the user selects a dot as the mark a dot plot is generated. An understanding of Bertins retinal variables \cite{bertin1973semiologie} is encoded into the system to ensure the visualizations are comprehensible. It is not clear how Polaris handles input that cannot be effectively displayed using these rules, e.g. when the input data set is too large to be displayed.
 
-Polaris allows multiple series of data to be overlaid on the same visualization but it does not appear to allow more than two dimensions of data to be displayed at the same time. As it is a data exploration tool it requires user input too function. While it does contain an understanding of retinal variables these are used to automate the generation of mappings between data and graphical marks. It does not contain any rules governing how the various retinal variables are combined so it may be possible for a user to create ineffective or incomprehensible visualizations \todo{Go into a bit more and cite}.
+Polaris allows multiple series of data to be overlaid on the same visualization but it does not appear to allow more than two dimensions of data to be displayed at the same time. As it is a data exploration tool it requires user input too function. While it does contain an understanding of retinal variables these are used to automate the generation of mappings between data and graphical marks. It does not contain any rules governing how the various retinal variables are combined so it may be possible for a user to create ineffective or incomprehensible visualizations.
 
 		\subsection{A Presentation Tool}
 
@@ -275,54 +326,52 @@ A Presentation Tool, henceforth referred to as APT, is an application-independen
 
 APT is divided into three parts, expressiveness, effectiveness and composition. Expressiveness determines how the input information can be expressed in a graphical language. It is encoded into a formal language. This languages main purpose is to ensure that any graphic encodes all of the input data and only the input data. It is not used to select entire graphics, rather it is used to test individual graphical mappings, i.e. to a single axis or type of mark.
 
-Effectiveness is is used to determine which of the sentences generated by the expressiveness phase is most effective at displaying the data in a useful manner \todo{Double check expressiveness and effectiveness synchronous w.r.t each other.} It is dependent on the capabilities of the user. There is a difficulty in that no verified theory of human perceptual capabilities exists so one is purposed. It is based off Bertins retinal variables \cite{bertin1973semiologie} which have been ranked in order of effectiveness by Cleveland and McGill \cite{cleveland1984graphical}. This ranking has been extended to include rankings of ordinal and nominal types of data although this extension has not been empirically verified \todo{Does Mazza match up with this ranking?}.
+Effectiveness is is used to determine which of the sentences generated by the expressiveness phase is most effective at displaying the data in a useful manner. It is dependent on the capabilities of the user. There is a difficulty in that no verified theory of human perceptual capabilities exists so one is purposed. It is based off Bertins retinal variables \cite{bertin1973semiologie} which have been ranked in order of effectiveness by Cleveland and McGill \cite{cleveland1984graphical}. This ranking has been extended to include rankings of ordinal and nominal types of data although this extension has not been empirically verified \cite{card1999readings}.
 
-The system generates multi-dimensional graphics by combining the effectively one dimensional or single data series sentences generated in the expressiveness and effectiveness stages. Designs are merged on common data. The types of data to merge on are ordered in terms of effectiveness.
+APT generates multi-dimensional graphics by combining the effectively one dimensional or single data series sentences generated in the expressiveness and effectiveness stages. Designs are merged on common data. The types of data to merge on are ordered in terms of effectiveness.
 \begin{itemize}
 \item Mark composition.
 \item Double axis composition.
 \item Single axis composition.
 \end{itemize}
-\todo{Replace the system with relevant name}
 APT combines these three stages using artificial intelligence techniques. The algorithm has three steps: partition, selection and composition. Each step contains various choices. If these choices do not lead to design backtracking is used to consider others.
 \begin{itemize}
 \item Partitioning: Each set of relations, or columns in the database, are partitioned to match the criteria of of one of the sentences defined in the expressiveness stage.
 \item Selection: A list of candidate designs for each partition is ordered in terms of effectiveness. 
 \item Composition: The individual designs are composed into unified presentations of all the input data using the composition algebra.
 \end{itemize}
-\todo{Example in notes of bar-chart rule.}
 
 Overall APT is a very robust and complex system. However it is perhaps somewhat dated. It is only capable of generating static graphics. It can also factor in the output media into the design choices, i.e. if the screen is monochrome colour is omitted for the effectiveness stage. The use of A.I. techniques is a novel and somewhat unique approach. The parameters of APT are not made completely clear, it is not clear what the limits of its capabilities are.
 
 \section{Data Visualization Tools}
-Thus far a reasonably complete examination of various visualization systems and processes have been discussed. However in order to get a more complete sense of the state of the art of automated visualization a broader approach is needed. This section presents brief summaries of a number of visualization design tools. These tools are then used to create a feature matrix presented in Table \ref{feature_matrix}. \todo{Blurb here about general groupings of tools}
+\label{viz_tools}
+Thus far a reasonably complete examination of various visualization systems and processes have been discussed. However in order to get a more complete sense of the state of the art of automated visualization a broader approach is needed. This section presents brief summaries of a number of visualization design tools. These tools are then used to create a feature matrix presented in Table \ref{feature_matrix}.
 
 \paragraph{Gretl}
-Gretl is a software package for econometric analysis\todo{Citation}. It provides a wide variety of financial calculations and ,notably , visualizations. It is a highly specialized application and generally expects data formatted in a certain way. The user must pick the type of chart to render. No further user input is needed. Admittedly very few intermediary processing steps are needed to generate a specific visualization given a pre-defined data format. However Gretl can handle some variation in this format so the process is not a straight mapping. The types of visualizations generated include line graphs, box blots, scatter plots and other graphics typical of econometric analysis. Gretl automatically ranges the dataset so the output visualizations are always comprehensible.
+Gretl is a software package for econometric analysis \cite{gretl}. It provides a wide variety of financial calculations and ,notably , visualizations. It is a highly specialized application and generally expects data formatted in a certain way. The user must pick the type of chart to render. No further user input is needed. Admittedly very few intermediary processing steps are needed to generate a specific visualization given a pre-defined data format. However Gretl can handle some variation in this format so the process is not a straight mapping. The types of visualizations generated include line graphs, box blots, scatter plots and other graphics typical of econometric analysis. Gretl automatically ranges the dataset so the output visualizations are always comprehensible.
 
 \paragraph{Microsoft Excel}
-Microsoft Excel is a substantial data analysis tool that centers around a pivot table display \todo{Citation for excel and pivot table}. Users can visualize the data they are working with by selecting the relevant table entries and selecting a chart type. Excel then automatically generates the visualization. Some user training is required in order to produce effective and correct visualizations. It is very easy for a novice user to create nonsensical visualizations, or in the worst case misleading ones. An new version of the software attempts to remedy this by providing functionality to automatically recommend the most effective visualization. A number of visualizations are available but are generally limited to no more than three dimensions. Any exceptions expect data of a specific format, i.e. Candle stick graphs expect specific labels.
+Microsoft Excel is a substantial data analysis tool that centers around a pivot table display \cite{excel}. Users can visualize the data they are working with by selecting the relevant table entries and selecting a chart type. Excel then automatically generates the visualization. Some user training is required in order to produce effective and correct visualizations. It is very easy for a novice user to create nonsensical visualizations, or in the worst case misleading ones. An new version of the software attempts to remedy this by providing functionality to automatically recommend the most effective visualization. A number of visualizations are available but are generally limited to no more than three dimensions. Any exceptions expect data of a specific format, i.e. Candle stick graphs expect specific labels.
 
 \paragraph{Google Charts API}
-Google Charts API is a browser based charts library \todo{citation}. It is an API aimed at developers and is not suitable for end users. User friendly interfaces do exist \todo{Cite Hohi Charts} but it is debatable how easy they are to use without training. The API provides a wide number of visualizations. These visualizations also contain elements of interactivity, leveraging the features of modern browsers to do so. Although it is an API the software is not completely manual. Given an input dataset it is capable of automatically generating visual mappings. However it should again be noted that this process is greatly simplified by having the user select the output visualization to generate. 
+Google Charts API is a browser based charts library \cite{gcharts}. It is an API aimed at developers and is not suitable for end users. User friendly interfaces do exist \cite{hohli} but it is debatable how easy they are to use without training. The API provides a wide number of visualizations. These visualizations also contain elements of interactivity, leveraging the features of modern browsers to do so. Although it is an API the software is not completely manual. Given an input dataset it is capable of automatically generating visual mappings. However it should again be noted that this process is greatly simplified by having the user select the output visualization to generate. 
 
 \paragraph{Tableau}
-Tableau was born out of the research done by Mackinlay\cite{mackinlay1986automating}. Like APT it appears to be a very robust and complex system. Interestingly it makes use of the visual shelving system presented by Polaris \todo{citation}. The user inputs a data source and then select the attributes to visualize. Again, as in Polaris, the data is divided into dimensions and measures. As the user selects attributes to visualize various types of applicable charts are made available. It is not made clear which one of the available visualizations is most effective so the user is left to decide. As it is a progression of the work presented by Mackinlay it is assumed an encoding retinal variables is present.
+Tableau was born out of the research done by Mackinlay \cite{tableau}, \cite{mackinlay1986automating}. Like APT it appears to be a very robust and complex system. Interestingly it makes use of the visual shelving system presented by Polaris \cite{stolte2002polaris}. The user inputs a data source and then select the attributes to visualize. Again, as in Polaris, the data is divided into dimensions and measures. As the user selects attributes to visualize various types of applicable charts are made available. It is not made clear which one of the available visualizations is most effective so the user is left to decide. As it is a progression of the work presented by Mackinlay it is assumed an encoding retinal variables is present.
 
 \paragraph{ManyEyes}
-Many eyes is a web based collaborative visualization authoring tool. Multiple users can work to create a visualization. It offers a wide variety of visualizations but leaves the task of selection completely to the user. If the system cannot generate the selected visualization it notifies the user. Aside from this the user can generate any visualization they see fit. Without an understanding of the various visualizations a user can easily generate ineffective graphics. While the focus of this tool is collaborative authoring it does contain features that automate various aspects of the visualization process. Data can be input in a variety of of formats and the system appears to do a good job of mapping them to appropriate visual features. The visualization engine is Java based \todo{Expand or is that enough for anyone to know?}
+Many eyes is a web based collaborative visualization authoring tool \cite{manyeyes}. Multiple users can work to create a visualization. It offers a wide variety of visualizations but leaves the task of selection completely to the user. If the system cannot generate the selected visualization it notifies the user. Aside from this the user can generate any visualization they see fit. Without an understanding of the various visualizations a user can easily generate ineffective graphics. While the focus of this tool is collaborative authoring it does contain features that automate various aspects of the visualization process. Data can be input in a variety of of formats and the system appears to do a good job of mapping them to appropriate visual features. The visualization engine is Java based.
 
 \paragraph{OpenHeatMap}
-OpenHeatMap is a web based geographic visualization tool. It allows users to overlay data across various maps. It is very easy to use. A dataset is uploaded and the visualization is presented. It is not clear what the formatting restrictions of the input data is but it appears to be relatively robust if occasionally fickle. The software is flash based and struggles noticeably with even moderately sized datasets. The user can zoom and pan the visualization interactively.
+OpenHeatMap is a web based geographic visualization tool \cite{openheatmap}. It allows users to overlay data across various maps. It is very easy to use. A dataset is uploaded and the visualization is presented. It is not clear what the formatting restrictions of the input data is but it appears to be relatively robust if occasionally fickle. The software is flash based and struggles noticeably with even moderately sized datasets. The user can zoom and pan the visualization interactively.
 \paragraph{D3}
-D3 is a browser based charts library. It offers much more control and flexibility then Google Charts API and as a result requires a substantially greater amount of developer effort. Whereas Google Charts offers complete visualizations D3 sits at a much lower level of abstraction. It is a tool set developers can use to create their own visualizations from scratch. 
+D3 is a browser based charts library \cite{d3}. It offers much more control and flexibility then Google Charts API and as a result requires a substantially greater amount of developer effort. Whereas Google Charts offers complete visualizations D3 sits at a much lower level of abstraction. It is a tool set developers can use to create their own visualizations from scratch. 
 
-\todo{Published in 1986, perhaps too old?}
 
 \section{Analysis}
-Presently there is a good amount of literature surrounding individual visualization as demonstrated by \cite{mazza2009introduction}, \todo{Cite Structure of information} and large degree of consensus on how to go about creating a visualization. However there have only been a few attempts to automate such a system. Such an application would not only allow users to quickly produce useful and accurate visualizations but would also server to validate the process that has become agreed upon. Such an evaluation is frequently omitted from these publications. Mazza outlines a set of criteria to evaluate individual visualizations \cite{mazza2009introduction} but the focus of this thesis is testing if the entire process is valid. 
+Presently there is a good amount of literature surrounding individual visualization as demonstrated by \cite{mazza2009introduction}, and large degree of consensus on how to go about creating a visualization. However there have only been a few attempts to automate such a system. Such an application would not only allow users to quickly produce useful and accurate visualizations but would also server to validate the process that has become agreed upon. Such an evaluation is frequently omitted from these publications. Mazza outlines a set of criteria to evaluate individual visualizations but the focus of this thesis is testing if the entire process is valid. 
 
-Works such as Polaris \todo{citation} and APT \todo{citation} suggest that this process is indeed valid. However Polaris does rely on the user for some tasks. APT appears to be a very robust and complex system but is somewhat dated and cannot generate visualizations with any interactivity. Given the ubiquity of powerful computing platforms this seams to be quite a large deficiency. The project presented in this thesis aims to create an automated version of the visualization process. The interesting aspects and possible deficiencies of the various systems examined in this chapter are summarized in the table below. The terms used to evaluate each system are qualified below the table.
+Works such as Polaris and APT suggest that this process is indeed valid. However Polaris does rely on the user for some tasks. APT appears to be a very robust and complex system but is somewhat dated and cannot generate visualizations with any interactivity. Given the ubiquity of powerful computing platforms this seams to be quite a large deficiency. The project presented in this thesis aims to create an automated version of the visualization process. The interesting aspects and possible deficiencies of the various systems examined in this chapter are summarized in the table below. The terms used to evaluate each system are qualified below the table.
 
 
     \begin{sidewaystable}
@@ -343,7 +392,7 @@ Works such as Polaris \todo{citation} and APT \todo{citation} suggest that this 
 \label{feature_matrix}
 \end{sidewaystable} 
 \label{project_goals}
-\paragraph{Native Browser Based.} The systems runs in a web-browser environment using native web technologies. These technologies, i.e. HTML5, SVG, EMCAScript etc, arguably compose the most widely adopted software platform in history. These technologies are described via specifications and implemented by multiple vendors. This approach has several benefits compared to older container based web-technologies such as Java or Flash. \todo{Citations everywhere} \todo{Go into this more back in the intro and ref from here}
+\paragraph{Native Browser Based.} The systems runs in a web-browser environment using native web technologies. These technologies, i.e. HTML5, SVG, EMCAScript etc, arguably compose the most widely adopted software platform in history. These technologies are described via specifications and implemented by multiple vendors. This approach has several benefits compared to older container based web-technologies such as Java or Flash.
 
 \paragraph{Automatic Visualization.} Given a dataset the system should be capable of automatically generating visualizations with no user input during the visualization process. Tasks such as selecting which entries to visualize or what visualization to output are not included as user tasks in this context, only the tasks involved in mapping data entries to graphical marks.
 
@@ -356,7 +405,7 @@ This is somewhat hard to quantify meaningfully as it depends on the capabilities
 
 \paragraph{Interactive.} The system should provide some sort of interaction. This can be as simple as scroll over text or as complex as multiple nested visualizations than can be panned and enlarged. 
 
-\paragraph{Automatic Feature Determination.} The system should be able to automatically determine the features of the dataset. These include attributes such as dimensionality and types of data. Systems with a limited number of uses typically have this information hard coded in based on data labels and do not determine it at runtime. \todo{This is weak, maybe take it out}
+\paragraph{Automatic Feature Determination.} The system should be able to automatically determine the features of the dataset. These include attributes such as dimensionality and types of data. Systems with a limited number of uses typically have this information hard coded in based on data labels and do not determine it at runtime.
 
 \paragraph{No User Input Required.} At no point should the user have input information into the system. This extends automatic visualization requirement by including such actions as selecting an output visualization.
 
@@ -366,13 +415,12 @@ The work started by Bertin \cite{bertin1973semiologie} has been incredibly influ
 This thesis will attempt to determine to what extent can suitable visualization be dynamically and automatically be generated from arbitrary data using browser based technologies. At no point should the user have to provide input. Browser based technologies have in recent years become very powerful platforms and are perhaps the most ubiquitous software platforms in existence. 
 
 \section{Conclusion}
-Chapter 2 \todo{Replace section with chapter in the text} introduced a state of the art automated and manual visualization processes and how they can be used to simplify the creation of visualizations from arbitrary data. By making the process of creating a visualization easier more data can visualized and thus comprehended more readily. Many existing systems are limited by requiring human intervention. If the user is untrained they can introduce errors which may lead to confusing or even mis-representative visualizations. 
+This chapter introduced a state of the art of automated and manual visualization processes and how they can be used to simplify the creation of visualizations from arbitrary data. By making the process of creating a visualization easier more data can visualized and thus comprehended more readily. Many existing systems are limited by requiring human intervention. If the user is untrained they can introduce errors which may lead to confusing or even mis-representative visualizations. 
 
 
  
 
 \chapter{Design}
-\todo{Take ACDV out of intro?}
 This chapter introduces the design principles and core technologies used in this project. The architecture for the Automatic Classifier and Data Visualizer, henceforth referred to as AC\lightning{}DV, is presented. The visualization process is also described.
 
 The project goals are taken detailed from the state of the art and are detailed in section \ref{project_goals}. They are summarized below:
@@ -410,7 +458,7 @@ Browser based technologies have been selected for use in this project. The core 
 
 \paragraph{Web Server.} AC\lightning{}DV runs entirely on the clients computer. However most web browsers do not support cross-origin resource sharing from local files. Such requests must be sent using HTTP. This means that data stored in an external file can not be loaded into AC\lightning{}DV without the use of a web server. A very simple python server was used in this project but any HTTP server is sufficient. 
 
-One area of concern was performance. Standalone executables have greater access to a machines resources and can take advantages of optimization techniques such as multi-threading \todo{Need citation?} or specialized instruction sets such as Streaming SIMD Extensions \todo{Citation}. This is not usually a problem for browser-based applications but as AC\lightning{}DV may have to process thousands of records some effort has been made to evaluate the its performance and keep it within a reasonable bounds.
+One area of concern was performance. Standalone executables have greater access to a machines resources and can take advantages of optimization techniques such as multi-threading or specialized instruction sets such as Streaming SIMD Extensions \cite{sse}. This is not usually a problem for browser-based applications but as AC\lightning{}DV may have to process thousands of records some effort has been made to evaluate the its performance and keep it within a reasonable bounds.
 
 
 \section{Overview of Data Visualization Process}
@@ -437,7 +485,7 @@ A variety of different techniques have been proposed to created date visualizati
     \item Univariate. One dependent attribute varies with respect to an independent variable. Example visualizations include Bar and pie charts.
     \item Bivariate. Two dependent attributes vary with respect to an independent variable. Example visualizations include Histograms. 
     \item Trivariate. Three dependent attributes vary with respect to an independent variable. Example visualizations include Bubble charts and Tree Maps.
-    \item Multivariate. Four or more dependent attributes vary with respect to an independent variable. This is where visualization becomes much more difficult because people are not used to working in four or more dimensions. Example visualization include Parallel Coordinates \todo{citation} and Scatter-plot Matrices. \todo{Citation}
+    \item Multivariate. Four or more dependent attributes vary with respect to an independent variable. This is where visualization becomes much more difficult because people are not used to working in four or more dimensions. Example visualization include Parallel Coordinates \cite{inselberg1991parallel} and Scatter-plot Matrices \cite{elmqvist2008rolling}.
   \end{itemize}
 
   Generally multiple instances of the same type of visualization can be combined to create a visualization of greater dimensionality, i.e. Clustered bar charts can be used to show data with many dimensions. There are limits on the combination of visualizations. These limitations vary depending on the specific type of visualization and will be addressed in Section \ref{section:VMapping}.
@@ -469,7 +517,7 @@ Each of the options described here help to point a specific visualization techni
 
 \section{Visual Mapping}
 \label{section:VMapping}
-Visual Mapping is the most important aspect of creating a visualization. If the elements of a dataset are mapped to visual elements effectively any patterns in that dataset are easily perceivable. A poor mapping results in these patterns becoming almost imperceptible. Creating an effective mapping is done by understanding and exploiting the way humans perceive what they see. Certain visual properties will more readily draw focus. There is a model detailing the effectiveness of various visual properties although it is not concrete. This model of human perception began with the work of Bertin \cite{bertin1973semiologie} and has since been expanded \todo{citations}.
+Visual Mapping is the most important aspect of creating a visualization. If the elements of a dataset are mapped to visual elements effectively any patterns in that dataset are easily perceivable. A poor mapping results in these patterns becoming almost imperceptible. Creating an effective mapping is done by understanding and exploiting the way humans perceive what they see. Certain visual properties will more readily draw focus. There is a model detailing the effectiveness of various visual properties although it is not concrete. This model of human perception began with the work of Bertin \cite{bertin1973semiologie} and has since been expanded \cite{card1999readings} \cite{few2004show}.
 
 \subsection{Memory}
 Human perception is composed of human vision and human memory. What we see is stored in memory and then processed. There are three basic types of memory:
@@ -541,7 +589,15 @@ The combination of attributes is a far harder problem and has not been the subje
 Short term memory and pre-attentive processing play an extremely important role in the design of effective visualizations. An understanding of these pre-attentive attributes can be used to make the most important information draw the focus of the viewer. If the rules surrounding these are ignored it can result in incomprehensible visualizations.
 
 \section{Architecture}
-AC\lightning{}DV consists of two main components. A chart API and a classifier. Data is input to the classifier which determines an appropriate visualization and displays it in the view. These two components are distinct. The chart API can be used completely independently. If a user does not wish to use AC\lightning{}DV as an automated tool they can use the visualizations directly. Similar chart APIs do exist \todo{reference DC.js} but are relatively complex to use, usually requiring large amount of arguments or specific setup steps before they can be used. The goal of AC\lightning{}DV was to create a chart API that used a minimum of parameters. Simplifying the the interaction between the two main components in this way reduces development effort, reduces coupling and promotes re-usability. \todo{Diagrams}
+AC\lightning{}DV consists of two main components. A chart API and a classifier. Data is input to the classifier which determines an appropriate visualization and displays it in the view. These two components are distinct. The chart API can be used completely independently. If a user does not wish to use AC\lightning{}DV as an automated tool they can use the visualizations directly. Similar chart APIs do exist \cite{dcjs} but are relatively complex to use, usually requiring large amount of arguments or specific setup steps before they can be used. The goal of AC\lightning{}DV was to create a chart API that used a minimum of parameters. Simplifying the the interaction between the two main components in this way reduces development effort, reduces coupling and promotes re-usability.
+
+\begin{figure}[htp] \centering
+\includegraphics[width=\textwidth]{arch.jpg}
+\caption{System Architecture}
+\label{fingal1}
+\end{figure}
+
+
 
 The system has been designed in this way to reflect the visualization process described above. The classifier encodes a paired down version of the process outlined by Mazza detailed in section \ref{Mazza_Process}. This approach also has the benefit of yielding a chart API that can be used by developers who wish to easily create a specific type of visualization.
 
@@ -565,7 +621,7 @@ As mentioned the classifier based on the process outlined by Mazza. It is summar
 
 The first and last stages of the pipeline are fixed as they depend on the needs of the user. The most generic choices have instead been selected. A communicative visualization gives an overview of the dataset while a manipulable view allows the system to create an interactive visualization. AC\lightning{}DV is not a data processing tool so any transformations on the dataset must be done using other tools. The middle three stages of the pipeline have been the focus of the project.
 
-AC\lightning{}DV reduces the categorization of data to ordinal and quantitative by assigning an implicit ordering to all nominal fields and subsequently treating them as ordinal. The assigned ordering is not important, indeed with many visualizations preserving the ordering of ordinal variables is not important for the final output. All nominal fields are treated as independent variables and quantitative fields treated as dependent variables. These are the same assumptions made by Polaris \todo{Citation}.
+AC\lightning{}DV reduces the categorization of data to ordinal and quantitative by assigning an implicit ordering to all nominal fields and subsequently treating them as ordinal. The assigned ordering is not important, indeed with many visualizations preserving the ordering of ordinal variables is not important for the final output. All nominal fields are treated as independent variables and quantitative fields treated as dependent variables. These are the same assumptions made by Polaris \cite{stolte2002polaris}.
 
 The current implementation of AC\lightning{}DV is limited to producing three visualizations with three or less dimensions. There is no technical reason for this limitation. The classification engine is designed to be extended easily.
 
@@ -592,7 +648,7 @@ The last item is attempted with the notion of ``soft" and ``hard" size. If the d
 
 
 \subsection{API}
-The API consists of a collection of visualizations with shared declaration attributes. The design is based of off Mike Bostock's, the creator of D3, convention for reusable charts \todo{Citation}. All visualization are designed as Javascript closures. Each chart only expects input data and a mapping of each data dimension to visualization ``axis" ( the notion of axis can be unique to each visualization ) , which the classification engine can provide automatically. Attributes such as size and position can be adjusted after declaration if desired. Charts could be extended to included customizable colours and marks like similar libraries \todo{Cite Dc.js again}. However such customization would allow interference with the decisions made in encoding the various retinal attributes.  
+The API consists of a collection of visualizations with shared declaration attributes. The design is based of off Mike Bostock's, the creator of D3, convention for reusable charts \cite{mikeconvention}. All visualization are designed as Javascript closures. Each chart only expects input data and a mapping of each data dimension to visualization ``axis" ( the notion of axis can be unique to each visualization ) , which the classification engine can provide automatically. Attributes such as size and position can be adjusted after declaration if desired. Charts could be extended to included customizable colours and marks like similar libraries \cite{dcjs}. However such customization would allow interference with the decisions made in encoding the various retinal attributes.  
 
 \subsection{Picker}
 The Picker is the glue logic used to combine the classification component and Chart API. It is responsible for creating DOM elements to bind the visualizations too, parsing input data and taking the results of the classification component and invoking the relevant visualizations in the Chart API.
@@ -619,13 +675,13 @@ The implementation of AC\lightning{}DV followed the design quite closely. For th
 Although the Chart API required the bulk of the implementation effort the classification component contains the application logic.
 
 \subsection{Data input}
-AC\lightning{}DV is begins with data input. Two data formats are supported, comma separated value files, or CSV \todo{cite rfc}, and json \todo{Cite rfc}. Input is parsed using D3. An example call is shown below. The ``pickChart" call executes AC\lightning{}DV. It requires no parameters other than the input data file. Such a small code footprint makes it relatively easy construct a user interface around AC\lightning{}DV. A simple example that allows users to load in and compare multiple datasets was created to illustrate the use cases presented in section \ref{use_cases}. 
+AC\lightning{}DV is begins with data input. Two data formats are supported, comma separated value files, or CSV \cite{csv}, and json \cite{json}. Input is parsed using D3. An example call is shown below. The ``pickChart" call executes AC\lightning{}DV. It requires no parameters other than the input data file. Such a small code footprint makes it relatively easy construct a user interface around AC\lightning{}DV. A simple example that allows users to load in and compare multiple datasets was created to illustrate the use cases presented in section \ref{use_cases}. 
 
 \begin{verbatim}
 d3.csv("data/edu.csv", pickChart)
 \end{verbatim}
 
-The D3 parser returns a common data format for all types of input. These data object contain a number of name value pairs. Each object corresponds to a single record in the dataset. The object contains a number of name value pairs. Json files are organized in this way but for CSV files it is assumed that the first line is the header. This header is mandatory, not optional as defined in the CSV RFC \todo{Cite again}. An example entry from a trivariate dataset is shown below. The quoted entries are taken from the elements of the data set. The key values associated with them are taken from the first row in the case of CSV.
+The D3 parser returns a common data format for all types of input. These data object contain a number of name value pairs. Each object corresponds to a single record in the dataset. The object contains a number of name value pairs. Json files are organized in this way but for CSV files it is assumed that the first line is the header. This header is mandatory, not optional as defined in the CSV RFC \cite{csv}. An example entry from a trivariate dataset is shown below. The quoted entries are taken from the elements of the data set. The key values associated with them are taken from the first row in the case of CSV.
 
 
 
@@ -652,7 +708,7 @@ The first object is then classified and the properties returned are associated w
 
 Type determination involved a number of challenges. Numbers are classified as quantitative variables and all other input is classified as ordinal. Dates are an exception. While a date is typically represented by an alphanumeric character string it can be thought of as both an ordinal label or a quantity. The internal representation of a date is a number so dates are classified as quantitative variables by AC\lightning{}DV. 
 
-Determining if a string represents a number in Javascript is somewhat tricky. The language is loosely typed and generally seems to be somewhat sloppy when determining type information. An elegant solution was ultimately provided by a language expert \todo{Citation}; 
+Determining if a string represents a number in Javascript is somewhat tricky. The language is loosely typed and generally seems to be somewhat sloppy when determining type information. An elegant solution was ultimately provided by a language expert \cite{isnumber}; 
 \begin{verbatim}
 !isNaN(parseFloat(n)) && isFinite(n);
 \end{verbatim}
@@ -680,7 +736,7 @@ Javascripts loose typing system was used extensively throughout the implementati
 The selected visualizations are sorted in order of the confidence scores. A ``div" element is created to bind the visualization to. If the classification engine determined an element in the dataset represents a date a date formatter is constructed. The dataset is then passed into each suitable visualization from the Chart API. Relevant entries are converted to dates. Every visualization in the Chart API requires each variable to be passed into it explicitly resulting in a different number of parameters depending on the dimensionality of the visualization. The result is that univariate, bivariate and trivariate visualizations require separate sections of code to invoke them. This is a rather ugly compromise and is due to the design of the Chart API.
 
 \section{Chart API}
-The Chart API uses D3 \todo{This better be cited earlier} extensively. The creator of D3 has purposed a set of guidelines for creating reusable visualizations \todo{citation}. These guidelines influenced the design of the Chart API heavily. They can be summarized as ``implement visualizations as closures with getter-setter methods".
+The Chart API uses D3 extensively. The creator of D3 has purposed a set of guidelines for creating reusable visualizations \cite{mikeconvention}. These guidelines influenced the design of the Chart API heavily. They can be summarized as ``implement visualizations as closures with getter-setter methods".
 
 Closures are a tricky concept to grasp. They can be summarized as an expression, usually a function, that can have free variables together with an environment that those variables. There are several advantages and drawbacks to using them. AC\lightning{}DV uses them primarily for two reasons; they allow visualizations to be encapsulated easily and improve performance by reducing the cost associated with instantiating objects.
 
@@ -693,6 +749,7 @@ d3.select("#exampleChart")
   .label(function(d) { return d.Area; } )
   .amount(function(d) { return +d.Amount; } )); 
 \end{verbatim} 
+\label{chart_usage}
 A ``selection" in D3 is an array of DOM elements. The ``div" argument is the DOM element to bind the visualization too. Data is bound to this element and a visualization is called. Every visualization expects an independent variable to be passed in as a label and a number of quantitative variables passed in as amounts.
 
 This string of methods calls will look unusual to those not familiar declarative programming. Every call returns an object used by the next call. So ``select" returns a selection, in this case a new div element identified by ``exampleChart". The ``datum" call is a setter for the selection object which then returns that selection object. The ``call" function executes an arbitrary function, in this case ``barchart" which expects a selection as an argument. Setter methods ``label" and ``amount" are then called. Functions are passed as argument which define how the data is to be accessed.
@@ -722,10 +779,17 @@ var g = svg.selectAll(".dot")
 \item Mouse over behavior is defined.
 \end{itemize} 
 
-By modifying only the attributes that actually change, D3 reduces overhead and allows greater graphical complexity at high frame rates. \todo{Enumerate the bloody charts}
-
+By modifying only the attributes that actually change, D3 reduces overhead and allows greater graphical complexity at high frame rates. The Chart API contains the following visualizations:
+\begin{itemize}
+\item Pie-chart
+\item Bar-chart
+\item Time series plot
+\item Scatter plot
+\item Bubble plot
+\end{itemize}
 \section{Conclusion}
-WRITE ME PLEASE
+This section provided details of the implementation of AC\lightning{}DV. The implementation process and any issues encountered will were described in the course of this description. This was followed by a description of the Chart API.
+
 
 \chapter{Evaluation and Discussion}
 This chapter describes the evaluation of AC\lightning{}DV. Visualizations are usually evaluated using empirical methods, e.g. user trials. AC\lightning{}DV is not an end user tool so such evaluations would not be relevant. Instead an analytic approach is adopted. The functionality of the AC\lightning{}DV is assessed with respect to the project goals and research question.
@@ -744,7 +808,7 @@ The first two goals are examined at length below in Section \ref{eval_of_ref}. T
 
 \section{Evaluation of Functional Requirements}
 \label{eval_of_req}
-Dix et al. outline evaluation criteria for a system in HCI \todo{Citation} which is elaborated by Mazza \cite{mazza2009introduction}. The process presented here is a modified version which aims to assess only the technical aspects of a system. The evaluation is divided into two parts.
+Dix et al. outline evaluation criteria for a system in HCI \cite{dix2004human} which is elaborated by Mazza \cite{mazza2009introduction}. The process presented here is a modified version which aims to assess only the technical aspects of a system. The evaluation is divided into two parts.
 \begin{itemize}
 \item Functionality of the system. Does it achieve the intended goal.
 \item Effectiveness of the system. Does the system generate visualizations that provide potential users with better knowledge of the data.
@@ -752,7 +816,7 @@ Dix et al. outline evaluation criteria for a system in HCI \todo{Citation} which
 
 \section{Functionality}
 \label{Functionality}
-Overall AC\lightning{}DV meets the requirements set out in Table \ref{feature_matrix} \todo{Make sure these are explicitly stated as requirements in design}. A brief discussion of each requirement is given below:
+Overall AC\lightning{}DV meets the requirements set out in Table \ref{feature_matrix}. A brief discussion of each requirement is given below:
 
 \paragraph{Native Browser Based.}AC\lightning{}DV runs entirely in a web browser. As noted in the state of the art the technologies used exist as standards, not implementations. While this offers many benefits it does make metering performance somewhat tricky. Older browsers may not support newer version of certain web technologies and different implementations will preform differently. This was not of much significance to the project. As long as standards are used they will be adopted by all platforms in time. AC\lightning{}DV does not use any particularly new or novel features of the technologies used. The system was developed using Chromium version 18. It was also tested in Firefox Version 11 as well as the latest version at the time of writing, version 20. Version 11 was released over a year ago. None of these platform had exhibited any problems and no errors were logged. Performance in Chromium was benchmarked ten times using a dataset of 5000 entries and the system returned a result, on average, in 4 ms. For comparison the time required by the browser to fetch the system code averaged 10 ms and when third party libraries are accounted for the time averaged at 55 ms. The times listed here will of course vary depending on different circumstances. It is the ratio that is important. Although this was only a small test it shows quite clearly that web technologies in their current state are more than capable of handling large datasets. The system was used extensively during development and at no point was there any appreciable delays in either page loading or interaction.
 
@@ -765,7 +829,7 @@ Overall AC\lightning{}DV meets the requirements set out in Table \ref{feature_ma
 </script>
 \end{verbatim}
 
-If desired the Chart API can be used in isolation as shown in Section \todo{Ref implementation}. Such a small footprint allows more complex user interaction to be added with relative ease. It was envisaged that AC\lightning{}DV would be a component in a larger system. A small mock system was created that allowed users to compose a web page containing various visualizations from predetermined data. This was done with a minimum of effort and the results are quite useful. 
+If desired the Chart API can be used in isolation as shown in section \ref{chart_usage}. Such a small footprint allows more complex user interaction to be added with relative ease. It was envisaged that AC\lightning{}DV would be a component in a larger system. A small mock system was created that allowed users to compose a web page containing various visualizations from predetermined data. This was done with a minimum of effort and the results are quite useful. 
 
 \paragraph{No user training required.}This objective is hard to qualify as it depends on the capabilities of the user. Some users may require no training where others may struggle without instruction. By any measure AC\lightning{}DV meets this requirement. As stated in the requirements this goal pertains to mapping of data entries to graphical marks. AC\lightning{}DV requires no user input at any stage in this process so no user training is required. The main benefit of this approach is it allows the retinal variables to be suitably encoded in every output visualization, thus ensuring comprehensible visualizations. 
 
@@ -775,7 +839,7 @@ These guidelines were drawn up with the most common cases in that mind so it fol
 
 \paragraph{Generic Application.}
 \label{generic_application}
-AC\lightning{}DV makes no assumptions about the data other than its basic organization in a file. Currently comma separated value \todo{Cite rfc} files and json \todo{Cite rfc} are supported. Support for different file formats was not a goal of the project but json was included as an exercise to determine the difficulty of including new formats. Some minor changes had to be made to accommodate jsons object oriented description of data but these changes were generic and do not interfere with record based processing. They were the result of flawed assumptions made about the output of D3s data parser. AC\lightning{}DV does not distinguish between the two data formats explicitly. D3 is used to parse input data files into a common format. It is this common data format that is passed into AC\lightning{}DV. The data format must be discriminated at this stage, not during AC\lightning{}DVs subsequent operation. 
+AC\lightning{}DV makes no assumptions about the data other than its basic organization in a file. Currently comma separated value files and json are supported. Support for different file formats was not a goal of the project but json was included as an exercise to determine the difficulty of including new formats. Some minor changes had to be made to accommodate jsons object oriented description of data but these changes were generic and do not interfere with record based processing. They were the result of flawed assumptions made about the output of D3s data parser. AC\lightning{}DV does not distinguish between the two data formats explicitly. D3 is used to parse input data files into a common format. It is this common data format that is passed into AC\lightning{}DV. The data format must be discriminated at this stage, not during AC\lightning{}DVs subsequent operation. 
 
 After the file has been parsed and input into AC\lightning{}DV no additional assumptions are made about the data. There are however limitations that were outlined in Table \ref{my_table}. Only three dimensional datasets or less or supported. This was not due to any technical limitations. The Chart API simply does not contain any multivariate visualizations as there was insufficient time to create any. It was observed during research for this project that multivariate visualizations typically accommodate a much smaller range of datasets than more traditional statistical graphics. The system is intended to visualize the widest range of possible datasets so effort was concentrated on visualizations with the greatest applicability.
 
@@ -823,7 +887,7 @@ These properties are determined from analysis of the first record in a dataset, 
 
 Every variable in a dataset is classified as an ordinal or quantitative data type. If the entries are numeric they are classified as quantitative, otherwise they are classified as ordinal. Without additional information it is not possible to infer if a variable is intended as a data point or a label. Classifying all numbers as quantities, or data points, and all other strings as labels is the only reasonable way to infer type information from raw data. However, if a dataset does not contain any ordinal variables a quantitative variable can used instead. This may not be ideal in all cases but ensures a visualization will be generated. Furthermore data without any labels is meaningless. If one of the quantitative variables is not intended as a label there is no visualization that will help the user understand the data. It will merely be a meaningless table of numbers.
 
-As Javascript is loosely typed determining if a string represents a number can be somewhat difficult. An elegant solution was provided by a language expert \todo{Cite stackoverflow}.
+As Javascript is loosely typed determining if a string represents a number can be somewhat difficult. An elegant solution was provided by a language expert.
 
 Dimensionality is determined by the number of records in a dataset. Dimensionality is defined as the number of dependent variables with respect to the number of independent variables as discussed in section \ref{Mazza_Process}. All visualizations in AC\lightning{}DV contain only one ordinal field. This was observed to be the case for most visualizations in general. This means dimensionality can be determined merely from the number of fields in a dataset.
 
@@ -867,7 +931,7 @@ AC\lightning{}DV uses no more than three retinal variables for any one graphical
 
 \section{Effectiveness.} 
 \label{use_cases}
-In order to evaluate the effectiveness of AC\lightning{}DV two use cases have been created. These are used to perform a cognitive walk through, a common method used to evaluate HCI systems \cite{polson1992cognitive}. A small user interface was constructed that allowed multiple datasets to be selected and visualized by the user. The first use case uses mocked data, the second uses data provided by Fingal County Councils Open Data initiative \todo{citation}.
+In order to evaluate the effectiveness of AC\lightning{}DV two use cases have been created. These are used to perform a cognitive walk through, a common method used to evaluate HCI systems \cite{polson1992cognitive}. A small user interface was constructed that allowed multiple datasets to be selected and visualized by the user. The first use case uses mocked data, the second uses data provided by Fingal County Councils Open Data initiative \cite{open-data}.
 
 \subsection{Coffee Chain Expenses}
 
@@ -895,8 +959,7 @@ Tom decides to investigate further and inputs the expense information for the So
 \label{coffeepie}
 \end{figure}
 
-Tom shows this information to his superiors using the visualizations provided by AC\lightning{}DV to illustrate his point. Using this information they decided to drop the aggressive marketing for a trial period and see it affects sales. \todo{Maybe drop that last bit}
-
+Tom shows this information to his superiors using the visualizations provided by AC\lightning{}DV to illustrate his point. Using this information they decided to drop the aggressive marketing for a trial period and see it affects sales.
 \subsection{Fingal County Council}
 
 Alice works for Fingal County Council. She is part of a committee tasked with drafting new proposals to help combat unemployment. These proposls will then be handed off to Ministers. Part of this work involves identifying the areas of highest unemployment within Fingal. She has access to the unemployment and population statistics for each region area within Fingal. She combines these datasets and inputs them into AC\lightning{}DV. The dataset, consisting of one categorical variable and two quantitative variables, is matched to a scatter plot as shown in figure \ref{fingal1}. The scatter plot indicates what areas have the highest unemployment compared to population. 

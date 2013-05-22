@@ -367,7 +367,7 @@ charts.scatterplot = function() {
                 .attr("y", margins.left * 0.75)
                 .attr("text-anchor", "middle");
 
-            var legend = svg.selectAll(".legend")
+            /*var legend = svg.selectAll(".legend")
                 .data(fill.domain())
               .enter().append("g")
                 .attr("class", "legend")
@@ -384,7 +384,7 @@ charts.scatterplot = function() {
                 .attr("y", 9)
                 .attr("dy", ".35em")
                 .style("text-anchor", "end")
-                .text(function(d) { return d; });
+                .text(function(d) { return d; });*/
 
             g.on("mouseover.tooltip", function(d) {
                 var text = keys[0] + ": " + d[0] + ", "
@@ -714,7 +714,7 @@ charts.barchart = function() {
                 .attr("y", function(d) { return yScale(d[1]) })
                 .attr("height", function(d) { return chartDimensions.height - yScale(d[1])})
                 .attr("width", chartDimensions.width / data.length)
-                .attr("fill", function(d, i) { return fill(d[1])});
+                .attr("fill", function(d, i) { return fill(d[0])});
 
 
              svg.append("g").attr("class", "x axis").call(xAxis);

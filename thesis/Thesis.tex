@@ -871,7 +871,15 @@ In order to evaluate the effectiveness of AC\lightning{}DV two use cases have be
 
 \subsection{Coffee Chain Expenses}
 
-Tom has been tasked with cutting expenses for his company, a coffee chain. He has several datasets detailing the various expenses and profits associated with each product. These datasets are stored as comma separated value files and have been collected by other tools. To get an initial understanding of the situation Tom inputs the broadest dataset into AC\lightning{}DV which has the total profit and expenses for every product. AC\lightning{}DV outputs a scatter plot, as shown in figure \ref{coffee1}, which clearly shows Soy Lattes are not selling enough to justify their cost. 
+Tom has been tasked with cutting expenses for his company, a coffee chain. He has several datasets detailing the various expenses and profits associated with each product. These datasets are stored as comma separated value files and have been collected by other tools. An example excerpt is shown below:
+\begin{verbatim}
+Coffee,Profit,Expense
+Americano, 550, 220
+Cappuccino, 435, 110
+Chocolate Dalmatian, 200, 100
+\end{verbatim}
+
+To get an initial understanding of the situation Tom inputs the broadest dataset into AC\lightning{}DV which has the total profit and expenses for every product. AC\lightning{}DV outputs a scatter plot, as shown in figure \ref{coffee1}, which clearly shows Soy Lattes are not selling enough to justify their cost. 
 
 \begin{figure}[htp] \centering
 \includegraphics[width=\textwidth]{coffee1.png}
@@ -891,22 +899,25 @@ Tom shows this information to his superiors using the visualizations provided by
 
 \subsection{Fingal County Council}
 
-Alice works for Fingal County Council. She is part of a committee tasked with drafting new proposals to help combat unemployment. Part of this work involves identifying the areas of highest unemployment within Fingal. She has access to the unemployment and population statistics for each region area within Fingal. She combines these datasets and inputs them into AC\lightning{}DV. The dataset, consisting of one categorical variable and two quantitative variables, is matched to a scatter plot. The scatter plot indicates what areas have the highest unemployment compared to population. 
-
-To further illustrate her point Alice divides the unemployment figures into the population and inputs it to AC\lightning{}DV. A bar chart is returned which shows quite clearly which area has the highest percentage unemployment. 
-
-Using these illustrations as part of a body of evidence the committee are able to target the new proposals to have the greatest effect.
+Alice works for Fingal County Council. She is part of a committee tasked with drafting new proposals to help combat unemployment. These proposls will then be handed off to Ministers. Part of this work involves identifying the areas of highest unemployment within Fingal. She has access to the unemployment and population statistics for each region area within Fingal. She combines these datasets and inputs them into AC\lightning{}DV. The dataset, consisting of one categorical variable and two quantitative variables, is matched to a scatter plot as shown in figure \ref{fingal1}. The scatter plot indicates what areas have the highest unemployment compared to population. 
 
 \begin{figure}[htp] \centering
-\includegraphics[scale=0.75]{output.pdf}
-\caption{Example composition.}
-\label{example_composition}
+\includegraphics[width=\textwidth]{fingal1.png}
+\caption{Unemployment and Population}
+\label{fingal1}
 \end{figure}
 
 
-The use case in Section \todo{Reference Fingal use case} consists of two complementary datasets showing unemployment and population statistics respectively. These datasets are were merged using external tools and visualized using AC\lightning{}DV. The shared trend in the data is obvious from the visualization. Unemployment and population are proportional. The obvious out-lier in the unemployment dataset is also clearly visible and further illustrated in the scatter plot. \todo{Illustrate outlier in image}
+The scatter plot shows a fairly linear relationship between population and population.  Blanchardstown is a clear exception. To further illustrate this point Alice expresses the unemployment as a percentage of population and inputs the data into AC\lightning{}DV. A bar chart is returned which shows quite clearly which areas have the highest percentage unemployment. 
 
-These three visualizations were then composed into a simple web page shown below in Figure \ref{example_composition}. As these visualizations are rendered in isolation they do not share any attributes, such as the colour labels used which are random. Sharing such attributes may be required if AC\lightning{}DV were to developed further. \todo{Merge in image}
+\begin{figure}[htp] \centering
+\includegraphics[width=\textwidth]{fingal2.png}
+\caption{Unemployment as a percentage of population}
+\label{fingal1}
+\end{figure}
+
+
+Using these illustrations as part of a body of evidence the committee are able to target the new proposals to have the greatest effect.
 
 \section{Discussion}
 \label{Discussion}

@@ -8,9 +8,9 @@ function createDiv(id) {
 function labelSuitability(score) {
 	var rating;
 	if(score === 10) {
-		rating = "Very suitable: " + score;
+		rating = "Very suitable";
 	} else {
-		rating = "Somewhat suitable: " + score;
+		rating = "Somewhat suitable";
 	}
 	return rating;
 }

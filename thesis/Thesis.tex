@@ -342,7 +342,7 @@ Works such as Polaris \todo{citation} and APT \todo{citation} suggest that this 
 \caption{Summary of systems examined}
 \label{feature_matrix}
 \end{sidewaystable} 
-
+\label{project_goals}
 \paragraph{Native Browser Based.} The systems runs in a web-browser environment using native web technologies. These technologies, i.e. HTML5, SVG, EMCAScript etc, arguably compose the most widely adopted software platform in history. These technologies are described via specifications and implemented by multiple vendors. This approach has several benefits compared to older container based web-technologies such as Java or Flash. \todo{Citations everywhere} \todo{Go into this more back in the intro and ref from here}
 
 \paragraph{Automatic Visualization.} Given a dataset the system should be capable of automatically generating visualizations with no user input during the visualization process. Tasks such as selecting which entries to visualize or what visualization to output are not included as user tasks in this context, only the tasks involved in mapping data entries to graphical marks.
@@ -375,10 +375,26 @@ Chapter 2 \todo{Replace section with chapter in the text} introduced a state of 
 \todo{Take ACDV out of intro?}
 This chapter introduces the design principles and core technologies used in this project. The architecture for the Automatic Classifier and Data Visualizer, henceforth referred to as AC\lightning{}DV, is presented. The visualization process is also described.
 
-\section{Technologies used}
-This section describes the technologies used in this project and the motivation for choosing said technologies. One of the main aims of the project was to quickly generate visualizations. This extends to any system setup the user may have to perform before inputting data. Extendability was another key consideration. The system should allow new visualizations to be added with relative ease.
+The project goals are taken detailed from the state of the art and are detailed in section \ref{project_goals}. They are summarized below:
 
-Browser based technologies have been selected for use in this project. The core technologies used are SVG and Javascript. Modern web-browsers allow for near seamless interoperability between these technologies. Such technologies offer many advantages over more traditional standalone executable binaries. If new visualizations need to be added they need only be appended to the existing software. They are then instantly available when the page is refreshed. The web browser if perhaps the most ubiquitous software platform in history making cross compatibility for applications within it almost a non-issue. The technologies used are freely available and exist as standards, not just implementations. This can lead to unexpected behavior in separate implementations but this is becoming less common as these standards and their implementations mature. As these technologies are not maintained by a single vendor they are far more resilient to an organization discontinuing their support. A short description of all the technologies used follows:
+\begin{itemize}
+\item Native browser based
+\item Automatic visualization
+\item No user training required
+\item Generic application
+\item Large number of visualizations
+\item Interactive
+\item Automatic feature determination
+\item No user input required 
+\item Encoding of retinal variables
+\end{itemize}
+
+\section{Technologies used}
+This section describes the technologies used in this project and the motivation for choosing said technologies. One of the main aims of the project was to quickly generate visualizations. This extends to any system setup the user may have to perform before inputing data. Extendability was another key consideration. The system should allow new visualizations to be added with relative ease.
+
+
+
+Browser based technologies have been selected for use in this project. The core technologies used are SVG and Javascript. Modern web-browsers allow for near seamless interoperability between these technologies. Such technologies offer many advantages over more traditional standalone executable binaries. If new visualizations need to be added they need only be appended to the existing software. They are then instantly available when the page is refreshed. The web browser is perhaps the most ubiquitous software platform in history making cross compatibility for applications almost a non-issue. The technologies used are freely available and exist as standards, not just implementations. This can lead to unexpected behavior in separate implementations but this is becoming less common as these standards and their implementations mature. As these technologies are not maintained by a single vendor they are far more resilient to an organization discontinuing their support. A short description of all the technologies used follows:
 
 \paragraph{Javascript}is a loosely typed interpreted programming language. It is defined in ECMA-262 standard. It was originally implemented as a client side scripting language. Javascript functions can be embedded or included in HTML pages and they can interact with the DOM. It is a dynamic language, a feature that was utilized extensively.
 
@@ -394,19 +410,19 @@ Browser based technologies have been selected for use in this project. The core 
 
 \paragraph{Web Server.} AC\lightning{}DV runs entirely on the clients computer. However most web browsers do not support cross-origin resource sharing from local files. Such requests must be sent using HTTP. This means that data stored in an external file can not be loaded into AC\lightning{}DV without the use of a web server. A very simple python server was used in this project but any HTTP server is sufficient. 
 
-One area of concern was performance. Standalone executables have greater access to a machines resources and can take advantages of optimization techniques such as multi-threading \todo{Need citation?} or specialized instruction sets such as SSE \todo{Citation}. This is not usually a problem for browser-based applications but as AC\lightning{}DV may have to process thousands of records some effort has been made to evaluate the its performance and keep it within a reasonable bounds.
+One area of concern was performance. Standalone executables have greater access to a machines resources and can take advantages of optimization techniques such as multi-threading \todo{Need citation?} or specialized instruction sets such as Streaming SIMD Extensions \todo{Citation}. This is not usually a problem for browser-based applications but as AC\lightning{}DV may have to process thousands of records some effort has been made to evaluate the its performance and keep it within a reasonable bounds.
 
 
 \section{Overview of Data Visualization Process}
-A variety of different techniques have been purposed to crate date visualizations. The technique purposed by Mazza \cite{mazza2009introduction} is one of the few constructed as a sequence of complete steps. These steps do not vary based on the nature of the data or the desired output making the process one of the most suitable for automation. The process was outlined in Table \ref{mazzatable} and will now be expanded on.
+A variety of different techniques have been proposed to created date visualizations. The technique proposed by Mazza \cite{mazza2009introduction} is one of the few constructed as a sequence of complete steps. AC\lightning{}DV adopts this process, though does so using web-browser techniques. These steps do not vary based on the nature of the data or the desired output making the process one of the most suitable for automation. The process was outlined in Table \ref{mazzatable} and will now be expanded on.
 \begin{enumerate}
 \label{Mazza_Process}
   \item \textbf{Define the problem.} This step depends on the goal the user is trying to accomplish. It is also necessary to make note of the perceptual capabilities of the user as these can be used to inform decisions later in the process. There are three main problems data visualization can help to solve.
 
     \begin{itemize}
-    \item Communicate. Visualizations can be used to quickly communicate information present in a data set. This is the most general task and can be thought of as presenting the entire dataset for easy consumption by the user.
-    \item Explore. Visualizations can be used to explore datasets. Exploratory analysis is often used to form new hypothesis that may not have been considered with more formal techniques \cite{tukey1977exploratory}. Such visualizations summarize the main characteristics of the data set and then  allow the user to filter the data and focus on subsets.
-    \item Confirm. Here the data is being analyzed to confirm a specific hypothesis.
+    \item Communication: Visualizations can be used to quickly communicate information present in a data set. This is the most general task and can be thought of as presenting the entire dataset for easy comprehension by the user.
+    \item Exploration: Visualizations can be used to explore datasets. Exploratory analysis is often used to form new hypothesis that may not have been considered with more formal techniques \cite{tukey1977exploratory}. Such visualizations summarize the main characteristics of the data set and then  allow the user to filter the data and focus on subsets.
+    \item Confirmation: Here the data is being analyzed to confirm a specific hypothesis.
   \end{itemize}
 
   \item \textbf{Nature of the data.} The data must be classified into one of three types. This classification is later used to inform the visual mapping.
@@ -453,7 +469,7 @@ Each of the options described here help to point a specific visualization techni
 
 \section{Visual Mapping}
 \label{section:VMapping}
-Visual Mapping is the most important aspect of creating a visualization. If the elements of a dataset are mapped to visual elements effectively any patterns in that dataset are easily perceivable. A poor mapping results in these patterns becoming almost imperceptible. Creating an effective mapping is done by understanding and exploiting the way humans perceive what they see. Certain visual properties will more readily draw focus. There is a model detailing the effectiveness of various visual properties although it is not concrete. This model of human perception began with the work of Bertin \cite{bertin1973semiologie} and has been expanded upon by many others \todo{Lots of citations here}. 
+Visual Mapping is the most important aspect of creating a visualization. If the elements of a dataset are mapped to visual elements effectively any patterns in that dataset are easily perceivable. A poor mapping results in these patterns becoming almost imperceptible. Creating an effective mapping is done by understanding and exploiting the way humans perceive what they see. Certain visual properties will more readily draw focus. There is a model detailing the effectiveness of various visual properties although it is not concrete. This model of human perception began with the work of Bertin \cite{bertin1973semiologie} and has since been expanded \todo{citations}.
 
 \subsection{Memory}
 Human perception is composed of human vision and human memory. What we see is stored in memory and then processed. There are three basic types of memory:
@@ -465,15 +481,15 @@ Human perception is composed of human vision and human memory. What we see is st
 \end{itemize}
 
 \subsection{Retinal Variables}
-A number of preventative visual properties have been identified by research. These visual properties have been grouped in order of effectiveness at conveying different types of information although such groupings do not seem to have been completely verified \cite{mackinlay1986automating}, \cite{mazza2009introduction}. 
+A number of pre-attentive visual properties have been identified by research. These visual properties have been grouped in order of effectiveness at conveying different types of information although such groupings do not seem to have been completely verified \cite{mackinlay1986automating}, \cite{mazza2009introduction}. 
 
 Ths visual properties can be grouped into four categories: \textit{colour, form, movement and position.} 
 
-\paragraph{Colours} can be expressed in different ways. Red, Green and Blue values are typically used when expressing the colours on a computer screen. For the purpose of data visualization it is more efficient to talk about colour in terms Hue, Saturation and Lightness as they map to preventative attributes far more readily. Hue is the aspect of colour we typically refer to by name and is usefully for labeling different sets. Saturation and Lightness describe the intensity of the Hue. A colour with a high intensity is more distinguishable from its surroundings so intensity is used to give certain elements a kind of visual precedence.
+\paragraph{Colours}can be expressed in different ways. Red, Green and Blue values are typically used when expressing the colours on a computer screen. For the purpose of data visualization it is more efficient to talk about colour in terms Hue, Saturation and Lightness as they map to preventative attributes far more readily. Hue is the aspect of colour we typically refer to by name and is usefully for labeling different sets. Saturation and Lightness describe the intensity of the Hue. A colour with a high intensity is more distinguishable from its surroundings so intensity is used to give certain elements a kind of visual precedence.
 
-\paragraph{Motion} is the most effective way for an attribute to gain focus. It should be used sparingly else the visualization quickly descends into a distracting mass of flickering objects.
+\paragraph{Motion}is the most effective way for an attribute to gain focus. It should be used sparingly else the visualization quickly descends into a disorienting mass of flickering objects.
 
-\paragraph{Position} is the most accurate attribute for encoding quantitative data in graphics.
+\paragraph{Position}is the most accurate attribute for encoding quantitative data in graphics.
 
 \paragraph{Form} is the most comprehensive of the visual attributes. There are many attributes that make up the form of an object, all of which are capable of representing various types of data with various levels of effectiveness. 
 \begin{itemize}
@@ -494,7 +510,7 @@ There are a number of different rules governing the use of these attributes. The
 
 The number of different pre-attentive attributes to use in a visualization is quite important. If it is too great an incomprehensible visualization is produced. If the number is too low then the full capabilities of the medium have not been exploited. The latter is the more desirable so a conservative approach is best adopted. Millers work on human information processing capacity \cite{Mil56} is the most widely known in this area but does not deal with specifically with preventative loading. Similar studies specifically with visualization in mind have also been conducted \cite{few2004show}, \cite{ware2012information}. These studies have not come to the same conclusions so the limits they purpose are not hard rules. Ware suggests no more than ten distinct values for pre-attentive attributes, although there are several exceptions, while Few limits this number to four.
 
-The combination of attributes is a far harder problem and has not been the subject of much research. However different attributes are better than others at conveying different types of information. This has been the subject of a relatively large amount of work. Cleveland and McGill purposed and verified a ranking of of attributes in terms of their ability to convey quantitative information. Mackinlay expanded, although he did not verify, this ranking to include ordinal and categorical information \cite{mackinlay1986automating}. More recent research has shown that the issue is more complicated \cite{spence2001information} so a definitive raking does not exists. Mazza extends the work done by Few \cite{few2004show} to purpose an ``indicative rule of thumb" for the three data types \cite{mazza2009introduction}. Mazzas work is a simplified ranking that groups the pre-attentive attributes into one of three groups for each data type: suitable, limited suitability and not suitable. It is shown in Table \ref{attribute_table}.
+The combination of attributes is a far harder problem and has not been the subject of much research. However different attributes are better than others at conveying different types of information. This has been the subject of a relatively large amount of work. Cleveland and McGill purposed and verified a ranking of of attributes in terms of their ability to convey quantitative information. Mackinlay expanded, although he did not verify, this ranking to include ordinal and categorical information \cite{mackinlay1986automating}. More recent research has shown that the issue is more complicated \cite{spence2001information} so a definitive raking does not exists. Mazza extends the work done by Few \cite{few2004show} to purpose an ``indicative rule of thumb" for the three data types \cite{mazza2009introduction}. Mazzas work is a simplified ranking that groups the pre-attentive attributes into one of three categories for each data type: suitable, limited suitability and not suitable. It is shown in Table \ref{attribute_table}.
 
 \begin{table}[!ht]
 \centering
@@ -525,7 +541,7 @@ The combination of attributes is a far harder problem and has not been the subje
 Short term memory and pre-attentive processing play an extremely important role in the design of effective visualizations. An understanding of these pre-attentive attributes can be used to make the most important information draw the focus of the viewer. If the rules surrounding these are ignored it can result in incomprehensible visualizations.
 
 \section{Architecture}
-AC\lightning{}DV consists of two main components. A chart API and a classifier. Data is input to the classifier where an appropriate charts is determined and displayed in the view. These two components are distinct. The chart API can be used completely independently. Similar chart APIs do exist \todo{reference DC.js} but are relatively complex to use. The goal of AC\lightning{}DV was to create a chart API that used an minimum of parameters. \todo{Diagrams}
+AC\lightning{}DV consists of two main components. A chart API and a classifier. Data is input to the classifier which determines an appropriate visualization and displays it in the view. These two components are distinct. The chart API can be used completely independently. If a user does not wish to use AC\lightning{}DV as an automated tool they can use the visualizations directly. Similar chart APIs do exist \todo{reference DC.js} but are relatively complex to use, usually requiring large amount of arguments or specific setup steps before they can be used. The goal of AC\lightning{}DV was to create a chart API that used a minimum of parameters. Simplifying the the interaction between the two main components in this way reduces development effort, reduces coupling and promotes re-usability. \todo{Diagrams}
 
 The system has been designed in this way to reflect the visualization process described above. The classifier encodes a paired down version of the process outlined by Mazza detailed in section \ref{Mazza_Process}. This approach also has the benefit of yielding a chart API that can be used by developers who wish to easily create a specific type of visualization.
 
@@ -555,9 +571,16 @@ The current implementation of AC\lightning{}DV is limited to producing three vis
 
 AC\lightning{}DV uses a single data structure for all processing. The system can test if a quantitative variable represents a date, hence the inclusion of temporal data structures. The design could be extended to detect the remaining types of data as such a task can be accomplished, to a high degree of reliability, with pattern matching, but this was out of scope.
 
-The classifier determines these attributes at run time from the dataset. Each visualization in the API has a similar set of properties. The system then attempts to match the characteristics of the dataset to the characteristics of a visualization. AC\lightning{}DV returns a confidence score along with the visualization to give an indication of how suitable the visualization is. This score is determined from how closely the two sets of characteristics match. Some characteristics must match for the visualization to be considered such as the dimensionality and types of information to be displayed, i.e. if no chart can display two independent variables then no chart will be returned.
+The classifier determines these attributes at run time from the dataset. Each visualization in the API has a similar set of properties. The properties are:
+\begin{itemize}
+\item Size: the number of entries in the dataset.
+\item Dimensionality: the number of dependent variables in the dataset.
+\item Keys: the variable names. These are used to label the data.
+\item Data types: The type of each element. 
+\end{itemize}
+The system then attempts to match the characteristics of the dataset to the characteristics of a visualization. AC\lightning{}DV returns a confidence score along with the visualization to give an indication of how suitable the visualization is. This score is determined from how closely the two sets of characteristics match. Some characteristics must match for the visualization to be considered such as the dimensionality and types of information to be displayed, i.e. if no chart can display two independent variables then no chart will be returned.
 
-The encoding of the charts properties is a manual step that must be done by an expert. It is here that the retinal variables are considered. The mapping from data to marks is encoded into each visualization and it is up to the expert to decided how to do so. As mentioned there are no hard rules to go by but a conservative approach has been adopted. The chart API consists of a number of well known visualizations so there is no need for a detailed description of the effectiveness of each one. The number of retinal attributes used to encode information is always three or less. The retinal variables used have been selected using Table \ref{attribute_table}.
+The encoding of the visualization properties is a manual step that must be done by an expert. It is here that the retinal variables are considered. The mapping from data to marks is encoded into each visualization and it is up to the expert to decided how to do so. As mentioned there are no hard rules to go by but a conservative approach has been adopted. The chart API consists of a number of well known visualizations so there is no need for a detailed description of the effectiveness of each one. The number of retinal attributes used to encode information is always three or less. The retinal variables used have been selected using Table \ref{attribute_table}.
 
 The system also contains a notion of ``soft" and ``hard" size for each visualization. These are the limits on how many records may be displayed in each visualization. Like the mapping to graphical marks and their associated retinal variables this notion of size is fixed. Deciding on the maximum number of entries for each visualization is quite tricky. It depends on 
 \begin{itemize}
@@ -571,6 +594,17 @@ The last item is attempted with the notion of ``soft" and ``hard" size. If the d
 \subsection{API}
 The API consists of a collection of visualizations with shared declaration attributes. The design is based of off Mike Bostock's, the creator of D3, convention for reusable charts \todo{Citation}. All visualization are designed as Javascript closures. Each chart only expects input data and a mapping of each data dimension to visualization ``axis" ( the notion of axis can be unique to each visualization ) , which the classification engine can provide automatically. Attributes such as size and position can be adjusted after declaration if desired. Charts could be extended to included customizable colours and marks like similar libraries \todo{Cite Dc.js again}. However such customization would allow interference with the decisions made in encoding the various retinal attributes.  
 
+\subsection{Picker}
+The Picker is the glue logic used to combine the classification component and Chart API. It is responsible for creating DOM elements to bind the visualizations too, parsing input data and taking the results of the classification component and invoking the relevant visualizations in the Chart API.
+
+\section{Use Cases}
+Two use cases have been created to illustrate the operation of AC\lightning{}DV. They are introduced here briefly and described extensively in section \ref{use_cases}. Their purpose is aid the evaluation of AC\lightning{}DV by providing a walk through of how the system may be used.
+
+As with any system AC\lightning{}DV has stakeholders. The users input data and use the output visualizations for various tasks. Experts are responsible for adding new visualizations and encoding their properties. As it is an automated system the user does not need the help of an expert directly.
+
+The first use case details the steps taken by an employee of a coffee shop chain tasked with cutting expenses. AC\lightning{}DV is used to quickly visualize data and investigate trends across multiple datasets. Here the visualizations are being used to form hypothesis and test them.
+
+The second use case details how AC\lightning{}DV might be used in social planning. In this example the system is used to provide illustrations for statistics and clearly show the correlations between data.  
 
 \section{Conclusion}
 This chapter has introduced and discussed aspects relating to the design of this project. The technologies used and the architecture of the system were presented and discussed. The visualization principles outlined were key to this discussion. The design of the system is broken into two sections.
@@ -688,7 +722,7 @@ var g = svg.selectAll(".dot")
 \item Mouse over behavior is defined.
 \end{itemize} 
 
-By modifying only the attributes that actually change, D3 reduces overhead and allows greater graphical complexity at high frame rates.
+By modifying only the attributes that actually change, D3 reduces overhead and allows greater graphical complexity at high frame rates. \todo{Enumerate the bloody charts}
 
 \section{Conclusion}
 WRITE ME PLEASE
@@ -833,13 +867,25 @@ AC\lightning{}DV uses no more than three retinal variables for any one graphical
 
 \section{Effectiveness.} 
 \label{use_cases}
-In order to evaluate the effectiveness of AC\lightning{}DV two use cases have been created. 
+In order to evaluate the effectiveness of AC\lightning{}DV two use cases have been created. These are used to perform a cognitive walk through, a common method used to evaluate HCI systems \cite{polson1992cognitive}. A small user interface was constructed that allowed multiple datasets to be selected and visualized by the user. The first use case uses mocked data, the second uses data provided by Fingal County Councils Open Data initiative \todo{citation}.
 
 \subsection{Coffee Chain Expenses}
 
-Tom has been tasked with cutting expenses for his company, a coffee chain. He has several datasets detailing the various expenses and profits associated with each product. These datasets are stored as comma separated value files and have been collected by other tools. To get an initial understanding of the situation Tom inputs the broadest dataset into AC\lightning{}DV which has the total profit and expenses for every product. AC\lightning{}DV outputs a scatter plot which clearly shows some products are not selling enough to justify their costs. \todo{Scatter plot here.}
+Tom has been tasked with cutting expenses for his company, a coffee chain. He has several datasets detailing the various expenses and profits associated with each product. These datasets are stored as comma separated value files and have been collected by other tools. To get an initial understanding of the situation Tom inputs the broadest dataset into AC\lightning{}DV which has the total profit and expenses for every product. AC\lightning{}DV outputs a scatter plot, as shown in figure \ref{coffee1}, which clearly shows Soy Lattes are not selling enough to justify their cost. 
 
-Tom decides to investigate further and inputs the expense information for the product. AC\lightning{}DV outputs a pie chart that shows every expense associated for that product. Most of the expenses look normal except for marketing. Tom concludes that the aggressive marketing for the product is not working. \todo{Bar chart}
+\begin{figure}[htp] \centering
+\includegraphics[width=\textwidth]{coffee1.png}
+\caption{Example showing coffee type with associated profit and expenses.}
+\label{coffee1}
+\end{figure}
+
+Tom decides to investigate further and inputs the expense information for the Soy Latte. AC\lightning{}DV outputs a pie chart, illustrated in figure \ref{coffeepie} that shows every expense associated for that product. Most of the expenses look normal except for marketing. Tom concludes that the aggressive marketing for the product is not working. 
+
+\begin{figure}[htp] \centering
+\includegraphics[width=\textwidth]{coffee2.png}
+\caption{Example expenses for Soy Latte.}
+\label{coffeepie}
+\end{figure}
 
 Tom shows this information to his superiors using the visualizations provided by AC\lightning{}DV to illustrate his point. Using this information they decided to drop the aggressive marketing for a trial period and see it affects sales. \todo{Maybe drop that last bit}
 
